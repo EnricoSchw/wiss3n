@@ -142,3 +142,9 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+
+######################
+# Custom
+######################
+/src/main/resources/application-prod.yaml
+/gradle/liquibase.gradle
