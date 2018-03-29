@@ -1,6 +1,5 @@
 package de.wiss3n.webapp.service.mapper;
 
-import de.klassenchat.webapp.domain.*;
 import de.wiss3n.webapp.domain.Content;
 import de.wiss3n.webapp.service.dto.ContentDTO;
 

@@ -1,7 +1,7 @@
 package de.wiss3n.webapp.config;
 
-import de.klassenchat.webapp.security.*;
-import de.klassenchat.webapp.security.jwt.*;
+import de.wiss3n.webapp.security.*;
+import de.wiss3n.webapp.security.jwt.*;
 
 import de.wiss3n.webapp.security.AuthoritiesConstants;
 import de.wiss3n.webapp.security.jwt.JWTConfigurer;

@@ -16,7 +16,7 @@
 logging:
     level:
         ROOT: DEBUG
-        de.klassenchat.webapp: DEBUG
+        de.wiss3n.webapp: DEBUG
         io.github.jhipster: DEBUG
 
 spring:

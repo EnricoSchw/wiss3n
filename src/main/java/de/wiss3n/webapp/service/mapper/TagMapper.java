@@ -1,6 +1,5 @@
 package de.wiss3n.webapp.service.mapper;
 
-import de.klassenchat.webapp.domain.*;
 import de.wiss3n.webapp.service.dto.TagDTO;
 
 import de.wiss3n.webapp.domain.Tag;

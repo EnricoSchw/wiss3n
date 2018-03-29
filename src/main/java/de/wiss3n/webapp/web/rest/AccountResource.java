@@ -8,7 +8,6 @@ import de.wiss3n.webapp.security.SecurityUtils;
 import de.wiss3n.webapp.service.MailService;
 import de.wiss3n.webapp.service.UserService;
 import de.wiss3n.webapp.service.dto.UserDTO;
-import de.klassenchat.webapp.web.rest.errors.*;
 import de.wiss3n.webapp.web.rest.errors.*;
 import de.wiss3n.webapp.web.rest.vm.KeyAndPasswordVM;
 import de.wiss3n.webapp.web.rest.vm.ManagedUserVM;
