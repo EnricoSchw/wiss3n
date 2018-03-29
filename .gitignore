@@ -146,5 +146,5 @@ Desktop.ini
 ######################
 # Custom
 ######################
-/src/main/resources/application-prod.yaml
+/src/main/resources/config/application-prod.yml
 /gradle/liquibase.gradle
