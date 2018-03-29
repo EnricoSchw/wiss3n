@@ -14,8 +14,8 @@ swagger {
     addDynamicProperty 'java8', true
 
     additionalProperties = [
-        'modelPackage' : 'de.klassenchat.webapp.web.api.model',
-        'apiPackage'   : 'de.klassenchat.webapp.web.api'
+        'modelPackage' : 'de.wiss3n.webapp.web.api.model',
+        'apiPackage'   : 'de.wiss3n.webapp.web.api'
     ]
 
     systemProperties = [

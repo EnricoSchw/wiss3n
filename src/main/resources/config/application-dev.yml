@@ -16,7 +16,7 @@
 logging:
     level:
         ROOT: DEBUG
-        de.klassenchat.webapp: DEBUG
+        de.wiss3n.webapp: DEBUG
         io.github.jhipster: DEBUG
 
 spring:
@@ -32,7 +32,7 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/klassenchatapp?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://localhost:3306/wiss3n?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: root
         password: root
         hikari:
