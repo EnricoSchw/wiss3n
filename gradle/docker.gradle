@@ -25,6 +25,6 @@ task buildDocker(type: DockerBuildImage, dependsOn: 'copyDockerFiles') {
     description = "Package application as Docker image"
     group = "Docker"
     inputDir = project.file("${project.buildDir}/docker")
-    tags = ["klassenchatapp:latest".toString(), "klassenchatapp:${project.version}".toString()]
+    tags = ["wiss3n:latest".toString(), "wiss3n:${project.version}".toString()]
 }
 

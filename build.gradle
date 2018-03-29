@@ -47,13 +47,13 @@ dependencyManagement {
 
 defaultTasks 'bootRun'
 
-group = 'de.klassenchat.webapp'
+group = 'de.wiss3n.webapp'
 version = '0.0.1-SNAPSHOT'
 
 description = ''
 
 bootRepackage {
-   mainClass = 'de.klassenchat.webapp.KlassenchatappApp'
+   mainClass = 'de.wiss3n.webapp.Wiss3nApp'
 }
 
 war {
@@ -61,7 +61,7 @@ war {
 }
 
 springBoot {
-    mainClass = 'de.klassenchat.webapp.KlassenchatappApp'
+    mainClass = 'de.wiss3n.webapp.Wiss3nApp'
     executable = true
     buildInfo()
 }
