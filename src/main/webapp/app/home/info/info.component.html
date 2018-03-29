@@ -1,0 +1,67 @@
+<section class="panel b-blue" id="1">
+    <article class="panel__wrapper">
+        <div class="panel__content">
+            <div class="panel_card__image-exposure panel_card__image">
+
+                    <img src="../../../content/images/info/school.jpg">
+            </div>
+
+            <div class="panel_card__bio panel_card__content">
+                <h2 class="panel_card__bio--title">John Legend</h2>
+
+                <p class="panel_card__bio--copy">John Roger Stephens (born December 28, 1978), better
+                    known by his stage name John Legend, is an American
+                    singer, songwriter and actor. He has won ten Grammy
+                    Awards, one Golden Globe, and one Academy Award. In
+                    2007, Legend received the Hal David Starlight Award
+                    from the Songwriters Hall of Fame.</p>
+
+            </div>
+        </div>
+
+    </article>
+</section>
+<section class="panel b-yellow" id="2">
+    <article class="panel__wrapper">
+        <div class="panel__content">
+            <h1 class="panel__headline"><i class="fa fa-bolt"></i>&nbsp;Lightning</h1>
+            <div class="panel__block"></div>
+            <p>Paleo authentic mlkshk taxidermy, vinyl meditation lomo drinking vinegar sartorial raw denim Thundercats
+                bitters selvage listicle. Keffiyeh Williamsburg gastropub McSweeney's.</p>
+        </div>
+    </article>
+</section>
+<section class="panel b-red" id="3">
+    <article class="panel__wrapper">
+        <div class="panel__content">
+            <h1 class="panel__headline"><i class="fa fa-music"></i>&nbsp;Music</h1>
+            <div class="panel__block"></div>
+            <p>Beard sriracha kitsch literally, taxidermy normcore aesthetic wayfarers salvia keffiyeh farm-to-table
+                sartorial gluten-free mlkshk. Selvage normcore 3 wolf moon, umami Kickstarter artisan meggings cardigan
+                drinking vinegar bicycle rights.</p>
+        </div>
+    </article>
+</section>
+<section class="panel b-green" id="4">
+    <article class="panel__wrapper">
+        <div class="panel__content">
+            <h1 class="panel__headline"><i class="fa fa-paper-plane"></i>&nbsp;Paper Planes</h1>
+            <div class="panel__block"></div>
+            <p>90's wayfarers lomo you probably haven't heard of them trust fund banh mi. Flannel Shoreditch
+                dreamcatcher, quinoa flexitarian Banksy pickled post-ironic lo-fi. Photo booth asymmetrical tousled
+                letterpress.</p>
+        </div>
+    </article>
+</section>
+<a href="http://ettrics.com/code/vertical-layout-navigation/" class="logo" target="_blank">
+    <img class="logo" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45226/ettrics-logo.svg" alt=""/>
+</a>
+
+<script>
+    $(function () {
+        $('a[href*=#]').on('click', function (e) {
+            e.preventDefault();
+            $('html, body').animate({scrollTop: $($(this).attr('href')).offset().top}, 500, 'linear');
+        });
+    });
+</script>

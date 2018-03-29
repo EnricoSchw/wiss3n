@@ -1,0 +1,180 @@
+$nav-bg: #2b3033;
+$blue: #dbdbdb;
+$red: #e68568;
+$yellow: #e6d068;
+$green: #68e6ac;
+$white: #ffffff;
+$ease: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$content-animation: scale(0.7) rotateX(-230deg);
+
+
+
+$firefly: #8E8C84;
+$white: #fff;
+* {
+    box-sizing: border-box;
+}
+
+
+.panel {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+
+    &__wrapper {
+        padding: 7vh 7vw;
+        perspective: 1000px;
+    }
+
+    &__content {
+
+    }
+
+    &__headline {
+        font-weight: 700;
+        opacity: 0.8;
+        font-size: 48px;
+        margin: 0 0 25px 0;
+    }
+
+    p {
+        margin: 0 0 25px 0;
+        //color: lighten(#000602, 10);
+        font-size: 20px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__block {
+        height: 3px;
+        background: rgba(black, 0.2);
+        margin: 0 0 25px 0;
+    }
+
+    @media (max-width: 640px) {
+
+        &__headline {
+            font-size: 36px;
+        }
+
+        &__wrapper {
+            padding: 10vh 10vw;
+        }
+
+        p {
+            font-size: 16px;
+        }
+    }
+}
+
+.c-blue {
+    color: $blue;
+}
+
+.c-red {
+    color: $red;
+}
+
+.c-green {
+    color: $green;
+}
+
+.c-yellow {
+    color: $yellow;
+}
+
+.b-blue {
+    background: linear-gradient(to right,  $firefly 0%,$firefly 40%,$white 40%,$white 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$white', endColorstr='$white',GradientType=1 ); /* IE6-9 */
+    color: $firefly
+}
+
+.b-red {
+    background: $red;
+}
+
+.b-green {
+    background: $green;
+}
+
+.b-yellow {
+    background: $yellow;
+}
+
+.logo {
+    position: fixed;
+    bottom: 3vh;
+    right: 3vw;
+    z-index: 2;
+
+
+    img {
+        width: 65px;
+        transition: $ease;
+        transform: rotate(0);
+
+        &:hover {
+            transform: rotate(180deg) scale(1.1);
+        }
+    }
+}
+
+
+/** ---------------------------*/
+
+.panel_card {
+    &__image {
+        float: left;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        margin-right: 3vw;
+    }
+
+    &__content {
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        min-height: 100%
+    }
+
+    &__image-exposure {
+        width: 45%;
+        position: relative;
+        height: 80vh;
+        display: inline-block;
+        overflow: hidden;
+        background: #fff;
+        border: 10px solid #fff;
+        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+        -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+
+    }
+    &__image-exposure img {
+        height: 100%;
+        width: 100%;
+        opacity: 0.6;
+    }
+
+    &__image-exposure__item {
+        background-image:  url('../../../content/images/info/calendar.jpg');
+        background-color: $white;
+        background-repeat: no-repeat;
+        height: 100%;
+        width: 100%;
+        opacity: 0.9;
+        min-height: 85vh;
+    }
+}
+
+.image-hover {
+
+}
+

@@ -1,0 +1,26 @@
+{
+    "klassenchatappApp": {
+        "teachingSubject" : {
+            "home": {
+                "title": "Teaching Subjects",
+                "createLabel": "Create a new Teaching Subject",
+                "createOrEditLabel": "Create or edit a Teaching Subject"
+            },
+            "created": "A new Teaching Subject is created with identifier {{ param }}",
+            "updated": "A Teaching Subject is updated with identifier {{ param }}",
+            "deleted": "A Teaching Subject is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Teaching Subject {{ id }}?"
+            },
+            "detail": {
+                "title": "Teaching Subject"
+            },
+            "year": "Year",
+            "name": "Name",
+            "grade": "Grade",
+            "user": "User",
+            "tag": "Tag",
+            "schoolClass": "School Class"
+        }
+    }
+}

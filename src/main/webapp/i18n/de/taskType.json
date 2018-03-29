@@ -1,0 +1,14 @@
+{
+    "klassenchatappApp": {
+        "TaskType" : {
+            "null": "",
+            "HAUSAUFGABE": "HAUSAUFGABE",
+            "VORTRAG": "VORTRAG",
+            "KURZKONTROLLE": "KURZKONTROLLE",
+            "TEST": "TEST",
+            "KLASSENARBEIT": "KLASSENARBEIT",
+            "KLAUSUR": "KLAUSUR",
+            "MUENDLICH": "MUENDLICH"
+        }
+    }
+}
