@@ -20,7 +20,8 @@
         "mobile": false,
         "styles": [
             "content/scss/vendor.scss",
-            "content/scss/global.scss"
+            "content/scss/global.scss",
+            "content/scss/_variables.scss"
         ],
         "scripts": [
             "../node_modules/jquery/dist/jquery.min.js"

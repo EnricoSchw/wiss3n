@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
 
 @Component({
     selector: 'jhi-info',
@@ -10,11 +9,5 @@ import * as $ from 'jquery';
 export class InfoComponent implements OnInit {
 
     ngOnInit(): void {
-        // $(() => {
-        //     $('a[href*=#]').on('click', (e) => {
-        //         e.preventDefault();
-        //         $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top}, 500, 'linear');
-        //     });
-        // });
     }
 }
