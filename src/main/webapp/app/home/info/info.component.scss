@@ -30,20 +30,23 @@ $white: #fff;
         width: 100%;
     }
 
-    &__content {
-        h1 {
-            font-size: 5rem
-        }
+    @media (min-width: 721px) {
 
-        h2 {
-            font-size: 4rem
-        }
+        &__content {
+            h1 {
+                font-size: 5rem
+            }
 
-        h3 {
-            font-size: 3rem
-        }
-        h4 {
-            font-size: 2rem
+            h2 {
+                font-size: 4rem
+            }
+
+            h3 {
+                font-size: 3rem
+            }
+            h4 {
+                font-size: 2rem
+            }
         }
     }
 
@@ -70,14 +73,14 @@ $white: #fff;
         margin: 0 0 25px 0;
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 720px) {
 
         &__headline {
             font-size: 36px;
         }
 
         &__wrapper {
-            padding: 10vh 10vw;
+
         }
 
         p {
@@ -104,14 +107,13 @@ $white: #fff;
 
 .b-blue {
     background: url("../../../content/images/info/mathew-schwartz-unsplash-min.jpg") no-repeat center top;
-    background-size: 100%;
+    background-size: cover;
     .panel {
         &__wrapper {
-            display: flex;
+
             &__left {
                 min-height: 100vh;
                 background: $transparentWhite;
-                flex: 50%;
                 border-right: 1px solid $app-gray;
                 color: $app-blue;
                 &__content {
@@ -129,9 +131,8 @@ $white: #fff;
             }
 
             &__right {
-                color: $app-light-gray;
                 min-height: 100vh;
-                flex: 50%;
+                color: $app-light-gray;
                 &__content {
                     margin-top: 30%;
                     margin-left: 20%;
