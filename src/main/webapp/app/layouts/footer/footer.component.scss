@@ -1,15 +1,7 @@
 @import "../../../content/scss/variables";
 
-ul, menu, dir {
-    display: block;
-    list-style-type: disc;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-    -webkit-padding-start: 40px;
-}
 .footer {
+    width: 100%;
     padding-top: 120px;
     padding-bottom: 120px;
     background-color: $app-blue;
@@ -24,7 +16,7 @@ ul, menu, dir {
 .footer .social li {
     display: inline-block;
     list-style: outside none none;
-    margin: 0 8px;
+    //margin: 0 8px;
 }
 
 .footer .social li a {
