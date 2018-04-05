@@ -48,13 +48,6 @@ a.dropdown-item:hover {
     background-color: $app-gray;
 }
 
-//.navbar {
-//    padding: .2em 1em;
-//    a {
-//        color: $app-light-gray;
-//        font-weight: bold;
-//    }
-//}
 
 @media(min-width: 767px) {
     .navbar {
@@ -119,6 +112,9 @@ a.dropdown-item:hover {
     vertical-align: middle;
 }
 
+.navbar-brand {
+    margin-left: 2.14em;
+}
 /* ==========================================================================
 Logo styles
 ========================================================================== */
