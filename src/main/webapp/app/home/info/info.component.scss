@@ -1,3 +1,5 @@
+@import "../../../content/scss/variables";
+
 $nav-bg: #2b3033;
 $blue: #dbdbdb;
 $red: #e68568;
@@ -10,10 +12,6 @@ $content-animation: scale(0.7) rotateX(-230deg);
 $transparentWhite: rgba(255, 255, 255, 0.5);
 $firefly: rgba(0, 0, 0, 0.18);
 $white: #fff;
-
-// colors
-$main-gray: #707070;
-$main-light-gray: #F8F5F0;
 
 * {
     box-sizing: border-box;
@@ -33,7 +31,20 @@ $main-light-gray: #F8F5F0;
     }
 
     &__content {
+        h1 {
+            font-size: 5rem
+        }
 
+        h2 {
+            font-size: 4rem
+        }
+
+        h3 {
+            font-size: 3rem
+        }
+        h4 {
+            font-size: 2rem
+        }
     }
 
     &__headline {
@@ -94,7 +105,6 @@ $main-light-gray: #F8F5F0;
 .b-blue {
     background: url("../../../content/images/info/mathew-schwartz-unsplash-min.jpg") no-repeat center top;
     background-size: 100%;
-    color: #F8F5F0;
     .panel {
         &__wrapper {
             display: flex;
@@ -102,21 +112,29 @@ $main-light-gray: #F8F5F0;
                 min-height: 100vh;
                 background: $transparentWhite;
                 flex: 50%;
-                border-right: 1px solid $main-gray;
+                border-right: 1px solid $app-gray;
+                color: $app-blue;
+                &__content {
+                    margin-top: 40%;
+                    margin-left: $app-margin-left;
+
+                    h4 {
+                        margin-bottom: 1.5em;
+                    }
+                    p {
+                        font-size: 1.3rem;
+                        line-height: 1.5rem;
+                    }
+                }
             }
 
             &__right {
+                color: $app-light-gray;
                 min-height: 100vh;
                 flex: 50%;
-            }
-        }
-        &__content {
-            &__headline {
-                margin-top: 30%;
-                margin-left: 20%;
-
-                h2 {
-                    font-size: 4rem
+                &__content {
+                    margin-top: 30%;
+                    margin-left: 20%;
                 }
             }
         }
