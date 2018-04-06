@@ -81,11 +81,11 @@ jhipster:
         #allow-credentials: true
         #max-age: 1800
     mail:
-        from: klassenchatapp@localhost
+        from: mail@wiss3n.de
     swagger:
         default-include-pattern: /api/.*
-        title: klassenchatapp API
-        description: klassenchatapp API documentation
+        title: wiss3n API
+        description: wiss3n API documentation
         version: 0.0.1
         terms-of-service-url:
         contact-name:
