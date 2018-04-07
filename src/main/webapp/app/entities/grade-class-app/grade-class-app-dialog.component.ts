@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Response } from '@angular/http';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -11,7 +11,6 @@ import { GradeClassAppPopupService } from './grade-class-app-popup.service';
 import { GradeClassAppService } from './grade-class-app.service';
 import { TaskClassApp, TaskClassAppService } from '../task-class-app';
 import { User, UserService } from '../../shared';
-import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-grade-class-app-dialog',
@@ -41,19 +40,19 @@ export class GradeClassAppDialogComponent implements OnInit {
         this.isSaving = false;
         this.taskService
             .query({filter: 'grade-is-null'})
-            .subscribe((res: ResponseWrapper) => {
+            .subscribe((res: HttpResponse<TaskClassApp[]>) => {
                 if (!this.grade.taskId) {
-                    this.tasks = res.json;
+                    this.tasks = res.body;
                 } else {
                     this.taskService
                         .find(this.grade.taskId)
-                        .subscribe((subRes: TaskClassApp) => {
-                            this.tasks = [subRes].concat(res.json);
-                        }, (subRes: ResponseWrapper) => this.onError(subRes.json));
+                        .subscribe((subRes: HttpResponse<TaskClassApp>) => {
+                            this.tasks = [subRes.body].concat(res.body);
+                        }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
                 }
-            }, (res: ResponseWrapper) => this.onError(res.json));
+            }, (res: HttpErrorResponse) => this.onError(res.message));
         this.userService.query()
-            .subscribe((res: ResponseWrapper) => { this.users = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+            .subscribe((res: HttpResponse<User[]>) => { this.users = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -71,9 +70,9 @@ export class GradeClassAppDialogComponent implements OnInit {
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<GradeClassApp>) {
-        result.subscribe((res: GradeClassApp) =>
-            this.onSaveSuccess(res), (res: Response) => this.onSaveError());
+    private subscribeToSaveResponse(result: Observable<HttpResponse<GradeClassApp>>) {
+        result.subscribe((res: HttpResponse<GradeClassApp>) =>
+            this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
     }
 
     private onSaveSuccess(result: GradeClassApp) {

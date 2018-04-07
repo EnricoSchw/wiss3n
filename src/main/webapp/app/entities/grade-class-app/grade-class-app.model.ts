@@ -13,6 +13,7 @@ export class GradeClassApp implements BaseEntity {
         public additional?: GradeAdditional,
         public point?: number,
         public taskId?: number,
+        public userLogin?: string,
         public userId?: number,
     ) {
     }

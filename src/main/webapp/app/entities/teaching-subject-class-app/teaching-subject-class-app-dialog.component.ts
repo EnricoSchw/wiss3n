@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Response } from '@angular/http';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,7 +12,6 @@ import { TeachingSubjectClassAppService } from './teaching-subject-class-app.ser
 import { User, UserService } from '../../shared';
 import { TagClassApp, TagClassAppService } from '../tag-class-app';
 import { SchoolClassClassApp, SchoolClassClassAppService } from '../school-class-class-app';
-import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-teaching-subject-class-app-dialog',
@@ -44,11 +43,11 @@ export class TeachingSubjectClassAppDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.userService.query()
-            .subscribe((res: ResponseWrapper) => { this.users = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+            .subscribe((res: HttpResponse<User[]>) => { this.users = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.tagService.query()
-            .subscribe((res: ResponseWrapper) => { this.tags = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+            .subscribe((res: HttpResponse<TagClassApp[]>) => { this.tags = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.schoolClassService.query()
-            .subscribe((res: ResponseWrapper) => { this.schoolclasses = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+            .subscribe((res: HttpResponse<SchoolClassClassApp[]>) => { this.schoolclasses = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -66,9 +65,9 @@ export class TeachingSubjectClassAppDialogComponent implements OnInit {
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<TeachingSubjectClassApp>) {
-        result.subscribe((res: TeachingSubjectClassApp) =>
-            this.onSaveSuccess(res), (res: Response) => this.onSaveError());
+    private subscribeToSaveResponse(result: Observable<HttpResponse<TeachingSubjectClassApp>>) {
+        result.subscribe((res: HttpResponse<TeachingSubjectClassApp>) =>
+            this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
     }
 
     private onSaveSuccess(result: TeachingSubjectClassApp) {

@@ -6,6 +6,7 @@ export class TeachingSubjectClassApp implements BaseEntity {
         public year?: any,
         public name?: string,
         public grade?: number,
+        public userLogin?: string,
         public userId?: number,
         public tags?: BaseEntity[],
         public schoolClassId?: number,

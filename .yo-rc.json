@@ -4,7 +4,7 @@
       "packageName": "de.klassenchat.webapp",
       "nativeLanguage": "de"
     },
-    "jhipsterVersion": "4.13.3",
+    "jhipsterVersion": "4.14.2",
     "baseName": "klassenchatapp",
     "packageName": "de.klassenchat.webapp",
     "packageFolder": "de/klassenchat/webapp",

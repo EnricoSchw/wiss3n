@@ -84,78 +84,78 @@ export class TaskDialogPage {
 
     setTitelInput = function(titel) {
         this.titelInput.sendKeys(titel);
-    }
+    };
 
     getTitelInput = function() {
         return this.titelInput.getAttribute('value');
-    }
+    };
 
     setContentInput = function(content) {
         this.contentInput.sendKeys(content);
-    }
+    };
 
     getContentInput = function() {
         return this.contentInput.getAttribute('value');
-    }
+    };
 
     setTypeSelect = function(type) {
         this.typeSelect.sendKeys(type);
-    }
+    };
 
     getTypeSelect = function() {
         return this.typeSelect.element(by.css('option:checked')).getText();
-    }
+    };
 
     typeSelectLastOption = function() {
         this.typeSelect.all(by.tagName('option')).last().click();
-    }
+    };
     setStartInput = function(start) {
         this.startInput.sendKeys(start);
-    }
+    };
 
     getStartInput = function() {
         return this.startInput.getAttribute('value');
-    }
+    };
 
     setEndInput = function(end) {
         this.endInput.sendKeys(end);
-    }
+    };
 
     getEndInput = function() {
         return this.endInput.getAttribute('value');
-    }
+    };
 
     userSelectLastOption = function() {
         this.userSelect.all(by.tagName('option')).last().click();
-    }
+    };
 
     userSelectOption = function(option) {
         this.userSelect.sendKeys(option);
-    }
+    };
 
     getUserSelect = function() {
         return this.userSelect;
-    }
+    };
 
     getUserSelectedOption = function() {
         return this.userSelect.element(by.css('option:checked')).getText();
-    }
+    };
 
     teachingSubjectSelectLastOption = function() {
         this.teachingSubjectSelect.all(by.tagName('option')).last().click();
-    }
+    };
 
     teachingSubjectSelectOption = function(option) {
         this.teachingSubjectSelect.sendKeys(option);
-    }
+    };
 
     getTeachingSubjectSelect = function() {
         return this.teachingSubjectSelect;
-    }
+    };
 
     getTeachingSubjectSelectedOption = function() {
         return this.teachingSubjectSelect.element(by.css('option:checked')).getText();
-    }
+    };
 
     save() {
         this.saveButton.click();

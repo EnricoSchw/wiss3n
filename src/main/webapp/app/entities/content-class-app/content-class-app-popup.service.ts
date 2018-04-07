@@ -1,6 +1,7 @@
 import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { HttpResponse } from '@angular/common/http';
 import { ContentClassApp } from './content-class-app.model';
 import { ContentClassAppService } from './content-class-app.service';
 
@@ -25,10 +26,12 @@ export class ContentClassAppPopupService {
             }
 
             if (id) {
-                this.contentService.find(id).subscribe((content) => {
-                    this.ngbModalRef = this.contentModalRef(component, content);
-                    resolve(this.ngbModalRef);
-                });
+                this.contentService.find(id)
+                    .subscribe((contentResponse: HttpResponse<ContentClassApp>) => {
+                        const content: ContentClassApp = contentResponse.body;
+                        this.ngbModalRef = this.contentModalRef(component, content);
+                        resolve(this.ngbModalRef);
+                    });
             } else {
                 // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
                 setTimeout(() => {

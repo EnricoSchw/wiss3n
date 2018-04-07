@@ -5,6 +5,7 @@ export class ContentClassApp implements BaseEntity {
         public id?: number,
         public titel?: string,
         public text?: any,
+        public userLogin?: string,
         public userId?: number,
         public taskId?: number,
         public tags?: BaseEntity[],

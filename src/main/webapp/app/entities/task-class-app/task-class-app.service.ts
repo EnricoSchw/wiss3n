@@ -1,72 +1,73 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { SERVER_API_URL } from '../../app.constants';
 
 import { JhiDateUtils } from 'ng-jhipster';
 
 import { TaskClassApp } from './task-class-app.model';
-import { ResponseWrapper, createRequestOption } from '../../shared';
+import { createRequestOption } from '../../shared';
+
+export type EntityResponseType = HttpResponse<TaskClassApp>;
 
 @Injectable()
 export class TaskClassAppService {
 
     private resourceUrl =  SERVER_API_URL + 'api/tasks';
 
-    constructor(private http: Http, private dateUtils: JhiDateUtils) { }
+    constructor(private http: HttpClient, private dateUtils: JhiDateUtils) { }
 
-    create(task: TaskClassApp): Observable<TaskClassApp> {
+    create(task: TaskClassApp): Observable<EntityResponseType> {
         const copy = this.convert(task);
-        return this.http.post(this.resourceUrl, copy).map((res: Response) => {
-            const jsonResponse = res.json();
-            return this.convertItemFromServer(jsonResponse);
-        });
+        return this.http.post<TaskClassApp>(this.resourceUrl, copy, { observe: 'response' })
+            .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
-    update(task: TaskClassApp): Observable<TaskClassApp> {
+    update(task: TaskClassApp): Observable<EntityResponseType> {
         const copy = this.convert(task);
-        return this.http.put(this.resourceUrl, copy).map((res: Response) => {
-            const jsonResponse = res.json();
-            return this.convertItemFromServer(jsonResponse);
-        });
+        return this.http.put<TaskClassApp>(this.resourceUrl, copy, { observe: 'response' })
+            .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
-    find(id: number): Observable<TaskClassApp> {
-        return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
-            const jsonResponse = res.json();
-            return this.convertItemFromServer(jsonResponse);
-        });
+    find(id: number): Observable<EntityResponseType> {
+        return this.http.get<TaskClassApp>(`${this.resourceUrl}/${id}`, { observe: 'response'})
+            .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
-    query(req?: any): Observable<ResponseWrapper> {
+    query(req?: any): Observable<HttpResponse<TaskClassApp[]>> {
         const options = createRequestOption(req);
-        return this.http.get(this.resourceUrl, options)
-            .map((res: Response) => this.convertResponse(res));
+        return this.http.get<TaskClassApp[]>(this.resourceUrl, { params: options, observe: 'response' })
+            .map((res: HttpResponse<TaskClassApp[]>) => this.convertArrayResponse(res));
     }
 
-    delete(id: number): Observable<Response> {
-        return this.http.delete(`${this.resourceUrl}/${id}`);
+    delete(id: number): Observable<HttpResponse<any>> {
+        return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});
     }
 
-    private convertResponse(res: Response): ResponseWrapper {
-        const jsonResponse = res.json();
-        const result = [];
+    private convertResponse(res: EntityResponseType): EntityResponseType {
+        const body: TaskClassApp = this.convertItemFromServer(res.body);
+        return res.clone({body});
+    }
+
+    private convertArrayResponse(res: HttpResponse<TaskClassApp[]>): HttpResponse<TaskClassApp[]> {
+        const jsonResponse: TaskClassApp[] = res.body;
+        const body: TaskClassApp[] = [];
         for (let i = 0; i < jsonResponse.length; i++) {
-            result.push(this.convertItemFromServer(jsonResponse[i]));
+            body.push(this.convertItemFromServer(jsonResponse[i]));
         }
-        return new ResponseWrapper(res.headers, result, res.status);
+        return res.clone({body});
     }
 
     /**
      * Convert a returned JSON object to TaskClassApp.
      */
-    private convertItemFromServer(json: any): TaskClassApp {
-        const entity: TaskClassApp = Object.assign(new TaskClassApp(), json);
-        entity.start = this.dateUtils
-            .convertLocalDateFromServer(json.start);
-        entity.end = this.dateUtils
-            .convertLocalDateFromServer(json.end);
-        return entity;
+    private convertItemFromServer(task: TaskClassApp): TaskClassApp {
+        const copy: TaskClassApp = Object.assign({}, task);
+        copy.start = this.dateUtils
+            .convertLocalDateFromServer(task.start);
+        copy.end = this.dateUtils
+            .convertLocalDateFromServer(task.end);
+        return copy;
     }
 
     /**

@@ -81,70 +81,70 @@ export class GradeDialogPage {
 
     setDateInput = function(date) {
         this.dateInput.sendKeys(date);
-    }
+    };
 
     getDateInput = function() {
         return this.dateInput.getAttribute('value');
-    }
+    };
 
     setValueInput = function(value) {
         this.valueInput.sendKeys(value);
-    }
+    };
 
     getValueInput = function() {
         return this.valueInput.getAttribute('value');
-    }
+    };
 
     setAdditionalSelect = function(additional) {
         this.additionalSelect.sendKeys(additional);
-    }
+    };
 
     getAdditionalSelect = function() {
         return this.additionalSelect.element(by.css('option:checked')).getText();
-    }
+    };
 
     additionalSelectLastOption = function() {
         this.additionalSelect.all(by.tagName('option')).last().click();
-    }
+    };
     setPointInput = function(point) {
         this.pointInput.sendKeys(point);
-    }
+    };
 
     getPointInput = function() {
         return this.pointInput.getAttribute('value');
-    }
+    };
 
     taskSelectLastOption = function() {
         this.taskSelect.all(by.tagName('option')).last().click();
-    }
+    };
 
     taskSelectOption = function(option) {
         this.taskSelect.sendKeys(option);
-    }
+    };
 
     getTaskSelect = function() {
         return this.taskSelect;
-    }
+    };
 
     getTaskSelectedOption = function() {
         return this.taskSelect.element(by.css('option:checked')).getText();
-    }
+    };
 
     userSelectLastOption = function() {
         this.userSelect.all(by.tagName('option')).last().click();
-    }
+    };
 
     userSelectOption = function(option) {
         this.userSelect.sendKeys(option);
-    }
+    };
 
     getUserSelect = function() {
         return this.userSelect;
-    }
+    };
 
     getUserSelectedOption = function() {
         return this.userSelect.element(by.css('option:checked')).getText();
-    }
+    };
 
     save() {
         this.saveButton.click();

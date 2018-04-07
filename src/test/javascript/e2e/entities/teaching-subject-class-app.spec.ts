@@ -81,75 +81,75 @@ export class TeachingSubjectDialogPage {
 
     setYearInput = function(year) {
         this.yearInput.sendKeys(year);
-    }
+    };
 
     getYearInput = function() {
         return this.yearInput.getAttribute('value');
-    }
+    };
 
     setNameInput = function(name) {
         this.nameInput.sendKeys(name);
-    }
+    };
 
     getNameInput = function() {
         return this.nameInput.getAttribute('value');
-    }
+    };
 
     setGradeInput = function(grade) {
         this.gradeInput.sendKeys(grade);
-    }
+    };
 
     getGradeInput = function() {
         return this.gradeInput.getAttribute('value');
-    }
+    };
 
     userSelectLastOption = function() {
         this.userSelect.all(by.tagName('option')).last().click();
-    }
+    };
 
     userSelectOption = function(option) {
         this.userSelect.sendKeys(option);
-    }
+    };
 
     getUserSelect = function() {
         return this.userSelect;
-    }
+    };
 
     getUserSelectedOption = function() {
         return this.userSelect.element(by.css('option:checked')).getText();
-    }
+    };
 
     tagSelectLastOption = function() {
         this.tagSelect.all(by.tagName('option')).last().click();
-    }
+    };
 
     tagSelectOption = function(option) {
         this.tagSelect.sendKeys(option);
-    }
+    };
 
     getTagSelect = function() {
         return this.tagSelect;
-    }
+    };
 
     getTagSelectedOption = function() {
         return this.tagSelect.element(by.css('option:checked')).getText();
-    }
+    };
 
     schoolClassSelectLastOption = function() {
         this.schoolClassSelect.all(by.tagName('option')).last().click();
-    }
+    };
 
     schoolClassSelectOption = function(option) {
         this.schoolClassSelect.sendKeys(option);
-    }
+    };
 
     getSchoolClassSelect = function() {
         return this.schoolClassSelect;
-    }
+    };
 
     getSchoolClassSelectedOption = function() {
         return this.schoolClassSelect.element(by.css('option:checked')).getText();
-    }
+    };
 
     save() {
         this.saveButton.click();

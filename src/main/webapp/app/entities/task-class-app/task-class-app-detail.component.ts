@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
 import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
 
@@ -32,9 +33,10 @@ export class TaskClassAppDetailComponent implements OnInit, OnDestroy {
     }
 
     load(id) {
-        this.taskService.find(id).subscribe((task) => {
-            this.task = task;
-        });
+        this.taskService.find(id)
+            .subscribe((taskResponse: HttpResponse<TaskClassApp>) => {
+                this.task = taskResponse.body;
+            });
     }
     byteSize(field) {
         return this.dataUtils.byteSize(field);

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
 import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
 
@@ -32,9 +33,10 @@ export class ContentClassAppDetailComponent implements OnInit, OnDestroy {
     }
 
     load(id) {
-        this.contentService.find(id).subscribe((content) => {
-            this.content = content;
-        });
+        this.contentService.find(id)
+            .subscribe((contentResponse: HttpResponse<ContentClassApp>) => {
+                this.content = contentResponse.body;
+            });
     }
     byteSize(field) {
         return this.dataUtils.byteSize(field);

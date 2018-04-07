@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { GradeClassApp } from './grade-class-app.model';
 import { GradeClassAppService } from './grade-class-app.service';
-import { Principal, ResponseWrapper } from '../../shared';
+import { Principal } from '../../shared';
 
 @Component({
     selector: 'jhi-grade-class-app',
@@ -25,10 +26,10 @@ grades: GradeClassApp[];
 
     loadAll() {
         this.gradeService.query().subscribe(
-            (res: ResponseWrapper) => {
-                this.grades = res.json;
+            (res: HttpResponse<GradeClassApp[]>) => {
+                this.grades = res.body;
             },
-            (res: ResponseWrapper) => this.onError(res.json)
+            (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
     ngOnInit() {

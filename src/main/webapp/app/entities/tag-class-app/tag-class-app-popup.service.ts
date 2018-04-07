@@ -1,6 +1,7 @@
 import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { HttpResponse } from '@angular/common/http';
 import { TagClassApp } from './tag-class-app.model';
 import { TagClassAppService } from './tag-class-app.service';
 
@@ -25,10 +26,12 @@ export class TagClassAppPopupService {
             }
 
             if (id) {
-                this.tagService.find(id).subscribe((tag) => {
-                    this.ngbModalRef = this.tagModalRef(component, tag);
-                    resolve(this.ngbModalRef);
-                });
+                this.tagService.find(id)
+                    .subscribe((tagResponse: HttpResponse<TagClassApp>) => {
+                        const tag: TagClassApp = tagResponse.body;
+                        this.ngbModalRef = this.tagModalRef(component, tag);
+                        resolve(this.ngbModalRef);
+                    });
             } else {
                 // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
                 setTimeout(() => {
