@@ -10,7 +10,6 @@ import { GradeClassApp } from './grade-class-app.model';
 import { GradeClassAppPopupService } from './grade-class-app-popup.service';
 import { GradeClassAppService } from './grade-class-app.service';
 import { TaskClassApp, TaskClassAppService } from '../task-class-app';
-import { User, UserService } from '../../shared';
 
 @Component({
     selector: 'jhi-grade-class-app-dialog',

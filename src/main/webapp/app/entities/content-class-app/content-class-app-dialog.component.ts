@@ -9,7 +9,7 @@ import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { ContentClassApp } from './content-class-app.model';
 import { ContentClassAppPopupService } from './content-class-app-popup.service';
 import { ContentClassAppService } from './content-class-app.service';
-import { User, UserService } from '../../shared';
+import { User } from '../../shared';
 import { TaskClassApp, TaskClassAppService } from '../task-class-app';
 import { TagClassApp, TagClassAppService } from '../tag-class-app';
 
