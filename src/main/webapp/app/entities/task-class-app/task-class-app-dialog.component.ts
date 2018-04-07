@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Response } from '@angular/http';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -11,7 +11,6 @@ import { TaskClassAppPopupService } from './task-class-app-popup.service';
 import { TaskClassAppService } from './task-class-app.service';
 import { User, UserService } from '../../shared';
 import { TeachingSubjectClassApp, TeachingSubjectClassAppService } from '../teaching-subject-class-app';
-import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-task-class-app-dialog',
@@ -25,7 +24,6 @@ export class TaskClassAppDialogComponent implements OnInit {
     users: User[];
 
     teachingsubjects: TeachingSubjectClassApp[];
-
     startDp: any;
     endDp: any;
 
@@ -42,7 +40,7 @@ export class TaskClassAppDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.teachingSubjectService.query()
-            .subscribe((res: ResponseWrapper) => { this.teachingsubjects = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+            .subscribe((res: HttpResponse<TeachingSubjectClassApp[]>) => { this.teachingsubjects = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     byteSize(field) {
@@ -72,9 +70,9 @@ export class TaskClassAppDialogComponent implements OnInit {
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<TaskClassApp>) {
-        result.subscribe((res: TaskClassApp) =>
-            this.onSaveSuccess(res), (res: Response) => this.onSaveError());
+    private subscribeToSaveResponse(result: Observable<HttpResponse<TaskClassApp>>) {
+        result.subscribe((res: HttpResponse<TaskClassApp>) =>
+            this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
     }
 
     private onSaveSuccess(result: TaskClassApp) {

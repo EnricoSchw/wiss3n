@@ -1,6 +1,7 @@
 import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { HttpResponse } from '@angular/common/http';
 import { GradeClassApp } from './grade-class-app.model';
 import { GradeClassAppService } from './grade-class-app.service';
 
@@ -25,17 +26,19 @@ export class GradeClassAppPopupService {
             }
 
             if (id) {
-                this.gradeService.find(id).subscribe((grade) => {
-                    if (grade.date) {
-                        grade.date = {
-                            year: grade.date.getFullYear(),
-                            month: grade.date.getMonth() + 1,
-                            day: grade.date.getDate()
-                        };
-                    }
-                    this.ngbModalRef = this.gradeModalRef(component, grade);
-                    resolve(this.ngbModalRef);
-                });
+                this.gradeService.find(id)
+                    .subscribe((gradeResponse: HttpResponse<GradeClassApp>) => {
+                        const grade: GradeClassApp = gradeResponse.body;
+                        if (grade.date) {
+                            grade.date = {
+                                year: grade.date.getFullYear(),
+                                month: grade.date.getMonth() + 1,
+                                day: grade.date.getDate()
+                            };
+                        }
+                        this.ngbModalRef = this.gradeModalRef(component, grade);
+                        resolve(this.ngbModalRef);
+                    });
             } else {
                 // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
                 setTimeout(() => {

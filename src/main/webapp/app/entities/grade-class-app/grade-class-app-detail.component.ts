@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
 import { JhiEventManager } from 'ng-jhipster';
 
@@ -31,9 +32,10 @@ export class GradeClassAppDetailComponent implements OnInit, OnDestroy {
     }
 
     load(id) {
-        this.gradeService.find(id).subscribe((grade) => {
-            this.grade = grade;
-        });
+        this.gradeService.find(id)
+            .subscribe((gradeResponse: HttpResponse<GradeClassApp>) => {
+                this.grade = gradeResponse.body;
+            });
     }
     previousState() {
         window.history.back();

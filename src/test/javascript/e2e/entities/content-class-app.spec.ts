@@ -78,67 +78,67 @@ export class ContentDialogPage {
 
     setTitelInput = function(titel) {
         this.titelInput.sendKeys(titel);
-    }
+    };
 
     getTitelInput = function() {
         return this.titelInput.getAttribute('value');
-    }
+    };
 
     setTextInput = function(text) {
         this.textInput.sendKeys(text);
-    }
+    };
 
     getTextInput = function() {
         return this.textInput.getAttribute('value');
-    }
+    };
 
     userSelectLastOption = function() {
         this.userSelect.all(by.tagName('option')).last().click();
-    }
+    };
 
     userSelectOption = function(option) {
         this.userSelect.sendKeys(option);
-    }
+    };
 
     getUserSelect = function() {
         return this.userSelect;
-    }
+    };
 
     getUserSelectedOption = function() {
         return this.userSelect.element(by.css('option:checked')).getText();
-    }
+    };
 
     taskSelectLastOption = function() {
         this.taskSelect.all(by.tagName('option')).last().click();
-    }
+    };
 
     taskSelectOption = function(option) {
         this.taskSelect.sendKeys(option);
-    }
+    };
 
     getTaskSelect = function() {
         return this.taskSelect;
-    }
+    };
 
     getTaskSelectedOption = function() {
         return this.taskSelect.element(by.css('option:checked')).getText();
-    }
+    };
 
     tagsSelectLastOption = function() {
         this.tagsSelect.all(by.tagName('option')).last().click();
-    }
+    };
 
     tagsSelectOption = function(option) {
         this.tagsSelect.sendKeys(option);
-    }
+    };
 
     getTagsSelect = function() {
         return this.tagsSelect;
-    }
+    };
 
     getTagsSelectedOption = function() {
         return this.tagsSelect.element(by.css('option:checked')).getText();
-    }
+    };
 
     save() {
         this.saveButton.click();

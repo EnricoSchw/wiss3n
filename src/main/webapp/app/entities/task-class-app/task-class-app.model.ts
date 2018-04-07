@@ -18,6 +18,7 @@ export class TaskClassApp implements BaseEntity {
         public type?: TaskType,
         public start?: any,
         public end?: any,
+        public userLogin?: string,
         public userId?: number,
         public teachingSubjectId?: number,
     ) {

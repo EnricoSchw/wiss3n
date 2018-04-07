@@ -1,5 +1,6 @@
 /* tslint:disable max-line-length */
 import { ComponentFixture, TestBed, async, inject, fakeAsync, tick } from '@angular/core/testing';
+import { HttpResponse } from '@angular/common/http';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs/Observable';
 import { JhiEventManager } from 'ng-jhipster';
@@ -50,7 +51,7 @@ describe('Component Tests', () => {
                     fakeAsync(() => {
                         // GIVEN
                         const entity = new TeachingSubjectClassApp(123);
-                        spyOn(service, 'update').and.returnValue(Observable.of(entity));
+                        spyOn(service, 'update').and.returnValue(Observable.of(new HttpResponse({body: entity})));
                         comp.teachingSubject = entity;
                         // WHEN
                         comp.save();
@@ -70,7 +71,7 @@ describe('Component Tests', () => {
                     fakeAsync(() => {
                         // GIVEN
                         const entity = new TeachingSubjectClassApp();
-                        spyOn(service, 'create').and.returnValue(Observable.of(entity));
+                        spyOn(service, 'create').and.returnValue(Observable.of(new HttpResponse({body: entity})));
                         comp.teachingSubject = entity;
                         // WHEN
                         comp.save();

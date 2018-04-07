@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
 import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { TaskClassApp } from './task-class-app.model';
 import { TaskClassAppService } from './task-class-app.service';
-import { Principal, ResponseWrapper } from '../../shared';
+import { Principal } from '../../shared';
 
 @Component({
     selector: 'jhi-task-class-app',
@@ -26,10 +27,10 @@ tasks: TaskClassApp[];
 
     loadAll() {
         this.taskService.query().subscribe(
-            (res: ResponseWrapper) => {
-                this.tasks = res.json;
+            (res: HttpResponse<TaskClassApp[]>) => {
+                this.tasks = res.body;
             },
-            (res: ResponseWrapper) => this.onError(res.json)
+            (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
     ngOnInit() {

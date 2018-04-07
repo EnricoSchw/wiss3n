@@ -55,7 +55,7 @@
             <div class="input-group">
                 <input id="field_start" type="text" class="form-control" name="start" ngbDatepicker  #startDp="ngbDatepicker" [(ngModel)]="task.start"
                 required/>
-                <span class="input-group-btn">
+                <span class="input-group-append">
                     <button type="button" class="btn btn-secondary" (click)="startDp.toggle()"><i class="fa fa-calendar"></i></button>
                 </span>
             </div>
@@ -71,7 +71,7 @@
             <div class="input-group">
                 <input id="field_end" type="text" class="form-control" name="end" ngbDatepicker  #endDp="ngbDatepicker" [(ngModel)]="task.end"
                 required/>
-                <span class="input-group-btn">
+                <span class="input-group-append">
                     <button type="button" class="btn btn-secondary" (click)="endDp.toggle()"><i class="fa fa-calendar"></i></button>
                 </span>
             </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Response } from '@angular/http';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,7 +12,6 @@ import { ContentClassAppService } from './content-class-app.service';
 import { User, UserService } from '../../shared';
 import { TaskClassApp, TaskClassAppService } from '../task-class-app';
 import { TagClassApp, TagClassAppService } from '../tag-class-app';
-import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-content-class-app-dialog',
@@ -43,9 +42,9 @@ export class ContentClassAppDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.taskService.query()
-            .subscribe((res: ResponseWrapper) => { this.tasks = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+            .subscribe((res: HttpResponse<TaskClassApp[]>) => { this.tasks = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.tagService.query()
-            .subscribe((res: ResponseWrapper) => { this.tags = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+            .subscribe((res: HttpResponse<TagClassApp[]>) => { this.tags = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     byteSize(field) {
@@ -75,9 +74,9 @@ export class ContentClassAppDialogComponent implements OnInit {
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<ContentClassApp>) {
-        result.subscribe((res: ContentClassApp) =>
-            this.onSaveSuccess(res), (res: Response) => this.onSaveError());
+    private subscribeToSaveResponse(result: Observable<HttpResponse<ContentClassApp>>) {
+        result.subscribe((res: HttpResponse<ContentClassApp>) =>
+            this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
     }
 
     private onSaveSuccess(result: ContentClassApp) {

@@ -1,6 +1,7 @@
 import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { HttpResponse } from '@angular/common/http';
 import { TaskClassApp } from './task-class-app.model';
 import { TaskClassAppService } from './task-class-app.service';
 
@@ -25,24 +26,26 @@ export class TaskClassAppPopupService {
             }
 
             if (id) {
-                this.taskService.find(id).subscribe((task) => {
-                    if (task.start) {
-                        task.start = {
-                            year: task.start.getFullYear(),
-                            month: task.start.getMonth() + 1,
-                            day: task.start.getDate()
-                        };
-                    }
-                    if (task.end) {
-                        task.end = {
-                            year: task.end.getFullYear(),
-                            month: task.end.getMonth() + 1,
-                            day: task.end.getDate()
-                        };
-                    }
-                    this.ngbModalRef = this.taskModalRef(component, task);
-                    resolve(this.ngbModalRef);
-                });
+                this.taskService.find(id)
+                    .subscribe((taskResponse: HttpResponse<TaskClassApp>) => {
+                        const task: TaskClassApp = taskResponse.body;
+                        if (task.start) {
+                            task.start = {
+                                year: task.start.getFullYear(),
+                                month: task.start.getMonth() + 1,
+                                day: task.start.getDate()
+                            };
+                        }
+                        if (task.end) {
+                            task.end = {
+                                year: task.end.getFullYear(),
+                                month: task.end.getMonth() + 1,
+                                day: task.end.getDate()
+                            };
+                        }
+                        this.ngbModalRef = this.taskModalRef(component, task);
+                        resolve(this.ngbModalRef);
+                    });
             } else {
                 // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
                 setTimeout(() => {

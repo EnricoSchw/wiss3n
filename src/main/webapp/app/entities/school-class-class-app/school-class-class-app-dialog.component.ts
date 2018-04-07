@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Response } from '@angular/http';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -10,7 +10,6 @@ import { SchoolClassClassApp } from './school-class-class-app.model';
 import { SchoolClassClassAppPopupService } from './school-class-class-app-popup.service';
 import { SchoolClassClassAppService } from './school-class-class-app.service';
 import { User, UserService } from '../../shared';
-import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-school-class-class-app-dialog',
@@ -36,7 +35,7 @@ export class SchoolClassClassAppDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.userService.query()
-            .subscribe((res: ResponseWrapper) => { this.users = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+            .subscribe((res: HttpResponse<User[]>) => { this.users = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -54,9 +53,9 @@ export class SchoolClassClassAppDialogComponent implements OnInit {
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<SchoolClassClassApp>) {
-        result.subscribe((res: SchoolClassClassApp) =>
-            this.onSaveSuccess(res), (res: Response) => this.onSaveError());
+    private subscribeToSaveResponse(result: Observable<HttpResponse<SchoolClassClassApp>>) {
+        result.subscribe((res: HttpResponse<SchoolClassClassApp>) =>
+            this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
     }
 
     private onSaveSuccess(result: SchoolClassClassApp) {
