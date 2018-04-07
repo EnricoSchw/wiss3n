@@ -1,0 +1,21 @@
+{
+    "klassenchatappApp": {
+        "tag" : {
+            "home": {
+                "title": "Tags",
+                "createLabel": "Tag erstellen",
+                "createOrEditLabel": "Tag erstellen oder bearbeiten"
+            },
+            "created": "Tag erstellt mit ID {{ param }}",
+            "updated": "Tag aktualisiert mit ID {{ param }}",
+            "deleted": "Tag gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Tag {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Tag"
+            },
+            "name": "Name"
+        }
+    }
+}

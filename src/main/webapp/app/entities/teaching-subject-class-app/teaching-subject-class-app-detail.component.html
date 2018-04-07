@@ -1,0 +1,50 @@
+
+<div *ngIf="teachingSubject">
+    <h2><span jhiTranslate="klassenchatappApp.teachingSubject.detail.title">Teaching Subject</span> {{teachingSubject.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="klassenchatappApp.teachingSubject.year">Year</span></dt>
+        <dd>
+            <span>{{teachingSubject.year | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="klassenchatappApp.teachingSubject.name">Name</span></dt>
+        <dd>
+            <span>{{teachingSubject.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="klassenchatappApp.teachingSubject.grade">Grade</span></dt>
+        <dd>
+            <span>{{teachingSubject.grade}}</span>
+        </dd>
+        <dt><span jhiTranslate="klassenchatappApp.teachingSubject.user">User</span></dt>
+        <dd>
+            {{teachingSubject.userLogin}}
+        </dd>
+        <dt><span jhiTranslate="klassenchatappApp.teachingSubject.tag">Tag</span></dt>
+        <dd>
+            <span *ngFor="let tag of teachingSubject.tags; let last = last">
+                <a [routerLink]="['/tag-class-app', tag?.id ]">{{tag.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span jhiTranslate="klassenchatappApp.teachingSubject.schoolClass">School Class</span></dt>
+        <dd>
+            <div *ngIf="teachingSubject.schoolClassId">
+                <a [routerLink]="['/school-class-class-app', teachingSubject.schoolClassId]">{{teachingSubject.schoolClassId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'teaching-subject-class-app/'+ teachingSubject.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

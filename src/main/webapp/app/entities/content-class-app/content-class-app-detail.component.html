@@ -1,0 +1,46 @@
+
+<div *ngIf="content">
+    <h2><span jhiTranslate="klassenchatappApp.content.detail.title">Content</span> {{content.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="klassenchatappApp.content.titel">Titel</span></dt>
+        <dd>
+            <span>{{content.titel}}</span>
+        </dd>
+        <dt><span jhiTranslate="klassenchatappApp.content.text">Text</span></dt>
+        <dd>
+            <span>{{content.text}}</span>
+        </dd>
+        <dt><span jhiTranslate="klassenchatappApp.content.user">User</span></dt>
+        <dd>
+            {{content.userLogin}}
+        </dd>
+        <dt><span jhiTranslate="klassenchatappApp.content.task">Task</span></dt>
+        <dd>
+            <div *ngIf="content.taskId">
+                <a [routerLink]="['/task-class-app', content.taskId]">{{content.taskId}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="klassenchatappApp.content.tags">Tags</span></dt>
+        <dd>
+            <span *ngFor="let tags of content.tags; let last = last">
+                <a [routerLink]="['/tag-class-app', tags?.id ]">{{tags.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'content-class-app/'+ content.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

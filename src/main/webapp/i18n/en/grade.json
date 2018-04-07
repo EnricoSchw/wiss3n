@@ -1,0 +1,26 @@
+{
+    "klassenchatappApp": {
+        "grade" : {
+            "home": {
+                "title": "Grades",
+                "createLabel": "Create a new Grade",
+                "createOrEditLabel": "Create or edit a Grade"
+            },
+            "created": "A new Grade is created with identifier {{ param }}",
+            "updated": "A Grade is updated with identifier {{ param }}",
+            "deleted": "A Grade is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Grade {{ id }}?"
+            },
+            "detail": {
+                "title": "Grade"
+            },
+            "date": "Date",
+            "value": "Value",
+            "additional": "Additional",
+            "point": "Point",
+            "task": "Task",
+            "user": "User"
+        }
+    }
+}

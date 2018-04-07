@@ -1,0 +1,26 @@
+{
+    "klassenchatappApp": {
+        "grade" : {
+            "home": {
+                "title": "Grades",
+                "createLabel": "Grade erstellen",
+                "createOrEditLabel": "Grade erstellen oder bearbeiten"
+            },
+            "created": "Grade erstellt mit ID {{ param }}",
+            "updated": "Grade aktualisiert mit ID {{ param }}",
+            "deleted": "Grade gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Grade {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Grade"
+            },
+            "date": "Date",
+            "value": "Value",
+            "additional": "Additional",
+            "point": "Point",
+            "task": "Task",
+            "user": "User"
+        }
+    }
+}
