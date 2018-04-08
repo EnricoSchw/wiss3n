@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
+    isOnPage: boolean;
 
     constructor(private loginService: LoginService,
                 private languageService: JhiLanguageService,
@@ -38,6 +39,8 @@ export class NavbarComponent implements OnInit {
         this.languageHelper.getAll().then((languages) => {
             this.languages = languages;
         });
+
+        this.isOnPage = this.isAuthenticated();
 
         this.profileService.getProfileInfo().then((profileInfo) => {
             this.inProduction = profileInfo.inProduction;
