@@ -52,9 +52,9 @@
         "messages": {
             "info": {
                 "authenticated": {
-                    "prefix": "Wenn Sie sich ",
+                    "prefix": "Klicken Sie: ",
                     "link": "anmelden",
-                    "suffix": " möchten, versuchen Sie es mit <br/>- Administrator (Name=\"admin\" und Passwort=\"admin\")<br/>- Benutzer (Name=\"user\" und Passwort=\"user\")."
+                    "suffix": ", wenn Sie sich anmelden möchten."
                 },
                 "register": {
                     "noaccount": "Sie haben noch keinen Zugang?",

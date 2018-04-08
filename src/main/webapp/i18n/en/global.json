@@ -52,9 +52,9 @@
         "messages": {
             "info": {
                 "authenticated": {
-                    "prefix": "If you want to ",
+                    "prefix": "Click ",
                     "link": "sign in",
-                    "suffix": ", you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\") <br/>- User (login=\"user\" and password=\"user\")."
+                    "suffix": ", If you want to sign in"
                 },
                 "register": {
                     "noaccount": "You don't have an account yet?",
