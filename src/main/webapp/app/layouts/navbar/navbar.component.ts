@@ -22,7 +22,6 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
-    isOnPage: boolean;
 
     constructor(private loginService: LoginService,
                 private languageService: JhiLanguageService,
@@ -40,22 +39,24 @@ export class NavbarComponent implements OnInit {
             this.languages = languages;
         });
 
-        this.isOnPage = this.isAuthenticated();
-
         this.profileService.getProfileInfo().then((profileInfo) => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
 
-        $(window).scroll( () => {
-            // 100 = The point you would like to fade the nav in.
-            if ($(window).scrollTop() > 100) {
-                $('.navbar').addClass('navbar-shown');
-                // navbar-dark navbar-expand-md bg-primary navbar-transparent
-            } else {
-                $('.navbar').removeClass('navbar-shown');
-            }
-        });
+        if (!this.isAuthenticated()) {
+
+            $(window).scroll(() => {
+                // 100 = The point you would like to fade the nav in.
+                if ($(window).scrollTop() > 100) {
+                    $('.navbar').addClass('navbar-shown');
+                    // navbar-dark navbar-expand-md bg-primary navbar-transparent
+                } else {
+                    $('.navbar').removeClass('navbar-shown');
+                }
+            });
+        }
+
     }
 
     changeLanguage(languageKey: string) {

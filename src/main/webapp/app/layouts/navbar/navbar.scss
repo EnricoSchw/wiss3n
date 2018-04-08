@@ -23,6 +23,15 @@ Navbar
     }
 }
 
+.navbar-dark {
+    a {
+        font-size: 1rem;
+        color: $app-light-gray;
+        font-weight: normal;
+        text-transform: none;
+    }
+}
+
 .navbar-shown {
     background-color: $app-gray;
     opacity: 0.8;

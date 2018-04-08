@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-fixed navbar-expand-md" [ngClass]="{'fixed-top': isAuthenticated(), 'navbar-fixed': isAuthenticated(), 'navbar-dark': !isAuthenticated(), 'bg-primary': !isAuthenticated()}" >
+<nav class="navbar fixed-top navbar-fixed navbar-expand-md" [ngClass]="{'fixed-top': !isAuthenticated(), 'navbar-fixed': !isAuthenticated(), 'navbar-dark': isAuthenticated(), 'bg-primary': isAuthenticated() }" >
     <div class="jh-logo-container float-left">
         <a class="jh-navbar-toggler d-lg-none float-right" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
             <i class="fa fa-bars "></i>
