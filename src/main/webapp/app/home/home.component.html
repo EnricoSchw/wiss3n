@@ -5,7 +5,15 @@
                       translateValues="{username: '{{account.login}}'}"> You are logged in as user "{{account.login}}". </span>
         </div>
 
+        <div>
+            <jhi-calendar *ngSwitchCase="true"></jhi-calendar>
+        </div>
+
+
+
         <jhi-info *ngSwitchCase="false" ></jhi-info>
+
+
 
     </div>
 

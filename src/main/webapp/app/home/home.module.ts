@@ -5,10 +5,12 @@ import { KlassenchatappSharedModule } from '../shared';
 
 import { HOME_ROUTE, HomeComponent } from './';
 import { InfoComponent } from './info/info.component';
+import { ManagementModule } from '../management/management.module';
 
 @NgModule({
     imports: [
         KlassenchatappSharedModule,
+        ManagementModule,
         RouterModule.forChild([ HOME_ROUTE ])
     ],
     declarations: [

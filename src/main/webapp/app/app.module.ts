@@ -17,6 +17,8 @@ import { KlassenchatappAdminModule } from './admin/admin.module';
 import { KlassenchatappAccountModule } from './account/account.module';
 import { KlassenchatappEntityModule } from './entities/entity.module';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
+import { CalendarModule } from 'angular-calendar';
+import { ManagementModule } from './management/management.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import {
     JhiMainComponent,
@@ -37,7 +39,7 @@ import {
         KlassenchatappHomeModule,
         KlassenchatappAdminModule,
         KlassenchatappAccountModule,
-        KlassenchatappEntityModule,
+        KlassenchatappEntityModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [

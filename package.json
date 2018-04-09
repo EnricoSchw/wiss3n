@@ -8,6 +8,7 @@
     "node_modules"
   ],
   "dependencies": {
+    "@angular/animations": "^5.2.9",
     "@angular/common": "5.2.0",
     "@angular/compiler": "5.2.0",
     "@angular/core": "5.2.0",
@@ -20,6 +21,7 @@
     "bootstrap": "4.0.0",
     "bootswatch": "^4.0.0",
     "core-js": "2.4.1",
+    "date-fns": "^1.29.0",
     "font-awesome": "4.7.0",
     "jquery": "3.2.1",
     "ng-jhipster": "0.4.0",
