@@ -10,7 +10,7 @@ import { CalendarBoardComponent } from './calendar-board/calendar-board.componen
         CalendarModule.forRoot()
     ],
     declarations: [CalendarComponent, CalendarBoardComponent],
-    exports: [CalendarComponent, CalendarBoardComponent],
+    exports: [CalendarBoardComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ManagementModule {
