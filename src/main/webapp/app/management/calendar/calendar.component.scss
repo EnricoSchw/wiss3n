@@ -1,0 +1,37 @@
+@import "../../../content/scss/variables";
+
+.calendar-head {
+    padding-bottom: 2em;
+    padding-top: 2em;
+    margin: 0;
+    color: $app-gray-blue;
+    border-bottom: 1px solid $app-gray-blue;
+    h3 {
+        font-weight: lighter !important;
+    }
+
+    .btn-primary {
+        color: $app-light-gray;
+        background-color: $app-blue;
+    }
+    .btn-primary:hover, .btn-primary.active {
+        color: $app-yellow !important;
+        background-color: $app-dark-gray !important;
+    }
+
+}
+
+.cal-cell-row.cal-header{
+    color: $app-gray-blue;
+    font-size: large;
+    font-weight: lighter !important;
+}
+
+.cal-month-view{
+    .cal-days {
+        border-top: 1px solid $app-gray-blue !important;
+        border-right: none;
+        border-left: none;
+
+    }
+}
