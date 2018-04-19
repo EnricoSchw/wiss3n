@@ -27,7 +27,6 @@
     font-weight: lighter !important;
 }
 
-
 .cal-month-view{
     .cal-days {
         border-top: 1px solid $app-gray-blue !important;
@@ -63,4 +62,12 @@ $hover-bg-cell: $hover;
 }
 .cal-cell.cal-day-cell:hover{
     background-color: $hover-bg-cell !important;
+}
+
+
+// Day Number ---------------------------------------------------
+.cal-month-view .cal-day-number {
+    margin-top: 15px !important;
+    margin-left: 15px !important;
+    float: left !important;
 }
