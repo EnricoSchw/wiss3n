@@ -21,6 +21,11 @@
 
 }
 
+.cal-cell-row:hover {
+    color: $app-yellow;
+    background-color: $app-gray !important;
+}
+
 .cal-cell-row.cal-header{
     color: $app-gray-blue;
     font-size: large;
@@ -32,6 +37,10 @@
         border-top: 1px solid $app-gray-blue !important;
         border-right: none;
         border-left: none;
+        .cal-cell-row {
+            border-bottom: 1px solid $app-gray-blue;
+        }
 
     }
 }
+
