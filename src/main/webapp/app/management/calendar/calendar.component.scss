@@ -21,16 +21,12 @@
 
 }
 
-.cal-cell-row:hover {
-    color: $app-yellow;
-    background-color: $app-gray !important;
-}
-
 .cal-cell-row.cal-header{
     color: $app-gray-blue;
     font-size: large;
     font-weight: lighter !important;
 }
+
 
 .cal-month-view{
     .cal-days {
@@ -44,3 +40,27 @@
     }
 }
 
+// Hover ---------------------------------------------------------
+$hover: #e7e8ee;
+$hover-bg-off: $app-light-blue;
+$hover-bg-row: $hover;
+$hover-bg-cell: $hover;
+
+// Hover Header --------------------------------------------------
+.cal-cell-row.cal-header:hover{
+    background-color: $hover-bg-off !important;
+}
+
+.cal-header {
+    .cal-cell:hover {
+        background-color: $hover-bg-off !important;
+    }
+}
+
+// Hover Cell ----------------------------------------------------
+.cal-cell-row:hover {
+    background-color: $hover-bg-row !important;
+}
+.cal-cell.cal-day-cell:hover{
+    background-color: $hover-bg-cell !important;
+}
