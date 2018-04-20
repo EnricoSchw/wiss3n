@@ -65,11 +65,11 @@
 
 <div [ngSwitch]="view">
     <mwl-calendar-month-view
-        [excludeDays]="excludeDays"
         *ngSwitchCase="'month'"
         [viewDate]="viewDate"
         [events]="events"
-        [cellTemplate]="customCellTemplate">
+        [excludeDays]="excludeDays"
+        [cellTemplate]="customCellTemplate"
         (dayClicked)="viewDate = $event.day.date; view = 'week'">
     </mwl-calendar-month-view>
     <mwl-calendar-week-view
