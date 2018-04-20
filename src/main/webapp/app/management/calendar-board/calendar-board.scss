@@ -7,6 +7,7 @@
 .board {
     width: 100vw;
 }
+
 .left-board {
     background-color: $app-blue;
     color: $app-light-gray;
@@ -34,6 +35,19 @@
 
     a.active {
         text-decoration: underline;
+    }
+
+    .task-control {
+        margin-top: 2em;
+        .btn.btn-outline-secondary {
+            color: $app-bootstrap-gray;
+            border-color: $app-bootstrap-gray;
+            background-color: $app-light-blue;
+        }
+        .btn.btn-outline-secondary:hover {
+            background-color: $app-bootstrap-gray;
+            color: $app-light-blue;
+        }
     }
 }
 
