@@ -67,7 +67,28 @@ $hover-bg-cell: $hover;
 
 // Day Number ---------------------------------------------------
 .cal-month-view .cal-day-number {
-    margin-top: 15px !important;
+    margin-top: 3px !important;
     margin-left: 15px !important;
+    margin-bottom: 2px !important;
     float: left !important;
+    font-weight: bold;
+}
+
+.cal-cell-top {
+    min-height: 0 !important;
+    position: relative;
+    flex: none !important;
+}
+.custom-event-month {
+    color: $app-gray-blue;
+    margin: 0 2px 0 15px;
+
+    .dot{
+        color: red;
+        margin-right: 3px;
+    }
+}
+
+small {
+    font-size: 60% !important;
 }

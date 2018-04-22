@@ -59,9 +59,10 @@
         <!--<span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>-->
         <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
     </div>
-    <small *ngFor="let event of day.events; index as i; first as isFirst">
-        <span *ngIf="event.meta.type !== 'subject'">{{event.title}}</span>
+    <small class="custom-event-month" *ngFor="let event of day.events; index as i; first as isFirst">
+        <span *ngIf="event.meta.type !== 'subject'"><span class="dot">MA</span>{{event.title}}</span>
     </small>
+
 </ng-template>
 
 
