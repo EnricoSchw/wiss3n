@@ -3,9 +3,24 @@ import { colors, TaskEventMeta, RecurringEvent } from '../models/events';
 import { CalendarEvent } from 'angular-calendar';
 import { TaskType } from 'src/main/webapp/app/entities/task-class-app';
 import { RRule } from 'rrule';
+import {
+    addDays, endOfDay, endOfMonth, endOfWeek, setHours, setMinutes, startOfDay, startOfMonth, startOfWeek, subDays
+} from 'date-fns';
 
 @Injectable()
 export class CalendarService {
+
+    private startOfPeriod: any = {
+        month: startOfMonth,
+        week: startOfWeek,
+        day: startOfDay
+    };
+
+    private endOfPeriod: any = {
+        month: endOfMonth,
+        week: endOfWeek,
+        day: endOfDay
+    };
 
     constructor() {
     }
@@ -43,11 +58,11 @@ export class CalendarService {
             {
                 title: 'Mathematik',
                 color: colors.get(TaskType.HAUSAUFGABE),
-                startPeriod: new Date('2018-04-01'),
-                endPeriod: new Date('2018-05-01'),
                 start: new Date('2018-04-24T10:05:00'),
                 end: new Date('2018-04-24T11:05:00'),
                 rrule: {
+                    dtstart: startOfWeek(new Date('2018-04-01')),
+                    until: endOfWeek( new Date('2018-05-01')),
                     freq: RRule.WEEKLY,
                     byweekday: [RRule.MO]
                 }

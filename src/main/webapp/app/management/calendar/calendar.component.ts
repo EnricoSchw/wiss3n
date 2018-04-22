@@ -59,28 +59,9 @@ export class CalendarComponent implements OnInit {
     public setUpCalendarEvents(events: CalendarEvent<TaskEventMeta>[], subjectEvents: RecurringEvent[]): CalendarEvent<TaskEventMeta>[] {
         const calendarEvents: CalendarEvent<TaskEventMeta>[] = events;
 
-        const startOfPeriod: any = {
-            month: startOfMonth,
-            week: startOfWeek,
-            day: startOfDay
-        };
-
-        const endOfPeriod: any = {
-            month: endOfMonth,
-            week: endOfWeek,
-            day: endOfDay
-        };
-
         subjectEvents.forEach((event) => {
+            const rule: RRule = new RRule(event.rrule);
 
-            // create separate events
-            const rule: RRule = new RRule(
-                Object.assign({}, event.rrule, {
-                    dtstart: startOfPeriod['week'](event.startPeriod), // starts in day of this week
-                    until: endOfPeriod['week'](event.endPeriod) // run until this day in this week
-                })
-            );
-            // add all events
             rule.all().forEach((date) => {
                 const start = new Date(date);
                 start.setHours(event.start.getHours());

@@ -27,11 +27,11 @@ export class EventColorList {
 export interface RecurringEvent {
     title: string;
     color: any;
-    startPeriod: Date;
-    endPeriod: Date;
     start:  Date;
     end: Date;
     rrule?: {
+        dtstart: Date;
+        until: Date;
         freq: RRule.Frequency;
         bymonth?: number;
         bymonthday?: number;
