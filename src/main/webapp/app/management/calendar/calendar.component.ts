@@ -11,7 +11,7 @@ import { TaskEventMeta } from '../models/events';
     templateUrl: './calendar.component.html',
     styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent  implements OnInit{
+export class CalendarComponent implements OnInit {
 
     view = 'month';
 

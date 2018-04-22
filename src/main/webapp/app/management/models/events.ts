@@ -3,7 +3,7 @@ import { TaskType } from 'src/main/webapp/app/entities/task-class-app';
 
 class EventColorList {
 
-    private list: { [type: number]: EventColor };
+    private list: { [type: number]: EventColor } = [];
 
     get(type: TaskType): EventColor {
         return this.list[type.valueOf()];

@@ -9,7 +9,6 @@ export class CalendarService {
     constructor() {
     }
 
-
     public loadTasks(): CalendarEvent<TaskEventMeta>[] {
         return [
             {
