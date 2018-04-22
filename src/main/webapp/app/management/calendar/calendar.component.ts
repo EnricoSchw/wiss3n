@@ -1,21 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CalendarEvent } from 'calendar-utils';
 import { addDays, setHours, setMinutes, subDays } from 'date-fns';
-
-export const colors: any = {
-    red: {
-        primary: '#ad2121',
-        secondary: '#FAE3E3'
-    },
-    blue: {
-        primary: '#1e90ff',
-        secondary: '#D1E8FF'
-    },
-    yellow: {
-        primary: '#e3bc08',
-        secondary: '#FDF1BA'
-    }
-};
+import { CalendarService } from '../providers/calendar.service';
+import { TaskEventMeta } from '../models/events';
 
 @Component({
     selector: 'jhi-calendar',
@@ -24,29 +11,23 @@ export const colors: any = {
     templateUrl: './calendar.component.html',
     styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent  {
+export class CalendarComponent  implements OnInit{
 
     view = 'month';
 
     viewDate: Date = new Date('2016-01-05');
 
-    events: CalendarEvent[] = [
-        {
-            start: new Date('2016-01-08'),
-            end: new Date('2016-01-10'),
-            title: 'One day excluded event',
-            color: colors.red
-        },
-        {
-            start: new Date('2016-01-01'),
-            end: new Date('2016-01-09'),
-            title: 'Multiple weeks event',
-            color: colors.blue
-        }
-    ];
-
     // exclude weekends
     excludeDays: number[] = [0, 6];
+
+    events: CalendarEvent<TaskEventMeta>[];
+
+    constructor(private service: CalendarService) {
+    }
+
+    public ngOnInit(): void {
+        this.events = this.service.loadTasks();
+    }
 
     skipWeekends(direction: 'back' | 'forward'): void {
         if (this.view === 'day') {
@@ -61,5 +42,4 @@ export class CalendarComponent  {
             }
         }
     }
-
 }
