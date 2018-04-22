@@ -26,7 +26,7 @@ export class CalendarComponent implements OnInit {
 
     view = 'month';
 
-    viewDate: Date = new  Date('2018-04-22');
+    viewDate: Date = new Date('2018-04-22');
 
     // exclude weekends
     excludeDays: number[] = [0, 6];
@@ -89,12 +89,7 @@ export class CalendarComponent implements OnInit {
                 end.setHours(event.end.getHours());
                 end.setMinutes(event.end.getMinutes());
 
-                calendarEvents.push(
-                    Object.assign({}, event, {
-                        start: start,
-                        end: end
-                    })
-                );
+                calendarEvents.push(<CalendarEvent<TaskEventMeta>>{...event, start, end});
             });
         });
 
