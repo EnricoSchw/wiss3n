@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { colors, TaskEventMeta } from '../models/events';
+import { colors, TaskEventMeta, RecurringEvent } from '../models/events';
 import { CalendarEvent } from 'angular-calendar';
 import { TaskType } from 'src/main/webapp/app/entities/task-class-app';
+import { RRule } from 'rrule';
 
 @Injectable()
 export class CalendarService {
@@ -37,4 +38,16 @@ export class CalendarService {
 
     }
 
+    public loadSubjects(): RecurringEvent[] {
+        return [
+            {
+                title: 'Recurs weekly on mondays',
+                color: colors.get(TaskType.HAUSAUFGABE),
+                rrule: {
+                    freq: RRule.WEEKLY,
+                    byweekday: [RRule.MO]
+                }
+            }
+        ];
+    }
 }

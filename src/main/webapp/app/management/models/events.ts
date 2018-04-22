@@ -1,7 +1,17 @@
 import { EventColor } from 'calendar-utils';
+import {
+    getMonth,
+    startOfMonth,
+    startOfWeek,
+    startOfDay,
+    endOfMonth,
+    endOfWeek,
+    endOfDay
+} from 'date-fns';
+import { RRule } from 'rrule';
 import { TaskType } from 'src/main/webapp/app/entities/task-class-app';
 
-class EventColorList {
+export class EventColorList {
 
     private list: { [type: number]: EventColor } = [];
 
@@ -12,6 +22,17 @@ class EventColorList {
     set(type: TaskType, color: EventColor) {
         this.list[type.valueOf()] = color;
     }
+}
+
+export interface RecurringEvent {
+    title: string;
+    color: any;
+    rrule?: {
+        freq: RRule.Frequency;
+        bymonth?: number;
+        bymonthday?: number;
+        byweekday?: RRule.Weekday[];
+    };
 }
 
 export const colors = new EventColorList();

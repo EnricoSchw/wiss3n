@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CalendarEvent } from 'calendar-utils';
-import { addDays, setHours, setMinutes, subDays } from 'date-fns';
+import {
+    addDays, endOfDay, endOfMonth, endOfWeek, setHours, setMinutes, startOfDay, startOfMonth, startOfWeek, subDays
+} from 'date-fns';
 import { CalendarService } from '../providers/calendar.service';
-import { TaskEventMeta } from '../models/events';
+import { RecurringEvent, TaskEventMeta } from '../models/events';
+import { RRule } from 'rrule';
 
 @Component({
     selector: 'jhi-calendar',
@@ -26,10 +29,12 @@ export class CalendarComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.events = this.service.loadTasks();
+        const events = this.service.loadTasks();
+        const setSubjectsEvents = this.service.loadSubjects();
+        this.events = this.setUpCalendarEvents(events, setSubjectsEvents);
     }
 
-    skipWeekends(direction: 'back' | 'forward'): void {
+    public skipWeekends(direction: 'back' | 'forward'): void {
         if (this.view === 'day') {
             if (direction === 'back') {
                 while (this.excludeDays.indexOf(this.viewDate.getDay()) > -1) {
@@ -41,5 +46,40 @@ export class CalendarComponent implements OnInit {
                 }
             }
         }
+    }
+
+    public setUpCalendarEvents(events: CalendarEvent<TaskEventMeta>[], subjectEvents: RecurringEvent[]): CalendarEvent<TaskEventMeta>[] {
+        const calendarEvents: CalendarEvent<TaskEventMeta>[] = events;
+
+        const startOfPeriod: any = {
+            month: startOfMonth,
+            week: startOfWeek,
+            day: startOfDay
+        };
+
+        const endOfPeriod: any = {
+            month: endOfMonth,
+            week: endOfWeek,
+            day: endOfDay
+        };
+
+        subjectEvents.forEach(event => {
+            const rule: RRule = new RRule(
+                Object.assign({}, event.rrule, {
+                    dtstart: startOfPeriod[this.view](this.viewDate),
+                    until: endOfPeriod[this.view](this.viewDate)
+                })
+            );
+
+            rule.all().forEach(date => {
+                calendarEvents.push(
+                    Object.assign({}, event, {
+                        start: new Date(date)
+                    })
+                );
+            });
+        });
+
+        return calendarEvents;
     }
 }
