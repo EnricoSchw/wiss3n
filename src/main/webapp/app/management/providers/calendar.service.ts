@@ -13,8 +13,8 @@ export class CalendarService {
     public loadTasks(): CalendarEvent<TaskEventMeta>[] {
         return [
             {
-                start: new Date('2016-01-08'),
-                end: new Date('2016-01-10'),
+                start: new Date('2018-04-24T12:05:00'),
+                end: new Date('2018-04-24T13:05:00'),
                 title: 'One day excluded event',
                 color: colors.get(TaskType.HAUSAUFGABE),
                 meta: {
@@ -24,8 +24,8 @@ export class CalendarService {
                 }
             },
             {
-                start: new Date('2016-01-01'),
-                end: new Date('2016-01-09'),
+                start: new Date('2018-04-24T10:05:00'),
+                end: new Date('2018-04-24T11:05:00'),
                 title: 'Multiple weeks event',
                 color: colors.get(TaskType.TEST),
                 meta: {
@@ -41,8 +41,12 @@ export class CalendarService {
     public loadSubjects(): RecurringEvent[] {
         return [
             {
-                title: 'Recurs weekly on mondays',
+                title: 'Mathematik',
                 color: colors.get(TaskType.HAUSAUFGABE),
+                startPeriod: new Date('2018-04-01'),
+                endPeriod: new Date('2018-05-01'),
+                start: new Date('2018-04-24T10:05:00'),
+                end: new Date('2018-04-24T11:05:00'),
                 rrule: {
                     freq: RRule.WEEKLY,
                     byweekday: [RRule.MO]

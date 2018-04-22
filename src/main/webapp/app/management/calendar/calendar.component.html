@@ -69,6 +69,7 @@
         [viewDate]="viewDate"
         [events]="events"
         [excludeDays]="excludeDays"
+        [locale]="locale"
         [cellTemplate]="customCellTemplate"
         (dayClicked)="viewDate = $event.day.date; view = 'week'">
     </mwl-calendar-month-view>
@@ -76,12 +77,16 @@
         *ngSwitchCase="'week'"
         [excludeDays]="excludeDays"
         [viewDate]="viewDate"
+        [locale]="locale"
         [events]="events"
         (dayHeaderClicked)="viewDate = $event.day.date; view = 'day'">
     </mwl-calendar-week-view>
     <mwl-calendar-day-view
         *ngSwitchCase="'day'"
         [viewDate]="viewDate"
-        [events]="events">
+        [events]="events"
+        [locale]="de"
+        [dayStartHour]="7"
+        [dayEndHour]="17">
     </mwl-calendar-day-view>
 </div>

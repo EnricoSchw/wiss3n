@@ -6,19 +6,27 @@ import {
 import { CalendarService } from '../providers/calendar.service';
 import { RecurringEvent, TaskEventMeta } from '../models/events';
 import { RRule } from 'rrule';
+import { CalendarDateFormatter } from 'angular-calendar';
+import { CustomDateFormatterService } from '../providers/custom-date-formatter.service';
 
 @Component({
     selector: 'jhi-calendar',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     templateUrl: './calendar.component.html',
-    styleUrls: ['./calendar.component.scss']
+    styleUrls: ['./calendar.component.scss'],
+    providers: [
+        {
+            provide: CalendarDateFormatter,
+            useClass: CustomDateFormatterService
+        }
+    ]
 })
 export class CalendarComponent implements OnInit {
 
     view = 'month';
 
-    viewDate: Date = new Date('2016-01-05');
+    viewDate: Date = new  Date('2018-04-22');
 
     // exclude weekends
     excludeDays: number[] = [0, 6];
@@ -63,18 +71,28 @@ export class CalendarComponent implements OnInit {
             day: endOfDay
         };
 
-        subjectEvents.forEach(event => {
+        subjectEvents.forEach((event) => {
+
+            // create separate events
             const rule: RRule = new RRule(
                 Object.assign({}, event.rrule, {
-                    dtstart: startOfPeriod[this.view](this.viewDate),
-                    until: endOfPeriod[this.view](this.viewDate)
+                    dtstart: startOfPeriod['week'](event.startPeriod), // starts in day of this week
+                    until: endOfPeriod['week'](event.endPeriod) // run until this day in this week
                 })
             );
+            // add all events
+            rule.all().forEach((date) => {
+                const start = new Date(date);
+                start.setHours(event.start.getHours());
+                start.setMinutes(event.start.getMinutes());
+                const end = new Date(date);
+                end.setHours(event.end.getHours());
+                end.setMinutes(event.end.getMinutes());
 
-            rule.all().forEach(date => {
                 calendarEvents.push(
                     Object.assign({}, event, {
-                        start: new Date(date)
+                        start: start,
+                        end: end
                     })
                 );
             });
