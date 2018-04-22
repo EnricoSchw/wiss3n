@@ -54,12 +54,14 @@
 <br>
 
 
-<ng-template #customCellTemplate let-day="day" let-locale="locale">
+<ng-template #customMonthCellTemplate let-day="day" let-locale="locale">
     <div class="cal-cell-top" *ngIf="day.date.getDay() > 0">
         <!--<span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>-->
         <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
     </div>
-    <small style="margin: 5px">There are {{ day.events.length }} events on this day</small>
+    <small *ngFor="let event of day.events; index as i; first as isFirst">
+        <span *ngIf="event.meta.type !== 'subject'">{{event.title}}</span>
+    </small>
 </ng-template>
 
 
@@ -70,7 +72,7 @@
         [events]="events"
         [excludeDays]="excludeDays"
         [locale]="locale"
-        [cellTemplate]="customCellTemplate"
+        [cellTemplate]="customMonthCellTemplate"
         (dayClicked)="viewDate = $event.day.date; view = 'week'">
     </mwl-calendar-month-view>
     <mwl-calendar-week-view

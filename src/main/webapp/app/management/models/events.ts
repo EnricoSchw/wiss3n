@@ -1,30 +1,13 @@
-import { EventColor } from 'calendar-utils';
-import {
-    getMonth,
-    startOfMonth,
-    startOfWeek,
-    startOfDay,
-    endOfMonth,
-    endOfWeek,
-    endOfDay
-} from 'date-fns';
+import { EventColor, CalendarEvent } from 'calendar-utils';
 import { RRule } from 'rrule';
-import { TaskType } from 'src/main/webapp/app/entities/task-class-app';
+import { TaskType } from '../../entities/task-class-app';
 
-export class EventColorList {
-
-    private list: { [type: number]: EventColor } = [];
-
-    get(type: TaskType): EventColor {
-        return this.list[type.valueOf()];
-    }
-
-    set(type: TaskType, color: EventColor) {
-        this.list[type.valueOf()] = color;
-    }
+export interface TaskEventMeta {
+    type: TaskType | 'subject';
+    subject: number;
 }
 
-export interface RecurringEvent {
+export interface RecurringEvent extends CalendarEvent<TaskEventMeta> {
     title: string;
     color: any;
     start:  Date;
@@ -37,6 +20,20 @@ export interface RecurringEvent {
         bymonthday?: number;
         byweekday?: RRule.Weekday[];
     };
+    meta: TaskEventMeta;
+}
+
+export class EventColorList {
+
+    private list: { [type: number]: EventColor } = [];
+
+    get(type: TaskType): EventColor {
+        return this.list[type.valueOf()];
+    }
+
+    set(type: TaskType, color: EventColor) {
+        this.list[type.valueOf()] = color;
+    }
 }
 
 export const colors = new EventColorList();
@@ -70,9 +67,3 @@ colors.set(TaskType.MUENDLICH, {
     primary: '#ad2121',
     secondary: '#FAE3E3'
 });
-
-export interface TaskEventMeta {
-    type: TaskType;
-    title: string;
-    subject: number;
-}

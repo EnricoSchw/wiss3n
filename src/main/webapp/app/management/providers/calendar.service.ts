@@ -34,7 +34,6 @@ export class CalendarService {
                 color: colors.get(TaskType.HAUSAUFGABE),
                 meta: {
                     type: TaskType.HAUSAUFGABE,
-                    title: 'Lehrbuch',
                     subject: 1
                 }
             },
@@ -45,8 +44,7 @@ export class CalendarService {
                 color: colors.get(TaskType.TEST),
                 meta: {
                     type: TaskType.TEST,
-                    title: 'Test',
-                    subject: 1
+                    subject: 2
                 }
             }
         ];
@@ -60,6 +58,10 @@ export class CalendarService {
                 color: colors.get(TaskType.HAUSAUFGABE),
                 start: new Date('2018-04-24T10:05:00'),
                 end: new Date('2018-04-24T11:05:00'),
+                meta: {
+                    type: 'subject',
+                    subject: 1
+                },
                 rrule: {
                     dtstart: startOfWeek(new Date('2018-04-01')),
                     until: endOfWeek( new Date('2018-05-01')),
