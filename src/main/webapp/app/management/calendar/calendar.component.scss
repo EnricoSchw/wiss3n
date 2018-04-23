@@ -83,8 +83,8 @@ $hover-bg-cell: $hover;
     color: $app-gray-blue;
     margin: 0 2px 0 15px;
 
-    .dot{
-        color: red;
+    &-subject{
+        font-weight: bold;
         margin-right: 3px;
     }
 }
