@@ -69,6 +69,33 @@
 </ng-template>
 
 
+<ng-template
+    #customWeekEventTemplate
+    let-weekEvent="weekEvent"
+    let-tooltipPlacement="tooltipPlacement"
+    let-eventClicked="eventClicked"
+    let-tooltipTemplate="tooltipTemplate"
+    let-tooltipAppendToBody="tooltipAppendToBody">
+    <div
+        class="cal-event"
+        [style.backgroundColor]="weekEvent.event.color?.secondary"
+        [style.borderColor]="weekEvent.event.color?.primary"
+        [mwlCalendarTooltip]="weekEvent.event.title | calendarEventTitle:'weekTooltip':weekEvent.event"
+        [tooltipPlacement]="tooltipPlacement"
+        [tooltipEvent]="weekEvent.event"
+        [tooltipTemplate]="tooltipTemplate"
+        [tooltipAppendToBody]="tooltipAppendToBody">
+        <mwl-calendar-event-actions [event]="weekEvent.event"></mwl-calendar-event-actions>
+        <mwl-calendar-event-title
+            [event]="weekEvent.event"
+            [customTemplate]="eventTitleTemplate"
+            view="week"
+            (mwlClick)="eventClicked.emit()">
+        </mwl-calendar-event-title>
+    </div>
+</ng-template>
+
+
 <div [ngSwitch]="view">
     <mwl-calendar-month-view
         *ngSwitchCase="'month'"
@@ -79,14 +106,15 @@
         [cellTemplate]="customMonthCellTemplate"
         (dayClicked)="viewDate = $event.day.date; view = 'week'">
     </mwl-calendar-month-view>
-    <mwl-calendar-week-view
+    <jhi-custom-calendar-week-view
         *ngSwitchCase="'week'"
         [excludeDays]="excludeDays"
         [viewDate]="viewDate"
         [locale]="locale"
+        [eventTemplate]="customWeekEventTemplate"
         [events]="events"
         (dayHeaderClicked)="viewDate = $event.day.date; view = 'day'">
-    </mwl-calendar-week-view>
+    </jhi-custom-calendar-week-view>
     <mwl-calendar-day-view
         *ngSwitchCase="'day'"
         [viewDate]="viewDate"
