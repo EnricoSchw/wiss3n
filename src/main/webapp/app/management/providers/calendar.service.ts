@@ -55,6 +55,7 @@ export class CalendarService {
         return [
             {
                 title: 'Mathematik',
+                prefix: 'MA',
                 color: colors.get(TaskType.HAUSAUFGABE),
                 start: new Date('2018-04-24T10:05:00'),
                 end: new Date('2018-04-24T11:05:00'),

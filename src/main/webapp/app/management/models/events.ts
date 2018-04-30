@@ -9,6 +9,7 @@ export interface TaskEventMeta {
 
 export interface RecurringEvent extends CalendarEvent<TaskEventMeta> {
     title: string;
+    prefix: string;
     color: any;
     start:  Date;
     end: Date;
