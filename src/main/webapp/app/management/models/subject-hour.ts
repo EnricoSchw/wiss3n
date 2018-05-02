@@ -1,40 +1,40 @@
 export interface SubjectHour {
-    start: Date,
-    end: Date,
+    start: string,
+    end: string,
 }
 
 export const firstHour = <SubjectHour>{
-    start: new Date('2018-04-24T08:15:00'),
-    end:  new Date('2018-04-24T09:00:00')
+    start: '08:15:00',
+    end: '09:00:00'
 };
 
 export const secondHour = <SubjectHour> {
-     start : new Date('2018-04-24T09:05:00'),
-     end : new Date('2018-04-24T09:50:00')
+    start: '09:05:00',
+    end: '09:50:00'
 };
 
 export const thirdHour = <SubjectHour> {
-    start: new Date('2018-04-24T10:00:00'),
-    end: new Date('2018-04-24T10:50:00')
+    start: '10:00:00',
+    end: '10:50:00'
 };
 
 export const fourthHour = <SubjectHour> {
-    start: new Date('2018-04-24T11:00:00'),
-    end: new Date('2018-04-24T11:45:00')
+    start: '11:00:00',
+    end: '11:45:00'
 };
 
 
 export const fifthHour = <SubjectHour> {
-    start: new Date('2018-04-24T12:05:00'),
-    end: new Date('2018-04-24T12:50:00')
+    start: '12:05:00',
+    end: '12:50:00'
 };
 
 export const sixthHour = <SubjectHour> {
-    start: new Date('2018-04-24T12:55:00'),
-    end: new Date('2018-04-24T13:10:00')
+    start: '12:55:00',
+    end: '13:10:00'
 };
 
 export const seventhHour = <SubjectHour> {
-    start: new Date('2018-04-24T13:45:00'),
-    end: new Date('2018-04-24T14:35:00')
+    start: '13:45:00',
+    end: '14:35:00'
 };
