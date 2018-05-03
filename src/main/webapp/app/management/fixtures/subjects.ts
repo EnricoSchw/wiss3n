@@ -19,12 +19,33 @@ const subjectColor = <EventColor>{
     secondary: '#59a9cb'
 };
 
-const setTime = (time: string): Date => {
+const setTime = (): Date => {
+    switch ()
     return new Date('2018-04-01T' + time);
 };
 
 const createSubjectEventList = (subjectHourList: SubjectHourData[]) => {
 
+
+    subjectHourList.forEach((subjcet) => {
+        naviMonday = <RecurringEvent>{
+            title: subjcet.title,
+            prefix: subjcet.prefix,
+            color: subjectColor,
+            start: setTime(subjcet.hour).start,
+            end: setTime(subjcet.hour).end,
+            meta: {
+                type: 'subject',
+                subject: 1
+            },
+            rrule: {
+                dtstart: startOfWeek(new Date('2018-04-01')),
+                until: endOfWeek(new Date('2018-05-01')),
+                freq: RRule.WEEKLY,
+                byweekday: [RRule.MO]
+            }
+        };
+    })
 };
 
 const subjectHourList = <SubjectHourData[]>[
