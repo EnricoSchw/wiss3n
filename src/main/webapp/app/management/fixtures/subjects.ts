@@ -19,10 +19,6 @@ const subjectColor = <EventColor>{
     secondary: '#59a9cb'
 };
 
-const setTime = (): Date => {
-    switch ()
-    return new Date('2018-04-01T' + time);
-};
 
 const createSubjectEventList = (subjectHourList: SubjectHourData[]) => {
 
