@@ -1,17 +1,20 @@
 import { EventColor } from 'calendar-utils';
 import { endOfWeek, startOfWeek } from 'date-fns';
 import { RRule } from 'rrule';
-import { fifthHour, firstHour, fourthHour, secondHour, sixthHour, thirdHour } from '../models/subject-hour';
+import {
+    fifthHour, firstHour, fourthHour, secondHour, sixthHour, SubjectHour, thirdHour
+} from '../models/subject-hour';
 import { RecurringEvent } from '../models/events';
-import { WeekDay } from '@angular/common';
 
 
 interface SubjectHourData {
     id: number;
     title: string,
     prefix: string,
-    hour: WeekDay,
-    color: EventColor
+    color: EventColor,
+    hour: SubjectHour,
+    day: RRule.Weekday,
+    start: Date,
 }
 
 const subjectColor = <EventColor>{
@@ -19,17 +22,19 @@ const subjectColor = <EventColor>{
     secondary: '#59a9cb'
 };
 
+const setSubjectHourTime = (timeString: string): Date => {
+    return new Date('2018-04-01T' + timeString);
+};
 
-const createSubjectEventList = (subjectHourList: SubjectHourData[]) => {
-
-
+const createSubjectEventList = (subjectHourList: SubjectHourData[]): RecurringEvent[]  => {
+    const eventList: RecurringEvent[] = [];
     subjectHourList.forEach((subjcet) => {
-        naviMonday = <RecurringEvent>{
+        eventList.push( <RecurringEvent>{
             title: subjcet.title,
             prefix: subjcet.prefix,
             color: subjectColor,
-            start: setTime(subjcet.hour).start,
-            end: setTime(subjcet.hour).end,
+            start: setSubjectHourTime(subjcet.hour.start),
+            end: setSubjectHourTime(subjcet.hour.end),
             meta: {
                 type: 'subject',
                 subject: 1
@@ -40,217 +45,19 @@ const createSubjectEventList = (subjectHourList: SubjectHourData[]) => {
                 freq: RRule.WEEKLY,
                 byweekday: [RRule.MO]
             }
-        };
-    })
+        });
+    });
+    return eventList;
 };
 
 const subjectHourList = <SubjectHourData[]>[
-    {id: 1, title: 'MusiK', prefix: 'MU', hour: 1, color: subjectColor},
-    {id: 1, title: 'MusiK', prefix: 'MU', hour: 1, color: subjectColor},
-    {id: 2, title: 'Naturwissenschaft', prefix: 'Nawi', day: RRule.MO, hour: 2, color: subjectColor},
-    {id: 1, title: 'MusiK', prefix: 'MU', hour: 1, color: subjectColor}
+    {id: 1, title: 'MusiK', prefix: 'MU', day: RRule.MO, hour: firstHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 1, title: 'MusiK', prefix: 'MU', day: RRule.MO, hour: fifthHour, color: subjectColor,  start: new Date('2018-04-01')},
+    {id: 2, title: 'Naturwissenschaft', prefix: 'Nawi', day: RRule.MO, hour: secondHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 1, title: 'MusiK', prefix: 'MU', day: RRule.MO,  hour: secondHour, color: subjectColor, start: new Date('2018-04-01')}
 ];
 
 
-const naviMonday = <RecurringEvent>{
-    title: 'Naturwissenschaft',
-    prefix: 'Nawi',
-    color: subjectColor,
-    start: setTime(secondHour.start),
-    end: setTime(secondHour.end),
-    meta: {
-        type: 'subject',
-        subject: 1
-    },
-    rrule: {
-        dtstart: startOfWeek(new Date('2018-04-01')),
-        until: endOfWeek(new Date('2018-05-01')),
-        freq: RRule.WEEKLY,
-        byweekday: [RRule.MO]
-    }
-};
-
-const englishMonday = <RecurringEvent>{
-    title: 'Enlisch',
-    prefix: 'E',
-    color: subjectColor,
-    start: thirdHour.start,
-    end: thirdHour.end,
-    meta: {
-        type: 'subject',
-        subject: 1
-    },
-    rrule: {
-        dtstart: startOfWeek(new Date('2018-04-01')),
-        until: endOfWeek(new Date('2018-05-01')),
-        freq: RRule.WEEKLY,
-        byweekday: [RRule.MO]
-    }
-};
-
-const matheMonday = <RecurringEvent>{
-    title: 'Mathematik',
-    prefix: 'Ma',
-    color: subjectColor,
-    start: fourthHour.start,
-    end: fourthHour.end,
-    meta: {
-        type: 'subject',
-        subject: 1
-    },
-    rrule: {
-        dtstart: startOfWeek(new Date('2018-04-01')),
-        until: endOfWeek(new Date('2018-05-01')),
-        freq: RRule.WEEKLY,
-        byweekday: [RRule.MO]
-    }
-};
-
-const spb1Monday = <RecurringEvent>{
-    title: 'SPB',
-    prefix: 'SPB',
-    color: subjectColor,
-    start: fifthHour.start,
-    end: fifthHour.end,
-    meta: {
-        type: 'subject',
-        subject: 1
-    },
-    rrule: {
-        dtstart: startOfWeek(new Date('2018-04-01')),
-        until: endOfWeek(new Date('2018-05-01')),
-        freq: RRule.WEEKLY,
-        byweekday: [RRule.MO]
-    }
-};
-
-
-const spb2Monday = <RecurringEvent>{
-    title: 'SPB',
-    prefix: 'SPB',
-    color: subjectColor,
-    start: sixthHour.start,
-    end: sixthHour.end,
-    meta: {
-        type: 'subject',
-        subject: 1
-    },
-    rrule: {
-        dtstart: startOfWeek(new Date('2018-04-01')),
-        until: endOfWeek(new Date('2018-05-01')),
-        freq: RRule.WEEKLY,
-        byweekday: [RRule.MO]
-    }
-};
-
-
-//##############Tuesday
-
-const englishTuesday = <RecurringEvent>{
-    title: 'Englisch',
-    prefix: 'E',
-    color: subjectColor,
-    start: firstHour.start,
-    end: firstHour.end,
-    meta: {
-        type: 'subject',
-        subject: 1
-    },
-    rrule: {
-        dtstart: startOfWeek(new Date('2018-04-01')),
-        until: endOfWeek(new Date('2018-05-01')),
-        freq: RRule.WEEKLY,
-        byweekday: [RRule.MO]
-    }
-};
-
-const naviMonday = <RecurringEvent>{
-    title: 'Naturwissenschaft',
-    prefix: 'Nawi',
-    color: subjectColor,
-    start: secondHour.start,
-    end: secondHour.end,
-    meta: {
-        type: 'subject',
-        subject: 1
-    },
-    rrule: {
-        dtstart: startOfWeek(new Date('2018-04-01')),
-        until: endOfWeek(new Date('2018-05-01')),
-        freq: RRule.WEEKLY,
-        byweekday: [RRule.MO]
-    }
-};
-
-const englishMonday = <RecurringEvent>{
-    title: 'Enlisch',
-    prefix: 'E',
-    color: subjectColor,
-    start: thirdHour.start,
-    end: thirdHour.end,
-    meta: {
-        type: 'subject',
-        subject: 1
-    },
-    rrule: {
-        dtstart: startOfWeek(new Date('2018-04-01')),
-        until: endOfWeek(new Date('2018-05-01')),
-        freq: RRule.WEEKLY,
-        byweekday: [RRule.MO]
-    }
-};
-
-const matheMonday = <RecurringEvent>{
-    title: 'Mathematik',
-    prefix: 'Ma',
-    color: subjectColor,
-    start: fourthHour.start,
-    end: fourthHour.end,
-    meta: {
-        type: 'subject',
-        subject: 1
-    },
-    rrule: {
-        dtstart: startOfWeek(new Date('2018-04-01')),
-        until: endOfWeek(new Date('2018-05-01')),
-        freq: RRule.WEEKLY,
-        byweekday: [RRule.MO]
-    }
-};
-
-const spb1Monday = <RecurringEvent>{
-    title: 'SPB',
-    prefix: 'SPB',
-    color: subjectColor,
-    start: fifthHour.start,
-    end: fifthHour.end,
-    meta: {
-        type: 'subject',
-        subject: 1
-    },
-    rrule: {
-        dtstart: startOfWeek(new Date('2018-04-01')),
-        until: endOfWeek(new Date('2018-05-01')),
-        freq: RRule.WEEKLY,
-        byweekday: [RRule.MO]
-    }
-};
-
-
-const spb2Monday = <RecurringEvent>{
-    title: 'SPB',
-    prefix: 'SPB',
-    color: subjectColor,
-    start: sixthHour.start,
-    end: sixthHour.end,
-    meta: {
-        type: 'subject',
-        subject: 1
-    },
-    rrule: {
-        dtstart: startOfWeek(new Date('2018-04-01')),
-        until: endOfWeek(new Date('2018-05-01')),
-        freq: RRule.WEEKLY,
-        byweekday: [RRule.MO]
-    }
+export const subjectFixtures = (): RecurringEvent[] => {
+    return createSubjectEventList(subjectHourList);
 };
