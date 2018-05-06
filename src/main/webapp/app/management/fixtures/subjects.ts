@@ -37,13 +37,13 @@ const createSubjectEventList = (subjectHourList: SubjectHourData[]): RecurringEv
             end: setSubjectHourTime(subjcet.hour.end),
             meta: {
                 type: 'subject',
-                subject: 1
+                subject: subjcet.id
             },
             rrule: {
-                dtstart: startOfWeek(new Date('2018-04-01')),
-                until: endOfWeek(new Date('2018-05-01')),
+                dtstart: startOfWeek(subjcet.start),
+                until: endOfWeek(subjcet.start),
                 freq: RRule.WEEKLY,
-                byweekday: [RRule.MO]
+                byweekday: [subjcet.day]
             }
         });
     });
@@ -52,9 +52,42 @@ const createSubjectEventList = (subjectHourList: SubjectHourData[]): RecurringEv
 
 const subjectHourList = <SubjectHourData[]>[
     {id: 1, title: 'MusiK', prefix: 'MU', day: RRule.MO, hour: firstHour, color: subjectColor, start: new Date('2018-04-01')},
-    {id: 1, title: 'MusiK', prefix: 'MU', day: RRule.MO, hour: fifthHour, color: subjectColor,  start: new Date('2018-04-01')},
+    {id: 1, title: 'MusiK', prefix: 'MU', day: RRule.TH, hour: fifthHour, color: subjectColor,  start: new Date('2018-04-01')},
+
     {id: 2, title: 'Naturwissenschaft', prefix: 'Nawi', day: RRule.MO, hour: secondHour, color: subjectColor, start: new Date('2018-04-01')},
-    {id: 1, title: 'MusiK', prefix: 'MU', day: RRule.MO,  hour: secondHour, color: subjectColor, start: new Date('2018-04-01')}
+    {id: 2, title: 'Naturwissenschaft', prefix: 'Nawi', day: RRule.TU, hour: fourthHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 2, title: 'Naturwissenschaft', prefix: 'Nawi', day: RRule.WE, hour: thirdHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 2, title: 'Naturwissenschaft', prefix: 'Nawi', day: RRule.WE, hour: fourthHour, color: subjectColor, start: new Date('2018-04-01')},
+
+    {id: 3, title: 'Englisch', prefix: 'E', day: RRule.MO,  hour: thirdHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 3, title: 'Englisch', prefix: 'E', day: RRule.TU,  hour: firstHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 3, title: 'Englisch', prefix: 'E', day: RRule.TH,  hour: fourthHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 3, title: 'Englisch', prefix: 'E', day: RRule.FR,  hour: fourthHour, color: subjectColor, start: new Date('2018-04-01')},
+
+    {id: 4, title: 'Mathe', prefix: 'M', day: RRule.MO,  hour: fourthHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 4, title: 'Mathe', prefix: 'M', day: RRule.TU,  hour: thirdHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 4, title: 'Mathe', prefix: 'M', day: RRule.TH,  hour: secondHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 4, title: 'Mathe', prefix: 'M', day: RRule.WE,  hour: sixthHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 4, title: 'Mathe', prefix: 'M', day: RRule.FR,  hour: firstHour, color: subjectColor, start: new Date('2018-04-01')},
+
+    {id: 5, title: 'Deutsch', prefix: 'D', day: RRule.TU,  hour: fifthHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 5, title: 'Deutsch', prefix: 'D', day: RRule.TU,  hour: sixthHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 5, title: 'Deutsch', prefix: 'D', day: RRule.WE,  hour: secondHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 5, title: 'Deutsch', prefix: 'D', day: RRule.TH,  hour: firstHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 5, title: 'Deutsch', prefix: 'D', day: RRule.FR,  hour: secondHour, color: subjectColor, start: new Date('2018-04-01')},
+
+    {id: 6, title: 'SPB', prefix: 'SPB', day: RRule.MO,  hour: fifthHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 6, title: 'SPB', prefix: 'SPB', day: RRule.MO,  hour: sixthHour, color: subjectColor, start: new Date('2018-04-01')},
+
+    {id: 7, title: 'Sport', prefix: 'SP', day: RRule.TU,  hour: secondHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 7, title: 'Sport', prefix: 'SP', day: RRule.TH,  hour: sixthHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 7, title: 'Sport', prefix: 'SP', day: RRule.FR,  hour: thirdHour, color: subjectColor, start: new Date('2018-04-01')},
+
+    {id: 8, title: 'Kunst', prefix: 'BK', day: RRule.WE,  hour: firstHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 8, title: 'Kunst', prefix: 'BK', day: RRule.FR,  hour: fifthHour, color: subjectColor, start: new Date('2018-04-01')},
+
+    {id: 9, title: 'Geschichte', prefix: 'Gewe', day: RRule.WE,  hour: fifthHour, color: subjectColor, start: new Date('2018-04-01')},
+    {id: 9, title: 'Geschichte', prefix: 'Gewe', day: RRule.FR,  hour: sixthHour, color: subjectColor, start: new Date('2018-04-01')},
 ];
 
 
