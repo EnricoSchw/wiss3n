@@ -6,6 +6,7 @@ import { RRule } from 'rrule';
 import {
     addDays, endOfDay, endOfMonth, endOfWeek, setHours, setMinutes, startOfDay, startOfMonth, startOfWeek, subDays
 } from 'date-fns';
+import { subjectFixtures } from '../fixtures/subjects';
 
 @Injectable()
 export class CalendarService {
@@ -52,24 +53,6 @@ export class CalendarService {
     }
 
     public loadSubjects(): RecurringEvent[] {
-        return [
-            {
-                title: 'Mathematik',
-                prefix: 'MA',
-                color: colors.get(TaskType.HAUSAUFGABE),
-                start: new Date('2018-04-24T10:05:00'),
-                end: new Date('2018-04-24T11:05:00'),
-                meta: {
-                    type: 'subject',
-                    subject: 1
-                },
-                rrule: {
-                    dtstart: startOfWeek(new Date('2018-04-01')),
-                    until: endOfWeek( new Date('2018-05-01')),
-                    freq: RRule.WEEKLY,
-                    byweekday: [RRule.MO]
-                }
-            }
-        ];
+        return subjectFixtures();
     }
 }

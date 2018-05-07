@@ -1,6 +1,6 @@
 export interface SubjectHour {
-    start: string,
-    end: string,
+    start: string;
+    end: string;
 }
 
 export const firstHour = <SubjectHour>{
@@ -22,7 +22,6 @@ export const fourthHour = <SubjectHour> {
     start: '11:00:00',
     end: '11:45:00'
 };
-
 
 export const fifthHour = <SubjectHour> {
     start: '12:05:00',

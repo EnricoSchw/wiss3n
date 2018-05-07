@@ -6,15 +6,14 @@ import {
 } from '../models/subject-hour';
 import { RecurringEvent } from '../models/events';
 
-
 interface SubjectHourData {
     id: number;
-    title: string,
-    prefix: string,
-    color: EventColor,
-    hour: SubjectHour,
-    day: RRule.Weekday,
-    start: Date,
+    title: string;
+    prefix: string;
+    color: EventColor;
+    hour: SubjectHour;
+    day: RRule.Weekday;
+    start: Date;
 }
 
 const subjectColor = <EventColor>{
@@ -50,7 +49,7 @@ const createSubjectEventList = (subjectHourList: SubjectHourData[]): RecurringEv
     return eventList;
 };
 
-const subjectHourList = <SubjectHourData[]>[
+const subjectHours = <SubjectHourData[]>[
     {id: 1, title: 'MusiK', prefix: 'MU', day: RRule.MO, hour: firstHour, color: subjectColor, start: new Date('2018-04-01')},
     {id: 1, title: 'MusiK', prefix: 'MU', day: RRule.TH, hour: fifthHour, color: subjectColor,  start: new Date('2018-04-01')},
 
@@ -90,7 +89,6 @@ const subjectHourList = <SubjectHourData[]>[
     {id: 9, title: 'Geschichte', prefix: 'Gewe', day: RRule.FR,  hour: sixthHour, color: subjectColor, start: new Date('2018-04-01')},
 ];
 
-
 export const subjectFixtures = (): RecurringEvent[] => {
-    return createSubjectEventList(subjectHourList);
+    return createSubjectEventList(subjectHours);
 };
