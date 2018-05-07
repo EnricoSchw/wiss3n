@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { colors, TaskEventMeta, RecurringEvent } from '../models/events';
 import { CalendarEvent } from 'angular-calendar';
 import { TaskType } from 'src/main/webapp/app/entities/task-class-app';
-import { RRule } from 'rrule';
 import {
     addDays, endOfDay, endOfMonth, endOfWeek, setHours, setMinutes, startOfDay, startOfMonth, startOfWeek, subDays
 } from 'date-fns';
@@ -10,19 +9,6 @@ import { subjectFixtures } from '../fixtures/subjects';
 
 @Injectable()
 export class CalendarService {
-
-    private startOfPeriod: any = {
-        month: startOfMonth,
-        week: startOfWeek,
-        day: startOfDay
-    };
-
-    private endOfPeriod: any = {
-        month: endOfMonth,
-        week: endOfWeek,
-        day: endOfDay
-    };
-
     constructor() {
     }
 
@@ -49,7 +35,6 @@ export class CalendarService {
                 }
             }
         ];
-
     }
 
     public loadSubjects(): RecurringEvent[] {
