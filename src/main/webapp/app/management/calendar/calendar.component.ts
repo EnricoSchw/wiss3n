@@ -27,19 +27,21 @@ export class CalendarComponent implements OnInit {
     view = 'month';
 
     viewDate: Date = new Date('2018-04-22');
-
     // exclude weekends
     excludeDays: number[] = [0, 6];
 
-    events: CalendarEvent<TaskEventMeta>[];
+    monthEvents: CalendarEvent<TaskEventMeta>[];
+    weekEvents: CalendarEvent<TaskEventMeta>[];
 
     constructor(private service: CalendarService) {
     }
 
     public ngOnInit(): void {
         const events = this.service.loadTasks();
-        const setSubjectsEvents = this.service.loadSubjects();
-        this.events = this.setUpCalendarEvents(events, setSubjectsEvents);
+        const subjects = this.service.loadSubjects();
+
+        this.monthEvents = events;
+        this.weekEvents = this.mapSubjectsToWeekEvents(subjects);
     }
 
     public skipWeekends(direction: 'back' | 'forward'): void {
@@ -56,8 +58,8 @@ export class CalendarComponent implements OnInit {
         }
     }
 
-    public setUpCalendarEvents(events: CalendarEvent<TaskEventMeta>[], subjectEvents: RecurringEvent[]): CalendarEvent<TaskEventMeta>[] {
-        const calendarEvents: CalendarEvent<TaskEventMeta>[] = events;
+    private mapSubjectsToWeekEvents(subjectEvents: RecurringEvent[]): CalendarEvent<TaskEventMeta>[] {
+        const calendarEvents: CalendarEvent<TaskEventMeta>[] = [];
 
         subjectEvents.forEach((event) => {
             const rule: RRule = new RRule(event.rrule);

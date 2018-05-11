@@ -4,7 +4,7 @@ import { TaskType } from '../../entities/task-class-app';
 
 export interface TaskEventMeta {
     type: TaskType | 'subject';
-    subject: number;
+    subjectHour: number;
 }
 
 export interface RecurringEvent extends CalendarEvent<TaskEventMeta> {

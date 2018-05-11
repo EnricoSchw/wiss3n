@@ -21,7 +21,7 @@ export class CalendarService {
                 color: colors.get(TaskType.HAUSAUFGABE),
                 meta: {
                     type: TaskType.HAUSAUFGABE,
-                    subject: 1
+                    subjectHour: 1
                 }
             },
             {
@@ -31,7 +31,7 @@ export class CalendarService {
                 color: colors.get(TaskType.TEST),
                 meta: {
                     type: TaskType.TEST,
-                    subject: 2
+                    subjectHour: 2
                 }
             }
         ];
