@@ -1,14 +1,14 @@
 import { EventColor, CalendarEvent } from 'calendar-utils';
 import { RRule } from 'rrule';
-import { TaskType } from '../../entities/task-class-app';
+import { TaskType, TaskClassApp } from '../../entities/task-class-app';
+import { SubjectHourData } from './subject-hour';
 
 export interface TaskEventMeta {
-    type: TaskType;
-    subjectHourId: number;
+    task: TaskClassApp;
+    subjectHour: SubjectHourData;
 }
 
 export interface SubjectEventMeta {
-    type: 'subject';
     subjectHourId: number;
     events: CalendarEvent<TaskEventMeta>[];
 }
@@ -30,47 +30,60 @@ export interface SubjectEvent extends CalendarEvent<SubjectEventMeta> {
     meta: SubjectEventMeta;
 }
 
-export class EventColorList {
+// setting for TaskType
+// ------------------------------------------------------------
 
-    private list: { [type: number]: EventColor } = [];
+export interface TaskTypeSet extends EventColor {
+    prefix: string;
+}
 
-    get(type: TaskType): EventColor {
+export class TaskTypeSetting {
+
+    private list: { [type: number]: TaskTypeSet } = [];
+
+    get(type: TaskType): TaskTypeSet {
         return this.list[type.valueOf()];
     }
 
-    set(type: TaskType, color: EventColor) {
-        this.list[type.valueOf()] = color;
+    set(type: TaskType, setting: TaskTypeSet) {
+        this.list[type.valueOf()] = setting;
     }
 }
 
-export const colors = new EventColorList();
+export const taskTypeSetting = new TaskTypeSetting();
 
-colors.set(TaskType.HAUSAUFGABE, {
+taskTypeSetting.set(TaskType.HAUSAUFGABE, {
+    prefix: 'HA',
     primary: '#284451',
     secondary: '#59a9cb'
 });
 
-colors.set(TaskType.VORTRAG, {
+taskTypeSetting.set(TaskType.VORTRAG, {
+    prefix: 'Vortrag',
     primary: '#ad2121',
     secondary: '#FAE3E3'
 });
 
-colors.set(TaskType.KURZKONTROLLE, {
+taskTypeSetting.set(TaskType.KURZKONTROLLE, {
+    prefix: 'KK',
     primary: '#ad2121',
     secondary: '#FAE3E3'
 });
 
-colors.set(TaskType.TEST, {
+taskTypeSetting.set(TaskType.TEST, {
+    prefix: 'Test',
     primary: '#ad2121',
     secondary: '#FAE3E3'
 });
 
-colors.set(TaskType.KLAUSUR, {
+taskTypeSetting.set(TaskType.KLAUSUR, {
+    prefix: 'Klausur',
     primary: '#ad2121',
     secondary: '#FAE3E3'
 });
 
-colors.set(TaskType.MUENDLICH, {
+taskTypeSetting.set(TaskType.MUENDLICH, {
+    prefix: 'MÜ',
     primary: '#ad2121',
     secondary: '#FAE3E3'
 });

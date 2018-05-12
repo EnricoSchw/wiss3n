@@ -1,16 +1,14 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CalendarEvent } from 'calendar-utils';
 import {
-    addDays, endOfDay, endOfMonth, endOfWeek, getDay, isEqual, isSameDay, setHours, setMinutes, startOfDay,
-    startOfMonth,
-    startOfWeek,
-    subDays
+    addDays, isSameDay, subDays
 } from 'date-fns';
 import { CalendarService } from '../providers/calendar.service';
-import { SubjectEvent, SubjectEventMeta, TaskEventMeta } from '../models/events';
+import { SubjectEvent, TaskEventMeta, taskTypeSetting } from '../models/events';
 import { RRule } from 'rrule';
 import { CalendarDateFormatter } from 'angular-calendar';
 import { CustomDateFormatterService } from '../providers/custom-date-formatter.service';
+import { TaskType } from '../../entities/task-class-app';
 
 @Component({
     selector: 'jhi-calendar',
@@ -62,7 +60,7 @@ export class CalendarComponent implements OnInit {
     }
 
     /**
-     * Map each task event to a subject hour.
+     * Map each task event to his subject hour.
      * @param {SubjectEvent[]} subjectHours
      * @param {CalendarEvent<TaskEventMeta>[]} orgEvents
      * @returns {SubjectEvent[]}
@@ -75,7 +73,7 @@ export class CalendarComponent implements OnInit {
             const rule: RRule = new RRule(subjectHour.rrule);
             let eventListOfSubject: CalendarEvent<TaskEventMeta>[] = [];
             nextEvents = nextEvents.reduce((eventList: CalendarEvent<TaskEventMeta>[], current) => {
-                if (current.meta.subjectHourId === subjectHour.meta.subjectHourId) {
+                if (current.meta.subjectHour.id === subjectHour.meta.subjectHourId) {
                     eventListOfSubject.push(current);
                 } else {
                     eventList.push(current);
@@ -107,5 +105,24 @@ export class CalendarComponent implements OnInit {
         });
 
         return calendarEvents;
+    }
+
+    /**
+     * Convert Task Type to string
+     * @param {TaskType} type
+     * @returns {string}
+     */
+    public convertTypeToString(type: TaskType): string {
+        switch (type) {
+            case TaskType.HAUSAUFGABE:
+            case TaskType.VORTRAG:
+            case TaskType.KURZKONTROLLE:
+            case TaskType.TEST:
+            case TaskType.KLASSENARBEIT:
+            case TaskType.KLAUSUR:
+            case TaskType.MUENDLICH:
+                return taskTypeSetting.get(type).prefix;
+            default: return '';
+        }
     }
 }

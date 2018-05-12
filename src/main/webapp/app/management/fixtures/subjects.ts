@@ -2,20 +2,9 @@ import { EventColor } from 'calendar-utils';
 import { endOfWeek, startOfWeek } from 'date-fns';
 import { RRule } from 'rrule';
 import {
-    fifthHour, firstHour, fourthHour, secondHour, sixthHour, SubjectHour, thirdHour
+    fifthHour, firstHour, fourthHour, secondHour, sixthHour, SubjectHourData, thirdHour
 } from '../models/subject-hour';
 import { SubjectEvent } from '../models/events';
-
-interface SubjectHourData {
-    id: number;
-    title: string;
-    prefix: string;
-    color: EventColor;
-    hour: SubjectHour;
-    day: RRule.Weekday;
-    start: Date;
-    end: Date;
-}
 
 const subjectColor = <EventColor>{
     primary: '#b7b7b7',
@@ -58,7 +47,7 @@ export const subjectFixtures = (): SubjectEvent[] => {
 // ---- Data Set ----
 // @formatter:off
 
-const subjectHours = <SubjectHourData[]>[
+export const subjectHours = <SubjectHourData[]>[
     {id: 1, title: 'MusiK', prefix: 'MU', day: RRule.MO, hour: firstHour, color: subjectColor, start: new Date('2018-04-01'), end: new Date('2018-06-01')},
     {id: 2, title: 'MusiK', prefix: 'MU', day: RRule.TH, hour: fifthHour, color: subjectColor,  start: new Date('2018-04-01'), end: new Date('2018-06-01')},
 

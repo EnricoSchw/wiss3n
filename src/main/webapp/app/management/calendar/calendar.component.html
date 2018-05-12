@@ -60,8 +60,8 @@
         <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
     </div>
     <small class="custom-event-month" *ngFor="let event of day.events; index as i; first as isFirst">
-        <span *ngIf="event.meta.type !== 'subject'">
-            <span class="custom-event-month-subject" [ngStyle]="{'color': event.color.primary}">MA</span>
+        <span>
+            <span class="custom-event-month-subject" [ngStyle]="{'color': event.color.primary}">{{event.meta.subjectHour.prefix}}</span>
             {{event.title}}
         </span>
     </small>
@@ -93,7 +93,7 @@
             (mwlClick)="eventClicked.emit()">
         </mwl-calendar-event-title>
         <div *ngFor="let taskEvent of weekEvent.event.meta.events; trackBy:trackByIndex"  class="xx">
-            <span class="custom-event-month-subject" [ngStyle]="{'color': taskEvent.color.primary}">MA</span>
+            <span class="custom-event-month-subject" [ngStyle]="{'color': taskEvent.color.primary}">{{convertTypeToString(taskEvent.meta.task.type)}}</span>
             {{taskEvent.title}}
         </div>
     </div>

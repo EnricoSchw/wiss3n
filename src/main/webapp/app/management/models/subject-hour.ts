@@ -1,3 +1,16 @@
+import { EventColor } from 'calendar-utils';
+
+export interface SubjectHourData {
+    id: number;
+    title: string;
+    prefix: string;
+    color: EventColor;
+    hour: SubjectHour;
+    day: RRule.Weekday;
+    start: Date;
+    end: Date;
+}
+
 export interface SubjectHour {
     start: string;
     end: string;
