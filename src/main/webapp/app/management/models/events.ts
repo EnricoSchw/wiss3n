@@ -3,11 +3,17 @@ import { RRule } from 'rrule';
 import { TaskType } from '../../entities/task-class-app';
 
 export interface TaskEventMeta {
-    type: TaskType | 'subject';
-    subjectHour: number;
+    type: TaskType;
+    subjectHourId: number;
 }
 
-export interface RecurringEvent extends CalendarEvent<TaskEventMeta> {
+export interface SubjectEventMeta {
+    type: 'subject';
+    subjectHourId: number;
+    events: CalendarEvent<TaskEventMeta>[];
+}
+
+export interface SubjectEvent extends CalendarEvent<SubjectEventMeta> {
     title: string;
     prefix: string;
     color: any;
@@ -21,7 +27,7 @@ export interface RecurringEvent extends CalendarEvent<TaskEventMeta> {
         bymonthday?: number;
         byweekday?: RRule.Weekday[];
     };
-    meta: TaskEventMeta;
+    meta: SubjectEventMeta;
 }
 
 export class EventColorList {

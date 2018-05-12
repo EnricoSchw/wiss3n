@@ -1,10 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CalendarEvent } from 'calendar-utils';
 import {
-    addDays, endOfDay, endOfMonth, endOfWeek, setHours, setMinutes, startOfDay, startOfMonth, startOfWeek, subDays
+    addDays, endOfDay, endOfMonth, endOfWeek, getDay, isEqual, isSameDay, setHours, setMinutes, startOfDay,
+    startOfMonth,
+    startOfWeek,
+    subDays
 } from 'date-fns';
 import { CalendarService } from '../providers/calendar.service';
-import { RecurringEvent, TaskEventMeta } from '../models/events';
+import { SubjectEvent, SubjectEventMeta, TaskEventMeta } from '../models/events';
 import { RRule } from 'rrule';
 import { CalendarDateFormatter } from 'angular-calendar';
 import { CustomDateFormatterService } from '../providers/custom-date-formatter.service';
@@ -31,7 +34,7 @@ export class CalendarComponent implements OnInit {
     excludeDays: number[] = [0, 6];
 
     monthEvents: CalendarEvent<TaskEventMeta>[];
-    weekEvents: CalendarEvent<TaskEventMeta>[];
+    weekEvents: SubjectEvent[];
 
     constructor(private service: CalendarService) {
     }
@@ -41,7 +44,7 @@ export class CalendarComponent implements OnInit {
         const subjects = this.service.loadSubjects();
 
         this.monthEvents = events;
-        this.weekEvents = this.mapSubjectsToWeekEvents(subjects);
+        this.weekEvents = this.mapSubjectsToWeekEvents(subjects, events);
     }
 
     public skipWeekends(direction: 'back' | 'forward'): void {
@@ -58,21 +61,48 @@ export class CalendarComponent implements OnInit {
         }
     }
 
-    private mapSubjectsToWeekEvents(subjectEvents: RecurringEvent[]): CalendarEvent<TaskEventMeta>[] {
-        const calendarEvents: CalendarEvent<TaskEventMeta>[] = [];
+    /**
+     * Map each task event to a subject hour.
+     * @param {SubjectEvent[]} subjectHours
+     * @param {CalendarEvent<TaskEventMeta>[]} orgEvents
+     * @returns {SubjectEvent[]}
+     */
+    private mapSubjectsToWeekEvents(subjectHours: SubjectEvent[], orgEvents: CalendarEvent<TaskEventMeta>[]): SubjectEvent[] {
+        const calendarEvents: SubjectEvent[] = [];
+        let nextEvents = orgEvents;
 
-        subjectEvents.forEach((event) => {
-            const rule: RRule = new RRule(event.rrule);
+        subjectHours.forEach((subjectHour) => {
+            const rule: RRule = new RRule(subjectHour.rrule);
+            let eventListOfSubject: CalendarEvent<TaskEventMeta>[] = [];
+            nextEvents = nextEvents.reduce((eventList: CalendarEvent<TaskEventMeta>[], current) => {
+                if (current.meta.subjectHourId === subjectHour.meta.subjectHourId) {
+                    eventListOfSubject.push(current);
+                } else {
+                    eventList.push(current);
+                }
+                return eventList;
+            }, []);
 
             rule.all().forEach((date) => {
                 const start = new Date(date);
-                start.setHours(event.start.getHours());
-                start.setMinutes(event.start.getMinutes());
+                start.setHours(subjectHour.start.getHours());
+                start.setMinutes(subjectHour.start.getMinutes());
                 const end = new Date(date);
-                end.setHours(event.end.getHours());
-                end.setMinutes(event.end.getMinutes());
+                end.setHours(subjectHour.end.getHours());
+                end.setMinutes(subjectHour.end.getMinutes());
 
-                calendarEvents.push(<CalendarEvent<TaskEventMeta>>{...event, start, end});
+                const thisEvents = [];
+
+                eventListOfSubject = eventListOfSubject.reduce((eventList: CalendarEvent<TaskEventMeta>[], current) => {
+                    if (isSameDay(start, current.start)) {
+                        thisEvents.push(current);
+                    } else {
+                        eventList.push(current);
+                    }
+                    return eventList;
+                }, []);
+                const ss = <SubjectEvent>{...subjectHour, start, end, meta: {...subjectHour.meta, events: thisEvents}};
+                calendarEvents.push(ss);
             });
         });
 

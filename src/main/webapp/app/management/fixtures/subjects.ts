@@ -4,7 +4,7 @@ import { RRule } from 'rrule';
 import {
     fifthHour, firstHour, fourthHour, secondHour, sixthHour, SubjectHour, thirdHour
 } from '../models/subject-hour';
-import { RecurringEvent } from '../models/events';
+import { SubjectEvent } from '../models/events';
 
 interface SubjectHourData {
     id: number;
@@ -26,10 +26,10 @@ const setSubjectHourTime = (timeString: string): Date => {
     return new Date('2018-04-01T' + timeString);
 };
 
-const createSubjectEventList = (subjectHourList: SubjectHourData[]): RecurringEvent[] => {
-    const eventList: RecurringEvent[] = [];
+const createSubjectEventList = (subjectHourList: SubjectHourData[]): SubjectEvent[] => {
+    const eventList: SubjectEvent[] = [];
     subjectHourList.forEach((subjcet) => {
-        eventList.push(<RecurringEvent>{
+        eventList.push(<SubjectEvent>{
             title: subjcet.title,
             prefix: subjcet.prefix,
             color: subjcet.color,
@@ -37,7 +37,8 @@ const createSubjectEventList = (subjectHourList: SubjectHourData[]): RecurringEv
             end: setSubjectHourTime(subjcet.hour.end),
             meta: {
                 type: 'subject',
-                subjectHour: subjcet.id
+                subjectHourId: subjcet.id,
+                events: []
             },
             rrule: {
                 dtstart: startOfWeek(subjcet.start),
@@ -50,7 +51,7 @@ const createSubjectEventList = (subjectHourList: SubjectHourData[]): RecurringEv
     return eventList;
 };
 
-export const subjectFixtures = (): RecurringEvent[] => {
+export const subjectFixtures = (): SubjectEvent[] => {
     return createSubjectEventList(subjectHours);
 };
 

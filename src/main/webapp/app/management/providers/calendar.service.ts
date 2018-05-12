@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import { colors, TaskEventMeta, RecurringEvent } from '../models/events';
+import { colors, TaskEventMeta, SubjectEvent } from '../models/events';
 import { CalendarEvent } from 'angular-calendar';
 import { TaskType } from 'src/main/webapp/app/entities/task-class-app';
-import {
-    addDays, endOfDay, endOfMonth, endOfWeek, setHours, setMinutes, startOfDay, startOfMonth, startOfWeek, subDays
-} from 'date-fns';
 import { subjectFixtures } from '../fixtures/subjects';
 
 @Injectable()
@@ -15,13 +12,13 @@ export class CalendarService {
     public loadTasks(): CalendarEvent<TaskEventMeta>[] {
         return [
             {
-                start: new Date('2018-04-24T12:05:00'),
-                end: new Date('2018-04-24T13:05:00'),
+                start: new Date('2018-04-26T12:05:00'),
+                end: new Date('2018-04-26T13:05:00'),
                 title: 'One day excluded event',
                 color: colors.get(TaskType.HAUSAUFGABE),
                 meta: {
                     type: TaskType.HAUSAUFGABE,
-                    subjectHour: 1
+                    subjectHourId: 2
                 }
             },
             {
@@ -31,13 +28,13 @@ export class CalendarService {
                 color: colors.get(TaskType.TEST),
                 meta: {
                     type: TaskType.TEST,
-                    subjectHour: 2
+                    subjectHourId: 4
                 }
             }
         ];
     }
 
-    public loadSubjects(): RecurringEvent[] {
+    public loadSubjects(): SubjectEvent[] {
         return subjectFixtures();
     }
 }

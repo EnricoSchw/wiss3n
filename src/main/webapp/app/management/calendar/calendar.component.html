@@ -92,6 +92,10 @@
             view="week"
             (mwlClick)="eventClicked.emit()">
         </mwl-calendar-event-title>
+        <div *ngFor="let taskEvent of weekEvent.event.meta.events; trackBy:trackByIndex"  class="xx">
+            <span class="custom-event-month-subject" [ngStyle]="{'color': taskEvent.color.primary}">MA</span>
+            {{taskEvent.title}}
+        </div>
     </div>
 </ng-template>
 
