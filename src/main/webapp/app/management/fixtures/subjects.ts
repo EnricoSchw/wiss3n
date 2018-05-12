@@ -86,7 +86,6 @@ export const subjectHours = <SubjectHourData[]>[
     {id: 28, title: 'Geschichte', prefix: 'Gewe', day: RRule.WE,  hour: fifthHour, color: subjectColor, start: new Date('2018-04-01'), end: new Date('2018-06-01')},
     {id: 29, title: 'Geschichte', prefix: 'Gewe', day: RRule.FR,  hour: sixthHour, color: subjectColor, start: new Date('2018-04-01'), end: new Date('2018-06-01')},
 
-
     {id: 100, title: 'Free', prefix: 'Free', day: RRule.TH,  hour: thirdHour, color: subjectColor, start: new Date('2018-04-01'), end: new Date('2018-06-01')}
 ];
 // @formatter:on
