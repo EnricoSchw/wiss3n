@@ -92,3 +92,20 @@ $hover-bg-cell: $hover;
 small {
     font-size: 60% !important;
 }
+
+// Week
+
+.cal-week-view .cal-events-row {
+    height: 124px;
+}
+
+.cal-week-view .cal-event {
+    height: 120px;
+    line-height: normal;
+    border-radius: 25px;
+    border: 1px solid #73AD21;
+}
+
+.cal-week-view .cal-event .cal-event-title {
+    line-height: 30px;
+}

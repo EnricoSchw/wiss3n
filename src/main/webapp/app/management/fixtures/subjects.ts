@@ -18,8 +18,8 @@ interface SubjectHourData {
 }
 
 const subjectColor = <EventColor>{
-    primary: '#284451',
-    secondary: '#59a9cb'
+    primary: '#b7b7b7',
+    secondary: '#e7e8ee'
 };
 
 const setSubjectHourTime = (timeString: string): Date => {
