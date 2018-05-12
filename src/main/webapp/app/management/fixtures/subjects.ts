@@ -45,6 +45,7 @@ export const subjectFixtures = (): SubjectEvent[] => {
 };
 
 // ---- Data Set ----
+// @TODO We need an algorithm to fill the hours without subjects with free ours.
 // @formatter:off
 
 export const subjectHours = <SubjectHourData[]>[
@@ -83,6 +84,9 @@ export const subjectHours = <SubjectHourData[]>[
     {id: 27, title: 'Kunst', prefix: 'BK', day: RRule.FR,  hour: fifthHour, color: subjectColor, start: new Date('2018-04-01'), end: new Date('2018-06-01')},
 
     {id: 28, title: 'Geschichte', prefix: 'Gewe', day: RRule.WE,  hour: fifthHour, color: subjectColor, start: new Date('2018-04-01'), end: new Date('2018-06-01')},
-    {id: 29, title: 'Geschichte', prefix: 'Gewe', day: RRule.FR,  hour: sixthHour, color: subjectColor, start: new Date('2018-04-01'), end: new Date('2018-06-01')}
+    {id: 29, title: 'Geschichte', prefix: 'Gewe', day: RRule.FR,  hour: sixthHour, color: subjectColor, start: new Date('2018-04-01'), end: new Date('2018-06-01')},
+
+
+    {id: 100, title: 'Free', prefix: 'Free', day: RRule.TH,  hour: thirdHour, color: subjectColor, start: new Date('2018-04-01'), end: new Date('2018-06-01')}
 ];
 // @formatter:on
