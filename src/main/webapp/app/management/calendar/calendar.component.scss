@@ -1,5 +1,13 @@
 @import "../../../content/scss/variables";
 
+// Common --------------------------------------------------------
+
+.col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+// Header --------------------------------------------------------
 .calendar-head {
     padding-bottom: 2em;
     padding-top: 2em;
@@ -21,13 +29,13 @@
 
 }
 
-.cal-cell-row.cal-header{
+.cal-cell-row.cal-header {
     color: $app-gray-blue;
     font-size: large;
     font-weight: lighter !important;
 }
 
-.cal-month-view{
+.cal-month-view {
     .cal-days {
         border-top: 1px solid $app-gray-blue !important;
         border-right: none;
@@ -46,7 +54,7 @@ $hover-bg-row: $hover;
 $hover-bg-cell: $hover;
 
 // Hover Header --------------------------------------------------
-.cal-cell-row.cal-header:hover{
+.cal-cell-row.cal-header:hover {
     background-color: $hover-bg-off !important;
 }
 
@@ -60,10 +68,10 @@ $hover-bg-cell: $hover;
 .cal-cell-row:hover {
     background-color: $hover-bg-row !important;
 }
-.cal-cell.cal-day-cell:hover{
+
+.cal-cell.cal-day-cell:hover {
     background-color: $hover-bg-cell !important;
 }
-
 
 // Day Number ---------------------------------------------------
 .cal-month-view .cal-day-number {
@@ -79,11 +87,12 @@ $hover-bg-cell: $hover;
     position: relative;
     flex: none !important;
 }
+
 .custom-event-month {
     color: $app-gray-blue;
     margin: 0 2px 0 15px;
 
-    &-subject{
+    &-subject {
         font-weight: bold;
         margin-right: 3px;
     }
@@ -93,7 +102,7 @@ small {
     font-size: 60% !important;
 }
 
-// Week
+// Week ------------------------------------------------------------------
 
 .cal-week-view .cal-events-row {
     height: 124px;
@@ -109,4 +118,32 @@ small {
 
 .cal-week-view .cal-event .cal-event-title {
     line-height: 30px;
+}
+
+// Day --------------------------------------------------------------------
+
+.cal-day-view .cal-hour .cal-hour-segment {
+    border-bottom: none !important;
+}
+
+.cal-day-view .cal-hour .cal-hour-segment:hover {
+    background-color: transparent;
+}
+
+.cal-day-view .cal-ends-within-day .cal-event {
+    border-radius: 0px;
+}
+
+.cal-day-view .cal-event {
+    border: solid 0px;
+    padding: 5px;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 100%;
+    box-sizing: border-box;
+}
+.cal-day-view .cal-event-container {
+    margin-left: 0 !important;
 }

@@ -99,7 +99,7 @@ export class CalendarComponent implements OnInit {
                     }
                     return eventList;
                 }, []);
-                const ss = <SubjectEvent>{...subjectHour, start, end, meta: {...subjectHour.meta, events: thisEvents}};
+                const ss = <SubjectEvent>{...subjectHour, start, end, meta: {...subjectHour.meta, events: thisEvents},  vxallDay: true};
                 calendarEvents.push(ss);
             });
         });
