@@ -128,18 +128,20 @@ small {
 
 .cal-day-view .cal-hour {
     background-color: transparent !important;
-    border-bottom: 1px solid rgba(83, 87, 113, 0.14);
 }
-.cal-day-view .cal-hour .cal-hour-segment {
+
+.cal-day-view .cal-hour .cal-hour-segment.cal-hour-start {
     border-bottom: none !important;
 }
 
+.cal-hour-segment.cal-after-hour-start {
+    border-bottom: 1px solid rgba(83, 87, 113, 0.14) !important;
+}
 .cal-day-view .cal-hour .cal-hour-segment:hover {
     background-color: transparent;
 }
 
 .cal-day-view .cal-ends-within-day .cal-event {
-    border-radius: 0px;
     background-color: transparent !important;
 }
 
@@ -161,7 +163,8 @@ small {
     font-weight: bold;
     font-size: 12px;
     padding-top: 5px;
-    padding-left: 5px;
+    padding-left: 15px;
+    /*line-height: 16px;*/
     width: 70px;
     text-align: left;
 }
