@@ -125,4 +125,10 @@ export class CalendarComponent implements OnInit {
             default: return '';
         }
     }
+
+    public eventClicked({ event }: { event: CalendarEvent }): void {
+        console.log('Event clicked', event);
+        this.viewDate = event.start;
+        this.view = 'day';
+    }
 }
