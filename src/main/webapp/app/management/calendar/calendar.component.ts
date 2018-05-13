@@ -131,4 +131,8 @@ export class CalendarComponent implements OnInit {
         this.viewDate = event.start;
         this.view = 'day';
     }
+
+    public someThingClicked({ event }: { event: CalendarEvent }): void {
+        console.log('Event clicked', event);
+    }
 }

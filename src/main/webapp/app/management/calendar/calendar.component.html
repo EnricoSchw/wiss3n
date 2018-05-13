@@ -100,6 +100,36 @@
 </ng-template>
 
 
+
+<ng-template
+    #customDayEventTemplate
+    let-dayEvent="dayEvent"
+    let-tooltipPlacement="tooltipPlacement"
+    let-eventClicked="eventClicked"
+    let-tooltipTemplate="tooltipTemplate"
+    let-tooltipAppendToBody="tooltipAppendToBody">
+    <div
+        class="cal-event"
+        [style.backgroundColor]="dayEvent.event.color?.secondary"
+        [style.borderColor]="dayEvent.event.color?.primary"
+        [mwlCalendarTooltip]="dayEvent.event.title | calendarEventTitle:'dayTooltip':dayEvent.event"
+        [tooltipPlacement]="tooltipPlacement"
+        [tooltipEvent]="dayEvent.event"
+        [tooltipTemplate]="tooltipTemplate"
+        [tooltipAppendToBody]="tooltipAppendToBody"
+        (mwlClick)="eventClicked.emit()">
+        <mwl-calendar-event-actions [event]="dayEvent.event"></mwl-calendar-event-actions>
+        &ngsp;
+        <mwl-calendar-event-title
+            [event]="dayEvent.event"
+            [customTemplate]="eventTitleTemplate"
+            view="day"
+            (mwlClick)="eventClicked.emit()">
+        </mwl-calendar-event-title>
+        <jhi-subject-hour-view></jhi-subject-hour-view>
+    </div>
+</ng-template>
+
 <div [ngSwitch]="view">
     <mwl-calendar-month-view
         *ngSwitchCase="'month'"
@@ -125,7 +155,9 @@
         [viewDate]="viewDate"
         [events]="weekEvents"
         [locale]="de"
+        [eventTemplate]="customDayEventTemplate"
         [dayStartHour]="0"
-        [dayEndHour]="10">
+        [dayEndHour]="10"
+        (eventClicked)="someThingClicked($event)">
     </mwl-calendar-day-view>
 </div>
