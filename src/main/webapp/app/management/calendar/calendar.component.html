@@ -108,6 +108,9 @@
     let-eventClicked="eventClicked"
     let-tooltipTemplate="tooltipTemplate"
     let-tooltipAppendToBody="tooltipAppendToBody">
+    <jhi-subject-hour-view
+        [dayEvent]="dayEvent">
+    </jhi-subject-hour-view>
     <div
         class="cal-event"
         [style.backgroundColor]="dayEvent.event.color?.secondary"
@@ -126,7 +129,6 @@
             view="day"
             (mwlClick)="eventClicked.emit()">
         </mwl-calendar-event-title>
-        <jhi-subject-hour-view></jhi-subject-hour-view>
     </div>
 </ng-template>
 
