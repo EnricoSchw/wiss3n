@@ -9,7 +9,7 @@ export interface TaskEventMeta {
 }
 
 export interface SubjectEventMeta {
-    subjectHourId: number;
+    subjectHour: SubjectHourData;
     events: CalendarEvent<TaskEventMeta>[];
 }
 

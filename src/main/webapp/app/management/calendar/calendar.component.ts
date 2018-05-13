@@ -73,7 +73,7 @@ export class CalendarComponent implements OnInit {
             const rule: RRule = new RRule(subjectHour.rrule);
             let eventListOfSubject: CalendarEvent<TaskEventMeta>[] = [];
             nextEvents = nextEvents.reduce((eventList: CalendarEvent<TaskEventMeta>[], current) => {
-                if (current.meta.subjectHour.id === subjectHour.meta.subjectHourId) {
+                if (current.meta.subjectHour.id === subjectHour.meta.subjectHour.id) {
                     eventListOfSubject.push(current);
                 } else {
                     eventList.push(current);

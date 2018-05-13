@@ -26,7 +26,7 @@ const createSubjectEventList = (subjectHourList: SubjectHourData[]): SubjectEven
             end: setSubjectHourTime(subjcet.hour.end),
             meta: {
                 type: 'subject',
-                subjectHourId: subjcet.id,
+                subjectHour: subjcet,
                 events: []
             },
             rrule: {

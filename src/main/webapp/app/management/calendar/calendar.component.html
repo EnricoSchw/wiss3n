@@ -99,7 +99,12 @@
     </div>
 </ng-template>
 
-
+<ng-template
+    #customEventTitleTemplate
+    let-event="event"
+    let-view="view">
+    <a class="cal-event-title">{{event.meta.subjectHour.hour.index}} {{ event.title }}</a>
+</ng-template>
 
 <ng-template
     #customDayEventTemplate
@@ -125,7 +130,7 @@
         &ngsp;
         <mwl-calendar-event-title
             [event]="dayEvent.event"
-            [customTemplate]="eventTitleTemplate"
+            [customTemplate]="customEventTitleTemplate"
             view="day"
             (mwlClick)="eventClicked.emit()">
         </mwl-calendar-event-title>

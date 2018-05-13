@@ -135,28 +135,26 @@ small {
 }
 
 .cal-hour-segment.cal-after-hour-start {
-    border-bottom: 1px solid rgba(83, 87, 113, 0.14) !important;
+    border-bottom: none !important;
+    // border-bottom: 1px solid rgba(83, 87, 113, 0.14) !important;
 }
 .cal-day-view .cal-hour .cal-hour-segment:hover {
     background-color: transparent;
 }
 
 .cal-day-view .cal-ends-within-day .cal-event {
-    background-color: transparent !important;
+    //background-color: transparent !important;
 }
 
 .cal-day-view .cal-event {
-    border: solid 0px;
-    padding: 5px;
+    border: solid 0;
+    border-radius: 0;
+    padding: 15px;
     font-size: 12px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    height: 100%;
-    box-sizing: border-box;
+    background-color: $app-light-blue !important;
 }
 .cal-day-view .cal-event-container {
-    margin-left: 30px !important;
+    margin-left: 0  !important;
 }
 
 .cal-day-view .cal-time {
@@ -168,3 +166,4 @@ small {
     width: 70px;
     text-align: left;
 }
+
