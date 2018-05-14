@@ -138,6 +138,7 @@ small {
     border-bottom: none !important;
     // border-bottom: 1px solid rgba(83, 87, 113, 0.14) !important;
 }
+
 .cal-day-view .cal-hour .cal-hour-segment:hover {
     background-color: transparent;
 }
@@ -148,13 +149,15 @@ small {
 
 .cal-day-view .cal-event {
     border: solid 0;
-    border-radius: 0;
+    border-radius: 0 !important;
+    // border-bottom: solid 1px;
     padding: 15px;
     font-size: 12px;
     background-color: $app-light-blue !important;
 }
+
 .cal-day-view .cal-event-container {
-    margin-left: 0  !important;
+    margin-left: 0 !important;
 }
 
 .cal-day-view .cal-time {
@@ -165,5 +168,21 @@ small {
     /*line-height: 16px;*/
     width: 70px;
     text-align: left;
+}
+
+.cal-day-view {
+    .line {
+        position: absolute;
+        width: 150px;
+        height: 1px;
+        background-color: $app-gray-blue;
+    }
+    .line.top {
+        top: -1px;
+    }
+
+    .line.bottom {
+        bottom: 0px;
+    }
 }
 
