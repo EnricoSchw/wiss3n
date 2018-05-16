@@ -131,7 +131,8 @@ small {
 }
 
 .cal-day-view .cal-hour .cal-hour-segment.cal-hour-start {
-    border-bottom: none !important;
+    border-top: 1px solid $app-gray-blue !important;
+    border-bottom: none !important
 }
 
 .cal-hour-segment.cal-after-hour-start {
