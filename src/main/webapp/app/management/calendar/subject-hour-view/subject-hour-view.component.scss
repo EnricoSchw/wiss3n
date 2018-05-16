@@ -1,6 +1,9 @@
+@import "../../../../content/scss/variables";
+
 .subject-hour-view {
     position: absolute;
-    background-color: red !important;
-
+    background-color: $app-light-blue;
+    min-width: 220px;
+    width: 100% !important;
     min-height: 660px;
 }
