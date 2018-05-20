@@ -5,6 +5,7 @@ import {
     fifthHour, firstHour, fourthHour, secondHour, sixthHour, SubjectHourData, thirdHour
 } from '../models/subject-hour';
 import { SubjectEvent } from '../models/events';
+import * as moment from 'moment';
 
 const subjectColor = <EventColor>{
     primary: '#b7b7b7',
@@ -12,7 +13,7 @@ const subjectColor = <EventColor>{
 };
 
 const setSubjectHourTime = (timeString: string): Date => {
-    return new Date('2018-04-01T' + timeString);
+    return moment('2018-04-01T' + timeString, 'YYYY-MM-DD[T]HH:mm:ss').toDate();
 };
 
 const createSubjectEventList = (subjectHourList: SubjectHourData[]): SubjectEvent[] => {
