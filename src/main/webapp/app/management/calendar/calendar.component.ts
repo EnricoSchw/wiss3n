@@ -130,13 +130,13 @@ export class CalendarComponent implements OnInit {
         }
     }
 
-    public eventClicked({ event }: { event: SubjectEvent }): void {
+    public clickSubjectEbentInWeek({ event }: { event: SubjectEvent }): void {
         this.setActiveEvent(event);
         this.viewDate = event.start;
         this.view = 'day';
     }
 
-    public someThingClicked({ event }: { event: SubjectEvent }): void {
+    public clickSubjectEbentInDay({ event }: { event: SubjectEvent }): void {
         this.setActiveEvent(event);
     }
 

@@ -157,7 +157,7 @@
         [eventTemplate]="customWeekEventTemplate"
         [events]="weekEvents"
         (dayHeaderClicked)="viewDate = $event.day.date; view = 'day'"
-        (eventClicked)="eventClicked($event)">
+        (eventClicked)="clickSubjectEbentInWeek($event)">
     </mwl-calendar-week-view>
     <mwl-calendar-day-view
         *ngSwitchCase="'day'"
@@ -167,6 +167,6 @@
         [eventTemplate]="customDayEventTemplate"
         [dayStartHour]="0"
         [dayEndHour]="10"
-        (eventClicked)="someThingClicked($event)">
+        (eventClicked)="clickSubjectEbentInDay($event)">
     </mwl-calendar-day-view>
 </div>
