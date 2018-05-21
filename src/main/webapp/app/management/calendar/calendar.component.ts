@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy, Component, ContentChild, ElementRef, Input, OnInit, TemplateRef, ViewChild,
+    ViewContainerRef,
+    ViewEncapsulation
+} from '@angular/core';
 import { CalendarEvent } from 'calendar-utils';
 import {
     addDays, isSameDay, subDays
@@ -9,6 +14,9 @@ import { RRule } from 'rrule';
 import { CalendarDateFormatter } from 'angular-calendar';
 import { CustomDateFormatterService } from '../providers/custom-date-formatter.service';
 import { TaskType } from '../../entities/task-class-app';
+import { NgForOfContext } from '@angular/common';
+import { DayViewEvent } from 'calendar-utils';
+import { tokenReference } from '@angular/compiler';
 
 @Component({
     selector: 'jhi-calendar',
@@ -24,17 +32,16 @@ import { TaskType } from '../../entities/task-class-app';
     ]
 })
 export class CalendarComponent implements OnInit {
-
     view = 'month';
-
     viewDate: Date = new Date('2018-04-22');
     // exclude weekends
     excludeDays: number[] = [0, 6];
-
     monthEvents: CalendarEvent<TaskEventMeta>[];
     weekEvents: SubjectEvent[];
 
-    constructor(private service: CalendarService) {
+    private activeEvent: SubjectEvent;
+
+    constructor(private service: CalendarService, private _viewContainer: ViewContainerRef) {
     }
 
     public ngOnInit(): void {
@@ -99,8 +106,8 @@ export class CalendarComponent implements OnInit {
                     }
                     return eventList;
                 }, []);
-                const ss = <SubjectEvent>{...subjectHour, start, end, meta: {...subjectHour.meta, events: thisEvents},  vxallDay: true};
-                calendarEvents.push(ss);
+                const subjectEvent = <SubjectEvent>{...subjectHour, start, end, meta: {...subjectHour.meta, events: thisEvents},  vxallDay: true};
+                calendarEvents.push(subjectEvent);
             });
         });
 
@@ -126,13 +133,22 @@ export class CalendarComponent implements OnInit {
         }
     }
 
-    public eventClicked({ event }: { event: CalendarEvent }): void {
-        console.log('Event clicked', event);
+    public eventClicked({ event }: { event: SubjectEvent }): void {
+        this.setActiveEvent(event);
         this.viewDate = event.start;
         this.view = 'day';
     }
 
-    public someThingClicked({ event }: { event: CalendarEvent }): void {
-        console.log('Event clicked', event);
+    public someThingClicked({ event }: { event: SubjectEvent }): void {
+        this.setActiveEvent(event);
+    }
+
+    private setActiveEvent(event: SubjectEvent) {
+        if(this.activeEvent) {
+            console.log('Change event');
+            this.activeEvent.meta.isActive = false;
+        }
+        event.meta.isActive = true;
+        this.activeEvent = event;
     }
 }

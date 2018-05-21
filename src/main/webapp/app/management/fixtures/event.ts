@@ -13,6 +13,7 @@ export const events = <CalendarEvent<TaskEventMeta>[]>[
             task: <TaskClassApp>{
                 type: TaskType.HAUSAUFGABE
             },
+            isActive: false,
             subjectHour: subjectHours[1]
         }
     },
@@ -25,6 +26,7 @@ export const events = <CalendarEvent<TaskEventMeta>[]>[
             task: <TaskClassApp>{
                 type: TaskType.TEST
             },
+            isActive: false,
             subjectHour: subjectHours[3]
         }
     }

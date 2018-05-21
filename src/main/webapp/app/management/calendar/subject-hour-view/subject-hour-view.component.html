@@ -1,6 +1,7 @@
 <div class="subject-hour-view"
      [style.top.px]="-dayEvent.top"
-     [style.left.px]="dayEvent.width">
+     [style.left.px]="dayEvent.width"
+     [hidden]="!dayEvent.event.meta.isActive">
     <h1>
         {{dayEvent.event.title}}
     </h1>

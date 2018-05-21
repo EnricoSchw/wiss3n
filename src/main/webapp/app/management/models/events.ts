@@ -4,11 +4,13 @@ import { TaskType, TaskClassApp } from '../../entities/task-class-app';
 import { SubjectHourData } from './subject-hour';
 
 export interface TaskEventMeta {
+    isActive: boolean;
     task: TaskClassApp;
     subjectHour: SubjectHourData;
 }
 
 export interface SubjectEventMeta {
+    isActive: boolean;
     subjectHour: SubjectHourData;
     events: CalendarEvent<TaskEventMeta>[];
 }
