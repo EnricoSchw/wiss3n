@@ -186,5 +186,13 @@ small {
     .line.bottom {
         bottom: 0px;
     }
+
+    .line.right {
+        height: 58px;
+        left: 149px;
+        width: 3px;
+        z-index: 101;
+        background-color: $app-light-blue;
+    }
 }
 
