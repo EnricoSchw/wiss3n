@@ -1,6 +1,5 @@
 import {
-    AfterViewInit,
-    ChangeDetectionStrategy, Component, ContentChild, ElementRef, Input, OnInit, TemplateRef, ViewChild,
+    ChangeDetectionStrategy, Component, OnInit,
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
@@ -14,9 +13,7 @@ import { RRule } from 'rrule';
 import { CalendarDateFormatter } from 'angular-calendar';
 import { CustomDateFormatterService } from '../providers/custom-date-formatter.service';
 import { TaskType } from '../../entities/task-class-app';
-import { NgForOfContext } from '@angular/common';
-import { DayViewEvent } from 'calendar-utils';
-import { tokenReference } from '@angular/compiler';
+
 
 @Component({
     selector: 'jhi-calendar',
@@ -145,7 +142,6 @@ export class CalendarComponent implements OnInit {
 
     private setActiveEvent(event: SubjectEvent) {
         if(this.activeEvent) {
-            console.log('Change event');
             this.activeEvent.meta.isActive = false;
         }
         event.meta.isActive = true;
