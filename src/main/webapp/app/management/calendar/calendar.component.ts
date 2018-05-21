@@ -14,7 +14,6 @@ import { CalendarDateFormatter } from 'angular-calendar';
 import { CustomDateFormatterService } from '../providers/custom-date-formatter.service';
 import { TaskType } from '../../entities/task-class-app';
 
-
 @Component({
     selector: 'jhi-calendar',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -103,7 +102,13 @@ export class CalendarComponent implements OnInit {
                     }
                     return eventList;
                 }, []);
-                const subjectEvent = <SubjectEvent>{...subjectHour, start, end, meta: {...subjectHour.meta, events: thisEvents},  vxallDay: true};
+                const subjectEvent = <SubjectEvent>{
+                    ...subjectHour,
+                    start,
+                    end,
+                    meta: {...subjectHour.meta, events: thisEvents},
+                    vxallDay: true
+                };
                 calendarEvents.push(subjectEvent);
             });
         });
@@ -126,22 +131,23 @@ export class CalendarComponent implements OnInit {
             case TaskType.KLAUSUR:
             case TaskType.MUENDLICH:
                 return taskTypeSetting.get(type).prefix;
-            default: return '';
+            default:
+                return '';
         }
     }
 
-    public clickSubjectEbentInWeek({ event }: { event: SubjectEvent }): void {
+    public clickSubjectEbentInWeek({event}: { event: SubjectEvent }): void {
         this.setActiveEvent(event);
         this.viewDate = event.start;
         this.view = 'day';
     }
 
-    public clickSubjectEbentInDay({ event }: { event: SubjectEvent }): void {
+    public clickSubjectEbentInDay({event}: { event: SubjectEvent }): void {
         this.setActiveEvent(event);
     }
 
     private setActiveEvent(event: SubjectEvent) {
-        if(this.activeEvent) {
+        if (this.activeEvent) {
             this.activeEvent.meta.isActive = false;
         }
         event.meta.isActive = true;
