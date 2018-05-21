@@ -157,6 +157,10 @@ small {
     background-color: $app-light-blue !important;
 }
 
+.cal-day-view .cal-event:hover{
+    cursor: pointer;
+}
+
 .cal-day-view .cal-event-container {
     margin-left: 0 !important;
     width: 100% !important;
@@ -171,6 +175,9 @@ small {
     width: 70px;
     text-align: left;
 }
+
+
+
 
 .cal-day-view {
     .line {
