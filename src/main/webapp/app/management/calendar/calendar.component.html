@@ -118,7 +118,7 @@
     </jhi-subject-hour-view>
     <div class="line top"></div>
     <div class="line bottom"></div>
-    <div class="line right"></div>
+    <div class="line right" [hidden]="!dayEvent.event.meta.isActive"></div>
     <div
         class="cal-event"
         [style.backgroundColor]="dayEvent.event.color?.secondary"
