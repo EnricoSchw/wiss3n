@@ -92,7 +92,7 @@
             [customTemplate]="eventTitleTemplate"
             view="week">
         </mwl-calendar-event-title>
-        <div *ngFor="let taskEvent of weekEvent.event.meta.events; trackBy:trackByIndex"  class="xx">
+        <div *ngFor="let taskEvent of weekEvent.event.meta.events; trackBy:trackByIndex" class="xx">
             <span class="custom-event-month-subject" [ngStyle]="{'color': taskEvent.color.primary}">{{convertTypeToString(taskEvent.meta.task.type)}}</span>
             {{taskEvent.title}}
         </div>
@@ -121,6 +121,7 @@
     <div class="line right" [hidden]="!dayEvent.event.meta.isActive"></div>
     <div
         class="cal-event"
+        [ngClass]="{ 'active': dayEvent.event.meta.isActive }"
         [style.backgroundColor]="dayEvent.event.color?.secondary"
         [style.borderColor]="dayEvent.event.color?.primary"
         [mwlCalendarTooltip]="dayEvent.event.title | calendarEventTitle:'dayTooltip':dayEvent.event"

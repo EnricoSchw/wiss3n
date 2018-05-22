@@ -157,6 +157,10 @@ small {
     background-color: $app-light-blue !important;
 }
 
+.cal-day-view .cal-event.active {
+    background-color: $app-light-gray !important;
+}
+
 .cal-day-view .cal-event:hover{
     cursor: pointer;
 }
@@ -199,7 +203,7 @@ small {
         left: 149px;
         width: 3px;
         z-index: 101;
-        background-color: $app-light-blue;
+        background-color: $app-light-gray;
     }
 }
 
