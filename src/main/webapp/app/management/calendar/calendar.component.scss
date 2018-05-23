@@ -2,7 +2,7 @@
 
 // Common --------------------------------------------------------
 body {
-    color: #8E8C84;
+    color: $app-dark-gray;
 }
 
 .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto {
@@ -157,13 +157,17 @@ small {
     // border-bottom: solid 1px;
     padding: 15px;
     font-size: 12px;
-    font-weight: normal;
     background-color: $app-light-blue !important;
+    a {
+        font-weight: normal;
+    }
 }
 
 .cal-day-view .cal-event.active {
     background-color: $app-light-gray !important;
-    font-weight: normal;
+    a {
+        font-weight: normal;
+    }
 }
 
 .cal-day-view .cal-event:hover{
@@ -176,7 +180,7 @@ small {
 }
 
 .cal-day-view .cal-time {
-    font-weight: bold;
+    font-weight: normal;
     font-size: 12px;
     padding-top: 5px;
     padding-left: 15px;
