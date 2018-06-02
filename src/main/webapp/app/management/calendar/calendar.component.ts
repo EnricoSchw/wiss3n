@@ -3,14 +3,14 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { CalendarEvent } from 'calendar-utils';
+import { CalendarEvent, ViewPeriod } from 'calendar-utils';
 import {
     addDays, isSameDay, subDays
 } from 'date-fns';
 import { CalendarService } from '../providers/calendar.service';
 import { SubjectEvent, TaskEventMeta, taskTypeSetting } from '../models/events';
 import { RRule } from 'rrule';
-import { CalendarDateFormatter } from 'angular-calendar';
+import { CalendarDateFormatter, CalendarDayViewBeforeRenderEvent } from 'angular-calendar';
 import { CustomDateFormatterService } from '../providers/custom-date-formatter.service';
 import { TaskType } from '../../entities/task-class-app';
 
@@ -48,7 +48,14 @@ export class CalendarComponent implements OnInit {
         this.weekEvents = this.mapSubjectsToWeekEvents(subjects, events);
     }
 
-    public skipWeekends(direction: 'back' | 'forward'): void {
+    public beforeDayViewRender({period} : {period: ViewPeriod}): void {
+        const events: SubjectEvent[] = <SubjectEvent[]> period.events;
+        if(! isSameDay(this.activeEvent.start, this.viewDate) && events.length > 0) {
+            this.setActiveEvent(events[0]);
+        }
+    }
+
+    public navigateCalendar(direction: 'back' | 'forward'): void {
         if (this.view === 'day') {
             if (direction === 'back') {
                 while (this.excludeDays.indexOf(this.viewDate.getDay()) > -1) {
@@ -136,13 +143,13 @@ export class CalendarComponent implements OnInit {
         }
     }
 
-    public clickSubjectEbentInWeek({event}: { event: SubjectEvent }): void {
+    public clickSubjectEventInWeek({event}: { event: SubjectEvent }): void {
         this.setActiveEvent(event);
         this.viewDate = event.start;
         this.view = 'day';
     }
 
-    public clickSubjectEbentInDay({event}: { event: SubjectEvent }): void {
+    public clickSubjectEventInDay({event}: { event: SubjectEvent }): void {
         this.setActiveEvent(event);
     }
 

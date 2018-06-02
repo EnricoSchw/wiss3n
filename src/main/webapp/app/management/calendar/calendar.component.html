@@ -6,7 +6,7 @@
                 mwlCalendarPreviousView
                 [view]="view"
                 [(viewDate)]="viewDate"
-                (viewDateChange)="skipWeekends('back')">
+                (viewDateChange)="navigateCalendar('back')">
                 Previous
             </div>
             <div
@@ -20,7 +20,7 @@
                 mwlCalendarNextView
                 [view]="view"
                 [(viewDate)]="viewDate"
-                (viewDateChange)="skipWeekends('forward')">
+                (viewDateChange)="navigateCalendar('forward')">
                 Next
             </div>
         </div>
@@ -147,7 +147,7 @@
         [viewDate]="viewDate"
         [events]="monthEvents"
         [excludeDays]="excludeDays"
-        [locale]="locale"
+        [locale]="de"
         [cellTemplate]="customMonthCellTemplate"
         (dayClicked)="viewDate = $event.day.date; view = 'week'">
     </mwl-calendar-month-view>
@@ -155,11 +155,11 @@
         *ngSwitchCase="'week'"
         [excludeDays]="excludeDays"
         [viewDate]="viewDate"
-        [locale]="locale"
+        [locale]="de"
         [eventTemplate]="customWeekEventTemplate"
         [events]="weekEvents"
         (dayHeaderClicked)="viewDate = $event.day.date; view = 'day'"
-        (eventClicked)="clickSubjectEbentInWeek($event)">
+        (eventClicked)="clickSubjectEventInWeek($event)">
     </mwl-calendar-week-view>
     <mwl-calendar-day-view
         *ngSwitchCase="'day'"
@@ -169,6 +169,7 @@
         [eventTemplate]="customDayEventTemplate"
         [dayStartHour]="0"
         [dayEndHour]="10"
-        (eventClicked)="clickSubjectEbentInDay($event)">
+        (beforeViewRender)="beforeDayViewRender($event)"
+        (eventClicked)="clickSubjectEventInDay($event)">
     </mwl-calendar-day-view>
 </div>
