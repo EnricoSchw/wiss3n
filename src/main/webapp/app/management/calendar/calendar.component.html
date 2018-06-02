@@ -141,7 +141,7 @@
     </div>
 </ng-template>
 
-<div [ngSwitch]="view">
+<div [ngSwitch]="view" style="overflow:hidden;">
     <mwl-calendar-month-view
         *ngSwitchCase="'month'"
         [viewDate]="viewDate"

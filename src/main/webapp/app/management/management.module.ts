@@ -5,13 +5,14 @@ import { CalendarModule } from 'angular-calendar';
 import { CalendarBoardComponent } from './calendar-board/calendar-board.component';
 import { CalendarService } from './providers/calendar.service';
 import { SubjectHourViewComponent } from './calendar/subject-hour-view/subject-hour-view.component';
+import { SubjectHourEventViewComponent } from './calendar/subject-hour-event-view/subject-hour-event-view.component';
 
 @NgModule({
     imports: [
         CommonModule,
         CalendarModule.forRoot()
     ],
-    declarations: [CalendarComponent, CalendarBoardComponent, SubjectHourViewComponent],
+    declarations: [CalendarComponent, CalendarBoardComponent, SubjectHourViewComponent, SubjectHourEventViewComponent],
     providers: [CalendarService],
     exports: [CalendarBoardComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

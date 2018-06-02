@@ -1,5 +1,6 @@
 @import "../../../content/scss/variables";
 
+
 // Common --------------------------------------------------------
 body {
     color: $app-dark-gray;
@@ -212,7 +213,7 @@ small {
         left: 149px;
         width: 3px;
         z-index: 101;
-        background-color: $app-light-gray;
+        background-color: $cyan;
     }
 }
 

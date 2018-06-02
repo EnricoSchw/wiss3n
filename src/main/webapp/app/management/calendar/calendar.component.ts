@@ -10,7 +10,7 @@ import {
 import { CalendarService } from '../providers/calendar.service';
 import { SubjectEvent, TaskEventMeta, taskTypeSetting } from '../models/events';
 import { RRule } from 'rrule';
-import { CalendarDateFormatter, CalendarDayViewBeforeRenderEvent } from 'angular-calendar';
+import { CalendarDateFormatter } from 'angular-calendar';
 import { CustomDateFormatterService } from '../providers/custom-date-formatter.service';
 import { TaskType } from '../../entities/task-class-app';
 
