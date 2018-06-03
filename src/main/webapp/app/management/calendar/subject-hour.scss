@@ -1,5 +1,6 @@
+@import "../../../content/scss/variables";
 .btn-toolbar {
-    margin-top:10px;
+    margin-top: 10px;
 }
 
 .btn {
@@ -12,6 +13,8 @@
     font-weight: normal;
     padding: 6px 6px;
     margin-left: 6px;
+    background-color: $app-gray;
+    color: $app-yellow;
 }
 
 .btn:focus, .btn:active {
@@ -20,8 +23,8 @@
 }
 
 .btn-default {
-    background-color: rgba(255,255,255,0.3);
-    border-color:rgba(0,0,0,0.2);
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(0, 0, 0, 0.2);
 }
 
 .fa {
