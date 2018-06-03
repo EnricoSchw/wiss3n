@@ -7,7 +7,7 @@ import { TaskClassApp } from '../../../entities/task-class-app/task-class-app.mo
 @Component({
     selector: 'jhi-subject-hour-event-view',
     templateUrl: './subject-hour-event-view.component.html',
-    styleUrls: ['./subject-hour-event-view.component.scss']
+    styleUrls: ['./subject-hour-event-view.component.scss', '../subject-hour.scss']
 })
 export class SubjectHourEventViewComponent implements OnInit {
 

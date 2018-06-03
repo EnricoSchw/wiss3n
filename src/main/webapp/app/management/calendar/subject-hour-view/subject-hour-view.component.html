@@ -1,28 +1,20 @@
 <div class="subject-hour-view"
      [style.top.px]="-dayEvent.top"
      [hidden]="!dayEvent.event.meta.isActive">
-    <div class="container-fluid">
-        <h1>
-            {{dayEvent.event.title}}
-        </h1>
+    <div class="subject-hour-view-header">
 
-        <div class="btn-toolbar pull-right" role="toolbar" aria-label="">
-            <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"><i class="fa fa-fw fa-list"></i> <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Add to new list</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">A list</a></li>
-                    <li><a href="#">Another list</a></li>
-                    <li><a href="#">Third list</a></li>
-                </ul>
+        <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="group">
+                <h1>
+                    {{dayEvent.event.title}}
+                </h1>
             </div>
-            <a href="#" class="btn btn-default">Add to cart</a>
-            <a href="#" class="btn btn-primary">$29.99</a>
+            <div class="btn-group" role="group" aria-label="First group">
+                <a href="#" class="btn btn-default rounded-circle"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></a>
+            </div>
         </div>
     </div>
+
     <div class="container-fluid">
         <ul class="list-group">
             <jhi-subject-hour-event-view *ngFor="let event of dayEvent.event.meta.events" [event]=event>
