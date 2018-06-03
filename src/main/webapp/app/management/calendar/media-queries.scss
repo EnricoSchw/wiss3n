@@ -7,11 +7,22 @@
         }
     }
 
+    .cal-tooltip {
+        left: 200px !important;
+    }
+
     /* subject-hour-view.component-ts */
     .subject-hour-view {
         left: 150px;
     }
 }
+
+@media (max-width: 767px) {
+    .cal-tooltip {
+        left: 30px !important;
+    }
+}
+
 
 /* Small devices (landscape phones, 544px and up) */
 @media (max-width: 544px) {
@@ -28,6 +39,10 @@
     .cal-day-view .cal-event-title-number {
         font-weight: bold;
         text-decoration: underline;
+    }
+
+    .cal-tooltip {
+        left: 0 !important;
     }
 
     /* subject-hour-view.component-ts */
