@@ -13,6 +13,7 @@ import { RRule } from 'rrule';
 import { CalendarDateFormatter } from 'angular-calendar';
 import { CustomDateFormatterService } from '../providers/custom-date-formatter.service';
 import { TaskType } from '../../entities/task-class-app';
+import { TaskClassApp } from '../../entities/task-class-app/task-class-app.model';
 
 @Component({
     selector: 'jhi-calendar',
@@ -129,18 +130,7 @@ export class CalendarComponent implements OnInit {
      * @returns {string}
      */
     public convertTypeToString(type: TaskType): string {
-        switch (type) {
-            case TaskType.HAUSAUFGABE:
-            case TaskType.VORTRAG:
-            case TaskType.KURZKONTROLLE:
-            case TaskType.TEST:
-            case TaskType.KLASSENARBEIT:
-            case TaskType.KLAUSUR:
-            case TaskType.MUENDLICH:
-                return taskTypeSetting.get(type).prefix;
-            default:
-                return '';
-        }
+        return TaskClassApp.convertTypeToString(type)
     }
 
     public clickSubjectEventInWeek({event}: { event: SubjectEvent }): void {
