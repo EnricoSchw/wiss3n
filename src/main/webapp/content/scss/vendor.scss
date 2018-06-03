@@ -10,7 +10,7 @@ eg $input-color: red;
 @import 'node_modules/bootswatch/dist/sandstone/variables';
 // Import Bootstrap source files from node_modules
 @import 'node_modules/bootstrap/scss/bootstrap';
-@import 'node_modules/bootswatch/dist/sandstone/bootswatch';
+@import 'bootstrap-sand';
 @import 'node_modules/font-awesome/scss/font-awesome';
 @import "variables";
 @import "node_modules/angular-calendar/scss/angular-calendar";
