@@ -1,0 +1,37 @@
+/* Small devices (landscape phones, 544px and up) */
+@media (min-width: 544px) {
+    /* calendar.component.ts */
+    .cal-day-view {
+        .line.right {
+            left: 149px;
+        }
+    }
+
+    /* subject-hour-view.component-ts */
+    .subject-hour-view {
+        left: 150px;
+    }
+}
+
+/* Small devices (landscape phones, 544px and up) */
+@media (max-width: 544px) {
+    /* calendar.component.ts */
+    .cal-day-view {
+        .line.right {
+            left: 39px;
+        }
+    }
+    .cal-day-view .cal-event-title {
+       display: none;
+    }
+
+    .cal-day-view .cal-event-title-number {
+        font-weight: bold;
+    }
+
+    /* subject-hour-view.component-ts */
+    .subject-hour-view {
+        left: 40px;
+    }
+
+}

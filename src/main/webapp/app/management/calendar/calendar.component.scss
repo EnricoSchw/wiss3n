@@ -159,9 +159,6 @@ small {
     padding: 15px;
     font-size: 12px;
     background-color: $app-light-blue !important;
-    a {
-        font-weight: normal;
-    }
 }
 
 .cal-day-view .cal-event.active {
@@ -179,6 +176,7 @@ small {
     margin-left: 0 !important;
     width: 100% !important;
 }
+
 
 .cal-day-view .cal-time {
     font-weight: normal;
@@ -210,10 +208,8 @@ small {
 
     .line.right {
         height: 58px;
-        left: 149px;
         width: 3px;
         z-index: 101;
         background-color: $cyan;
     }
 }
-

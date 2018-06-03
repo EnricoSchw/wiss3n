@@ -19,7 +19,7 @@ import { TaskType } from '../../entities/task-class-app';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     templateUrl: './calendar.component.html',
-    styleUrls: ['./calendar.component.scss'],
+    styleUrls: ['./calendar.component.scss', './media-queries.scss'],
     providers: [
         {
             provide: CalendarDateFormatter,

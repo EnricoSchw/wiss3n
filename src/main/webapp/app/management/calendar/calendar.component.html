@@ -103,7 +103,8 @@
     #customEventTitleTemplate
     let-event="event"
     let-view="view">
-    <a class="cal-event-title">{{event.meta.subjectHour.hour.index}} {{ event.title }}</a>
+    <span class="cal-event-title-number">{{event.meta.subjectHour.hour.index}}</span>
+    <span class="cal-event-title">{{ event.title }}</span>
 </ng-template>
 
 <ng-template
