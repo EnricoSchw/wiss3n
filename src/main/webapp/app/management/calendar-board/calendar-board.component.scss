@@ -39,14 +39,16 @@
 
     .task-control {
         margin-top: 2em;
-        .btn.btn-outline-secondary {
-            color: $app-bootstrap-gray;
-            border-color: $app-bootstrap-gray;
-            background-color: $app-light-blue;
+        .btn {
+            width: 40px;
+            height: 40px;
+            color: $app-light-gray;
+            border: solid 1px $app-light-gray;;
+            background-color: transparent;
         }
-        .btn.btn-outline-secondary:hover {
-            background-color: $app-bootstrap-gray;
-            color: $app-light-blue;
+        .btn:hover {
+            background-color: $app-gray;
+            color: $app-yellow;
         }
     }
 }
