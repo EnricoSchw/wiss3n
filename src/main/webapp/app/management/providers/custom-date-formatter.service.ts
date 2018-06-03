@@ -6,7 +6,7 @@ import { CalendarDateFormatter, DateFormatterParams } from 'angular-calendar';
 export class CustomDateFormatterService extends CalendarDateFormatter {
 
     public dayViewHour({date, locale}: DateFormatterParams): string {
-        return new DatePipe(locale).transform(date, 'HH', locale);
+        return new DatePipe(locale).transform(date, 'H', locale);
     }
 
 }
