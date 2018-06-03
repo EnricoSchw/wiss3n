@@ -5,6 +5,10 @@
         {{dayEvent.event.title}}
     </h1>
 
-    <jhi-subject-hour-event-view></jhi-subject-hour-event-view>
-
+    <div class="container-fluid">
+        <ul class="list-group">
+            <jhi-subject-hour-event-view *ngFor="let event of dayEvent.event.meta.events" [event]=event>
+            </jhi-subject-hour-event-view>
+        </ul>
+    </div>
 </div>
