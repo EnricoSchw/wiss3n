@@ -13,8 +13,10 @@
     font-weight: normal;
     padding: 6px 6px;
     margin-left: 6px;
-    background-color: $app-gray;
+    background-color: rgba(82, 65, 65, 0.12);
     color: $app-yellow;
+    border-color: #533f03;
+
 }
 
 .btn:focus, .btn:active {
