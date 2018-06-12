@@ -14,7 +14,7 @@ import { ITEMS_PER_PAGE, Principal } from '../../shared';
 })
 export class SchoolClassClassAppComponent implements OnInit, OnDestroy {
 
-currentAccount: any;
+    currentAccount: any;
     schoolClasses: SchoolClassClassApp[];
     error: any;
     success: any;

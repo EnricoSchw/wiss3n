@@ -6,11 +6,13 @@ import { CalendarBoardComponent } from './calendar-board/calendar-board.componen
 import { CalendarService } from './providers/calendar.service';
 import { SubjectHourViewComponent } from './calendar/subject-hour-view/subject-hour-view.component';
 import { SubjectHourEventViewComponent } from './calendar/subject-hour-event-view/subject-hour-event-view.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     imports: [
         CommonModule,
-        CalendarModule.forRoot()
+        CalendarModule.forRoot(),
+        RouterModule
     ],
     declarations: [CalendarComponent, CalendarBoardComponent, SubjectHourViewComponent, SubjectHourEventViewComponent],
     providers: [CalendarService],
