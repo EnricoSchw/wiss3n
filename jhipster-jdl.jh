@@ -19,7 +19,8 @@ entity Task {
 
 // Domain Schule
 entity SchoolClass {
-    date LocalDate required
+    start LocalDate required
+    end LocalDate required
     name String required minlength(2)
 }
 

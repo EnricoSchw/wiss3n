@@ -1,13 +1,13 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "de.klassenchat.webapp",
+      "packageName": "de.wissen.webapp",
       "nativeLanguage": "de"
     },
     "jhipsterVersion": "4.14.4",
-    "baseName": "klassenchatapp",
-    "packageName": "de.klassenchat.webapp",
-    "packageFolder": "de/klassenchat/webapp",
+    "baseName": "wiss3napp",
+    "packageName": "de.wiss3n.webapp",
+    "packageFolder": "de/wiss3n/webapp",
     "serverPort": "8080",
     "authenticationType": "jwt",
     "cacheProvider": "ehcache",
