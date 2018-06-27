@@ -12,8 +12,8 @@ export const events = <CalendarEvent<TaskEventMeta>[]>[
         meta: {
             task: <TaskClassApp>{
                 type: TaskType.HAUSAUFGABE,
-                titel: "Lehrbuch: Seite 22 Nummer 3,a,b,c",
-                content: "-"
+                titel: 'Lehrbuch: Seite 22 Nummer 3,a,b,c',
+                content: '-'
             },
             isActive: false,
             subjectHour: subjectHours[1]
@@ -27,8 +27,8 @@ export const events = <CalendarEvent<TaskEventMeta>[]>[
         meta: {
             task: <TaskClassApp>{
                 type: TaskType.TEST,
-                titel: "Integralrechnung",
-                content: "- Flächeninhalt, Volumeninhalt"
+                titel: 'Integralrechnung',
+                content: '- Flächeninhalt, Volumeninhalt'
 
             },
             isActive: false,

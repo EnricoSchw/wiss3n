@@ -1,6 +1,5 @@
 import {
     ChangeDetectionStrategy, Component, OnInit,
-    ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 import { CalendarEvent, ViewPeriod } from 'calendar-utils';
@@ -8,7 +7,7 @@ import {
     addDays, isSameDay, subDays
 } from 'date-fns';
 import { CalendarService } from '../providers/calendar.service';
-import { SubjectEvent, TaskEventMeta, taskTypeSetting } from '../models/events';
+import { SubjectEvent, TaskEventMeta } from '../models/events';
 import { RRule } from 'rrule';
 import { CalendarDateFormatter } from 'angular-calendar';
 import { CustomDateFormatterService } from '../providers/custom-date-formatter.service';
@@ -38,7 +37,7 @@ export class CalendarComponent implements OnInit {
 
     private activeEvent: SubjectEvent;
 
-    constructor(private service: CalendarService, private _viewContainer: ViewContainerRef) {
+    constructor(private service: CalendarService) {
     }
 
     public ngOnInit(): void {
@@ -49,9 +48,9 @@ export class CalendarComponent implements OnInit {
         this.weekEvents = this.mapSubjectsToWeekEvents(subjects, events);
     }
 
-    public beforeDayViewRender({period} : {period: ViewPeriod}): void {
+    public beforeDayViewRender({period}: { period: ViewPeriod }): void {
         const events: SubjectEvent[] = <SubjectEvent[]> period.events;
-        if(! isSameDay(this.activeEvent.start, this.viewDate) && events.length > 0) {
+        if (!isSameDay(this.activeEvent.start, this.viewDate) && events.length > 0) {
             this.setActiveEvent(events[0]);
         }
     }
@@ -130,7 +129,7 @@ export class CalendarComponent implements OnInit {
      * @returns {string}
      */
     public convertTypeToString(type: TaskType): string {
-        return TaskClassApp.convertTypeToString(type)
+        return TaskClassApp.convertTypeToString(type);
     }
 
     public clickSubjectEventInWeek({event}: { event: SubjectEvent }): void {

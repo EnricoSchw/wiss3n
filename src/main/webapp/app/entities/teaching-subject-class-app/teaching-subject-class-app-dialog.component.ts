@@ -9,7 +9,6 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { TeachingSubjectClassApp } from './teaching-subject-class-app.model';
 import { TeachingSubjectClassAppPopupService } from './teaching-subject-class-app-popup.service';
 import { TeachingSubjectClassAppService } from './teaching-subject-class-app.service';
-import { User, UserService } from '../../shared';
 import { TagClassApp, TagClassAppService } from '../tag-class-app';
 import { SchoolClassClassApp, SchoolClassClassAppService } from '../school-class-class-app';
 

@@ -25,6 +25,6 @@ export class SubjectHourEventViewComponent implements OnInit {
      * @returns {string}
      */
     public convertTypeToString(type: TaskType): string {
-        return TaskClassApp.convertTypeToString(type)
+        return TaskClassApp.convertTypeToString(type);
     }
 }

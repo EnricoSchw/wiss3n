@@ -12,18 +12,6 @@ export const enum TaskType {
 }
 
 export class TaskClassApp implements BaseEntity {
-    constructor(
-        public id?: number,
-        public titel?: string,
-        public content?: any,
-        public type?: TaskType,
-        public start?: any,
-        public end?: any,
-        public userLogin?: string,
-        public userId?: number,
-        public teachingSubjectId?: number,
-    ) {
-    }
 
     /**
      * Convert Task Type to string
@@ -43,5 +31,18 @@ export class TaskClassApp implements BaseEntity {
             default:
                 return '';
         }
+    }
+
+    constructor(
+        public id?: number,
+        public titel?: string,
+        public content?: any,
+        public type?: TaskType,
+        public start?: any,
+        public end?: any,
+        public userLogin?: string,
+        public userId?: number,
+        public teachingSubjectId?: number,
+    ) {
     }
 }

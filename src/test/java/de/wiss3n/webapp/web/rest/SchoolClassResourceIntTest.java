@@ -4,6 +4,7 @@ import de.wiss3n.webapp.Wiss3nApp;
 import de.wiss3n.webapp.domain.SchoolClass;
 import de.wiss3n.webapp.domain.User;
 import de.wiss3n.webapp.repository.SchoolClassRepository;
+import de.wiss3n.webapp.repository.UserRepository;
 import de.wiss3n.webapp.service.SchoolClassService;
 import de.wiss3n.webapp.service.dto.SchoolClassDTO;
 import de.wiss3n.webapp.service.mapper.SchoolClassMapper;
@@ -15,6 +16,7 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -22,6 +24,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
@@ -33,6 +36,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 
 /**
  * Test class for the SchoolClassResource REST controller.
@@ -60,6 +64,9 @@ public class SchoolClassResourceIntTest {
 
     @Autowired
     private SchoolClassService schoolClassService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -110,10 +117,12 @@ public class SchoolClassResourceIntTest {
     @Before
     public void initTest() {
         schoolClass = createEntity(em);
+        schoolClass.user(userRepository.findOneByLogin("user").get());
     }
 
     @Test
     @Transactional
+    @WithMockUser
     public void createSchoolClass() throws Exception {
         int databaseSizeBeforeCreate = schoolClassRepository.findAll().size();
 
@@ -212,6 +221,7 @@ public class SchoolClassResourceIntTest {
 
     @Test
     @Transactional
+    @WithMockUser
     public void getAllSchoolClasses() throws Exception {
         // Initialize the database
         schoolClassRepository.saveAndFlush(schoolClass);
@@ -252,6 +262,7 @@ public class SchoolClassResourceIntTest {
 
     @Test
     @Transactional
+    @WithMockUser
     public void updateSchoolClass() throws Exception {
         // Initialize the database
         schoolClassRepository.saveAndFlush(schoolClass);
@@ -283,6 +294,7 @@ public class SchoolClassResourceIntTest {
 
     @Test
     @Transactional
+    @WithMockUser
     public void updateNonExistingSchoolClass() throws Exception {
         int databaseSizeBeforeUpdate = schoolClassRepository.findAll().size();
 

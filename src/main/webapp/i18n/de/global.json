@@ -85,7 +85,8 @@
             }
         },
         "field": {
-            "id" : "ID"
+            "id" : "ID",
+            "nr" : "Nr."
         },
         "ribbon": {
             "dev":"Development"

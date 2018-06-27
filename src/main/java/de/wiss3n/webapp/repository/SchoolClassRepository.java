@@ -4,7 +4,8 @@ import de.wiss3n.webapp.domain.SchoolClass;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Spring Data JPA repository for the SchoolClass entity.
@@ -14,6 +15,6 @@ import java.util.List;
 public interface SchoolClassRepository extends JpaRepository<SchoolClass, Long> {
 
     @Query("select school_class from SchoolClass school_class where school_class.user.login = ?#{principal.username}")
-    List<SchoolClass> findByUserIsCurrentUser();
+    Page<SchoolClass> findByUserIsCurrentUser(Pageable pageable);
 
 }

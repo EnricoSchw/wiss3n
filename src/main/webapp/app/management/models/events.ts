@@ -1,7 +1,8 @@
 import { EventColor, CalendarEvent } from 'calendar-utils';
-import { RRule } from 'rrule';
 import { TaskType, TaskClassApp } from '../../entities/task-class-app';
 import { SubjectHourData } from './subject-hour';
+import * as RRule from 'rrule';
+// import { RRule } from 'rrule';
 
 export interface TaskEventMeta {
     isActive: boolean;
