@@ -25,8 +25,12 @@ public class SchoolClass implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "jhi_date", nullable = false)
-    private LocalDate date;
+    @Column(name = "jhi_start", nullable = false)
+    private LocalDate start;
+
+    @NotNull
+    @Column(name = "jhi_end", nullable = false)
+    private LocalDate end;
 
     @NotNull
     @Size(min = 2)
@@ -50,17 +54,30 @@ public class SchoolClass implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getStart() {
+        return start;
     }
 
-    public SchoolClass date(LocalDate date) {
-        this.date = date;
+    public SchoolClass start(LocalDate start) {
+        this.start = start;
         return this;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setStart(LocalDate start) {
+        this.start = start;
+    }
+
+    public LocalDate getEnd() {
+        return end;
+    }
+
+    public SchoolClass end(LocalDate end) {
+        this.end = end;
+        return this;
+    }
+
+    public void setEnd(LocalDate end) {
+        this.end = end;
     }
 
     public String getName() {
@@ -139,7 +156,8 @@ public class SchoolClass implements Serializable {
     public String toString() {
         return "SchoolClass{" +
             "id=" + getId() +
-            ", date='" + getDate() + "'" +
+            ", start='" + getStart() + "'" +
+            ", end='" + getEnd() + "'" +
             ", name='" + getName() + "'" +
             "}";
     }

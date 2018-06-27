@@ -63,8 +63,10 @@ export class SchoolClassClassAppService {
      */
     private convertItemFromServer(schoolClass: SchoolClassClassApp): SchoolClassClassApp {
         const copy: SchoolClassClassApp = Object.assign({}, schoolClass);
-        copy.date = this.dateUtils
-            .convertLocalDateFromServer(schoolClass.date);
+        copy.start = this.dateUtils
+            .convertLocalDateFromServer(schoolClass.start);
+        copy.end = this.dateUtils
+            .convertLocalDateFromServer(schoolClass.end);
         return copy;
     }
 
@@ -73,8 +75,10 @@ export class SchoolClassClassAppService {
      */
     private convert(schoolClass: SchoolClassClassApp): SchoolClassClassApp {
         const copy: SchoolClassClassApp = Object.assign({}, schoolClass);
-        copy.date = this.dateUtils
-            .convertLocalDateToServer(schoolClass.date);
+        copy.start = this.dateUtils
+            .convertLocalDateToServer(schoolClass.start);
+        copy.end = this.dateUtils
+            .convertLocalDateToServer(schoolClass.end);
         return copy;
     }
 }

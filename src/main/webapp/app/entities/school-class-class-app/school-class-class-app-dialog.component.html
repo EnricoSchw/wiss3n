@@ -13,17 +13,33 @@
                    [(ngModel)]="schoolClass.id" readonly />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="klassenchatappApp.schoolClass.date" for="field_date">Date</label>
+            <label class="form-control-label" jhiTranslate="klassenchatappApp.schoolClass.start" for="field_start">Start</label>
             <div class="input-group">
-                <input id="field_date" type="text" class="form-control" name="date" ngbDatepicker  #dateDp="ngbDatepicker" [(ngModel)]="schoolClass.date"
+                <input id="field_start" type="text" class="form-control" name="start" ngbDatepicker  #startDp="ngbDatepicker" [(ngModel)]="schoolClass.start"
                 required/>
                 <span class="input-group-append">
-                    <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                    <button type="button" class="btn btn-secondary" (click)="startDp.toggle()"><i class="fa fa-calendar"></i></button>
                 </span>
             </div>
-            <div [hidden]="!(editForm.controls.date?.dirty && editForm.controls.date?.invalid)">
+            <div [hidden]="!(editForm.controls.start?.dirty && editForm.controls.start?.invalid)">
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.date?.errors?.required" jhiTranslate="entity.validation.required">
+                   [hidden]="!editForm.controls.start?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="klassenchatappApp.schoolClass.end" for="field_end">End</label>
+            <div class="input-group">
+                <input id="field_end" type="text" class="form-control" name="end" ngbDatepicker  #endDp="ngbDatepicker" [(ngModel)]="schoolClass.end"
+                required/>
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="endDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.end?.dirty && editForm.controls.end?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.end?.errors?.required" jhiTranslate="entity.validation.required">
                    This field is required.
                 </small>
             </div>

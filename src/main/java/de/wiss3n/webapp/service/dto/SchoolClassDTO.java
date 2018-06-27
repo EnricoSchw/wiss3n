@@ -4,6 +4,8 @@ package de.wiss3n.webapp.service.dto;
 import java.time.LocalDate;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -14,7 +16,10 @@ public class SchoolClassDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private LocalDate date;
+    private LocalDate start;
+
+    @NotNull
+    private LocalDate end;
 
     @NotNull
     @Size(min = 2)
@@ -32,12 +37,20 @@ public class SchoolClassDTO implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getStart() {
+        return start;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setStart(LocalDate start) {
+        this.start = start;
+    }
+
+    public LocalDate getEnd() {
+        return end;
+    }
+
+    public void setEnd(LocalDate end) {
+        this.end = end;
     }
 
     public String getName() {
@@ -89,7 +102,8 @@ public class SchoolClassDTO implements Serializable {
     public String toString() {
         return "SchoolClassDTO{" +
             "id=" + getId() +
-            ", date='" + getDate() + "'" +
+            ", start='" + getStart() + "'" +
+            ", end='" + getEnd() + "'" +
             ", name='" + getName() + "'" +
             "}";
     }

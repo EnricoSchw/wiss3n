@@ -22,7 +22,11 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="jhi_date" type="date">
+            <column name="jhi_start" type="date">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="jhi_end" type="date">
                 <constraints nullable="false" />
             </column>
 

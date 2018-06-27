@@ -16,7 +16,8 @@
             "detail": {
                 "title": "School Class"
             },
-            "date": "Date",
+            "start": "Start",
+            "end": "End",
             "name": "Name",
             "teachingSubjects": "Teaching Subjects",
             "user": "User"

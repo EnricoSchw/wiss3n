@@ -29,11 +29,18 @@ export class SchoolClassClassAppPopupService {
                 this.schoolClassService.find(id)
                     .subscribe((schoolClassResponse: HttpResponse<SchoolClassClassApp>) => {
                         const schoolClass: SchoolClassClassApp = schoolClassResponse.body;
-                        if (schoolClass.date) {
-                            schoolClass.date = {
-                                year: schoolClass.date.getFullYear(),
-                                month: schoolClass.date.getMonth() + 1,
-                                day: schoolClass.date.getDate()
+                        if (schoolClass.start) {
+                            schoolClass.start = {
+                                year: schoolClass.start.getFullYear(),
+                                month: schoolClass.start.getMonth() + 1,
+                                day: schoolClass.start.getDate()
+                            };
+                        }
+                        if (schoolClass.end) {
+                            schoolClass.end = {
+                                year: schoolClass.end.getFullYear(),
+                                month: schoolClass.end.getMonth() + 1,
+                                day: schoolClass.end.getDate()
                             };
                         }
                         this.ngbModalRef = this.schoolClassModalRef(component, schoolClass);

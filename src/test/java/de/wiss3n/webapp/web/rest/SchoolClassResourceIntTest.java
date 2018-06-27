@@ -1,11 +1,9 @@
 package de.wiss3n.webapp.web.rest;
 
 import de.wiss3n.webapp.Wiss3nApp;
-
 import de.wiss3n.webapp.domain.SchoolClass;
 import de.wiss3n.webapp.domain.User;
 import de.wiss3n.webapp.repository.SchoolClassRepository;
-import de.wiss3n.webapp.repository.UserRepository;
 import de.wiss3n.webapp.service.SchoolClassService;
 import de.wiss3n.webapp.service.dto.SchoolClassDTO;
 import de.wiss3n.webapp.service.mapper.SchoolClassMapper;
@@ -20,7 +18,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -46,8 +43,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = Wiss3nApp.class)
 public class SchoolClassResourceIntTest {
 
-    private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate DEFAULT_START = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_START = LocalDate.now(ZoneId.systemDefault());
+
+    private static final LocalDate DEFAULT_END = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_END = LocalDate.now(ZoneId.systemDefault());
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
@@ -60,9 +60,6 @@ public class SchoolClassResourceIntTest {
 
     @Autowired
     private SchoolClassService schoolClassService;
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -99,7 +96,8 @@ public class SchoolClassResourceIntTest {
      */
     public static SchoolClass createEntity(EntityManager em) {
         SchoolClass schoolClass = new SchoolClass()
-            .date(DEFAULT_DATE)
+            .start(DEFAULT_START)
+            .end(DEFAULT_END)
             .name(DEFAULT_NAME);
         // Add required entity
         User user = UserResourceIntTest.createEntity(em);
@@ -112,12 +110,10 @@ public class SchoolClassResourceIntTest {
     @Before
     public void initTest() {
         schoolClass = createEntity(em);
-        schoolClass.user(userRepository.findOneByLogin("user").get());
     }
 
     @Test
     @Transactional
-    @WithMockUser
     public void createSchoolClass() throws Exception {
         int databaseSizeBeforeCreate = schoolClassRepository.findAll().size();
 
@@ -132,7 +128,8 @@ public class SchoolClassResourceIntTest {
         List<SchoolClass> schoolClassList = schoolClassRepository.findAll();
         assertThat(schoolClassList).hasSize(databaseSizeBeforeCreate + 1);
         SchoolClass testSchoolClass = schoolClassList.get(schoolClassList.size() - 1);
-        assertThat(testSchoolClass.getDate()).isEqualTo(DEFAULT_DATE);
+        assertThat(testSchoolClass.getStart()).isEqualTo(DEFAULT_START);
+        assertThat(testSchoolClass.getEnd()).isEqualTo(DEFAULT_END);
         assertThat(testSchoolClass.getName()).isEqualTo(DEFAULT_NAME);
     }
 
@@ -158,10 +155,29 @@ public class SchoolClassResourceIntTest {
 
     @Test
     @Transactional
-    public void checkDateIsRequired() throws Exception {
+    public void checkStartIsRequired() throws Exception {
         int databaseSizeBeforeTest = schoolClassRepository.findAll().size();
         // set the field null
-        schoolClass.setDate(null);
+        schoolClass.setStart(null);
+
+        // Create the SchoolClass, which fails.
+        SchoolClassDTO schoolClassDTO = schoolClassMapper.toDto(schoolClass);
+
+        restSchoolClassMockMvc.perform(post("/api/school-classes")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(schoolClassDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<SchoolClass> schoolClassList = schoolClassRepository.findAll();
+        assertThat(schoolClassList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkEndIsRequired() throws Exception {
+        int databaseSizeBeforeTest = schoolClassRepository.findAll().size();
+        // set the field null
+        schoolClass.setEnd(null);
 
         // Create the SchoolClass, which fails.
         SchoolClassDTO schoolClassDTO = schoolClassMapper.toDto(schoolClass);
@@ -196,7 +212,6 @@ public class SchoolClassResourceIntTest {
 
     @Test
     @Transactional
-    @WithMockUser
     public void getAllSchoolClasses() throws Exception {
         // Initialize the database
         schoolClassRepository.saveAndFlush(schoolClass);
@@ -206,7 +221,8 @@ public class SchoolClassResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(schoolClass.getId().intValue())))
-            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
+            .andExpect(jsonPath("$.[*].start").value(hasItem(DEFAULT_START.toString())))
+            .andExpect(jsonPath("$.[*].end").value(hasItem(DEFAULT_END.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
     }
 
@@ -221,7 +237,8 @@ public class SchoolClassResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(schoolClass.getId().intValue()))
-            .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
+            .andExpect(jsonPath("$.start").value(DEFAULT_START.toString()))
+            .andExpect(jsonPath("$.end").value(DEFAULT_END.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
     }
 
@@ -235,7 +252,6 @@ public class SchoolClassResourceIntTest {
 
     @Test
     @Transactional
-    @WithMockUser
     public void updateSchoolClass() throws Exception {
         // Initialize the database
         schoolClassRepository.saveAndFlush(schoolClass);
@@ -246,7 +262,8 @@ public class SchoolClassResourceIntTest {
         // Disconnect from session so that the updates on updatedSchoolClass are not directly saved in db
         em.detach(updatedSchoolClass);
         updatedSchoolClass
-            .date(UPDATED_DATE)
+            .start(UPDATED_START)
+            .end(UPDATED_END)
             .name(UPDATED_NAME);
         SchoolClassDTO schoolClassDTO = schoolClassMapper.toDto(updatedSchoolClass);
 
@@ -259,13 +276,13 @@ public class SchoolClassResourceIntTest {
         List<SchoolClass> schoolClassList = schoolClassRepository.findAll();
         assertThat(schoolClassList).hasSize(databaseSizeBeforeUpdate);
         SchoolClass testSchoolClass = schoolClassList.get(schoolClassList.size() - 1);
-        assertThat(testSchoolClass.getDate()).isEqualTo(UPDATED_DATE);
+        assertThat(testSchoolClass.getStart()).isEqualTo(UPDATED_START);
+        assertThat(testSchoolClass.getEnd()).isEqualTo(UPDATED_END);
         assertThat(testSchoolClass.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    @WithMockUser
     public void updateNonExistingSchoolClass() throws Exception {
         int databaseSizeBeforeUpdate = schoolClassRepository.findAll().size();
 

@@ -21,7 +21,8 @@ export class SchoolClassClassAppDialogComponent implements OnInit {
     isSaving: boolean;
 
     users: User[];
-    dateDp: any;
+    startDp: any;
+    endDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,

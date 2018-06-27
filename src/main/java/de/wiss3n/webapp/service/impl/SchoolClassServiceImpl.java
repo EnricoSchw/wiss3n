@@ -1,8 +1,5 @@
 package de.wiss3n.webapp.service.impl;
 
-import de.wiss3n.webapp.domain.User;
-import de.wiss3n.webapp.repository.UserRepository;
-import de.wiss3n.webapp.security.SecurityUtils;
 import de.wiss3n.webapp.service.SchoolClassService;
 import de.wiss3n.webapp.domain.SchoolClass;
 import de.wiss3n.webapp.repository.SchoolClassRepository;
@@ -29,16 +26,9 @@ public class SchoolClassServiceImpl implements SchoolClassService {
 
     private final SchoolClassMapper schoolClassMapper;
 
-    private final UserRepository userRepository;
-
-    public SchoolClassServiceImpl(
-        SchoolClassRepository schoolClassRepository,
-        SchoolClassMapper schoolClassMapper,
-        UserRepository userRepository
-    ) {
+    public SchoolClassServiceImpl(SchoolClassRepository schoolClassRepository, SchoolClassMapper schoolClassMapper) {
         this.schoolClassRepository = schoolClassRepository;
         this.schoolClassMapper = schoolClassMapper;
-        this.userRepository = userRepository;
     }
 
     /**
@@ -51,16 +41,8 @@ public class SchoolClassServiceImpl implements SchoolClassService {
     public SchoolClassDTO save(SchoolClassDTO schoolClassDTO) {
         log.debug("Request to save SchoolClass : {}", schoolClassDTO);
         SchoolClass schoolClass = schoolClassMapper.toEntity(schoolClassDTO);
-
-        return SecurityUtils.getCurrentUserLogin()
-            .flatMap(userRepository::findOneByLogin)
-            .map((User user) -> {
-                schoolClass.setUser(user);
-                return schoolClass;
-            })
-            .map(schoolClassRepository::save)
-            .map(schoolClassMapper::toDto)
-            .orElseThrow(IllegalArgumentException::new);
+        schoolClass = schoolClassRepository.save(schoolClass);
+        return schoolClassMapper.toDto(schoolClass);
     }
 
     /**
@@ -73,7 +55,7 @@ public class SchoolClassServiceImpl implements SchoolClassService {
     @Transactional(readOnly = true)
     public Page<SchoolClassDTO> findAll(Pageable pageable) {
         log.debug("Request to get all SchoolClasses");
-        return schoolClassRepository.findByUserIsCurrentUser(pageable)
+        return schoolClassRepository.findAll(pageable)
             .map(schoolClassMapper::toDto);
     }
 

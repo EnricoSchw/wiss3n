@@ -4,9 +4,13 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="klassenchatappApp.schoolClass.date">Date</span></dt>
+        <dt><span jhiTranslate="klassenchatappApp.schoolClass.start">Start</span></dt>
         <dd>
-            <span>{{schoolClass.date | date:'mediumDate'}}</span>
+            <span>{{schoolClass.start | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="klassenchatappApp.schoolClass.end">End</span></dt>
+        <dd>
+            <span>{{schoolClass.end | date:'mediumDate'}}</span>
         </dd>
         <dt><span jhiTranslate="klassenchatappApp.schoolClass.name">Name</span></dt>
         <dd>

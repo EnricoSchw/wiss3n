@@ -5,7 +5,7 @@
       "nativeLanguage": "de"
     },
     "jhipsterVersion": "4.14.4",
-    "baseName": "wiss3napp",
+    "baseName": "klassenchatapp",
     "packageName": "de.wiss3n.webapp",
     "packageFolder": "de/wiss3n/webapp",
     "serverPort": "8080",

@@ -16,17 +16,19 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">Nr</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="date"><span jhiTranslate="klassenchatappApp.schoolClass.date">Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="start"><span jhiTranslate="klassenchatappApp.schoolClass.start">Start</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="end"><span jhiTranslate="klassenchatappApp.schoolClass.end">End</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span jhiTranslate="klassenchatappApp.schoolClass.name">Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="userLogin"><span jhiTranslate="klassenchatappApp.schoolClass.user">User</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let schoolClass of schoolClasses ;trackBy: trackId; let i = index">
-                <td><a [routerLink]="['../school-class-class-app', schoolClass.id ]">{{i + 1}}</a></td>
-                <td>{{schoolClass.date | date:'mediumDate'}}</td>
+            <tr *ngFor="let schoolClass of schoolClasses ;trackBy: trackId">
+                <td><a [routerLink]="['../school-class-class-app', schoolClass.id ]">{{schoolClass.id}}</a></td>
+                <td>{{schoolClass.start | date:'mediumDate'}}</td>
+                <td>{{schoolClass.end | date:'mediumDate'}}</td>
                 <td>{{schoolClass.name}}</td>
                 <td>
                     {{schoolClass.userLogin}}

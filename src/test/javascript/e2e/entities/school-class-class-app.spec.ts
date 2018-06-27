@@ -33,8 +33,10 @@ describe('SchoolClass e2e test', () => {
 
    /* it('should create and save SchoolClasses', () => {
         schoolClassComponentsPage.clickOnCreateButton();
-        schoolClassDialogPage.setDateInput('2000-12-31');
-        expect(schoolClassDialogPage.getDateInput()).toMatch('2000-12-31');
+        schoolClassDialogPage.setStartInput('2000-12-31');
+        expect(schoolClassDialogPage.getStartInput()).toMatch('2000-12-31');
+        schoolClassDialogPage.setEndInput('2000-12-31');
+        expect(schoolClassDialogPage.getEndInput()).toMatch('2000-12-31');
         schoolClassDialogPage.setNameInput('name');
         expect(schoolClassDialogPage.getNameInput()).toMatch('name');
         schoolClassDialogPage.userSelectLastOption();
@@ -64,7 +66,8 @@ export class SchoolClassDialogPage {
     modalTitle = element(by.css('h4#mySchoolClassLabel'));
     saveButton = element(by.css('.modal-footer .btn.btn-primary'));
     closeButton = element(by.css('button.close'));
-    dateInput = element(by.css('input#field_date'));
+    startInput = element(by.css('input#field_start'));
+    endInput = element(by.css('input#field_end'));
     nameInput = element(by.css('input#field_name'));
     userSelect = element(by.css('select#field_user'));
 
@@ -72,12 +75,20 @@ export class SchoolClassDialogPage {
         return this.modalTitle.getAttribute('jhiTranslate');
     }
 
-    setDateInput = function(date) {
-        this.dateInput.sendKeys(date);
+    setStartInput = function(start) {
+        this.startInput.sendKeys(start);
     };
 
-    getDateInput = function() {
-        return this.dateInput.getAttribute('value');
+    getStartInput = function() {
+        return this.startInput.getAttribute('value');
+    };
+
+    setEndInput = function(end) {
+        this.endInput.sendKeys(end);
+    };
+
+    getEndInput = function() {
+        return this.endInput.getAttribute('value');
     };
 
     setNameInput = function(name) {

@@ -1,8 +1,8 @@
 package de.wiss3n.webapp.service.mapper;
 
+import de.wiss3n.webapp.domain.*;
 import de.wiss3n.webapp.service.dto.SchoolClassDTO;
 
-import de.wiss3n.webapp.domain.SchoolClass;
 import org.mapstruct.*;
 
 /**
