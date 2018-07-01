@@ -1,21 +1,12 @@
 /* after changing this file run 'npm run webpack:build' */
-$fa-font-path: '~font-awesome/fonts';
-//$fa-font-path: '~@fortawesome/fontawesome-free-webfonts/webfonts';
 
 /***************************
 put Sass variables here:
 eg $input-color: red;
 ****************************/
 // Override Boostrap variables
-//@import "bootstrap-variables";
-@import 'node_modules/bootswatch/dist/sandstone/variables';
+@import 'bootstrap-variables';
 // Import Bootstrap source files from node_modules
-@import 'node_modules/bootstrap/scss/bootstrap';
-@import 'bootstrap-sand';
-@import 'node_modules/font-awesome/scss/font-awesome';
-//@import 'font-awesome/fontawesome';
-//@import 'node_modules/@fortawesome/fontawesome-free-webfonts/scss/fontawesome';
-@import "variables";
-@import "node_modules/angular-calendar/scss/angular-calendar";
-/* jhipster-needle-scss-add-vendor JHipster will add new css style */
+@import '~bootstrap/scss/bootstrap';
 
+/* jhipster-needle-scss-add-vendor JHipster will add new css style */

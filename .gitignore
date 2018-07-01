@@ -4,7 +4,6 @@
 /src/main/webapp/content/css/main.css
 /build/www/**
 /src/test/javascript/coverage/
-/src/test/javascript/PhantomJS*/
 
 ######################
 # Node
@@ -14,6 +13,7 @@ node_tmp/
 node_modules/
 npm-debug.log.*
 /.awcache/*
+/.cache-loader/*
 
 ######################
 # SASS
@@ -61,6 +61,7 @@ local.properties
 *.ids
 *.orig
 classes/
+out/
 
 ######################
 # Visual Studio Code
@@ -142,12 +143,3 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
-
-######################
-# Custom
-######################
-/src/main/resources/config/application-prod.yml
-/gradle/liquibase.gradle
-deploy.sh
-package-lock.json
-

@@ -3,17 +3,14 @@ import { Router } from '@angular/router';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiLanguageService } from 'ng-jhipster';
 
+import { VERSION } from 'app/app.constants';
+import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from 'app/core';
 import { ProfileService } from '../profiles/profile.service';
-import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from '../../shared';
-
-import { VERSION } from '../../app.constants';
 
 @Component({
     selector: 'jhi-navbar',
     templateUrl: './navbar.component.html',
-    styleUrls: [
-        'navbar.scss'
-    ]
+    styleUrls: ['navbar.scss']
 })
 export class NavbarComponent implements OnInit {
     inProduction: boolean;
@@ -23,40 +20,28 @@ export class NavbarComponent implements OnInit {
     modalRef: NgbModalRef;
     version: string;
 
-    constructor(private loginService: LoginService,
-                private languageService: JhiLanguageService,
-                private languageHelper: JhiLanguageHelper,
-                private principal: Principal,
-                private loginModalService: LoginModalService,
-                private profileService: ProfileService,
-                private router: Router) {
+    constructor(
+        private loginService: LoginService,
+        private languageService: JhiLanguageService,
+        private languageHelper: JhiLanguageHelper,
+        private principal: Principal,
+        private loginModalService: LoginModalService,
+        private profileService: ProfileService,
+        private router: Router
+    ) {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
     }
 
     ngOnInit() {
-        this.languageHelper.getAll().then((languages) => {
+        this.languageHelper.getAll().then(languages => {
             this.languages = languages;
         });
 
-        this.profileService.getProfileInfo().then((profileInfo) => {
+        this.profileService.getProfileInfo().then(profileInfo => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
-
-        if (!this.isAuthenticated()) {
-
-            $(window).scroll(() => {
-                // 100 = The point you would like to fade the nav in.
-                if ($(window).scrollTop() > 100) {
-                    $('.navbar').addClass('navbar-shown');
-                    // navbar-dark navbar-expand-md bg-primary navbar-transparent
-                } else {
-                    $('.navbar').removeClass('navbar-shown');
-                }
-            });
-        }
-
     }
 
     changeLanguage(languageKey: string) {

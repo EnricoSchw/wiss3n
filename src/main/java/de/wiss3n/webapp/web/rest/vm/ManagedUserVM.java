@@ -1,7 +1,6 @@
 package de.wiss3n.webapp.web.rest.vm;
 
 import de.wiss3n.webapp.service.dto.UserDTO;
-
 import javax.validation.constraints.Size;
 
 /**

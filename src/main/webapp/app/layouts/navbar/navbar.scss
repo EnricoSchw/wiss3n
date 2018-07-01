@@ -1,85 +1,24 @@
-@import "../../../content/scss/variables";
-
 /* ==========================================================================
 Navbar
 ========================================================================== */
+
 .navbar-version {
     font-size: 10px;
-    color: $app-light-gray;
+    color: #ccc;
 }
-
-/* Custom ================================================================== */
-
-.navbar-fixed {
-    background-color: transparent;
-    background: transparent;
-    border-color: transparent;
-    color: $app-light-gray;
-    a {
-        font-size: 1rem;
-        color: $app-light-gray;
-        font-weight: normal;
-        text-transform: none;
-    }
-}
-
-.navbar-dark {
-    a {
-        font-size: 1rem;
-        color: $app-light-gray;
-        font-weight: normal;
-        text-transform: none;
-    }
-}
-
-.navbar-shown {
-    background-color: $app-gray;
-    opacity: 0.8;
-}
-
-a.dropdown-item {
-    color: $app-light-gray;
-}
-
-a.dropdown-item.active, a.dropdown-item:active {
-    color: $app-gray;
-    text-decoration: none;
-    background-color: $app-light-gray;
-}
-
-
-a.dropdown-item:hover {
-    background-color: $app-light-gray;
-    color: $app-gray !important;
-}
-
-.dropdown-menu {
-    background-color: $app-gray;
-}
-
-
-@media(min-width: 767px) {
-    .navbar {
-        padding: 20px 0;
-        -webkit-transition: background .5s ease-in-out, padding .5s ease-in-out;
-        -moz-transition: background .5s ease-in-out, padding .5s ease-in-out;
-        transition: background .5s ease-in-out, padding .5s ease-in-out;
-    }
-
-}
-
-/* End Custom ================================================================== */
 
 .jh-navbar {
     background-color: #353d47;
-    padding: .2em 1em;
+    padding: 0.2em 1em;
     .profile-image {
         margin: -10px 0px;
         height: 40px;
         width: 40px;
         border-radius: 50%;
     }
-    .dropdown-item.active, .dropdown-item.active:focus, .dropdown-item.active:hover {
+    .dropdown-item.active,
+    .dropdown-item.active:focus,
+    .dropdown-item.active:hover {
         background-color: #353d47;
     }
     .dropdown-toggle::after {
@@ -121,29 +60,19 @@ a.dropdown-item:hover {
     vertical-align: middle;
 }
 
-.navbar-brand {
-    margin-left: $app-margin-left;
-}
 /* ==========================================================================
 Logo styles
 ========================================================================== */
-.round-icon {
-    border-radius: 50%;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    height: 40px;
-    width: 40px;
-    text-align: center;
-    line-height: 38px;
-    border: 1px solid #ebebeb;
-    margin-right: 12px;
-    vertical-align: middle;
+.navbar-brand {
+    &.logo {
+        padding: 5px 15px;
+        .logo-img {
+            height: 45px;
+            width: 70px;
+            display: inline-block;
+            vertical-align: middle;
+            background: url('../../../content/images/logo-jhipster.png') no-repeat center center;
+            background-size: contain;
+        }
+    }
 }
-
-
-
-
-.dropdown-toggle::after {
-    border: 0 !important;
-}
-

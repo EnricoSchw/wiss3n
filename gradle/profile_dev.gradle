@@ -21,7 +21,7 @@ task webpackBuildDev(type: NpmTask) {
 }
 
 war {
-    webAppDirName = 'build/www/'
+    webAppDirName = 'src/main/webapp/'
 }
 
 processResources {

@@ -4,18 +4,16 @@
     <base href="./" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Wiss3n</title>
+    <title>wiss3n</title>
     <meta name="description" content="">
     <meta name="google" value="notranslate">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="manifest" href="manifest.webapp" />
-    <!--<link href="/css/font-awesome/fontawesome-all.min.css" rel="stylesheet">-->
-
-    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">-->
+    <!-- jhipster-needle-add-resources-to-root - JHipster will add new resources here -->
 </head>
-<body  data-spy="scroll" data-target=".navbar-fixed-top">
+<body>
     <!--[if lt IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -27,7 +25,7 @@
         <script>
             if ('serviceWorker' in navigator) {
                  navigator.serviceWorker
-                    .register('./sw.js')
+                    .register('./service-worker.js')
                     .then(function() { console.log('Service Worker Registered'); });
             }
         </script>

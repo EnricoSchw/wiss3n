@@ -1,26 +1,12 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { KlassenchatappSharedModule } from '../shared';
-
+import { Wiss3NSharedModule } from 'app/shared';
 import { HOME_ROUTE, HomeComponent } from './';
-import { InfoComponent } from './info/info.component';
-import { ManagementModule } from '../management/management.module';
 
 @NgModule({
-    imports: [
-        KlassenchatappSharedModule,
-        ManagementModule,
-        RouterModule.forChild([ HOME_ROUTE ])
-    ],
-    declarations: [
-        HomeComponent,
-        InfoComponent
-    ],
-    entryComponents: [
-    ],
-    providers: [
-    ],
+    imports: [Wiss3NSharedModule, RouterModule.forChild([HOME_ROUTE])],
+    declarations: [HomeComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class KlassenchatappHomeModule {}
+export class Wiss3NHomeModule {}

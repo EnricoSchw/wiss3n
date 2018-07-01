@@ -1,6 +1,6 @@
 package de.wiss3n.webapp.web.rest.errors;
 
-import de.wiss3n.webapp.Wiss3nApp;
+import de.wiss3n.webapp.Wiss3NApp;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see ExceptionTranslator
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Wiss3nApp.class)
+@SpringBootTest(classes = Wiss3NApp.class)
 public class ExceptionTranslatorIntTest {
 
     @Autowired

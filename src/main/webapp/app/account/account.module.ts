@@ -1,14 +1,9 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { KlassenchatappSharedModule } from '../shared';
+import { Wiss3NSharedModule } from 'app/shared';
 
 import {
-    Register,
-    ActivateService,
-    PasswordService,
-    PasswordResetInitService,
-    PasswordResetFinishService,
     PasswordStrengthBarComponent,
     RegisterComponent,
     ActivateComponent,
@@ -20,10 +15,7 @@ import {
 } from './';
 
 @NgModule({
-    imports: [
-        KlassenchatappSharedModule,
-        RouterModule.forChild(accountState)
-    ],
+    imports: [Wiss3NSharedModule, RouterModule.forChild(accountState)],
     declarations: [
         ActivateComponent,
         RegisterComponent,
@@ -33,13 +25,6 @@ import {
         PasswordResetFinishComponent,
         SettingsComponent
     ],
-    providers: [
-        Register,
-        ActivateService,
-        PasswordService,
-        PasswordResetInitService,
-        PasswordResetFinishService
-    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class KlassenchatappAccountModule {}
+export class Wiss3NAccountModule {}

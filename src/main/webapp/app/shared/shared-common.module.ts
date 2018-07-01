@@ -1,44 +1,10 @@
-import { NgModule, LOCALE_ID } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { registerLocaleData } from '@angular/common';
-import locale from '@angular/common/locales/de';
+import { NgModule } from '@angular/core';
 
-import { WindowRef } from './tracker/window.service';
-import {
-    KlassenchatappSharedLibsModule,
-    JhiLanguageHelper,
-    FindLanguageFromKeyPipe,
-    JhiAlertComponent,
-    JhiAlertErrorComponent
-} from './';
+import { Wiss3NSharedLibsModule, FindLanguageFromKeyPipe, JhiAlertComponent, JhiAlertErrorComponent } from './';
 
 @NgModule({
-    imports: [
-        KlassenchatappSharedLibsModule
-    ],
-    declarations: [
-        FindLanguageFromKeyPipe,
-        JhiAlertComponent,
-        JhiAlertErrorComponent
-    ],
-    providers: [
-        JhiLanguageHelper,
-        WindowRef,
-        Title,
-        {
-            provide: LOCALE_ID,
-            useValue: 'de'
-        },
-    ],
-    exports: [
-        KlassenchatappSharedLibsModule,
-        FindLanguageFromKeyPipe,
-        JhiAlertComponent,
-        JhiAlertErrorComponent
-    ]
+    imports: [Wiss3NSharedLibsModule],
+    declarations: [FindLanguageFromKeyPipe, JhiAlertComponent, JhiAlertErrorComponent],
+    exports: [Wiss3NSharedLibsModule, FindLanguageFromKeyPipe, JhiAlertComponent, JhiAlertErrorComponent]
 })
-export class KlassenchatappSharedCommonModule {
-    constructor() {
-        registerLocaleData(locale);
-    }
-}
+export class Wiss3NSharedCommonModule {}

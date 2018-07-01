@@ -1,6 +1,6 @@
 package de.wiss3n.webapp.web.rest;
 
-import de.wiss3n.webapp.Wiss3nApp;
+import de.wiss3n.webapp.Wiss3NApp;
 import de.wiss3n.webapp.web.rest.vm.LoggerVM;
 import ch.qos.logback.classic.AsyncAppender;
 import ch.qos.logback.classic.LoggerContext;
@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see LogsResource
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Wiss3nApp.class)
+@SpringBootTest(classes = Wiss3NApp.class)
 public class LogsResourceIntTest {
 
     private MockMvc restLogsMockMvc;

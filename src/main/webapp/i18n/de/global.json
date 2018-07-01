@@ -1,18 +1,12 @@
 {
     "global": {
-        "title": "WiSS3N",
+        "title": "Wiss3n",
         "browsehappy": "Sie benutzen einen <strong>veralteten</strong> Browser. Bitte <a href=\"http://browsehappy.com/?locale=de/\">aktualisieren Sie Ihren Browser</a>, um die Benutzerfreundlichkeit zu erhöhen.",
         "menu": {
             "home": "Startseite",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entitäten",
-                "gradeClassApp": "Grade",
-                "taskClassApp": "Task",
-                "schoolClassClassApp": "School Class",
-                "teachingSubjectClassApp": "Teaching Subject",
-                "tagClassApp": "Tag",
-                "contentClassApp": "Content",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -42,6 +36,8 @@
         "form": {
             "username": "Benutzername",
             "username.placeholder": "Ihr Benutzername",
+            "currentpassword": "Current password",
+            "currentpassword.placeholder": "Current password",
             "newpassword": "Neues Passwort",
             "newpassword.placeholder": "Neues Passwort",
             "confirmpassword": "Neues Passwort bestätigen",
@@ -52,9 +48,9 @@
         "messages": {
             "info": {
                 "authenticated": {
-                    "prefix": "Klicken Sie: ",
+                    "prefix": "Wenn Sie sich ",
                     "link": "anmelden",
-                    "suffix": ", wenn Sie sich anmelden möchten."
+                    "suffix": " möchten, versuchen Sie es mit <br/>- Administrator (Name=\"admin\" und Passwort=\"admin\")<br/>- Benutzer (Name=\"user\" und Passwort=\"user\")."
                 },
                 "register": {
                     "noaccount": "Sie haben noch keinen Zugang?",
@@ -85,8 +81,7 @@
             }
         },
         "field": {
-            "id" : "ID",
-            "nr" : "Nr."
+            "id" : "ID"
         },
         "ribbon": {
             "dev":"Development"
@@ -133,7 +128,8 @@
         "Size": "Feld {{fieldName}} erfüllt nicht die minimalen/maximalen Voraussetzungen!",
         "userexists": "Benutzername bereits vergeben!",
         "emailexists": "Email wird bereits verwendet!",
-        "idexists": "Ein neuer {{entityName}} kann noch keine ID haben"
+        "idexists": "Ein neuer {{entityName}} kann noch keine ID haben",
+        "idnull": "Invalid ID"
     },
     "footer": "Dies ist Ihre Fußzeile"
 }

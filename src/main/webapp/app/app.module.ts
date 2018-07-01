@@ -3,89 +3,61 @@ import './vendor.ts';
 import { NgModule, Injector } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { Ng2Webstorage, LocalStorageService, SessionStorageService  } from 'ngx-webstorage';
+import { Ng2Webstorage, LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { AuthInterceptor } from './blocks/interceptor/auth.interceptor';
 import { AuthExpiredInterceptor } from './blocks/interceptor/auth-expired.interceptor';
 import { ErrorHandlerInterceptor } from './blocks/interceptor/errorhandler.interceptor';
 import { NotificationInterceptor } from './blocks/interceptor/notification.interceptor';
-import { KlassenchatappSharedModule, UserRouteAccessService } from './shared';
-import { KlassenchatappAppRoutingModule} from './app-routing.module';
-import { KlassenchatappHomeModule } from './home/home.module';
-import { KlassenchatappAdminModule } from './admin/admin.module';
-import { KlassenchatappAccountModule } from './account/account.module';
-import { KlassenchatappEntityModule } from './entities/entity.module';
-import { PaginationConfig } from './blocks/config/uib-pagination.config';
+import { Wiss3NSharedModule } from 'app/shared';
+import { Wiss3NCoreModule } from 'app/core';
+import { Wiss3NAppRoutingModule } from './app-routing.module';
+import { Wiss3NHomeModule } from './home/home.module';
+import { Wiss3NAccountModule } from './account/account.module';
+import { Wiss3NEntityModule } from './entities/entity.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
-import {
-    JhiMainComponent,
-    NavbarComponent,
-    FooterComponent,
-    ProfileService,
-    PageRibbonComponent,
-    ActiveMenuDirective,
-    ErrorComponent
-} from './layouts';
+import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 
 @NgModule({
     imports: [
         BrowserModule,
-        KlassenchatappAppRoutingModule,
-        Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
-        KlassenchatappSharedModule,
-        KlassenchatappHomeModule,
-        KlassenchatappAdminModule,
-        KlassenchatappAccountModule,
-        KlassenchatappEntityModule
+        Wiss3NAppRoutingModule,
+        Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
+        Wiss3NSharedModule,
+        Wiss3NCoreModule,
+        Wiss3NHomeModule,
+        Wiss3NAccountModule,
+        Wiss3NEntityModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
-    declarations: [
-        JhiMainComponent,
-        NavbarComponent,
-        ErrorComponent,
-        PageRibbonComponent,
-        ActiveMenuDirective,
-        FooterComponent
-    ],
+    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
     providers: [
-        ProfileService,
-        PaginationConfig,
-        UserRouteAccessService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
             multi: true,
-            deps: [
-                LocalStorageService,
-                SessionStorageService
-            ]
+            deps: [LocalStorageService, SessionStorageService]
         },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthExpiredInterceptor,
             multi: true,
-            deps: [
-                Injector
-            ]
+            deps: [Injector]
         },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: ErrorHandlerInterceptor,
             multi: true,
-            deps: [
-                JhiEventManager
-            ]
+            deps: [JhiEventManager]
         },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: NotificationInterceptor,
             multi: true,
-            deps: [
-                Injector
-            ]
+            deps: [Injector]
         }
     ],
-    bootstrap: [ JhiMainComponent ]
+    bootstrap: [JhiMainComponent]
 })
-export class KlassenchatappAppModule {}
+export class Wiss3NAppModule {}

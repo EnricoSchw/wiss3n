@@ -1,18 +1,12 @@
 {
     "global": {
-        "title": "WiSS3N",
+        "title": "Wiss3n",
         "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
             "home": "Home",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entities",
-                "gradeClassApp": "Grade",
-                "taskClassApp": "Task",
-                "schoolClassClassApp": "School Class",
-                "teachingSubjectClassApp": "Teaching Subject",
-                "tagClassApp": "Tag",
-                "contentClassApp": "Content",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -42,6 +36,8 @@
         "form": {
             "username": "Username",
             "username.placeholder": "Your username",
+            "currentpassword": "Current password",
+            "currentpassword.placeholder": "Current password",
             "newpassword": "New password",
             "newpassword.placeholder": "New password",
             "confirmpassword": "New password confirmation",
@@ -52,9 +48,9 @@
         "messages": {
             "info": {
                 "authenticated": {
-                    "prefix": "Click ",
+                    "prefix": "If you want to ",
                     "link": "sign in",
-                    "suffix": ", If you want to sign in"
+                    "suffix": ", you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\") <br/>- User (login=\"user\" and password=\"user\")."
                 },
                 "register": {
                     "noaccount": "You don't have an account yet?",
@@ -85,8 +81,7 @@
             }
         },
         "field": {
-            "id": "ID",
-            "nr" : "Num"
+            "id": "ID"
         },
         "ribbon": {
             "dev":"Development"
@@ -134,7 +129,8 @@
         "Size": "Field {{ fieldName }} does not meet min/max size requirements!",
         "userexists": "Login name already used!",
         "emailexists": "Email is already in use!",
-        "idexists": "A new {{ entityName }} cannot already have an ID"
+        "idexists": "A new {{ entityName }} cannot already have an ID",
+        "idnull": "Invalid ID"
     },
     "footer": "This is your footer"
 }

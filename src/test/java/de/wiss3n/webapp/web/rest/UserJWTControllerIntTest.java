@@ -1,6 +1,6 @@
 package de.wiss3n.webapp.web.rest;
 
-import de.wiss3n.webapp.Wiss3nApp;
+import de.wiss3n.webapp.Wiss3NApp;
 import de.wiss3n.webapp.domain.User;
 import de.wiss3n.webapp.repository.UserRepository;
 import de.wiss3n.webapp.security.jwt.TokenProvider;
@@ -32,7 +32,7 @@ import static org.hamcrest.Matchers.not;
  * @see UserJWTController
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Wiss3nApp.class)
+@SpringBootTest(classes = Wiss3NApp.class)
 public class UserJWTControllerIntTest {
 
     @Autowired
