@@ -5,8 +5,12 @@ put Sass variables here:
 eg $input-color: red;
 ****************************/
 // Override Boostrap variables
-@import 'bootstrap-variables';
+// @import 'bootstrap-variables';
+@import '~bootswatch/dist/sandstone/variables';
 // Import Bootstrap source files from node_modules
 @import '~bootstrap/scss/bootstrap';
+@import '~bootswatch/dist/sandstone/bootswatch';
+@import "variables";
+@import "~angular-calendar/scss/angular-calendar";
 
 /* jhipster-needle-scss-add-vendor JHipster will add new css style */

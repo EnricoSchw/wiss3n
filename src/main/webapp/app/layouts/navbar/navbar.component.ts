@@ -7,6 +7,7 @@ import { VERSION } from 'app/app.constants';
 import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from 'app/core';
 import { ProfileService } from '../profiles/profile.service';
 
+
 @Component({
     selector: 'jhi-navbar',
     templateUrl: './navbar.component.html',
@@ -42,6 +43,18 @@ export class NavbarComponent implements OnInit {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
+
+        if (!this.isAuthenticated()) {
+            $(window).scroll(() => {
+                // 100 = The point you would like to fade the nav in.
+                if ($(window).scrollTop() > 100) {
+                    $('.navbar').addClass('navbar-shown');
+                    // navbar-dark navbar-expand-md bg-primary navbar-transparent
+                } else {
+                    $('.navbar').removeClass('navbar-shown');
+                }
+            });
+        }
     }
 
     changeLanguage(languageKey: string) {
