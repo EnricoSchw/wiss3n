@@ -146,7 +146,7 @@ Desktop.ini
 ######################
 # Custom
 ######################
-/src/main/resources/config/application-prod.yml
-/gradle/liquibase.gradle
+src/main/resources/config/application-prod.yml
+gradle/liquibase.gradle
 deploy.sh
 package-lock.json
