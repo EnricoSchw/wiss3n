@@ -143,3 +143,10 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+######################
+# Custom
+######################
+/src/main/resources/config/application-prod.yml
+/gradle/liquibase.gradle
+deploy.sh
+package-lock.json
