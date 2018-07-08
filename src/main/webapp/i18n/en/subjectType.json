@@ -1,0 +1,9 @@
+{
+    "wiss3NApp": {
+        "SubjectType" : {
+            "null": "",
+            "HAUPFACH": "HAUPFACH",
+            "NEBENFACH": "NEBENFACH"
+        }
+    }
+}

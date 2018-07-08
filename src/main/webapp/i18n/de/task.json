@@ -1,0 +1,30 @@
+
+{
+    "wiss3NApp": {
+        "task" : {
+            "home": {
+                "title": "Tasks",
+                "createLabel": "Task erstellen",
+                "createOrEditLabel": "Task erstellen oder bearbeiten",
+                "search": "Suche nach Task"
+            },
+            "created": "Task erstellt mit ID {{ param }}",
+            "updated": "Task aktualisiert mit ID {{ param }}",
+            "deleted": "Task gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Task {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Task"
+            },
+            "title": "Title",
+            "description": "Description",
+            "type": "Type",
+            "date": "Date",
+            "grade": "Grade",
+            "user": "User",
+            "teachingHour": "Teaching Hour",
+            "contents": "Contents"
+        }
+    }
+}

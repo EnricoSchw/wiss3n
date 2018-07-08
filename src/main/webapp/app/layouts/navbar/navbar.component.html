@@ -25,6 +25,36 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
+                    <li>
+                        <a class="dropdown-item" routerLink="task" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.task">Task</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="school-class" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.schoolClass">School Class</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="teaching-subject" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.teachingSubject">Teaching Subject</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="teaching-hour" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.teachingHour">Teaching Hour</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="content" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.content">Content</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>

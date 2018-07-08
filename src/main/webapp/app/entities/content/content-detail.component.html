@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="content">
+            <h2><span jhiTranslate="wiss3NApp.content.detail.title">Content</span> {{content.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="wiss3NApp.content.title">Title</span></dt>
+                <dd>
+                    <span>{{content.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="wiss3NApp.content.date">Date</span></dt>
+                <dd>
+                    <span>{{content.date}}</span>
+                </dd>
+                <dt><span jhiTranslate="wiss3NApp.content.text">Text</span></dt>
+                <dd>
+                    <span>{{content.text}}</span>
+                </dd>
+                <dt><span jhiTranslate="wiss3NApp.content.user">User</span></dt>
+                <dd>
+                    {{content.user?.login}}
+                </dd>
+                <dt><span jhiTranslate="wiss3NApp.content.task">Task</span></dt>
+                <dd>
+                    <div *ngIf="content.task">
+                        <a [routerLink]="['/task', content.task?.id, 'view']">{{content.task?.title}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/content', content.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

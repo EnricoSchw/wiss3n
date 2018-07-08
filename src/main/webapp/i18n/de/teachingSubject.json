@@ -1,0 +1,27 @@
+
+{
+    "wiss3NApp": {
+        "teachingSubject" : {
+            "home": {
+                "title": "Teaching Subjects",
+                "createLabel": "Teaching Subject erstellen",
+                "createOrEditLabel": "Teaching Subject erstellen oder bearbeiten",
+                "search": "Suche nach Teaching Subject"
+            },
+            "created": "Teaching Subject erstellt mit ID {{ param }}",
+            "updated": "Teaching Subject aktualisiert mit ID {{ param }}",
+            "deleted": "Teaching Subject gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Teaching Subject {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Teaching Subject"
+            },
+            "name": "Name",
+            "prefix": "Prefix",
+            "type": "Type",
+            "user": "User",
+            "teachingHours": "Teaching Hours"
+        }
+    }
+}

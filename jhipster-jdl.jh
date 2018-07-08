@@ -80,5 +80,3 @@ paginate * with pagination
 // Set service options to all except few
 service all with serviceClass
 
-// Set an angular suffix
-angularSuffix * with wiss3n

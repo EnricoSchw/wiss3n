@@ -1,0 +1,63 @@
+{
+    "name": "TeachingHour",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "weekday",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min",
+                "max",
+                "required"
+            ],
+            "fieldValidateRulesMin": 1,
+            "fieldValidateRulesMax": 5
+        },
+        {
+            "fieldName": "hour",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min",
+                "max",
+                "required"
+            ],
+            "fieldValidateRulesMin": 1,
+            "fieldValidateRulesMax": 10
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "teachingSubject",
+            "otherEntityName": "teachingSubject",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "schoolClass",
+            "otherEntityName": "schoolClass",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "tasks",
+            "otherEntityName": "task",
+            "otherEntityRelationshipName": "teachingHour"
+        }
+    ],
+    "changelogDate": "20180708144840",
+    "entityTableName": "teaching_hour",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

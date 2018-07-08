@@ -7,7 +7,6 @@ import { VERSION } from 'app/app.constants';
 import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from 'app/core';
 import { ProfileService } from '../profiles/profile.service';
 
-
 @Component({
     selector: 'jhi-navbar',
     templateUrl: './navbar.component.html',

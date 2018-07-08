@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="schoolClass">
+            <h2><span jhiTranslate="wiss3NApp.schoolClass.detail.title">School Class</span> {{schoolClass.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="wiss3NApp.schoolClass.start">Start</span></dt>
+                <dd>
+                    <span>{{schoolClass.start}}</span>
+                </dd>
+                <dt><span jhiTranslate="wiss3NApp.schoolClass.end">End</span></dt>
+                <dd>
+                    <span>{{schoolClass.end}}</span>
+                </dd>
+                <dt><span jhiTranslate="wiss3NApp.schoolClass.name">Name</span></dt>
+                <dd>
+                    <span>{{schoolClass.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="wiss3NApp.schoolClass.user">User</span></dt>
+                <dd>
+                    {{schoolClass.user?.login}}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/school-class', schoolClass.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
