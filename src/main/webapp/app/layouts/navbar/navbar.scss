@@ -140,3 +140,17 @@ Logo styles
         }
     }
 }
+
+.round-icon {
+    display: inline-block;
+    border-radius: 60px;
+    box-shadow: 0px 0px 2px #ebebeb;
+    padding: 0.7em 0.8em;
+}
+
+.dropdown-toggle::after {
+    border: 0;
+    margin-left: 0;
+    content: unset;
+}
+
