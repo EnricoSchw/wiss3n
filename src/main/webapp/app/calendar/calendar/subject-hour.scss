@@ -1,0 +1,35 @@
+@import "../../../content/scss/variables";
+.btn-toolbar {
+    margin-top: 10px;
+}
+
+.btn {
+    padding: 6px 6px;
+    margin-left: 6px;
+    font-weight: normal;
+}
+
+.btn:hover {
+    font-weight: normal;
+    padding: 6px 6px;
+    margin-left: 6px;
+    background-color: rgba(82, 65, 65, 0.12);
+    color: $app-yellow;
+    border-color: #533f03;
+
+}
+
+.btn:focus, .btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.btn-default {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.fa {
+    line-height: 27px;
+    font-size: large;
+}

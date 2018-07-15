@@ -1,0 +1,28 @@
+@import "../../../../content/scss/variables";
+
+.subject-hour-view {
+    position: absolute;
+    background-color: $app-light-gray;
+    min-width: 220px;
+    right: 0px;
+    min-height: 660px;
+    border-left: 1px solid $app-light-gray-border;
+    border-top: 1px solid $app-light-gray-border;
+    z-index: 100;
+    font-weight: lighter;
+}
+
+.subject-hour-view-header {
+    margin: 15px;
+    padding: 0.75rem 1.25rem;
+}
+
+.btn {
+    width: 40px;
+    height: 40px;
+}
+
+//.btn.btn-default:hover{
+//    background-color: $app-gray !important;
+//    color: $app-yellow !important;
+//}

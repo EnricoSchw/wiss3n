@@ -8,6 +8,7 @@
     "node_modules"
   ],
   "dependencies": {
+    "@angular/animations": "^6.0.9",
     "@angular/common": "6.0.0",
     "@angular/compiler": "6.0.0",
     "@angular/core": "6.0.0",
@@ -30,6 +31,7 @@
     "ngx-infinite-scroll": "0.5.1",
     "ngx-webstorage": "2.0.1",
     "reflect-metadata": "0.1.12",
+    "rrule": "^2.2.9",
     "rxjs": "6.1.0",
     "rxjs-compat": "6.1.0",
     "sockjs-client": "1.1.4",

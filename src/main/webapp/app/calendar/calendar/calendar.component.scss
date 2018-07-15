@@ -1,0 +1,213 @@
+@import "../../../content/scss/variables";
+
+
+// Common --------------------------------------------------------
+body {
+    color: $app-dark-gray;
+}
+
+.col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+// Header --------------------------------------------------------
+.calendar-head {
+    padding-bottom: 2em;
+    padding-top: 2em;
+    margin: 0;
+    color: $app-gray-blue;
+    border-bottom: 0;
+    h3 {
+        font-weight: lighter !important;
+    }
+
+    .btn-primary {
+        color: $app-light-gray;
+        background-color: $app-blue;
+    }
+    .btn-primary:hover, .btn-primary.active {
+        color: $app-yellow !important;
+        background-color: $app-dark-gray !important;
+    }
+
+}
+
+.cal-cell-row.cal-header {
+    color: $app-gray-blue;
+    font-size: large;
+    font-weight: lighter !important;
+}
+
+.cal-month-view {
+    .cal-days {
+        border-top: 1px solid $app-gray-blue !important;
+        border-right: none;
+        border-left: none;
+        .cal-cell-row {
+            border-bottom: 1px solid $app-gray-blue;
+        }
+
+    }
+}
+
+// Hover ---------------------------------------------------------
+$hover: #e7e8ee;
+$hover-bg-off: $app-light-blue;
+$hover-bg-row: $hover;
+$hover-bg-cell: $hover;
+
+// Hover Header --------------------------------------------------
+.cal-cell-row.cal-header:hover {
+    background-color: $hover-bg-off !important;
+}
+
+.cal-header {
+    .cal-cell:hover {
+        background-color: $hover-bg-off !important;
+    }
+}
+
+// Hover Cell ----------------------------------------------------
+.cal-cell-row:hover {
+    background-color: $hover-bg-row !important;
+}
+
+.cal-cell.cal-day-cell:hover {
+    background-color: $hover-bg-cell !important;
+}
+
+// Day Number ---------------------------------------------------
+.cal-month-view .cal-day-number {
+    margin-top: 3px !important;
+    margin-left: 15px !important;
+    margin-bottom: 2px !important;
+    float: left !important;
+    font-weight: bold;
+}
+
+.cal-cell-top {
+    min-height: 0 !important;
+    position: relative;
+    flex: none !important;
+}
+
+.custom-event-month {
+    color: $app-gray-blue;
+    margin: 0 2px 0 15px;
+
+    &-subject {
+        font-weight: bold;
+        margin-right: 3px;
+    }
+}
+
+small {
+    font-size: 60% !important;
+}
+
+// Week ------------------------------------------------------------------
+
+.cal-week-view .cal-events-row {
+    height: 124px;
+}
+
+.cal-week-view .cal-event {
+    height: 120px;
+    line-height: normal;
+    border-radius: 25px;
+    border: 1px solid #73AD21;
+    cursor: pointer;
+}
+
+.cal-week-view .cal-event .cal-event-title {
+    line-height: 30px;
+}
+
+// Day --------------------------------------------------------------------
+
+.cal-day-view .cal-hour-rows {
+    border: none;
+}
+
+.cal-day-view .cal-hour {
+    background-color: transparent !important;
+}
+
+.cal-day-view .cal-hour .cal-hour-segment.cal-hour-start {
+    border-top: 1px solid $app-light-gray-border !important;
+    border-bottom: none !important
+}
+
+.cal-hour-segment.cal-after-hour-start {
+    border-bottom: none !important;
+}
+
+.cal-day-view .cal-hour .cal-hour-segment:hover {
+    background-color: transparent;
+}
+
+.cal-day-view .cal-ends-within-day .cal-event {
+    //background-color: transparent !important;
+}
+
+.cal-day-view .cal-event {
+    width: 100%;
+    border: solid 0;
+    border-radius: 0 !important;
+    // border-bottom: solid 1px;
+    padding: 15px;
+    font-size: 12px;
+    background-color: $app-light-blue !important;
+}
+
+.cal-day-view .cal-event.active {
+    background-color: $app-light-gray !important;
+    a {
+        font-weight: normal;
+    }
+}
+
+.cal-day-view .cal-event:hover{
+    cursor: pointer;
+}
+
+.cal-day-view .cal-event-container {
+    margin-left: 0 !important;
+    width: 100% !important;
+}
+
+
+.cal-day-view .cal-time {
+    font-weight: normal;
+    font-size: 12px;
+    padding-top: 5px;
+    padding-left: 15px;
+    /*line-height: 16px;*/
+    width: 70px;
+    text-align: left;
+}
+
+
+.cal-day-view {
+    .line {
+        position: absolute;
+        width: 150px;
+        height: 1px;
+        background-color: $app-light-gray-border;
+    }
+    .line.top {
+        top: -1px;
+    }
+
+    .line.bottom {
+        bottom: 0px;
+    }
+
+    .line.right {
+        height: 58px;
+        width: 3px;
+        z-index: 101;
+        background-color: $cyan;
+    }
+}

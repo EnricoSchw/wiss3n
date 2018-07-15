@@ -1,0 +1,24 @@
+<div class="subject-hour-view"
+     [style.top.px]="-dayEvent.top"
+     [hidden]="!dayEvent.event.meta.isActive">
+    <div class="subject-hour-view-header">
+
+        <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="group">
+                <h1>
+                    {{dayEvent.event.title}}
+                </h1>
+            </div>
+            <div class="btn-group" role="group" aria-label="First group">
+                <a href="#" class="btn btn-default rounded-circle"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <ul class="list-group">
+            <jhi-subject-hour-event-view *ngFor="let event of dayEvent.event.meta.events" [event]=event>
+            </jhi-subject-hour-event-view>
+        </ul>
+    </div>
+</div>
