@@ -1,6 +1,6 @@
-import { Task, TaskType } from 'app/shared/model/task.model';
+import { Task, TaskType, taskTypeSetting } from 'app/shared/model/task.model';
 import { subjectHours } from './subjects';
-import { taskTypeSetting, TaskEventMeta } from 'app/shared/model/event.model';
+import { TaskEventMeta } from 'app/shared/model/event.model';
 import { CalendarEvent } from 'angular-calendar';
 
 export const events = <CalendarEvent<TaskEventMeta>[]>[

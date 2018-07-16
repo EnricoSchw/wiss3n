@@ -1,8 +1,8 @@
 import { Moment } from 'moment';
+import { EventColor } from 'calendar-utils';
 import { IUser } from 'app/core/user/user.model';
 import { ITeachingHour } from 'app/shared/model//teaching-hour.model';
 import { IContent } from 'app/shared/model//content.model';
-import { taskTypeSetting } from 'app/shared/model/event.model';
 
 export const enum TaskType {
     HAUSAUFGABE = 'HAUSAUFGABE',
@@ -59,3 +59,62 @@ export class Task implements ITask {
         public contents?: IContent[]
     ) {}
 }
+
+
+// setting for TaskType TaskTypeSet
+// ------------------------------------------------------------
+
+export interface TaskTypeSet extends EventColor {
+    prefix: string;
+}
+
+export class TaskTypeSetting {
+
+    private list: { [type: string]: TaskTypeSet } = {  };
+
+    get(type: TaskType): TaskTypeSet {
+        return this.list[type.valueOf()];
+    }
+
+    set(type: TaskType, setting: TaskTypeSet) {
+        this.list[type.valueOf()] = setting;
+    }
+}
+
+export const taskTypeSetting = new TaskTypeSetting();
+
+taskTypeSetting.set( TaskType.HAUSAUFGABE , {
+    prefix: 'HA',
+    primary: '#284451',
+    secondary: '#59a9cb'
+});
+
+taskTypeSetting.set(TaskType.VORTRAG, {
+    prefix: 'Vortrag',
+    primary: '#ad2121',
+    secondary: '#FAE3E3'
+});
+
+taskTypeSetting.set(TaskType.KURZKONTROLLE, {
+    prefix: 'KK',
+    primary: '#ad2121',
+    secondary: '#FAE3E3'
+});
+
+taskTypeSetting.set(TaskType.TEST, {
+    prefix: 'Test',
+    primary: '#ad2121',
+    secondary: '#FAE3E3'
+});
+
+taskTypeSetting.set(TaskType.KLAUSUR, {
+    prefix: 'Klausur',
+    primary: '#ad2121',
+    secondary: '#FAE3E3'
+});
+
+taskTypeSetting.set(TaskType.MUENDLICH, {
+    prefix: 'MÜ',
+    primary: '#ad2121',
+    secondary: '#FAE3E3'
+});
