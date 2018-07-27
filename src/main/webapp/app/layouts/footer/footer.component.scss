@@ -37,11 +37,13 @@
 a {
     color: $app-light-gray;
 }
+
 a:hover {
     color: $app-yellow;
 }
 
-.footer .social li a i, .footer .social li a span {
+.footer .social li a .fa-rotate-45-back {
+    display: block;
     transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
     -ms-transform: rotate(-45deg);
@@ -54,7 +56,6 @@ a:hover {
     background-color: $app-gray;
     color: $app-yellow;
 }
-
 
 .fadeInUp {
     -webkit-animation-name: fadeInUp;
