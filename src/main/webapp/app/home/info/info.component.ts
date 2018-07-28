@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginModalService } from 'app/core';
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-info',
@@ -8,6 +11,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoComponent implements OnInit {
 
+    modalRef: NgbModalRef;
+
+    constructor(
+        private loginModalService: LoginModalService,
+        private router: Router
+    ) {}
+
     ngOnInit(): void {
+    }
+
+    login() {
+        this.modalRef = this.loginModalService.open();
     }
 }
