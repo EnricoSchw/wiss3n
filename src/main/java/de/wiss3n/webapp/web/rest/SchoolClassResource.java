@@ -2,6 +2,7 @@ package de.wiss3n.webapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import de.wiss3n.webapp.domain.SchoolClass;
+import de.wiss3n.webapp.security.SecurityUtils;
 import de.wiss3n.webapp.service.SchoolClassService;
 import de.wiss3n.webapp.web.rest.errors.BadRequestAlertException;
 import de.wiss3n.webapp.web.rest.util.HeaderUtil;
@@ -79,6 +80,11 @@ public class SchoolClassResource {
         if (schoolClass.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+
+        if (! schoolClass.getUser().getLogin().equals(SecurityUtils.getCurrentUserLogin().orElse(null))) {
+            throw new BadRequestAlertException("Invalid user", ENTITY_NAME, "not same user");
+        }
+
         SchoolClass result = schoolClassService.save(schoolClass);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, schoolClass.getId().toString()))
@@ -95,6 +101,7 @@ public class SchoolClassResource {
     @Timed
     public ResponseEntity<List<SchoolClass>> getAllSchoolClasses(Pageable pageable) {
         log.debug("REST request to get a page of SchoolClasses");
+        //Page<SchoolClass> page = schoolClassService.findAll(pageable);
         Page<SchoolClass> page = schoolClassService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/school-classes");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);

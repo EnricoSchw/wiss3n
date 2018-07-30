@@ -1,8 +1,11 @@
 package de.wiss3n.webapp.service;
 
 import de.wiss3n.webapp.domain.SchoolClass;
+import de.wiss3n.webapp.domain.User;
 import de.wiss3n.webapp.repository.SchoolClassRepository;
+import de.wiss3n.webapp.repository.UserRepository;
 import de.wiss3n.webapp.repository.search.SchoolClassSearchRepository;
+import de.wiss3n.webapp.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,9 +32,16 @@ public class SchoolClassService {
 
     private final SchoolClassSearchRepository schoolClassSearchRepository;
 
-    public SchoolClassService(SchoolClassRepository schoolClassRepository, SchoolClassSearchRepository schoolClassSearchRepository) {
+    private final UserRepository userRepository;
+
+    public SchoolClassService(
+        SchoolClassRepository schoolClassRepository,
+        SchoolClassSearchRepository schoolClassSearchRepository,
+        UserRepository userRepository
+    ) {
         this.schoolClassRepository = schoolClassRepository;
         this.schoolClassSearchRepository = schoolClassSearchRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -41,9 +51,19 @@ public class SchoolClassService {
      * @return the persisted entity
      */
     public SchoolClass save(SchoolClass schoolClass) {
-        log.debug("Request to save SchoolClass : {}", schoolClass);        SchoolClass result = schoolClassRepository.save(schoolClass);
-        schoolClassSearchRepository.save(result);
-        return result;
+        log.debug("Request to save SchoolClass : {}", schoolClass);
+        return SecurityUtils.getCurrentUserLogin()
+            .flatMap(userRepository::findOneByLogin)
+            .map((User user) -> {
+                schoolClass.setUser(user);
+                return schoolClass;
+            })
+            .map(schoolClassRepository::save)
+            .map((SchoolClass result) -> {
+                schoolClassSearchRepository.save(result);
+                return result;
+            })
+            .orElseThrow(IllegalArgumentException::new);
     }
 
     /**
@@ -55,7 +75,7 @@ public class SchoolClassService {
     @Transactional(readOnly = true)
     public Page<SchoolClass> findAll(Pageable pageable) {
         log.debug("Request to get all SchoolClasses");
-        return schoolClassRepository.findAll(pageable);
+        return schoolClassRepository.findByUserIsCurrentUser(pageable);
     }
 
 
@@ -68,7 +88,7 @@ public class SchoolClassService {
     @Transactional(readOnly = true)
     public Optional<SchoolClass> findOne(Long id) {
         log.debug("Request to get SchoolClass : {}", id);
-        return schoolClassRepository.findById(id);
+        return schoolClassRepository.findByIdAndByUserIsCurrentUser(id);
     }
 
     /**
@@ -85,12 +105,13 @@ public class SchoolClassService {
     /**
      * Search for the schoolClass corresponding to the query.
      *
-     * @param query the query of the search
+     * @param query    the query of the search
      * @param pageable the pagination information
      * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<SchoolClass> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of SchoolClasses for query {}", query);
-        return schoolClassSearchRepository.search(queryStringQuery(query), pageable);    }
+        return schoolClassSearchRepository.search(queryStringQuery(query), pageable);
+    }
 }

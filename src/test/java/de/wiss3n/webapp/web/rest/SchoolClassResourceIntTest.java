@@ -3,7 +3,9 @@ package de.wiss3n.webapp.web.rest;
 import de.wiss3n.webapp.Wiss3NApp;
 
 import de.wiss3n.webapp.domain.SchoolClass;
+import de.wiss3n.webapp.domain.User;
 import de.wiss3n.webapp.repository.SchoolClassRepository;
+import de.wiss3n.webapp.repository.UserRepository;
 import de.wiss3n.webapp.repository.search.SchoolClassSearchRepository;
 import de.wiss3n.webapp.service.SchoolClassService;
 import de.wiss3n.webapp.web.rest.errors.ExceptionTranslator;
@@ -19,6 +21,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -60,7 +63,8 @@ public class SchoolClassResourceIntTest {
     @Autowired
     private SchoolClassRepository schoolClassRepository;
 
-    
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private SchoolClassService schoolClassService;
@@ -89,6 +93,7 @@ public class SchoolClassResourceIntTest {
 
     private SchoolClass schoolClass;
 
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -111,16 +116,23 @@ public class SchoolClassResourceIntTest {
             .start(DEFAULT_START)
             .end(DEFAULT_END)
             .name(DEFAULT_NAME);
+        // Add required entity
+        User user = UserResourceIntTest.createEntity(em);
+        em.persist(user);
+        em.flush();
+        schoolClass.setUser(user);
         return schoolClass;
     }
 
     @Before
     public void initTest() {
         schoolClass = createEntity(em);
+        schoolClass.user(userRepository.findOneByLogin("user").get());
     }
 
     @Test
     @Transactional
+    @WithMockUser
     public void createSchoolClass() throws Exception {
         int databaseSizeBeforeCreate = schoolClassRepository.findAll().size();
 
@@ -220,6 +232,7 @@ public class SchoolClassResourceIntTest {
 
     @Test
     @Transactional
+    @WithMockUser
     public void getAllSchoolClasses() throws Exception {
         // Initialize the database
         schoolClassRepository.saveAndFlush(schoolClass);
@@ -233,10 +246,11 @@ public class SchoolClassResourceIntTest {
             .andExpect(jsonPath("$.[*].end").value(hasItem(DEFAULT_END.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
     }
-    
+
 
     @Test
     @Transactional
+    @WithMockUser
     public void getSchoolClass() throws Exception {
         // Initialize the database
         schoolClassRepository.saveAndFlush(schoolClass);
@@ -252,6 +266,7 @@ public class SchoolClassResourceIntTest {
     }
     @Test
     @Transactional
+    @WithMockUser
     public void getNonExistingSchoolClass() throws Exception {
         // Get the schoolClass
         restSchoolClassMockMvc.perform(get("/api/school-classes/{id}", Long.MAX_VALUE))
@@ -260,6 +275,7 @@ public class SchoolClassResourceIntTest {
 
     @Test
     @Transactional
+    @WithMockUser
     public void updateSchoolClass() throws Exception {
         // Initialize the database
         schoolClassService.save(schoolClass);
@@ -296,6 +312,7 @@ public class SchoolClassResourceIntTest {
 
     @Test
     @Transactional
+    @WithMockUser
     public void updateNonExistingSchoolClass() throws Exception {
         int databaseSizeBeforeUpdate = schoolClassRepository.findAll().size();
 
@@ -317,6 +334,7 @@ public class SchoolClassResourceIntTest {
 
     @Test
     @Transactional
+    @WithMockUser
     public void deleteSchoolClass() throws Exception {
         // Initialize the database
         schoolClassService.save(schoolClass);
@@ -338,6 +356,7 @@ public class SchoolClassResourceIntTest {
 
     @Test
     @Transactional
+    @WithMockUser
     public void searchSchoolClass() throws Exception {
         // Initialize the database
         schoolClassService.save(schoolClass);
