@@ -1,29 +1,16 @@
 <jhi-alert></jhi-alert>
 <div class="row board">
     <div class="left-board col-md-2">
-        <div>
-            <h4>
-                <span>Klassen</span>
-                <button class="btn btn-default rounded-circle float-right jh-create-entity create-school-class-class-app" [routerLink]="['/', { outlets: { popup: ['school-class-class-app-new'] } }]">
-                    <span class="fa fa-plus"></span>
-                </button>
-            </h4>
-            <ul>
-                <li><a href="#" class="active">Klasse 1a</a></li>
-                <li><a href="#">Nachhilfe</a></li>
-            </ul>
-        </div>
+
+
+            <jhi-school-class-list></jhi-school-class-list>
 
         <div>
-            <h4>Aufgaben</h4>
-            <ul>
-                <li><a href="#">Klasse 1a</a></li>
-                <li><a href="#">Nachhilfe</a></li>
-            </ul>
+            <h4>Fächer <a href="#" class="btn btn-default rounded-circle"><fa-icon [icon]="'plus'"></fa-icon></a></h4>
         </div>
 
         <div class="task-control">
-            <a href="#" class="btn btn-default rounded-circle"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></a>
+            <a href="#" class="btn btn-default rounded-circle"><fa-icon [icon]="'plus'"></fa-icon></a>
         </div>
 
     </div>

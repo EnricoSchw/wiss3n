@@ -4,10 +4,11 @@ import { RouterModule } from '@angular/router';
 import { Wiss3NSharedModule } from 'app/shared';
 import { HOME_ROUTE, HomeComponent } from './';
 import { InfoComponent } from 'app/home/info/info.component';
-import { CalendarModule } from 'app/calendar/calendar.module';
+import { Wiss3NCalendarModule } from 'app/calendar/calendar.module';
+
 
 @NgModule({
-    imports: [Wiss3NSharedModule, CalendarModule, RouterModule.forChild([HOME_ROUTE])],
+    imports: [Wiss3NSharedModule, Wiss3NCalendarModule, RouterModule.forChild([HOME_ROUTE])],
     declarations: [HomeComponent, InfoComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

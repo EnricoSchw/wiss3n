@@ -77,12 +77,10 @@ public class SchoolClassResource {
     @Timed
     public ResponseEntity<SchoolClass> updateSchoolClass(@Valid @RequestBody SchoolClass schoolClass) throws URISyntaxException {
         log.debug("REST request to update SchoolClass : {}", schoolClass);
+        this.hasAccess(schoolClass);
+
         if (schoolClass.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-
-        if (! schoolClass.getUser().getLogin().equals(SecurityUtils.getCurrentUserLogin().orElse(null))) {
-            throw new BadRequestAlertException("Invalid user", ENTITY_NAME, "not same user");
         }
 
         SchoolClass result = schoolClassService.save(schoolClass);
@@ -139,7 +137,7 @@ public class SchoolClassResource {
      * SEARCH  /_search/school-classes?query=:query : search for the schoolClass corresponding
      * to the query.
      *
-     * @param query the query of the schoolClass search
+     * @param query    the query of the schoolClass search
      * @param pageable the pagination information
      * @return the result of the search
      */
@@ -150,6 +148,13 @@ public class SchoolClassResource {
         Page<SchoolClass> page = schoolClassService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/school-classes");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+
+    private void hasAccess(SchoolClass schoolClass) {
+        if (!schoolClass.getUser().getLogin().equals(SecurityUtils.getCurrentUserLogin().orElse(null))) {
+            throw new BadRequestAlertException("Invalid user", ENTITY_NAME, "not same user");
+        }
     }
 
 }

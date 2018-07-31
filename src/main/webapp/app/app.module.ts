@@ -18,6 +18,7 @@ import { Wiss3NAccountModule } from './account/account.module';
 import { Wiss3NEntityModule } from './entities/entity.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
+import { Wiss3NCalendarModule } from 'app/calendar/calendar.module';
 
 @NgModule({
     imports: [
@@ -26,9 +27,10 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
         Wiss3NSharedModule,
         Wiss3NCoreModule,
+        Wiss3NCalendarModule,
         Wiss3NHomeModule,
         Wiss3NAccountModule,
-        Wiss3NEntityModule
+        Wiss3NEntityModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
