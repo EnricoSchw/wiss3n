@@ -105,13 +105,12 @@ public class SchoolClassService {
     /**
      * Search for the schoolClass corresponding to the query.
      *
-     * @param query    the query of the search
+     * @param query the query of the search
      * @param pageable the pagination information
      * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<SchoolClass> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of SchoolClasses for query {}", query);
-        return schoolClassSearchRepository.search(queryStringQuery(query), pageable);
-    }
+        return schoolClassSearchRepository.search(queryStringQuery(query), pageable);    }
 }

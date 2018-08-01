@@ -16,6 +16,13 @@
             ]
         },
         {
+            "fieldName": "active",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
             "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
@@ -30,6 +37,12 @@
             "relationshipType": "one-to-many",
             "relationshipName": "teachingHours",
             "otherEntityName": "teachingHour",
+            "otherEntityRelationshipName": "schoolClass"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "schoolClass",
+            "otherEntityName": "teachingSubject",
             "otherEntityRelationshipName": "schoolClass"
         },
         {

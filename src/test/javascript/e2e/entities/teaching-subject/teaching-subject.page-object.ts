@@ -21,6 +21,7 @@ export class TeachingSubjectUpdatePage {
     prefixInput = element(by.id('field_prefix'));
     typeSelect = element(by.id('field_type'));
     userSelect = element(by.id('field_user'));
+    schoolClassSelect = element(by.id('field_schoolClass'));
 
     getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -73,6 +74,25 @@ export class TeachingSubjectUpdatePage {
 
     getUserSelectedOption() {
         return this.userSelect.element(by.css('option:checked')).getText();
+    }
+
+    schoolClassSelectLastOption(): promise.Promise<void> {
+        return this.schoolClassSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    schoolClassSelectOption(option): promise.Promise<void> {
+        return this.schoolClassSelect.sendKeys(option);
+    }
+
+    getSchoolClassSelect(): ElementFinder {
+        return this.schoolClassSelect;
+    }
+
+    getSchoolClassSelectedOption() {
+        return this.schoolClassSelect.element(by.css('option:checked')).getText();
     }
 
     save(): promise.Promise<void> {

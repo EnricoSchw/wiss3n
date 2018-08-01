@@ -36,6 +36,7 @@ describe('TeachingSubject e2e test', () => {
         expect(teachingSubjectUpdatePage.getPrefixInput()).toMatch('prefix');
         teachingSubjectUpdatePage.typeSelectLastOption();
         teachingSubjectUpdatePage.userSelectLastOption();
+        teachingSubjectUpdatePage.schoolClassSelectLastOption();
         teachingSubjectUpdatePage.save();
         expect(teachingSubjectUpdatePage.getSaveButton().isPresent()).toBeFalsy();
     });

@@ -21,6 +21,12 @@
                 <dd>
                     {{teachingSubject.user?.login}}
                 </dd>
+                <dt><span jhiTranslate="wiss3NApp.teachingSubject.schoolClass">School Class</span></dt>
+                <dd>
+                    <div *ngIf="teachingSubject.schoolClass">
+                        <a [routerLink]="['/school-class', teachingSubject.schoolClass?.id, 'view']">{{teachingSubject.schoolClass?.name}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

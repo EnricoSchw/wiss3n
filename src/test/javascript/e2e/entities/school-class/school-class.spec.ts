@@ -34,6 +34,18 @@ describe('SchoolClass e2e test', () => {
         expect(schoolClassUpdatePage.getStartInput()).toMatch('2000-12-31');
         schoolClassUpdatePage.setEndInput('2000-12-31');
         expect(schoolClassUpdatePage.getEndInput()).toMatch('2000-12-31');
+        schoolClassUpdatePage
+            .getActiveInput()
+            .isSelected()
+            .then(selected => {
+                if (selected) {
+                    schoolClassUpdatePage.getActiveInput().click();
+                    expect(schoolClassUpdatePage.getActiveInput().isSelected()).toBeFalsy();
+                } else {
+                    schoolClassUpdatePage.getActiveInput().click();
+                    expect(schoolClassUpdatePage.getActiveInput().isSelected()).toBeTruthy();
+                }
+            });
         schoolClassUpdatePage.setNameInput('name');
         expect(schoolClassUpdatePage.getNameInput()).toMatch('name');
         schoolClassUpdatePage.userSelectLastOption();

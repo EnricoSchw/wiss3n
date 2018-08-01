@@ -60,6 +60,13 @@
                         <option [ngValue]="userOption.id === teachingSubject.user?.id ? teachingSubject.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wiss3NApp.teachingSubject.schoolClass" for="field_schoolClass">School Class</label>
+                    <select class="form-control" id="field_schoolClass" name="schoolClass" [(ngModel)]="teachingSubject.schoolClass" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="schoolClassOption.id === teachingSubject.schoolClass?.id ? teachingSubject.schoolClass : schoolClassOption" *ngFor="let schoolClassOption of schoolclasses; trackBy: trackSchoolClassById">{{schoolClassOption.name}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

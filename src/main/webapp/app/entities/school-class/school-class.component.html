@@ -32,6 +32,7 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="start"><span jhiTranslate="wiss3NApp.schoolClass.start">Start</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="end"><span jhiTranslate="wiss3NApp.schoolClass.end">End</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="active"><span jhiTranslate="wiss3NApp.schoolClass.active">Active</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="name"><span jhiTranslate="wiss3NApp.schoolClass.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="user.login"><span jhiTranslate="wiss3NApp.schoolClass.user">User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
@@ -42,6 +43,7 @@
                 <td><a [routerLink]="['/school-class', schoolClass.id, 'view' ]">{{schoolClass.id}}</a></td>
                 <td>{{schoolClass.start | date:'mediumDate'}}</td>
                 <td>{{schoolClass.end | date:'mediumDate'}}</td>
+                <td>{{schoolClass.active}}</td>
                 <td>{{schoolClass.name}}</td>
                 <td>
                     {{schoolClass.user?.login}}

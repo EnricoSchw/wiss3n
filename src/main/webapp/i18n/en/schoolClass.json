@@ -19,8 +19,10 @@
             },
             "start": "Start",
             "end": "End",
+            "active": "Active",
             "name": "Name",
             "teachingHours": "Teaching Hours",
+            "schoolClass": "School Class",
             "user": "User"
         }
     }

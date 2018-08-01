@@ -1,4 +1,5 @@
 import { IUser } from 'app/core/user/user.model';
+import { ISchoolClass } from 'app/shared/model//school-class.model';
 import { ITeachingHour } from 'app/shared/model//teaching-hour.model';
 
 export const enum SubjectType {
@@ -12,6 +13,7 @@ export interface ITeachingSubject {
     prefix?: string;
     type?: SubjectType;
     user?: IUser;
+    schoolClass?: ISchoolClass;
     teachingHours?: ITeachingHour[];
 }
 
@@ -22,6 +24,7 @@ export class TeachingSubject implements ITeachingSubject {
         public prefix?: string,
         public type?: SubjectType,
         public user?: IUser,
+        public schoolClass?: ISchoolClass,
         public teachingHours?: ITeachingHour[]
     ) {}
 }

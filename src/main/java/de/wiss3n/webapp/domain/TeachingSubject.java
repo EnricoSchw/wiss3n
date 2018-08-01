@@ -50,6 +50,10 @@ public class TeachingSubject implements Serializable {
     @JsonIgnoreProperties("")
     private User user;
 
+    @ManyToOne
+    @JsonIgnoreProperties("schoolClasses")
+    private SchoolClass schoolClass;
+
     @OneToMany(mappedBy = "teachingSubject")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<TeachingHour> teachingHours = new HashSet<>();
@@ -113,6 +117,19 @@ public class TeachingSubject implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public SchoolClass getSchoolClass() {
+        return schoolClass;
+    }
+
+    public TeachingSubject schoolClass(SchoolClass schoolClass) {
+        this.schoolClass = schoolClass;
+        return this;
+    }
+
+    public void setSchoolClass(SchoolClass schoolClass) {
+        this.schoolClass = schoolClass;
     }
 
     public Set<TeachingHour> getTeachingHours() {

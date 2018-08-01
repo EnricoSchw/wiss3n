@@ -82,7 +82,6 @@ public class SchoolClassResource {
         if (schoolClass.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-
         SchoolClass result = schoolClassService.save(schoolClass);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, schoolClass.getId().toString()))
@@ -99,7 +98,6 @@ public class SchoolClassResource {
     @Timed
     public ResponseEntity<List<SchoolClass>> getAllSchoolClasses(Pageable pageable) {
         log.debug("REST request to get a page of SchoolClasses");
-        //Page<SchoolClass> page = schoolClassService.findAll(pageable);
         Page<SchoolClass> page = schoolClassService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/school-classes");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
@@ -137,7 +135,7 @@ public class SchoolClassResource {
      * SEARCH  /_search/school-classes?query=:query : search for the schoolClass corresponding
      * to the query.
      *
-     * @param query    the query of the schoolClass search
+     * @param query the query of the schoolClass search
      * @param pageable the pagination information
      * @return the result of the search
      */

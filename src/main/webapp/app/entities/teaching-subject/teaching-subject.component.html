@@ -34,6 +34,7 @@
             <th jhiSortBy="prefix"><span jhiTranslate="wiss3NApp.teachingSubject.prefix">Prefix</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="type"><span jhiTranslate="wiss3NApp.teachingSubject.type">Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="user.login"><span jhiTranslate="wiss3NApp.teachingSubject.user">User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="schoolClass.name"><span jhiTranslate="wiss3NApp.teachingSubject.schoolClass">School Class</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -45,6 +46,11 @@
                 <td jhiTranslate="{{'wiss3NApp.SubjectType.' + teachingSubject.type}}">{{teachingSubject.type}}</td>
                 <td>
                     {{teachingSubject.user?.login}}
+                </td>
+                <td>
+                    <div *ngIf="teachingSubject.schoolClass">
+                        <a [routerLink]="['../school-class', teachingSubject.schoolClass?.id, 'view' ]" >{{teachingSubject.schoolClass?.name}}</a>
+                    </div>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

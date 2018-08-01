@@ -21,6 +21,7 @@
             "prefix": "Prefix",
             "type": "Type",
             "user": "User",
+            "schoolClass": "School Class",
             "teachingHours": "Teaching Hours"
         }
     }

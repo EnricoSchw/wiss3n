@@ -42,6 +42,17 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wiss3NApp.schoolClass.active" for="field_active">Active</label>
+                    <input type="checkbox" class="form-control" name="active" id="field_active"
+                        [(ngModel)]="schoolClass.active" />
+                    <div [hidden]="!(editForm.controls.active?.dirty && editForm.controls.active?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.active?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="wiss3NApp.schoolClass.name" for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
                         [(ngModel)]="schoolClass.name" required minlength="2"/>

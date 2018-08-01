@@ -39,6 +39,10 @@ public class SchoolClass implements Serializable {
     private LocalDate end;
 
     @NotNull
+    @Column(name = "active", nullable = false)
+    private Boolean active;
+
+    @NotNull
     @Size(min = 2)
     @Column(name = "name", nullable = false)
     private String name;
@@ -46,6 +50,10 @@ public class SchoolClass implements Serializable {
     @OneToMany(mappedBy = "schoolClass")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<TeachingHour> teachingHours = new HashSet<>();
+
+    @OneToMany(mappedBy = "schoolClass")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<TeachingSubject> schoolClasses = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties("")
@@ -86,6 +94,19 @@ public class SchoolClass implements Serializable {
         this.end = end;
     }
 
+    public Boolean isActive() {
+        return active;
+    }
+
+    public SchoolClass active(Boolean active) {
+        this.active = active;
+        return this;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
     public String getName() {
         return name;
     }
@@ -122,6 +143,31 @@ public class SchoolClass implements Serializable {
 
     public void setTeachingHours(Set<TeachingHour> teachingHours) {
         this.teachingHours = teachingHours;
+    }
+
+    public Set<TeachingSubject> getSchoolClasses() {
+        return schoolClasses;
+    }
+
+    public SchoolClass schoolClasses(Set<TeachingSubject> teachingSubjects) {
+        this.schoolClasses = teachingSubjects;
+        return this;
+    }
+
+    public SchoolClass addSchoolClass(TeachingSubject teachingSubject) {
+        this.schoolClasses.add(teachingSubject);
+        teachingSubject.setSchoolClass(this);
+        return this;
+    }
+
+    public SchoolClass removeSchoolClass(TeachingSubject teachingSubject) {
+        this.schoolClasses.remove(teachingSubject);
+        teachingSubject.setSchoolClass(null);
+        return this;
+    }
+
+    public void setSchoolClasses(Set<TeachingSubject> teachingSubjects) {
+        this.schoolClasses = teachingSubjects;
     }
 
     public User getUser() {
@@ -164,6 +210,7 @@ public class SchoolClass implements Serializable {
             "id=" + getId() +
             ", start='" + getStart() + "'" +
             ", end='" + getEnd() + "'" +
+            ", active='" + isActive() + "'" +
             ", name='" + getName() + "'" +
             "}";
     }

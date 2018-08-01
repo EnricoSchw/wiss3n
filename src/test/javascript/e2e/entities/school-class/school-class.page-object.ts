@@ -19,6 +19,7 @@ export class SchoolClassUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     startInput = element(by.id('field_start'));
     endInput = element(by.id('field_end'));
+    activeInput = element(by.id('field_active'));
     nameInput = element(by.id('field_name'));
     userSelect = element(by.id('field_user'));
 
@@ -42,6 +43,9 @@ export class SchoolClassUpdatePage {
         return this.endInput.getAttribute('value');
     }
 
+    getActiveInput() {
+        return this.activeInput;
+    }
     setNameInput(name): promise.Promise<void> {
         return this.nameInput.sendKeys(name);
     }

@@ -7,6 +7,8 @@ import { JhiAlertService } from 'ng-jhipster';
 import { ITeachingSubject } from 'app/shared/model/teaching-subject.model';
 import { TeachingSubjectService } from './teaching-subject.service';
 import { IUser, UserService } from 'app/core';
+import { ISchoolClass } from 'app/shared/model/school-class.model';
+import { SchoolClassService } from 'app/entities/school-class';
 
 @Component({
     selector: 'jhi-teaching-subject-update',
@@ -18,10 +20,13 @@ export class TeachingSubjectUpdateComponent implements OnInit {
 
     users: IUser[];
 
+    schoolclasses: ISchoolClass[];
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private teachingSubjectService: TeachingSubjectService,
         private userService: UserService,
+        private schoolClassService: SchoolClassService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -33,6 +38,12 @@ export class TeachingSubjectUpdateComponent implements OnInit {
         this.userService.query().subscribe(
             (res: HttpResponse<IUser[]>) => {
                 this.users = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.schoolClassService.query().subscribe(
+            (res: HttpResponse<ISchoolClass[]>) => {
+                this.schoolclasses = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -69,6 +80,10 @@ export class TeachingSubjectUpdateComponent implements OnInit {
     }
 
     trackUserById(index: number, item: IUser) {
+        return item.id;
+    }
+
+    trackSchoolClassById(index: number, item: ISchoolClass) {
         return item.id;
     }
     get teachingSubject() {

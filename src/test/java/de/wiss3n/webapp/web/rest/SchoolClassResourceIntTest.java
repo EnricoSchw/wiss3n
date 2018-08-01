@@ -57,6 +57,9 @@ public class SchoolClassResourceIntTest {
     private static final LocalDate DEFAULT_END = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_END = LocalDate.now(ZoneId.systemDefault());
 
+    private static final Boolean DEFAULT_ACTIVE = false;
+    private static final Boolean UPDATED_ACTIVE = true;
+
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
@@ -93,7 +96,6 @@ public class SchoolClassResourceIntTest {
 
     private SchoolClass schoolClass;
 
-
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -115,6 +117,7 @@ public class SchoolClassResourceIntTest {
         SchoolClass schoolClass = new SchoolClass()
             .start(DEFAULT_START)
             .end(DEFAULT_END)
+            .active(DEFAULT_ACTIVE)
             .name(DEFAULT_NAME);
         // Add required entity
         User user = UserResourceIntTest.createEntity(em);
@@ -148,6 +151,7 @@ public class SchoolClassResourceIntTest {
         SchoolClass testSchoolClass = schoolClassList.get(schoolClassList.size() - 1);
         assertThat(testSchoolClass.getStart()).isEqualTo(DEFAULT_START);
         assertThat(testSchoolClass.getEnd()).isEqualTo(DEFAULT_END);
+        assertThat(testSchoolClass.isActive()).isEqualTo(DEFAULT_ACTIVE);
         assertThat(testSchoolClass.getName()).isEqualTo(DEFAULT_NAME);
 
         // Validate the SchoolClass in Elasticsearch
@@ -214,6 +218,24 @@ public class SchoolClassResourceIntTest {
 
     @Test
     @Transactional
+    public void checkActiveIsRequired() throws Exception {
+        int databaseSizeBeforeTest = schoolClassRepository.findAll().size();
+        // set the field null
+        schoolClass.setActive(null);
+
+        // Create the SchoolClass, which fails.
+
+        restSchoolClassMockMvc.perform(post("/api/school-classes")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(schoolClass)))
+            .andExpect(status().isBadRequest());
+
+        List<SchoolClass> schoolClassList = schoolClassRepository.findAll();
+        assertThat(schoolClassList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = schoolClassRepository.findAll().size();
         // set the field null
@@ -244,6 +266,7 @@ public class SchoolClassResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(schoolClass.getId().intValue())))
             .andExpect(jsonPath("$.[*].start").value(hasItem(DEFAULT_START.toString())))
             .andExpect(jsonPath("$.[*].end").value(hasItem(DEFAULT_END.toString())))
+            .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
     }
 
@@ -262,6 +285,7 @@ public class SchoolClassResourceIntTest {
             .andExpect(jsonPath("$.id").value(schoolClass.getId().intValue()))
             .andExpect(jsonPath("$.start").value(DEFAULT_START.toString()))
             .andExpect(jsonPath("$.end").value(DEFAULT_END.toString()))
+            .andExpect(jsonPath("$.active").value(DEFAULT_ACTIVE.booleanValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
     }
     @Test
@@ -291,6 +315,7 @@ public class SchoolClassResourceIntTest {
         updatedSchoolClass
             .start(UPDATED_START)
             .end(UPDATED_END)
+            .active(UPDATED_ACTIVE)
             .name(UPDATED_NAME);
 
         restSchoolClassMockMvc.perform(put("/api/school-classes")
@@ -304,6 +329,7 @@ public class SchoolClassResourceIntTest {
         SchoolClass testSchoolClass = schoolClassList.get(schoolClassList.size() - 1);
         assertThat(testSchoolClass.getStart()).isEqualTo(UPDATED_START);
         assertThat(testSchoolClass.getEnd()).isEqualTo(UPDATED_END);
+        assertThat(testSchoolClass.isActive()).isEqualTo(UPDATED_ACTIVE);
         assertThat(testSchoolClass.getName()).isEqualTo(UPDATED_NAME);
 
         // Validate the SchoolClass in Elasticsearch
@@ -369,6 +395,7 @@ public class SchoolClassResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(schoolClass.getId().intValue())))
             .andExpect(jsonPath("$.[*].start").value(hasItem(DEFAULT_START.toString())))
             .andExpect(jsonPath("$.[*].end").value(hasItem(DEFAULT_END.toString())))
+            .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
     }
 

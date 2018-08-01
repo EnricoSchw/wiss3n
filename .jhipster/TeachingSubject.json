@@ -36,6 +36,12 @@
             "otherEntityField": "login"
         },
         {
+            "relationshipType": "many-to-one",
+            "relationshipName": "schoolClass",
+            "otherEntityName": "schoolClass",
+            "otherEntityField": "name"
+        },
+        {
             "relationshipType": "one-to-many",
             "relationshipName": "teachingHours",
             "otherEntityName": "teachingHour",
