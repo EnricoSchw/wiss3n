@@ -4,26 +4,30 @@
         <jhi-school-class-list></jhi-school-class-list>
         <div>
             <h4>
-                <span class="title">Fächer</span>
+                <span class="title">Fächer
                 <button id="jh-view-teaching-subject"
-                        class="btn btn-outline-dark btn-sm rounded-circle  jh-create-entity create-school-class"
+                        class="btn btn-outline-dark btn-sm float-right rounded-circle  jh-create-entity create-school-class"
                         [routerLink]="['/teaching-subject/new']">
                     <fa-icon [icon]="'plus'"></fa-icon>
                 </button>
-                <button id="jh-view-entity" class="btn btn-outline-dark btn-sm rounded-circle  jh-create-entity create-school-class" [routerLink]="['/teaching-subject']" >
+                <button id="jh-view-entity"
+                        class="btn btn-outline-dark btn-sm float-right rounded-circle  jh-create-entity create-school-class"
+                        [routerLink]="['/teaching-subject']">
                     <fa-icon [icon]="'pencil-alt'"></fa-icon>
                 </button>
+                </span>
             </h4>
         </div>
 
         <div>
             <h4>
-                <span class="title">Aufgabe</span>
+                <span class="title">Aufgabe
                 <button id="jh-create-task"
-                        class="btn btn-outline-dark btn-sm rounded-circle  jh-create-entity create-school-class"
+                        class="btn btn-outline-dark btn-sm float-right rounded-circle jh-create-entity create-school-class"
                         [routerLink]="['/school-class/new']">
                     <fa-icon [icon]="'plus'"></fa-icon>
                 </button>
+                    </span>
             </h4>
         </div>
 

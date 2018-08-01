@@ -1,12 +1,17 @@
 <div>
     <h4 id="page-heading">
-        <span class="title">Klassen</span>
-        <button id="jh-create-entity" class="btn btn-outline-dark btn-sm rounded-circle  jh-create-entity create-school-class" [routerLink]="['/school-class/new']" >
+        <span class="title"> Klassen
+        <button id="jh-create-entity"
+                class="btn btn-outline-dark float-right btn-sm rounded-circle  jh-create-entity create-school-class"
+                [routerLink]="['/school-class/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
         </button>
-        <button id="jh-view-entity" class="btn btn-outline-dark btn-sm rounded-circle  jh-create-entity create-school-class" [routerLink]="['/school-class']" >
+        <button id="jh-view-entity"
+                class="btn btn-outline-dark float-right btn-sm rounded-circle  jh-create-entity create-school-class"
+                [routerLink]="['/school-class']">
             <fa-icon [icon]="'pencil-alt'"></fa-icon>
         </button>
+        </span>
     </h4>
     <br/>
     <div class="table-responsive" *ngIf="schoolClasses">
@@ -14,25 +19,25 @@
             <li>
                 <a href="#" class="active">{{schoolClass.name}}</a>
                 <!--<div class="text-right">-->
-                    <!--<div class="btn-group flex-btn-group-container">-->
-                        <!--<button type="submit"-->
-                                <!--[routerLink]="['/school-class', schoolClass.id, 'view' ]"-->
-                                <!--class="btn btn-info btn-sm">-->
-                            <!--<fa-icon [icon]="'eye'"></fa-icon>-->
-                        <!--</button>-->
-                        <!--<button type="submit"-->
-                                <!--[routerLink]="['/school-class', schoolClass.id, 'edit']"-->
-                                <!--class="btn btn-primary btn-sm">-->
-                            <!--<fa-icon [icon]="'pencil-alt'"></fa-icon>-->
-                        <!--</button>-->
-                        <!--<button type="submit"-->
-                                <!--[routerLink]="['/', { outlets: { popup: 'school-class/'+ schoolClass.id + '/delete'} }]"-->
-                                <!--replaceUrl="true"-->
-                                <!--queryParamsHandling="merge"-->
-                                <!--class="btn btn-danger btn-sm">-->
-                            <!--<fa-icon [icon]="'times'"></fa-icon>-->
-                        <!--</button>-->
-                    <!--</div>-->
+                <!--<div class="btn-group flex-btn-group-container">-->
+                <!--<button type="submit"-->
+                <!--[routerLink]="['/school-class', schoolClass.id, 'view' ]"-->
+                <!--class="btn btn-info btn-sm">-->
+                <!--<fa-icon [icon]="'eye'"></fa-icon>-->
+                <!--</button>-->
+                <!--<button type="submit"-->
+                <!--[routerLink]="['/school-class', schoolClass.id, 'edit']"-->
+                <!--class="btn btn-primary btn-sm">-->
+                <!--<fa-icon [icon]="'pencil-alt'"></fa-icon>-->
+                <!--</button>-->
+                <!--<button type="submit"-->
+                <!--[routerLink]="['/', { outlets: { popup: 'school-class/'+ schoolClass.id + '/delete'} }]"-->
+                <!--replaceUrl="true"-->
+                <!--queryParamsHandling="merge"-->
+                <!--class="btn btn-danger btn-sm">-->
+                <!--<fa-icon [icon]="'times'"></fa-icon>-->
+                <!--</button>-->
+                <!--</div>-->
                 <!--</div>-->
             </li>
         </ul>
