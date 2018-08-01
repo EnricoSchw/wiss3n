@@ -11,6 +11,7 @@ entity Task {
 entity SchoolClass {
     start LocalDate required
     end LocalDate required
+    active Boolean required
     name String required minlength(2)
 }
 
@@ -73,6 +74,9 @@ relationship OneToMany {
     SchoolClass{teachingHours(name)} to TeachingHour{schoolClass(name)}
 }
 
+relationship OneToMany {
+	SchoolClass{schoolClass(name)}  to TeachingSubject{schoolClass(name)}
+}
 
 // Set pagination options
 paginate * with pagination
