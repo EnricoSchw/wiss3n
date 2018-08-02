@@ -1,6 +1,7 @@
 package de.wiss3n.webapp.service;
 
 import de.wiss3n.webapp.domain.SchoolClass;
+import de.wiss3n.webapp.domain.TeachingHour;
 import de.wiss3n.webapp.domain.User;
 import de.wiss3n.webapp.repository.SchoolClassRepository;
 import de.wiss3n.webapp.repository.UserRepository;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -32,15 +34,19 @@ public class SchoolClassService {
 
     private final SchoolClassSearchRepository schoolClassSearchRepository;
 
+    private final TeachingHourService teachingHourService;
+
     private final UserRepository userRepository;
 
     public SchoolClassService(
         SchoolClassRepository schoolClassRepository,
         SchoolClassSearchRepository schoolClassSearchRepository,
+        TeachingHourService teachingHourService,
         UserRepository userRepository
     ) {
         this.schoolClassRepository = schoolClassRepository;
         this.schoolClassSearchRepository = schoolClassSearchRepository;
+        this.teachingHourService = teachingHourService;
         this.userRepository = userRepository;
     }
 
@@ -63,8 +69,14 @@ public class SchoolClassService {
                 schoolClassSearchRepository.save(result);
                 return result;
             })
+            .map((SchoolClass result) -> {
+                List<TeachingHour> teachingHours = this.teachingHourService.createTeachingHour(result);
+                return result;
+            })
             .orElseThrow(IllegalArgumentException::new);
     }
+
+
 
     /**
      * Get all the schoolClasses.
@@ -96,10 +108,19 @@ public class SchoolClassService {
      *
      * @param id the id of the entity
      */
+    @Transactional
     public void delete(Long id) {
         log.debug("Request to delete SchoolClass : {}", id);
-        schoolClassRepository.deleteById(id);
-        schoolClassSearchRepository.deleteById(id);
+        Optional<SchoolClass> schoolClassOpt = schoolClassRepository.findByIdAndByUserIsCurrentUser(id);
+        if (schoolClassOpt.isPresent()) {
+            for (TeachingHour teachingHour : schoolClassOpt.get().getTeachingHours()) {
+                this.teachingHourService.delete(teachingHour.getId());
+            }
+            schoolClassRepository.deleteById(id);
+            schoolClassSearchRepository.deleteById(id);
+        } else {
+            log.debug("Request to delete SchoolClass : {} Not Found School Class", id);
+        }
     }
 
     /**
