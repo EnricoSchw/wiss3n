@@ -18,7 +18,7 @@ const setSubjectHourTime = (timeString: string): Date => {
 
 const createSubjectEventList = (subjectHourList: SubjectHourData[]): SubjectEvent[] => {
     const eventList: SubjectEvent[] = [];
-    subjectHourList.forEach((subjcet) => {
+    subjectHourList.forEach(subjcet => {
         eventList.push(<SubjectEvent>{
             title: subjcet.title,
             prefix: subjcet.prefix,

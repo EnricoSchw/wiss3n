@@ -78,7 +78,7 @@ export class CalendarComponent implements OnInit {
         const calendarEvents: SubjectEvent[] = [];
         let nextEvents = orgEvents;
 
-        subjectHours.forEach((subjectHour) => {
+        subjectHours.forEach(subjectHour => {
             const rule: RRule = new RRule(subjectHour.rrule);
             let eventListOfSubject: CalendarEvent<TaskEventMeta>[] = [];
             nextEvents = nextEvents.reduce((eventList: CalendarEvent<TaskEventMeta>[], current) => {
@@ -90,7 +90,7 @@ export class CalendarComponent implements OnInit {
                 return eventList;
             }, []);
 
-            rule.all().forEach((date) => {
+            rule.all().forEach(date => {
                 const start = new Date(date);
                 start.setHours(subjectHour.start.getHours());
                 start.setMinutes(subjectHour.start.getMinutes());

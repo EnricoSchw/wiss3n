@@ -60,7 +60,6 @@ export class Task implements ITask {
     ) {}
 }
 
-
 // setting for TaskType TaskTypeSet
 // ------------------------------------------------------------
 

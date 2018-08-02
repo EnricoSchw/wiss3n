@@ -6,7 +6,7 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { ISchoolClass } from 'app/shared/model/school-class.model';
 import { SchoolClassService } from './school-class.service';
-import { IUser, UserService } from 'app/core';
+import { IUser, Principal, UserService } from 'app/core';
 
 @Component({
     selector: 'jhi-school-class-update',
@@ -16,14 +16,14 @@ export class SchoolClassUpdateComponent implements OnInit {
     private _schoolClass: ISchoolClass;
     isSaving: boolean;
 
-    users: IUser[];
+    user: IUser;
     startDp: any;
     endDp: any;
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private schoolClassService: SchoolClassService,
-        private userService: UserService,
+        private principal: Principal,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -32,12 +32,10 @@ export class SchoolClassUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ schoolClass }) => {
             this.schoolClass = schoolClass;
         });
-        this.userService.query().subscribe(
-            (res: HttpResponse<IUser[]>) => {
-                this.users = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.principal.identity().then(account => {
+            this.user = account;
+        });
+
     }
 
     previousState() {
@@ -46,6 +44,7 @@ export class SchoolClassUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.schoolClass.user = this.user;
         if (this.schoolClass.id !== undefined) {
             this.subscribeToSaveResponse(this.schoolClassService.update(this.schoolClass));
         } else {

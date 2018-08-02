@@ -6,7 +6,6 @@ import { HOME_ROUTE, HomeComponent } from './';
 import { InfoComponent } from 'app/home/info/info.component';
 import { Wiss3NCalendarModule } from 'app/calendar/calendar.module';
 
-
 @NgModule({
     imports: [Wiss3NSharedModule, Wiss3NCalendarModule, RouterModule.forChild([HOME_ROUTE])],
     declarations: [HomeComponent, InfoComponent],

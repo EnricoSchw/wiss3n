@@ -54,15 +54,13 @@ export class SchoolClassListComponent implements OnInit, OnDestroy {
                 : '';
     }
 
-
     loadAll() {
         if (this.currentSearch) {
             this.schoolClassService
                 .search({
                     page: this.page - 1,
                     query: this.currentSearch,
-                    size: this.itemsPerPage,
-                    //sort: this.sort()
+                    size: this.itemsPerPage
                 })
                 .subscribe(
                     (res: HttpResponse<ISchoolClass[]>) => this.paginateSchoolClasses(res.body, res.headers),
@@ -73,8 +71,7 @@ export class SchoolClassListComponent implements OnInit, OnDestroy {
         this.schoolClassService
             .query({
                 page: this.page - 1,
-                size: this.itemsPerPage,
-                //sort: this.sort()
+                size: this.itemsPerPage
             })
             .subscribe(
                 (res: HttpResponse<ISchoolClass[]>) => this.paginateSchoolClasses(res.body, res.headers),

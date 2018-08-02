@@ -29,25 +29,21 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">Nr</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="start"><span jhiTranslate="wiss3NApp.schoolClass.start">Start</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="end"><span jhiTranslate="wiss3NApp.schoolClass.end">End</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="active"><span jhiTranslate="wiss3NApp.schoolClass.active">Active</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="name"><span jhiTranslate="wiss3NApp.schoolClass.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="user.login"><span jhiTranslate="wiss3NApp.schoolClass.user">User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let schoolClass of schoolClasses ;trackBy: trackId">
-                <td><a [routerLink]="['/school-class', schoolClass.id, 'view' ]">{{schoolClass.id}}</a></td>
+            <tr *ngFor="let schoolClass of schoolClasses ;trackBy: trackId; let i = index">
+                <td><a [routerLink]="['/school-class', schoolClass.id, 'view' ]">{{i + 1}}</a></td>
                 <td>{{schoolClass.start | date:'mediumDate'}}</td>
                 <td>{{schoolClass.end | date:'mediumDate'}}</td>
                 <td>{{schoolClass.active}}</td>
                 <td>{{schoolClass.name}}</td>
-                <td>
-                    {{schoolClass.user?.login}}
-                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
