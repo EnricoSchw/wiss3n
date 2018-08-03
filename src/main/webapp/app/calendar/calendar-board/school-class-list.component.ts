@@ -42,48 +42,48 @@ export class SchoolClassListComponent implements OnInit, OnDestroy {
         private eventManager: JhiEventManager
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
-        this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = 1;
-            this.previousPage = data.pagingParams.page;
-            this.reverse = data.pagingParams.ascending;
-            this.predicate = data.pagingParams.predicate;
-        });
-        this.currentSearch =
-            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
-                ? this.activatedRoute.snapshot.params['search']
-                : '';
+        // this.routeData = this.activatedRoute.data.subscribe(data => {
+        //     this.page = 1;
+        //     this.previousPage = data.pagingParams.page;
+        //     this.reverse = data.pagingParams.ascending;
+        //     this.predicate = data.pagingParams.predicate;
+        // });
+        // this.currentSearch =
+        //     this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
+        //         ? this.activatedRoute.snapshot.params['search']
+        //         : '';
     }
 
     loadAll() {
-        if (this.currentSearch) {
             this.schoolClassService
-                .search({
-                    page: this.page - 1,
-                    query: this.currentSearch,
+                .searchActive({
+                    page: 0,
                     size: this.itemsPerPage
+                    //sort: this.sort()
                 })
                 .subscribe(
-                    (res: HttpResponse<ISchoolClass[]>) => this.paginateSchoolClasses(res.body, res.headers),
+                    (res: HttpResponse<ISchoolClass[]>) => this.schoolClasses = res.body,
                     (res: HttpErrorResponse) => this.onError(res.message)
                 );
-            return;
-        }
+
         this.schoolClassService
-            .query({
-                page: this.page - 1,
+            .searchForTeachingHours(7   , {
+                page: 0,
                 size: this.itemsPerPage
+                //sort: this.sort()
             })
             .subscribe(
-                (res: HttpResponse<ISchoolClass[]>) => this.paginateSchoolClasses(res.body, res.headers),
+                (res: HttpResponse<ISchoolClass[]>) => {
+                    console.log(res.body);
+                },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
+
+            return;
     }
 
     loadPage(page: number) {
-        if (page !== this.previousPage) {
-            this.previousPage = page;
-            this.transition();
-        }
+        this.loadAll();
     }
 
     transition() {
@@ -98,35 +98,6 @@ export class SchoolClassListComponent implements OnInit, OnDestroy {
         this.loadAll();
     }
 
-    clear() {
-        this.page = 0;
-        this.currentSearch = '';
-        this.router.navigate([
-            '/school-class',
-            {
-                page: this.page,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        ]);
-        this.loadAll();
-    }
-
-    search(query) {
-        if (!query) {
-            return this.clear();
-        }
-        this.page = 0;
-        this.currentSearch = query;
-        this.router.navigate([
-            '/school-class',
-            {
-                search: this.currentSearch,
-                page: this.page,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        ]);
-        this.loadAll();
-    }
 
     ngOnInit() {
         this.loadAll();
@@ -156,12 +127,7 @@ export class SchoolClassListComponent implements OnInit, OnDestroy {
         return result;
     }
 
-    private paginateSchoolClasses(data: ISchoolClass[], headers: HttpHeaders) {
-        this.links = this.parseLinks.parse(headers.get('link'));
-        this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
-        this.queryCount = this.totalItems;
-        this.schoolClasses = data;
-    }
+
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);

@@ -14,7 +14,7 @@
         </span>
     </h4>
     <br/>
-    <div class="table-responsive" *ngIf="schoolClasses">
+    <div class="table-responsive" *ngIf="schoolClasses.length > 0; else create_school_class">
         <ul *ngFor="let schoolClass of schoolClasses ;trackBy: trackId">
             <li>
                 <a href="#" class="active">{{schoolClass.name}}</a>
@@ -42,4 +42,8 @@
             </li>
         </ul>
     </div>
+
+    <ng-template #create_school_class>
+        <span>Lege eine Klasse an</span>
+    </ng-template>
 </div>

@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,18 +66,13 @@ public class SchoolClassService {
                 return schoolClass;
             })
             .map(schoolClassRepository::save)
+            .map(teachingHourService::createTeachingHour)
             .map((SchoolClass result) -> {
                 schoolClassSearchRepository.save(result);
                 return result;
             })
-            .map((SchoolClass result) -> {
-                List<TeachingHour> teachingHours = this.teachingHourService.createTeachingHour(result);
-                return result;
-            })
             .orElseThrow(IllegalArgumentException::new);
     }
-
-
 
     /**
      * Get all the schoolClasses.
@@ -90,6 +86,20 @@ public class SchoolClassService {
         return schoolClassRepository.findByUserIsCurrentUser(pageable);
     }
 
+    /**
+     * Get all active school classes
+     *
+     * @param pageable
+     * @return
+     */
+    public Page<SchoolClass> findActive( Pageable pageable) {
+        log.debug("Request to search for active SchoolClasses for user {}");
+        return SecurityUtils.getCurrentUserLogin()
+            .flatMap(userRepository::findOneByLogin)
+            .map(User::getLogin)
+            .map((String login) -> schoolClassSearchRepository.findActive(login, pageable))
+            .orElse(null);
+    }
 
     /**
      * Get one schoolClass by id.

@@ -148,6 +148,21 @@ public class SchoolClassResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    /**
+     * SEARCH  /_search/school-classes/active : search for active schoolClass corresponding
+     * to the current user.
+     *
+     * @param pageable the pagination information
+     * @return the result of the search
+     */
+    @GetMapping("/_search/school-classes/active")
+    @Timed
+    public ResponseEntity<List<SchoolClass>> searchActiveSchoolClasses(Pageable pageable) {
+        log.debug("REST request to search for a page of SchoolClasses for active");
+        Page<SchoolClass> page = schoolClassService.findActive(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders( page, "/api/_search/school-classes/active");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
     private void hasAccess(SchoolClass schoolClass) {
         if (!schoolClass.getUser().getLogin().equals(SecurityUtils.getCurrentUserLogin().orElse(null))) {

@@ -132,7 +132,7 @@ public class TeachingHourResource {
      * SEARCH  /_search/teaching-hours?query=:query : search for the teachingHour corresponding
      * to the query.
      *
-     * @param query the query of the teachingHour search
+     * @param query    the query of the teachingHour search
      * @param pageable the pagination information
      * @return the result of the search
      */
@@ -142,6 +142,23 @@ public class TeachingHourResource {
         log.debug("REST request to search for a page of TeachingHours for query {}", query);
         Page<TeachingHour> page = teachingHourService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/teaching-hours");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * SEARCH  /_search/schoolClasses/{schoolClassId}/teaching-hours: search for the teachingHour corresponding
+     * to the user and school class.
+     *
+     * @param schoolClassId the query of the teachingHour search
+     * @param pageable      the pagination information
+     * @return the result of the search
+     */
+    @GetMapping("/_search/school-classes/{schoolClassId}/teaching-hours")
+    @Timed
+    public ResponseEntity<List<TeachingHour>> searchTeachingHoursBySchoolClass(@PathVariable Long schoolClassId, Pageable pageable) {
+        log.debug("REST request to search for a page of TeachingHours for schoolClass Id {}", schoolClassId);
+        Page<TeachingHour> page = teachingHourService.searchBySchoolClass(schoolClassId, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/_search/schoolClasses/" + schoolClassId + "/teaching-hours");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

@@ -2,8 +2,10 @@ package de.wiss3n.webapp.service;
 
 import de.wiss3n.webapp.domain.SchoolClass;
 import de.wiss3n.webapp.domain.TeachingHour;
+import de.wiss3n.webapp.domain.User;
 import de.wiss3n.webapp.repository.TeachingHourRepository;
 import de.wiss3n.webapp.repository.search.TeachingHourSearchRepository;
+import de.wiss3n.webapp.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -99,8 +102,18 @@ public class TeachingHourService {
         log.debug("Request to search for a page of TeachingHours for query {}", query);
         return teachingHourSearchRepository.search(queryStringQuery(query), pageable);    }
 
+
+    @Transactional(readOnly = true)
+    public Page<TeachingHour> searchBySchoolClass(Long schoolClassId, Pageable pageable) {
+        log.debug("Request to search for a page of TeachingHours for schoolClass id {}", schoolClassId);
+        return SecurityUtils.getCurrentUserLogin()
+            .map((String login) -> teachingHourSearchRepository.findAllBySchoolClass(schoolClassId, login, pageable))
+            .orElse(null);
+        }
+
+
     @Transactional()
-    public List<TeachingHour> createTeachingHour(SchoolClass schoolClass) {
+    public SchoolClass createTeachingHour(SchoolClass schoolClass) {
         List list = new ArrayList<String>();
         String[] weekdays = { "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"};
 
@@ -110,13 +123,14 @@ public class TeachingHourService {
                 teachingHour.setName(weekdays[weekday - 1] + ", " + hour + ". Stunde");
                 teachingHour.setHour(hour);
                 teachingHour.setWeekday(weekday);
-                teachingHour.setSchoolClass(schoolClass);
+                schoolClass.addTeachingHours(teachingHour);
+                //teachingHour.setSchoolClass(schoolClass);
                 TeachingHour result = this.save(teachingHour);
-                list.add(result);
+                //list.add(result);
             }
         }
 
-        return list;
+        return schoolClass;
     }
 
 }

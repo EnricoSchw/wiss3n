@@ -51,6 +51,7 @@ public class TeachingHour implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("teachingHours")
+    @JsonIgnore
     private SchoolClass schoolClass;
 
     @OneToMany(mappedBy = "teachingHour")
