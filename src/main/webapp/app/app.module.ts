@@ -19,6 +19,12 @@ import { Wiss3NEntityModule } from './entities/entity.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 import { Wiss3NCalendarModule } from 'app/calendar/calendar.module';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './app.effects';
+import { APP_ENVIRONMENT } from 'app/app.constants';
 
 @NgModule({
     imports: [
@@ -31,6 +37,9 @@ import { Wiss3NCalendarModule } from 'app/calendar/calendar.module';
         Wiss3NHomeModule,
         Wiss3NAccountModule,
         Wiss3NEntityModule,
+        StoreModule.forRoot(reducers, { metaReducers }),
+        APP_ENVIRONMENT !== 'production' ? StoreDevtoolsModule.instrument() : [],
+        EffectsModule.forRoot([AppEffects]),
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
