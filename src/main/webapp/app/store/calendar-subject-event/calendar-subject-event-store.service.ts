@@ -1,0 +1,37 @@
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { State } from 'app/store/calendar-subject-event/calendar-subject-event.reducer';
+import { ISchoolClass } from 'app/shared/model/school-class.model';
+import { CalendarSubjectEventEntityService } from 'app/store/calendar-subject-event/calendar-subject-event-entity.service';
+import { forEach } from '@angular/router/src/utils/collection';
+import { SubjectEvent } from 'app/shared/model/event.model';
+import { CalendarSubjectEvent } from 'app/store/calendar-subject-event/calendar-subject-event.model';
+import {
+    CalendarSubjectEventActionTypes, LoadCalendarSubjectEvents
+} from 'app/store/calendar-subject-event/calendar-subject-event.actions';
+
+@Injectable({
+    providedIn: 'root'
+})
+export class CalendarSubjectEventStoreService {
+
+    constructor(
+        private store: Store<State>,
+        private entityService: CalendarSubjectEventEntityService) {
+    }
+
+    public loadAll(schoolClassList: ISchoolClass[]) {
+        const calendarSubjectEvents: CalendarSubjectEvent[] = [];
+
+        schoolClassList.forEach(schoolClass => {
+            const subjectEvents: SubjectEvent[] = this.entityService.createSubjectEventsForSchoolClass(schoolClass);
+            calendarSubjectEvents.push({
+                id: schoolClass.id,
+                start: schoolClass.start,
+                end: schoolClass.end,
+                subjectEvents: subjectEvents
+            });
+        });
+        this.store.dispatch(new LoadCalendarSubjectEvents({calendarSubjectEvents}));
+    }
+}

@@ -1,4 +1,5 @@
 import { EventColor } from 'calendar-utils';
+import * as RRule from 'rrule';
 
 export interface SubjectHourData {
     id: number;
@@ -101,4 +102,19 @@ export const getSubjectHourByNumber = (day: number): SubjectHour => {
             return tenthHour;
 
     }
-}
+};
+
+export const getWeekdayByNumber = (day: number): RRule.Weekday => {
+    switch (day) {
+        case 1:
+            return RRule.MO;
+        case 2:
+            return RRule.TU;
+        case 3:
+            return RRule.WE;
+        case 4:
+            return RRule.TH;
+        case 5:
+            return RRule.FR;
+    }
+};

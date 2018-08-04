@@ -6,14 +6,21 @@ import { APP_ENVIRONMENT } from '../app.constants';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
+import { CalendarSubjectEventEntityService } from 'app/store/calendar-subject-event/calendar-subject-event-entity.service';
+import { CalendarSubjectEventStoreService } from 'app/store/calendar-subject-event/calendar-subject-event-store.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
-      StoreModule.forRoot(reducers, { metaReducers }),
-      APP_ENVIRONMENT !== 'production' ? StoreDevtoolsModule.instrument() : [],
-      EffectsModule.forRoot([AppEffects]),
-  ],
-  declarations: []
+    imports: [
+        CommonModule,
+        StoreModule.forRoot(reducers, {metaReducers}),
+        APP_ENVIRONMENT !== 'production' ? StoreDevtoolsModule.instrument() : [],
+        EffectsModule.forRoot([AppEffects])
+    ],
+    providers: [
+        CalendarSubjectEventEntityService,
+        CalendarSubjectEventStoreService
+    ],
+    declarations: []
 })
-export class Wiss3NStoreModule { }
+export class Wiss3NStoreModule {
+}
