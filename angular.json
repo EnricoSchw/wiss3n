@@ -12,7 +12,8 @@
   },
   "defaultProject": "wiss-3-n",
   "cli": {
-    "packageManager": "yarn"
+    "packageManager": "yarn",
+    "defaultCollection": "@ngrx/schematics"
   },
   "schematics": {
     "@schematics/angular:component": {
