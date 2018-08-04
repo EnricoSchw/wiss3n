@@ -80,7 +80,6 @@ export const {
     selectTotal
 } = adapter.getSelectors();
 
-
 // Selectors: CalendarSubjectEvent
 export const selectCalendarSubjectEventState = createFeatureSelector<State>('calendarSubjectEvent');
 

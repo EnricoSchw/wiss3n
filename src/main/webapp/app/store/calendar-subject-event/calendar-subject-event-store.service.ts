@@ -33,13 +33,13 @@ export class CalendarSubjectEventStoreService {
                 id: schoolClass.id,
                 start: schoolClass.start,
                 end: schoolClass.end,
-                subjectEvents: subjectEvents
+                subjectEvents
             });
         });
         this.store.dispatch(new LoadCalendarSubjectEvents({calendarSubjectEvents}));
     }
 
-    public getActiveSubjectEvents():Observable<SubjectEvent[]>{
+    public getActiveSubjectEvents(): Observable<SubjectEvent[]> {
         return this.store.pipe(select(selectActiveCalendarSubjectEvent))
             .filter(s => s !== null && s !== undefined)
             .map(events => events.subjectEvents);

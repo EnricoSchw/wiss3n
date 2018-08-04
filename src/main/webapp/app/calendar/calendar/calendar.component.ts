@@ -34,10 +34,8 @@ export class CalendarComponent implements OnInit {
     excludeDays: number[] = [0, 6];
     monthEvents: CalendarEvent<TaskEventMeta>[];
     weekEvents$: Observable<SubjectEvent[]>;
-    events$: Observable<CalendarEvent<TaskEventMeta>>;
 
     private activeEvent: SubjectEvent;
-
 
     constructor(private service: CalendarService) {
     }
@@ -45,9 +43,9 @@ export class CalendarComponent implements OnInit {
     public ngOnInit(): void {
         const events = this.service.loadTasks();
         this.weekEvents$ = this.service
-            .loadSubjects()
+            .loadSubjectEvents()
             .map(subjects => {
-                return this.mapSubjectsToWeekEvents(subjects, events)
+                return this.mapSubjectsToWeekEvents(subjects, events);
             });
 
         this.monthEvents = events;
