@@ -11,6 +11,7 @@ import { Injectable } from '@angular/core';
 import { SubjectEvent } from 'app/shared/model/event.model';
 import * as moment from 'moment';
 import { ISchoolClass } from 'app/shared/model/school-class.model';
+import { Moment } from 'moment';
 
 
 const subjectColor = <EventColor>{
@@ -22,11 +23,13 @@ const subjectColor = <EventColor>{
 export class CalendarSubjectEventEntityService {
 
     public createSubjectEventsForSchoolClass(schoolClass: ISchoolClass): SubjectEvent[] {
-        const hours: SubjectHourData[] = this.mapTeachingHoursToSubjectHourData(schoolClass.teachingHours);
+        const hours: SubjectHourData[] = this.mapTeachingHoursToSubjectHourData(
+            schoolClass.teachingHours, schoolClass.start.toDate(), schoolClass.end.toDate()
+        );
         return this.createSubjectEventListFromSubjectHours(hours);
     }
 
-    private mapTeachingHoursToSubjectHourData( teachingHours: ITeachingHour[] ): SubjectHourData[] {
+    private mapTeachingHoursToSubjectHourData( teachingHours: ITeachingHour[], start: Date, end: Date ): SubjectHourData[] {
         const subjectHourData: SubjectHourData[] = [];
         teachingHours.forEach(teachingHour => {
             subjectHourData.push(
@@ -37,8 +40,8 @@ export class CalendarSubjectEventEntityService {
                     hour: getSubjectHourByNumber(teachingHour.weekday),
                     day: getWeekdayByNumber(teachingHour.weekday),
                     color: subjectColor,
-                    start: new Date('2018-04-01'),
-                    end: new Date('2018-06-01')
+                    start: start,
+                    end: end
                 }
             );
         });

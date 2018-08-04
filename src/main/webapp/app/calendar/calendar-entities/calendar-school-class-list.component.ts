@@ -30,8 +30,6 @@ export class CalendarSchoolClassListComponent implements OnInit, OnDestroy {
     predicate: any;
     reverse: any;
 
-    @Output() changeActiveSchoolClass = new EventEmitter<ISchoolClass>();
-
     constructor(
         private schoolClassService: SchoolClassService,
         private storeService: CalendarSubjectEventStoreService,
@@ -54,8 +52,8 @@ export class CalendarSchoolClassListComponent implements OnInit, OnDestroy {
                 .subscribe(
                     (res: HttpResponse<ISchoolClass[]>) => {
                         this.schoolClasses = res.body;
-                        console.log('##################################', 'emit');
                         this.storeService.loadAll(this.schoolClasses);
+                        this.storeService.activateBySchoolClassId(this.schoolClasses[0].id)
 
                     },(res: HttpErrorResponse) => this.onError(res.message)
 

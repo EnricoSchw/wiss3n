@@ -12,8 +12,7 @@ import { CalendarDateFormatter } from 'angular-calendar';
 import { CustomDateFormatterService } from '../providers/custom-date-formatter.service';
 import { Task, TaskType } from 'app/shared/model/task.model';
 import { SubjectEvent, TaskEventMeta } from 'app/shared/model/event.model';
-import { HttpErrorResponse } from '@angular/common/http';
-import { ISchoolClass } from 'app/shared/model/school-class.model';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'jhi-calendar',
@@ -30,40 +29,28 @@ import { ISchoolClass } from 'app/shared/model/school-class.model';
 })
 export class CalendarComponent implements OnInit {
     view = 'month';
-    viewDate: Date = new Date('2018-04-22');
+    viewDate: Date = new Date('2018-07-16');
     // exclude weekends
     excludeDays: number[] = [0, 6];
     monthEvents: CalendarEvent<TaskEventMeta>[];
-    weekEvents: SubjectEvent[];
+    weekEvents$: Observable<SubjectEvent[]>;
+    events$: Observable<CalendarEvent<TaskEventMeta>>;
 
     private activeEvent: SubjectEvent;
-    private _schoolClass: ISchoolClass;
 
-    @Input()
-    set schoolClass(schoolClass: ISchoolClass) {
-        if (schoolClass) {
-            const events = this.service.loadTasks();
-            this._schoolClass = schoolClass;
-
-            console.log('###############################', schoolClass);
-            const subjects = this.service.loadSubjectEvents(schoolClass.teachingHours);
-
-            this.monthEvents = events;
-            this.weekEvents = this.mapSubjectsToWeekEvents(subjects, events);
-        }
-    }
-
-    get schoolClass(): ISchoolClass { return this._schoolClass; }
 
     constructor(private service: CalendarService) {
     }
 
     public ngOnInit(): void {
-        // const events = this.service.loadTasks();
-        // const subjects = this.service.loadSubjects();
-        //
-        // this.monthEvents = events;
-        // this.weekEvents = this.mapSubjectsToWeekEvents(subjects, events);
+        const events = this.service.loadTasks();
+        this.weekEvents$ = this.service
+            .loadSubjects()
+            .map(subjects => {
+                return this.mapSubjectsToWeekEvents(subjects, events)
+            });
+
+        this.monthEvents = events;
     }
 
     public beforeDayViewRender({period}: { period: ViewPeriod }): void {

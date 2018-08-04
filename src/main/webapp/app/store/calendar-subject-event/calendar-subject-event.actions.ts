@@ -12,6 +12,7 @@ export enum CalendarSubjectEventActionTypes {
   UpdateCalendarSubjectEvents = '[CalendarSubjectEvent] Update CalendarSubjectEvents',
   DeleteCalendarSubjectEvent = '[CalendarSubjectEvent] Delete CalendarSubjectEvent',
   DeleteCalendarSubjectEvents = '[CalendarSubjectEvent] Delete CalendarSubjectEvents',
+  ActivateCalendarSubjectEvent = '[CalendarSubjectEvent] Activate CalendarSubjectEvent',
   ClearCalendarSubjectEvents = '[CalendarSubjectEvent] Clear CalendarSubjectEvents'
 }
 
@@ -60,13 +61,19 @@ export class UpdateCalendarSubjectEvents implements Action {
 export class DeleteCalendarSubjectEvent implements Action {
   readonly type = CalendarSubjectEventActionTypes.DeleteCalendarSubjectEvent;
 
-  constructor(public payload: { id: string }) {}
+  constructor(public payload: { id: number }) {}
 }
 
 export class DeleteCalendarSubjectEvents implements Action {
   readonly type = CalendarSubjectEventActionTypes.DeleteCalendarSubjectEvents;
 
-  constructor(public payload: { ids: string[] }) {}
+  constructor(public payload: { ids: number[] }) {}
+}
+
+export class ActivateCalendarSubjectEvent implements Action {
+    readonly type = CalendarSubjectEventActionTypes.ActivateCalendarSubjectEvent;
+
+    constructor(public payload: { id: number }) {}
 }
 
 export class ClearCalendarSubjectEvents implements Action {
@@ -83,4 +90,5 @@ export type CalendarSubjectEventActions =
  | UpdateCalendarSubjectEvents
  | DeleteCalendarSubjectEvent
  | DeleteCalendarSubjectEvents
+ | ActivateCalendarSubjectEvent
  | ClearCalendarSubjectEvents;

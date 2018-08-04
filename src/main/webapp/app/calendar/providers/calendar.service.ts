@@ -3,45 +3,25 @@ import { TaskEventMeta, SubjectEvent } from 'app/shared/model/event.model';
 import { CalendarEvent } from 'angular-calendar';
 import { subjectFixtures } from '../fixtures/subjects';
 import { events } from '../fixtures/event';
-import { SchoolClassService } from 'app/entities/school-class/school-class.service';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { ISchoolClass } from 'app/shared/model/school-class.model';
-import { ITeachingHour } from 'app/shared/model/teaching-hour.model';
-import { JhiAlertService } from 'ng-jhipster';
-import { EntityMapperService } from 'app/calendar/providers/entity-mapper.service';
 import { Observable } from 'rxjs/Observable';
+import { CalendarSubjectEventStoreService } from 'app/store/calendar-subject-event/calendar-subject-event-store.service';
 
 @Injectable()
 export class CalendarService {
     constructor(
-        private schoolClassService: SchoolClassService,
-        private entityMapperService: EntityMapperService,
-        private jhiAlertService: JhiAlertService) {
+        private storeService: CalendarSubjectEventStoreService) {
     }
 
-    public loadTeachingHours(schoolClassId: number): Observable<SubjectEvent[]> {
-        return this.schoolClassService.searchForTeachingHours(schoolClassId, {
-                page: 0,
-                size: 50
-            }
-        ).map((res: HttpResponse<ITeachingHour[]>) => this.entityMapperService.mapTeachingHoursToSubjectHourData(res.body)
-        ).map((data) => this.entityMapperService.createSubjectEventList(data));
-    }
-
-    loadSubjectEvents(teachingHours: ITeachingHour[]): SubjectEvent[] {
-        const data = this.entityMapperService.mapTeachingHoursToSubjectHourData(teachingHours);
-        return this.entityMapperService.createSubjectEventList(data);
+    loadSubjectEvents(): Observable<SubjectEvent[]> {
+        return this.storeService.getActiveSubjectEvents();
     }
 
     public loadTasks(): CalendarEvent<TaskEventMeta>[] {
         return events;
     }
 
-    public loadSubjects(): SubjectEvent[] {
-        return subjectFixtures();
+    public loadSubjects(): Observable<SubjectEvent[]> {
+        return Observable.of(subjectFixtures());
     }
 
-    private onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
-    }
 }

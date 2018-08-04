@@ -9,7 +9,6 @@ import { SubjectHourEventViewComponent } from './calendar/subject-hour-event-vie
 import { RouterModule } from '@angular/router';
 import { CalendarSchoolClassListComponent } from './calendar-entities/calendar-school-class-list.component';
 import { Wiss3NSharedModule } from 'app/shared';
-import { EntityMapperService } from 'app/calendar/providers/entity-mapper.service';
 
 @NgModule({
     imports: [
@@ -19,7 +18,7 @@ import { EntityMapperService } from 'app/calendar/providers/entity-mapper.servic
         Wiss3NSharedModule
     ],
     declarations: [CalendarComponent, CalendarSchoolClassListComponent, CalendarBoardComponent, SubjectHourViewComponent, SubjectHourEventViewComponent],
-    providers: [CalendarService, EntityMapperService],
+    providers: [CalendarService],
     exports: [CalendarBoardComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { State } from 'app/store/calendar-subject-event/calendar-subject-event.reducer';
+import { select, Store } from '@ngrx/store';
+import {
+    selectActiveCalendarSubjectEvent, State
+} from 'app/store/calendar-subject-event/calendar-subject-event.reducer';
 import { ISchoolClass } from 'app/shared/model/school-class.model';
 import { CalendarSubjectEventEntityService } from 'app/store/calendar-subject-event/calendar-subject-event-entity.service';
 import { forEach } from '@angular/router/src/utils/collection';
 import { SubjectEvent } from 'app/shared/model/event.model';
 import { CalendarSubjectEvent } from 'app/store/calendar-subject-event/calendar-subject-event.model';
 import {
-    CalendarSubjectEventActionTypes, LoadCalendarSubjectEvents
+    ActivateCalendarSubjectEvent,
+    LoadCalendarSubjectEvents
 } from 'app/store/calendar-subject-event/calendar-subject-event.actions';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable({
     providedIn: 'root'
@@ -33,5 +37,15 @@ export class CalendarSubjectEventStoreService {
             });
         });
         this.store.dispatch(new LoadCalendarSubjectEvents({calendarSubjectEvents}));
+    }
+
+    public getActiveSubjectEvents():Observable<SubjectEvent[]>{
+        return this.store.pipe(select(selectActiveCalendarSubjectEvent))
+            .filter(s => s !== null && s !== undefined)
+            .map(events => events.subjectEvents);
+    }
+
+    public activateBySchoolClassId(id: number) {
+        this.store.dispatch(new ActivateCalendarSubjectEvent({id}));
     }
 }
