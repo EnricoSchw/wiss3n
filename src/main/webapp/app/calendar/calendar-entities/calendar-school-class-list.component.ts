@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -11,26 +11,25 @@ import { ITEMS_PER_PAGE } from 'app/shared';
 import { SchoolClassService } from 'app/entities/school-class/school-class.service';
 
 @Component({
-    selector: 'jhi-school-class-list',
-    templateUrl: './school-class-list.component.html',
-    styleUrls: ['./calendar-board.scss']
+    selector: 'jhi-calendar-school-class-list',
+    templateUrl: './calendar-school-class-list.component.html',
+    styleUrls: ['./../calendar-board/calendar-board.scss']
 })
-export class SchoolClassListComponent implements OnInit, OnDestroy {
+export class CalendarSchoolClassListComponent implements OnInit, OnDestroy {
     currentAccount: any;
-    schoolClasses: ISchoolClass[];
+    schoolClasses: ISchoolClass[] = [];
     error: any;
     success: any;
     eventSubscriber: Subscription;
     currentSearch: string;
-    routeData: any;
-    links: any;
     totalItems: any;
     queryCount: any;
     itemsPerPage: any;
     page: any = 0;
     predicate: any;
-    previousPage: any;
     reverse: any;
+
+    @Output() changeActiveSchoolClass = new EventEmitter<ISchoolClass>();
 
     constructor(
         private schoolClassService: SchoolClassService,
@@ -42,16 +41,6 @@ export class SchoolClassListComponent implements OnInit, OnDestroy {
         private eventManager: JhiEventManager
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
-        // this.routeData = this.activatedRoute.data.subscribe(data => {
-        //     this.page = 1;
-        //     this.previousPage = data.pagingParams.page;
-        //     this.reverse = data.pagingParams.ascending;
-        //     this.predicate = data.pagingParams.predicate;
-        // });
-        // this.currentSearch =
-        //     this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
-        //         ? this.activatedRoute.snapshot.params['search']
-        //         : '';
     }
 
     loadAll() {
@@ -59,26 +48,16 @@ export class SchoolClassListComponent implements OnInit, OnDestroy {
                 .searchActive({
                     page: 0,
                     size: this.itemsPerPage
-                    //sort: this.sort()
                 })
                 .subscribe(
-                    (res: HttpResponse<ISchoolClass[]>) => this.schoolClasses = res.body,
-                    (res: HttpErrorResponse) => this.onError(res.message)
+                    (res: HttpResponse<ISchoolClass[]>) => {
+                        this.schoolClasses = res.body;
+                        console.log('##################################', 'emit');
+                        this.changeActiveSchoolClass.emit(this.schoolClasses[0]);
+
+                    },(res: HttpErrorResponse) => this.onError(res.message)
+
                 );
-
-        this.schoolClassService
-            .searchForTeachingHours(7   , {
-                page: 0,
-                size: this.itemsPerPage
-                //sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<ISchoolClass[]>) => {
-                    console.log(res.body);
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-
             return;
     }
 
@@ -97,7 +76,6 @@ export class SchoolClassListComponent implements OnInit, OnDestroy {
         });
         this.loadAll();
     }
-
 
     ngOnInit() {
         this.loadAll();
@@ -126,8 +104,6 @@ export class SchoolClassListComponent implements OnInit, OnDestroy {
         }
         return result;
     }
-
-
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);

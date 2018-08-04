@@ -1,7 +1,9 @@
 <jhi-alert></jhi-alert>
 <div class="row board">
     <div class="left-board col-md-2">
-        <jhi-school-class-list></jhi-school-class-list>
+        <jhi-calendar-school-class-list
+            (changeActiveSchoolClass)="setActiveSchoolClass(schoolClass)">
+        </jhi-calendar-school-class-list>
         <div>
             <h4>
                 <span class="title">Fächer
@@ -33,6 +35,8 @@
 
     </div>
     <div class="right-bord col-md">
-        <jhi-calendar></jhi-calendar>
+        <jhi-calendar [schoolClass]="activeSchoolClass">
+
+        </jhi-calendar>
     </div>
 </div>

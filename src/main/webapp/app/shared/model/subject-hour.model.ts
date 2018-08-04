@@ -58,3 +58,47 @@ export const seventhHour = <SubjectHour> {
     start: '07:00:00',
     end: '08:00:00'
 };
+
+export const eighthHour = <SubjectHour> {
+    index: 7,
+    start: '07:00:00',
+    end: '08:00:00'
+};
+
+export const ninthHour = <SubjectHour> {
+    index: 7,
+    start: '07:00:00',
+    end: '08:00:00'
+};
+
+export const tenthHour = <SubjectHour> {
+    index: 7,
+    start: '07:00:00',
+    end: '08:00:00'
+};
+
+export const getSubjectHourByNumber = (day: number): SubjectHour => {
+    switch (day) {
+        case 1:
+            return firstHour;
+        case 2:
+            return secondHour;
+        case 3:
+            return thirdHour;
+        case 4:
+            return fourthHour;
+        case 5:
+            return fifthHour;
+        case 6:
+            return sixthHour;
+        case 7:
+            return seventhHour;
+        case 8:
+            return eighthHour;
+        case 9:
+            return ninthHour;
+        case 10:
+            return tenthHour;
+
+    }
+}

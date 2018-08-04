@@ -7,6 +7,7 @@ import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { ISchoolClass } from 'app/shared/model/school-class.model';
+import { ITeachingHour } from 'app/shared/model/teaching-hour.model';
 
 type EntityResponseType = HttpResponse<ISchoolClass>;
 type EntityArrayResponseType = HttpResponse<ISchoolClass[]>;
@@ -60,7 +61,7 @@ export class SchoolClassService {
     searchForTeachingHours(id: number, req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http
-            .get<ISchoolClass[]>(this.resourceSearchUrl + '/' + id + '/teaching-hours', {
+            .get<ITeachingHour[]>(this.resourceSearchUrl + '/' + id + '/teaching-hours', {
                 params: options,
                 observe: 'response'
             })
