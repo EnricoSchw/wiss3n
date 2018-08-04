@@ -1,9 +1,7 @@
 import { ITeachingHour } from 'app/shared/model/teaching-hour.model';
 import {
-    firstHour, getSubjectHourByNumber, getWeekdayByNumber, SubjectHour, SubjectHourData
+    getSubjectHourByNumber, getWeekdayByNumber, SubjectHourData
 } from 'app/shared/model/subject-hour.model';
-import { ITeachingSubject } from 'app/shared/model/teaching-subject.model';
-import { Weekday } from 'rrule';
 import { endOfWeek, startOfWeek } from 'date-fns';
 import { RRule } from 'rrule';
 import { EventColor } from 'calendar-utils';
@@ -11,8 +9,6 @@ import { Injectable } from '@angular/core';
 import { SubjectEvent } from 'app/shared/model/event.model';
 import * as moment from 'moment';
 import { ISchoolClass } from 'app/shared/model/school-class.model';
-import { Moment } from 'moment';
-
 
 const subjectColor = <EventColor>{
     primary: '#b7b7b7',
@@ -29,19 +25,20 @@ export class CalendarSubjectEventEntityService {
         return this.createSubjectEventListFromSubjectHours(hours);
     }
 
-    private mapTeachingHoursToSubjectHourData( teachingHours: ITeachingHour[], start: Date, end: Date ): SubjectHourData[] {
+    private mapTeachingHoursToSubjectHourData(teachingHours: ITeachingHour[], start: Date, end: Date): SubjectHourData[] {
         const subjectHourData: SubjectHourData[] = [];
+
         teachingHours.forEach(teachingHour => {
             subjectHourData.push(
                 {
                     id: teachingHour.id,
-                    title: (teachingHour.teachingSubject !== null )? teachingHour.teachingSubject.name : 'Free',
-                    prefix: (teachingHour.teachingSubject !== null)? teachingHour.teachingSubject.prefix : 'Free',
-                    hour: getSubjectHourByNumber(teachingHour.weekday),
+                    title: (teachingHour.teachingSubject !== null) ? teachingHour.teachingSubject.name : 'Free',
+                    prefix: (teachingHour.teachingSubject !== null) ? teachingHour.teachingSubject.prefix : 'Free',
+                    hour: getSubjectHourByNumber(teachingHour.hour),
                     day: getWeekdayByNumber(teachingHour.weekday),
                     color: subjectColor,
-                    start: start,
-                    end: end
+                    start,
+                    end
                 }
             );
         });
@@ -49,9 +46,9 @@ export class CalendarSubjectEventEntityService {
         return subjectHourData;
     }
 
-    private setSubjectHourTime(timeString: string): Date  {
+    private setSubjectHourTime(timeString: string): Date {
         return moment('2018-04-01T' + timeString, 'YYYY-MM-DD[T]HH:mm:ss').toDate();
-    };
+    }
 
     private createSubjectEventListFromSubjectHours(subjectHourList: SubjectHourData[]): SubjectEvent[] {
         const eventList: SubjectEvent[] = [];
@@ -76,6 +73,7 @@ export class CalendarSubjectEventEntityService {
                 }
             });
         });
+
         return eventList;
-    };
+    }
 }
