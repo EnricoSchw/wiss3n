@@ -20,20 +20,20 @@ export class CalendarSubjectEventEntityService {
 
     public createSubjectEventsForSchoolClass(schoolClass: ISchoolClass): SubjectEvent[] {
         const hours: SubjectHourData[] = this.mapTeachingHoursToSubjectHourData(
-            schoolClass.teachingHours, schoolClass.start.toDate(), schoolClass.end.toDate()
+            schoolClass.teachingHours, schoolClass.start.toDate(), schoolClass.end.toDate(), schoolClass.name
         );
         return this.createSubjectEventListFromSubjectHours(hours);
     }
 
-    private mapTeachingHoursToSubjectHourData(teachingHours: ITeachingHour[], start: Date, end: Date): SubjectHourData[] {
+    private mapTeachingHoursToSubjectHourData(teachingHours: ITeachingHour[], start: Date, end: Date, name: string): SubjectHourData[] {
         const subjectHourData: SubjectHourData[] = [];
 
         teachingHours.forEach(teachingHour => {
             subjectHourData.push(
                 {
                     id: teachingHour.id,
-                    title: (teachingHour.teachingSubject !== null) ? teachingHour.teachingSubject.name : 'Free',
-                    prefix: (teachingHour.teachingSubject !== null) ? teachingHour.teachingSubject.prefix : 'Free',
+                    title: (teachingHour.teachingSubject !== null) ? teachingHour.teachingSubject.name : name,
+                    prefix: (teachingHour.teachingSubject !== null) ? teachingHour.teachingSubject.prefix : name,
                     hour: getSubjectHourByNumber(teachingHour.hour),
                     day: getWeekdayByNumber(teachingHour.weekday),
                     color: subjectColor,

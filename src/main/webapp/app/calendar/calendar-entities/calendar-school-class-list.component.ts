@@ -30,6 +30,8 @@ export class CalendarSchoolClassListComponent implements OnInit, OnDestroy {
     predicate: any;
     reverse: any;
 
+    activeClassId: number;
+
     constructor(
         private schoolClassService: SchoolClassService,
         private storeService: CalendarSubjectEventStoreService,
@@ -49,12 +51,12 @@ export class CalendarSchoolClassListComponent implements OnInit, OnDestroy {
                     page: 0,
                     size: this.itemsPerPage
                 })
+                .filter((res: HttpResponse<ISchoolClass[]>) => res.body.length > 0)
                 .subscribe(
                     (res: HttpResponse<ISchoolClass[]>) => {
                         this.schoolClasses = res.body;
                         this.storeService.loadAll(this.schoolClasses);
-                        this.storeService.activateBySchoolClassId(this.schoolClasses[0].id)
-
+                        this.setSchoolClassActive(this.schoolClasses[0].id);
                     },(res: HttpErrorResponse) => this.onError(res.message)
 
                 );
@@ -97,15 +99,12 @@ export class CalendarSchoolClassListComponent implements OnInit, OnDestroy {
         this.eventSubscriber = this.eventManager.subscribe('schoolClassListModification', response => this.loadAll());
     }
 
-    sort() {
-        const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
-        if (this.predicate !== 'id') {
-            result.push('id');
-        }
-        return result;
-    }
-
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    setSchoolClassActive(id: number) {
+        this.activeClassId = id;
+        this.storeService.activateBySchoolClassId(id);
     }
 }

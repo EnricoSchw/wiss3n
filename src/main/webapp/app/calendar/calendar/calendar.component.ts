@@ -1,5 +1,5 @@
 import {
-    ChangeDetectionStrategy, Component, Input, OnInit,
+    ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
 import { CalendarEvent, ViewPeriod } from 'calendar-utils';
@@ -41,10 +41,12 @@ export class CalendarComponent implements OnInit {
     }
 
     public ngOnInit(): void {
+
         const events = this.service.loadTasks();
         this.weekEvents$ = this.service
             .loadSubjectEvents()
             .map(subjects => {
+                this.activeEvent = null;
                 return this.mapSubjectsToWeekEvents(subjects, events);
             });
 
@@ -53,8 +55,13 @@ export class CalendarComponent implements OnInit {
 
     public beforeDayViewRender({period}: { period: ViewPeriod }): void {
         const events: SubjectEvent[] = <SubjectEvent[]> period.events;
-        if (!isSameDay(this.activeEvent.start, this.viewDate) && events.length > 0) {
-            this.setActiveEvent(events[0]);
+        if (events.length > 0) {
+            if ((this.activeEvent === null || this.activeEvent === undefined)) {
+                this.setActiveEvent(events[0]);
+            }
+            if (!isSameDay(this.activeEvent.start, this.viewDate)) {
+                this.setActiveEvent(events[0]);
+            }
         }
     }
 
@@ -152,4 +159,5 @@ export class CalendarComponent implements OnInit {
         event.meta.isActive = true;
         this.activeEvent = event;
     }
+
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import {
-    selectActiveCalendarSubjectEvent, State
+    selectActiveCalendarSubjectEvent, selectActiveCalendarSubjectEventId, State
 } from 'app/store/calendar-subject-event/calendar-subject-event.reducer';
 import { ISchoolClass } from 'app/shared/model/school-class.model';
 import { CalendarSubjectEventEntityService } from 'app/store/calendar-subject-event/calendar-subject-event-entity.service';
@@ -47,5 +47,9 @@ export class CalendarSubjectEventStoreService {
 
     public activateBySchoolClassId(id: number) {
         this.store.dispatch(new ActivateCalendarSubjectEvent({id}));
+    }
+
+    public getActiveSchoolClassId(): Observable<number> {
+        return this.store.pipe(select(selectActiveCalendarSubjectEventId));
     }
 }
