@@ -1,0 +1,28 @@
+<div *ngIf="schoolClass">
+    <h4>
+        <span class="title">Unterrichtsfächer
+            <button id="jh-view-teaching-subject"
+                    class="btn btn-outline-dark btn-sm float-right rounded-circle  jh-create-entity create-school-class"
+                    [routerLink]="['/teaching-subject/new']">
+                    <fa-icon [icon]="'plus'"></fa-icon>
+            </button>
+            <button id="jh-view-entity"
+                    class="btn btn-outline-dark btn-sm float-right rounded-circle  jh-create-entity create-school-class"
+                    [routerLink]="['/teaching-subject']">
+                    <fa-icon [icon]="'pencil-alt'"></fa-icon>
+            </button>
+        </span>
+    </h4>
+    <br/>
+    <div class="table-responsive" *ngIf="teachingSubjects.length > 0; else create_school_class">
+        <ul *ngFor="let schoolClass of schoolClasses ;trackBy: trackId">
+            <li (click)="setSchoolClassActive(schoolClass.id)">
+                <a href="#" [ngClass]="{'active': schoolClass.id== activeClassId}">{{schoolClass.name}}</a>
+            </li>
+        </ul>
+    </div>
+
+    <ng-template #create_teaching_subjects>
+        <span>Lege Unterrichtsfächer an!</span>
+    </ng-template>
+</div>
