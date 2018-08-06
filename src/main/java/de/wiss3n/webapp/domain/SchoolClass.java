@@ -53,7 +53,7 @@ public class SchoolClass implements Serializable {
 
     @OneToMany(mappedBy = "schoolClass")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<TeachingSubject> schoolClasses = new HashSet<>();
+    private Set<TeachingSubject> teachingSubjects = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties("")
@@ -145,29 +145,29 @@ public class SchoolClass implements Serializable {
         this.teachingHours = teachingHours;
     }
 
-    public Set<TeachingSubject> getSchoolClasses() {
-        return schoolClasses;
+    public Set<TeachingSubject> getTeachingSubjects() {
+        return teachingSubjects;
     }
 
-    public SchoolClass schoolClasses(Set<TeachingSubject> teachingSubjects) {
-        this.schoolClasses = teachingSubjects;
+    public SchoolClass teachingSubjects(Set<TeachingSubject> teachingSubjects) {
+        this.teachingSubjects = teachingSubjects;
         return this;
     }
 
-    public SchoolClass addSchoolClass(TeachingSubject teachingSubject) {
-        this.schoolClasses.add(teachingSubject);
+    public SchoolClass addTeachingSubjects(TeachingSubject teachingSubject) {
+        this.teachingSubjects.add(teachingSubject);
         teachingSubject.setSchoolClass(this);
         return this;
     }
 
-    public SchoolClass removeSchoolClass(TeachingSubject teachingSubject) {
-        this.schoolClasses.remove(teachingSubject);
+    public SchoolClass removeTeachingSubjects(TeachingSubject teachingSubject) {
+        this.teachingSubjects.remove(teachingSubject);
         teachingSubject.setSchoolClass(null);
         return this;
     }
 
-    public void setSchoolClasses(Set<TeachingSubject> teachingSubjects) {
-        this.schoolClasses = teachingSubjects;
+    public void setTeachingSubjects(Set<TeachingSubject> teachingSubjects) {
+        this.teachingSubjects = teachingSubjects;
     }
 
     public User getUser() {

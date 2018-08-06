@@ -10,7 +10,7 @@ export interface ISchoolClass {
     active?: boolean;
     name?: string;
     teachingHours?: ITeachingHour[];
-    schoolClasses?: ITeachingSubject[];
+    teachingSubjects?: ITeachingSubject[];
     user?: IUser;
 }
 
@@ -22,7 +22,7 @@ export class SchoolClass implements ISchoolClass {
         public active?: boolean,
         public name?: string,
         public teachingHours?: ITeachingHour[],
-        public schoolClasses?: ITeachingSubject[],
+        public teachingSubjects?: ITeachingSubject[],
         public user?: IUser
     ) {
         this.active = false;

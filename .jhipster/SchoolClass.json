@@ -41,7 +41,7 @@
         },
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "schoolClass",
+            "relationshipName": "teachingSubjects",
             "otherEntityName": "teachingSubject",
             "otherEntityRelationshipName": "schoolClass"
         },

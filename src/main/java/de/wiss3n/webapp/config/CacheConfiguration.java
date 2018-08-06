@@ -48,6 +48,7 @@ public class CacheConfiguration {
             cm.createCache(de.wiss3n.webapp.domain.TeachingHour.class.getName() + ".tasks", jcacheConfiguration);
             cm.createCache(de.wiss3n.webapp.domain.Content.class.getName(), jcacheConfiguration);
             cm.createCache(de.wiss3n.webapp.domain.SchoolClass.class.getName() + ".schoolClasses", jcacheConfiguration);
+            cm.createCache(de.wiss3n.webapp.domain.SchoolClass.class.getName() + ".teachingSubjects", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

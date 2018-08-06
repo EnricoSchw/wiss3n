@@ -75,7 +75,7 @@ relationship OneToMany {
 }
 
 relationship OneToMany {
-	SchoolClass{schoolClass(name)}  to TeachingSubject{schoolClass(name)}
+	SchoolClass{teachingSubjects(name)}  to TeachingSubject{schoolClass(name)}
 }
 
 // Set pagination options

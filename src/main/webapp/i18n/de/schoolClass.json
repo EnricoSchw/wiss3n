@@ -22,7 +22,7 @@
             "active": "Active",
             "name": "Name",
             "teachingHours": "Teaching Hours",
-            "schoolClass": "School Class",
+            "teachingSubjects": "Teaching Subjects",
             "user": "User"
         }
     }

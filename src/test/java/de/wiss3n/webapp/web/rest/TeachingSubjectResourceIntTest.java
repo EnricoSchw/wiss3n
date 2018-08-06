@@ -59,7 +59,7 @@ public class TeachingSubjectResourceIntTest {
     @Autowired
     private TeachingSubjectRepository teachingSubjectRepository;
 
-
+    
 
     @Autowired
     private TeachingSubjectService teachingSubjectService;
@@ -232,7 +232,7 @@ public class TeachingSubjectResourceIntTest {
             .andExpect(jsonPath("$.[*].prefix").value(hasItem(DEFAULT_PREFIX.toString())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
-
+    
 
     @Test
     @Transactional
