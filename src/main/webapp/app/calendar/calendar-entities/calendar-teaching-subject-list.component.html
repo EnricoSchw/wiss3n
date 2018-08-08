@@ -1,4 +1,4 @@
-<div *ngIf="schoolClass">
+<div *ngIf="(schoolClassId$ | async ) !== null">
     <h4>
         <span class="title">Unterrichtsfächer
             <button id="jh-view-teaching-subject"
