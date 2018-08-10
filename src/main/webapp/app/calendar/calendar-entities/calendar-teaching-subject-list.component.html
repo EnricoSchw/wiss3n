@@ -1,4 +1,4 @@
-<div *ngIf="(schoolClassId$ | async ) !== null">
+<div *ngIf="(teachingSubjects$ | async ) !== null">
     <h4>
         <span class="title">Unterrichtsfächer
             <button id="jh-view-teaching-subject"
@@ -14,11 +14,9 @@
         </span>
     </h4>
     <br/>
-    <div class="table-responsive" *ngIf="teachingSubjects.length > 0; else create_school_class">
-        <ul *ngFor="let schoolClass of schoolClasses ;trackBy: trackId">
-            <li (click)="setSchoolClassActive(schoolClass.id)">
-                <a href="#" [ngClass]="{'active': schoolClass.id== activeClassId}">{{schoolClass.name}}</a>
-            </li>
+    <div class="table-responsive" *ngIf="teachingSubjects.length > 0; else create_teaching_subjects">
+        <ul *ngFor="let teachingSubject of teachingSubjects ;trackBy: trackId">
+            <li >{{teachingSubjects.name}}</li>
         </ul>
     </div>
 

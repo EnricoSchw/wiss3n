@@ -146,7 +146,6 @@ public class TeachingSubjectResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-
     /**
      * SEARCH  /_search/schoolClasses/{schoolClassId}/teaching-subjects: search for the teachingSubjects corresponding
      * to the user and school class.
