@@ -43,6 +43,7 @@ export class TeachingSubjectService {
     }
 
     public findBySchoolClassId(id: number): Observable<EntityArrayResponseType> {
-        return this.http.get<ITeachingSubject[]>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+        const resourceSearchBySchoolClassUrl = `api/_search/school-classes/${id}/teaching-subjects`;
+        return this.http.get<ITeachingSubject[]>(SERVER_API_URL + resourceSearchBySchoolClassUrl, { observe: 'response' });
     }
 }
