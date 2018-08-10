@@ -158,7 +158,7 @@ public class TeachingSubjectResource {
     @GetMapping("/_search/school-classes/{schoolClassId}/teaching-subjects")
     @Timed
     public ResponseEntity<List<TeachingSubject>> searchTeachingHoursBySchoolClass(@PathVariable Long schoolClassId, Pageable pageable) {
-        log.debug("REST request to search for a page of TeachingHours for schoolClass Id {}", schoolClassId);
+        log.debug("REST request to search for a page of TeachingSubjects for schoolClass Id {}", schoolClassId);
         Page<TeachingSubject> page = teachingSubjectService.searchBySchoolClass(schoolClassId, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/_search/schoolClasses/" + schoolClassId + "/teaching-subjects");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
