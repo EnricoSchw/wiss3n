@@ -41,4 +41,8 @@ export class TeachingSubjectService {
         const options = createRequestOption(req);
         return this.http.get<ITeachingSubject[]>(this.resourceSearchUrl, { params: options, observe: 'response' });
     }
+
+    public findBySchoolClassId(id: number): Observable<EntityArrayResponseType> {
+        return this.http.get<ITeachingSubject[]>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    }
 }
