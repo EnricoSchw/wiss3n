@@ -1,8 +1,10 @@
 package de.wiss3n.webapp.service;
 
+import de.wiss3n.webapp.domain.TeachingHour;
 import de.wiss3n.webapp.domain.TeachingSubject;
 import de.wiss3n.webapp.repository.TeachingSubjectRepository;
 import de.wiss3n.webapp.repository.search.TeachingSubjectSearchRepository;
+import de.wiss3n.webapp.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -93,4 +95,12 @@ public class TeachingSubjectService {
     public Page<TeachingSubject> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of TeachingSubjects for query {}", query);
         return teachingSubjectSearchRepository.search(queryStringQuery(query), pageable);    }
+
+    @Transactional(readOnly = true)
+    public Page<TeachingSubject> searchBySchoolClass(Long schoolClassId, Pageable pageable) {
+        log.debug("Request to search for a page of TeachingSubject for schoolClass id {}", schoolClassId);
+        return SecurityUtils.getCurrentUserLogin()
+            .map((String login) -> teachingSubjectSearchRepository.findAllBySchoolClass(schoolClassId, login, pageable))
+            .orElse(null);
+    }
 }

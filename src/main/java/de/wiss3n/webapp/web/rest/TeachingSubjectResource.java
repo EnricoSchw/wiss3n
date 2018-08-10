@@ -1,6 +1,7 @@
 package de.wiss3n.webapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import de.wiss3n.webapp.domain.TeachingHour;
 import de.wiss3n.webapp.domain.TeachingSubject;
 import de.wiss3n.webapp.service.TeachingSubjectService;
 import de.wiss3n.webapp.web.rest.errors.BadRequestAlertException;
@@ -145,4 +146,21 @@ public class TeachingSubjectResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+
+    /**
+     * SEARCH  /_search/schoolClasses/{schoolClassId}/teaching-subjects: search for the teachingSubjects corresponding
+     * to the user and school class.
+     *
+     * @param schoolClassId the query of the teachingHour search
+     * @param pageable      the pagination information
+     * @return the result of the search
+     */
+    @GetMapping("/_search/school-classes/{schoolClassId}/teaching-subjects")
+    @Timed
+    public ResponseEntity<List<TeachingSubject>> searchTeachingHoursBySchoolClass(@PathVariable Long schoolClassId, Pageable pageable) {
+        log.debug("REST request to search for a page of TeachingHours for schoolClass Id {}", schoolClassId);
+        Page<TeachingSubject> page = teachingSubjectService.searchBySchoolClass(schoolClassId, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/_search/schoolClasses/" + schoolClassId + "/teaching-subjects");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 }
