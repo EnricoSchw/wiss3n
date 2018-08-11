@@ -18,7 +18,14 @@ import { CalendarTeachingSubjectListComponent } from './calendar-entities/calend
         RouterModule,
         Wiss3NSharedModule
     ],
-    declarations: [CalendarComponent, CalendarSchoolClassListComponent, CalendarBoardComponent, SubjectHourViewComponent, SubjectHourEventViewComponent, CalendarTeachingSubjectListComponent],
+    declarations: [
+        CalendarComponent,
+        CalendarSchoolClassListComponent,
+        CalendarBoardComponent,
+        SubjectHourViewComponent,
+        SubjectHourEventViewComponent,
+        CalendarTeachingSubjectListComponent
+    ],
     providers: [CalendarService],
     exports: [CalendarBoardComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -9,9 +9,9 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 import { JhiAlertService } from 'ng-jhipster';
 
 @Component({
-    selector: 'calendar-teaching-subject-list',
+    selector: 'jhi-calendar-teaching-subject-list',
     templateUrl: './calendar-teaching-subject-list.component.html',
-    styleUrls: ['./calendar-teaching-subject-list.component.scss']
+    styleUrls: ['./../calendar-board/calendar-board.scss']
 })
 export class CalendarTeachingSubjectListComponent implements OnInit {
     private teachingSubjects$: Observable<ITeachingSubject[]> =  Observable.of([]);
@@ -30,7 +30,7 @@ export class CalendarTeachingSubjectListComponent implements OnInit {
             .pipe(
                 retry(3), // retry a failed request up to 3 times
                 catchError(this.handleError) // then handle the error
-            )
+            );
     }
 
     private handleError(error: HttpErrorResponse) {
@@ -48,6 +48,6 @@ export class CalendarTeachingSubjectListComponent implements OnInit {
         this.jhiAlertService.error('Something bad happened; please try again later.', null, null);
         return throwError(
             'Something bad happened; please try again later.');
-    };
+    }
 
 }
