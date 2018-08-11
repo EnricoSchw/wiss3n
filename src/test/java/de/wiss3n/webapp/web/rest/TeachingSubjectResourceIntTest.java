@@ -2,8 +2,12 @@ package de.wiss3n.webapp.web.rest;
 
 import de.wiss3n.webapp.Wiss3NApp;
 
+import de.wiss3n.webapp.domain.SchoolClass;
 import de.wiss3n.webapp.domain.TeachingSubject;
+import de.wiss3n.webapp.domain.User;
+import de.wiss3n.webapp.repository.SchoolClassRepository;
 import de.wiss3n.webapp.repository.TeachingSubjectRepository;
+import de.wiss3n.webapp.repository.UserRepository;
 import de.wiss3n.webapp.repository.search.TeachingSubjectSearchRepository;
 import de.wiss3n.webapp.service.TeachingSubjectService;
 import de.wiss3n.webapp.web.rest.errors.ExceptionTranslator;
@@ -14,11 +18,13 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -59,7 +65,11 @@ public class TeachingSubjectResourceIntTest {
     @Autowired
     private TeachingSubjectRepository teachingSubjectRepository;
 
-    
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private SchoolClassRepository schoolClassRepository;
 
     @Autowired
     private TeachingSubjectService teachingSubjectService;
@@ -110,16 +120,31 @@ public class TeachingSubjectResourceIntTest {
             .name(DEFAULT_NAME)
             .prefix(DEFAULT_PREFIX)
             .type(DEFAULT_TYPE);
+
+        SchoolClass schoolClass = SchoolClassResourceIntTest.createEntity(em);
+        em.persist(schoolClass);
+        em.flush();
+
+        teachingSubject.setSchoolClass(schoolClass);
+        teachingSubject.setUser(schoolClass.getUser());
         return teachingSubject;
     }
 
     @Before
     public void initTest() {
         teachingSubject = createEntity(em);
+
+        User user = userRepository.findOneByLogin("user").get();
+        SchoolClass schoolClass = schoolClassRepository.findOneByName("AAAAAAAAAA").get();
+
+        schoolClass.user(user);
+        teachingSubject.schoolClass(schoolClass);
+        teachingSubject.user(user);
     }
 
     @Test
     @Transactional
+    @WithMockUser
     public void createTeachingSubject() throws Exception {
         int databaseSizeBeforeCreate = teachingSubjectRepository.findAll().size();
 
@@ -219,6 +244,7 @@ public class TeachingSubjectResourceIntTest {
 
     @Test
     @Transactional
+    @WithMockUser
     public void getAllTeachingSubjects() throws Exception {
         // Initialize the database
         teachingSubjectRepository.saveAndFlush(teachingSubject);
@@ -232,10 +258,11 @@ public class TeachingSubjectResourceIntTest {
             .andExpect(jsonPath("$.[*].prefix").value(hasItem(DEFAULT_PREFIX.toString())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
-    
+
 
     @Test
     @Transactional
+    @WithMockUser
     public void getTeachingSubject() throws Exception {
         // Initialize the database
         teachingSubjectRepository.saveAndFlush(teachingSubject);
@@ -251,6 +278,7 @@ public class TeachingSubjectResourceIntTest {
     }
     @Test
     @Transactional
+    @WithMockUser
     public void getNonExistingTeachingSubject() throws Exception {
         // Get the teachingSubject
         restTeachingSubjectMockMvc.perform(get("/api/teaching-subjects/{id}", Long.MAX_VALUE))
@@ -259,6 +287,7 @@ public class TeachingSubjectResourceIntTest {
 
     @Test
     @Transactional
+    @WithMockUser
     public void updateTeachingSubject() throws Exception {
         // Initialize the database
         teachingSubjectService.save(teachingSubject);
@@ -295,6 +324,7 @@ public class TeachingSubjectResourceIntTest {
 
     @Test
     @Transactional
+    @WithMockUser
     public void updateNonExistingTeachingSubject() throws Exception {
         int databaseSizeBeforeUpdate = teachingSubjectRepository.findAll().size();
 
@@ -316,6 +346,7 @@ public class TeachingSubjectResourceIntTest {
 
     @Test
     @Transactional
+    @WithMockUser
     public void deleteTeachingSubject() throws Exception {
         // Initialize the database
         teachingSubjectService.save(teachingSubject);
@@ -337,6 +368,7 @@ public class TeachingSubjectResourceIntTest {
 
     @Test
     @Transactional
+    @WithMockUser
     public void searchTeachingSubject() throws Exception {
         // Initialize the database
         teachingSubjectService.save(teachingSubject);

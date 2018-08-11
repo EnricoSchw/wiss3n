@@ -2,7 +2,10 @@ package de.wiss3n.webapp.service;
 
 import de.wiss3n.webapp.domain.TeachingHour;
 import de.wiss3n.webapp.domain.TeachingSubject;
+import de.wiss3n.webapp.domain.User;
+import de.wiss3n.webapp.repository.SchoolClassRepository;
 import de.wiss3n.webapp.repository.TeachingSubjectRepository;
+import de.wiss3n.webapp.repository.UserRepository;
 import de.wiss3n.webapp.repository.search.TeachingSubjectSearchRepository;
 import de.wiss3n.webapp.security.SecurityUtils;
 import org.slf4j.Logger;
@@ -31,9 +34,20 @@ public class TeachingSubjectService {
 
     private final TeachingSubjectSearchRepository teachingSubjectSearchRepository;
 
-    public TeachingSubjectService(TeachingSubjectRepository teachingSubjectRepository, TeachingSubjectSearchRepository teachingSubjectSearchRepository) {
+    private final UserRepository userRepository;
+
+    private final SchoolClassRepository schoolClassRepository;
+
+    public TeachingSubjectService(
+        TeachingSubjectRepository teachingSubjectRepository,
+        TeachingSubjectSearchRepository teachingSubjectSearchRepository,
+        SchoolClassRepository schoolClassRepository,
+        UserRepository userRepository
+    ) {
         this.teachingSubjectRepository = teachingSubjectRepository;
         this.teachingSubjectSearchRepository = teachingSubjectSearchRepository;
+        this.schoolClassRepository = schoolClassRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -43,9 +57,24 @@ public class TeachingSubjectService {
      * @return the persisted entity
      */
     public TeachingSubject save(TeachingSubject teachingSubject) {
-        log.debug("Request to save TeachingSubject : {}", teachingSubject);        TeachingSubject result = teachingSubjectRepository.save(teachingSubject);
-        teachingSubjectSearchRepository.save(result);
-        return result;
+        log.debug("Request to save TeachingSubject : {}", teachingSubject);
+        if (schoolClassRepository.existsByIdAndByUserIsCurrentUser(teachingSubject.getSchoolClass().getId())) {
+            return SecurityUtils.getCurrentUserLogin()
+                .flatMap(userRepository::findOneByLogin)
+                .map((User user) -> {
+                    teachingSubject.setUser(user);
+                    return teachingSubject;
+                })
+                .map(teachingSubjectRepository::save)
+                .map((result) -> {
+                    teachingSubjectSearchRepository.save(result);
+                    return result;
+                })
+                .orElseThrow(IllegalArgumentException::new);
+        } else {
+            log.debug("Request not allowed to save TeachingSubject : {}", teachingSubject);
+            throw new IllegalArgumentException();
+        }
     }
 
     /**

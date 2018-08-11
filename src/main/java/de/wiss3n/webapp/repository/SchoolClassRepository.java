@@ -1,6 +1,8 @@
 package de.wiss3n.webapp.repository;
 
 import de.wiss3n.webapp.domain.SchoolClass;
+import de.wiss3n.webapp.domain.User;
+import de.wiss3n.webapp.web.rest.AuditResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -16,9 +18,20 @@ import java.util.Optional;
 @Repository
 public interface SchoolClassRepository extends JpaRepository<SchoolClass, Long> {
 
+    Optional<SchoolClass> findOneByUser(User user);
+    Optional<SchoolClass> findOneByName(String name);
+
+
     @Query("select school_class from SchoolClass school_class where school_class.user.login = ?#{principal.username}")
     Page<SchoolClass> findByUserIsCurrentUser(Pageable pageable);
 
     @Query("select school_class from SchoolClass school_class where school_class.user.login = ?#{principal.username} and school_class.id = :id")
     Optional<SchoolClass> findByIdAndByUserIsCurrentUser(@Param("id") Long id);
+
+    @Query("SELECT CASE  WHEN count(school_class)> 0 THEN true ELSE false END FROM SchoolClass school_class where school_class.user.login = ?#{principal.username} and school_class.id = :id")
+    boolean existsByIdAndByUserIsCurrentUser(@Param("id") Long id);
+
+
 }
+
+
