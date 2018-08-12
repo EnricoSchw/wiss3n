@@ -26,7 +26,7 @@ public interface SchoolClassRepository extends JpaRepository<SchoolClass, Long> 
     Page<SchoolClass> findByUserIsCurrentUser(Pageable pageable);
 
     @Query("select school_class from SchoolClass school_class where school_class.user.login = ?#{principal.username} and school_class.id = :id")
-    Optional<SchoolClass> findByIdAndByUserIsCurrentUser(@Param("id") Long id);
+    Optional<SchoolClass> findOneByIdAndByUserIsCurrentUser(@Param("id") Long id);
 
     @Query("SELECT CASE  WHEN count(school_class)> 0 THEN true ELSE false END FROM SchoolClass school_class where school_class.user.login = ?#{principal.username} and school_class.id = :id")
     boolean existsByIdAndByUserIsCurrentUser(@Param("id") Long id);

@@ -12,12 +12,9 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import java.util.List;
 import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -110,7 +107,7 @@ public class SchoolClassService {
     @Transactional(readOnly = true)
     public Optional<SchoolClass> findOne(Long id) {
         log.debug("Request to get SchoolClass : {}", id);
-        return schoolClassRepository.findByIdAndByUserIsCurrentUser(id);
+        return schoolClassRepository.findOneByIdAndByUserIsCurrentUser(id);
     }
 
     /**
@@ -121,7 +118,7 @@ public class SchoolClassService {
     @Transactional
     public void delete(Long id) {
         log.debug("Request to delete SchoolClass : {}", id);
-        Optional<SchoolClass> schoolClassOpt = schoolClassRepository.findByIdAndByUserIsCurrentUser(id);
+        Optional<SchoolClass> schoolClassOpt = schoolClassRepository.findOneByIdAndByUserIsCurrentUser(id);
         if (schoolClassOpt.isPresent()) {
             for (TeachingHour teachingHour : schoolClassOpt.get().getTeachingHours()) {
                 this.teachingHourService.delete(teachingHour.getId());
@@ -144,4 +141,9 @@ public class SchoolClassService {
     public Page<SchoolClass> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of SchoolClasses for query {}", query);
         return schoolClassSearchRepository.search(queryStringQuery(query), pageable);    }
+
+
+    public boolean isMySchoolClass(Long id) {
+        return schoolClassRepository.existsByIdAndByUserIsCurrentUser(id);
+    }
 }

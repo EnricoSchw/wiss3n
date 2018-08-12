@@ -1,9 +1,7 @@
 package de.wiss3n.webapp.service;
 
-import de.wiss3n.webapp.domain.TeachingHour;
 import de.wiss3n.webapp.domain.TeachingSubject;
 import de.wiss3n.webapp.domain.User;
-import de.wiss3n.webapp.repository.SchoolClassRepository;
 import de.wiss3n.webapp.repository.TeachingSubjectRepository;
 import de.wiss3n.webapp.repository.UserRepository;
 import de.wiss3n.webapp.repository.search.TeachingSubjectSearchRepository;
@@ -36,17 +34,17 @@ public class TeachingSubjectService {
 
     private final UserRepository userRepository;
 
-    private final SchoolClassRepository schoolClassRepository;
+    private final SchoolClassService schoolClassService;
 
     public TeachingSubjectService(
         TeachingSubjectRepository teachingSubjectRepository,
         TeachingSubjectSearchRepository teachingSubjectSearchRepository,
-        SchoolClassRepository schoolClassRepository,
+        SchoolClassService schoolClassService,
         UserRepository userRepository
     ) {
         this.teachingSubjectRepository = teachingSubjectRepository;
         this.teachingSubjectSearchRepository = teachingSubjectSearchRepository;
-        this.schoolClassRepository = schoolClassRepository;
+        this.schoolClassService = schoolClassService;
         this.userRepository = userRepository;
     }
 
@@ -58,7 +56,7 @@ public class TeachingSubjectService {
      */
     public TeachingSubject save(TeachingSubject teachingSubject) {
         log.debug("Request to save TeachingSubject : {}", teachingSubject);
-        if (schoolClassRepository.existsByIdAndByUserIsCurrentUser(teachingSubject.getSchoolClass().getId())) {
+        if (schoolClassService.isMySchoolClass(teachingSubject.getSchoolClass().getId())) {
             return SecurityUtils.getCurrentUserLogin()
                 .flatMap(userRepository::findOneByLogin)
                 .map((User user) -> {
@@ -86,7 +84,7 @@ public class TeachingSubjectService {
     @Transactional(readOnly = true)
     public Page<TeachingSubject> findAll(Pageable pageable) {
         log.debug("Request to get all TeachingSubjects");
-        return teachingSubjectRepository.findAll(pageable);
+        return teachingSubjectRepository.findByUserIsCurrentUser(pageable);
     }
 
 
@@ -99,7 +97,7 @@ public class TeachingSubjectService {
     @Transactional(readOnly = true)
     public Optional<TeachingSubject> findOne(Long id) {
         log.debug("Request to get TeachingSubject : {}", id);
-        return teachingSubjectRepository.findById(id);
+        return teachingSubjectRepository.findOneByIdAndByUserIsCurrentUser(id);
     }
 
     /**
@@ -131,5 +129,9 @@ public class TeachingSubjectService {
         return SecurityUtils.getCurrentUserLogin()
             .map((String login) -> teachingSubjectSearchRepository.findAllBySchoolClass(schoolClassId, login, pageable))
             .orElse(null);
+    }
+
+    public boolean isMyTeachingSubject(Long id) {
+        return teachingSubjectRepository.existsByIdAndByUserIsCurrentUser(id);
     }
 }

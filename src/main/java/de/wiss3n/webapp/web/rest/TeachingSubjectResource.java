@@ -80,6 +80,11 @@ public class TeachingSubjectResource {
         if (teachingSubject.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+
+        if (!teachingSubjectService.isMyTeachingSubject(teachingSubject.getId())) {
+            throw new BadRequestAlertException("Invalid user", ENTITY_NAME, "not same user");
+        }
+
         TeachingSubject result = teachingSubjectService.save(teachingSubject);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, teachingSubject.getId().toString()))
@@ -125,15 +130,19 @@ public class TeachingSubjectResource {
     @Timed
     public ResponseEntity<Void> deleteTeachingSubject(@PathVariable Long id) {
         log.debug("REST request to delete TeachingSubject : {}", id);
-        teachingSubjectService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        if (!teachingSubjectService.isMyTeachingSubject(id)) {
+            teachingSubjectService.delete(id);
+            return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        } else{
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
     }
 
     /**
      * SEARCH  /_search/teaching-subjects?query=:query : search for the teachingSubject corresponding
      * to the query.
      *
-     * @param query the query of the teachingSubject search
+     * @param query    the query of the teachingSubject search
      * @param pageable the pagination information
      * @return the result of the search
      */
