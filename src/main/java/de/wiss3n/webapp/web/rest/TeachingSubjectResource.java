@@ -130,7 +130,7 @@ public class TeachingSubjectResource {
     @Timed
     public ResponseEntity<Void> deleteTeachingSubject(@PathVariable Long id) {
         log.debug("REST request to delete TeachingSubject : {}", id);
-        if (!teachingSubjectService.isMyTeachingSubject(id)) {
+        if (teachingSubjectService.isMyTeachingSubject(id)) {
             teachingSubjectService.delete(id);
             return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
         } else{

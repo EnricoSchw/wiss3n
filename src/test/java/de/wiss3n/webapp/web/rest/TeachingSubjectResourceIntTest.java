@@ -18,7 +18,6 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
@@ -31,6 +30,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -61,6 +61,15 @@ public class TeachingSubjectResourceIntTest {
 
     private static final SubjectType DEFAULT_TYPE = SubjectType.HAUPFACH;
     private static final SubjectType UPDATED_TYPE = SubjectType.NEBENFACH;
+
+
+    private static final LocalDate DEFAULT_SCHOOL_CLASS_START = LocalDate.ofEpochDay(0L);
+
+    private static final LocalDate DEFAULT_SCHOOL_CLASS_END = LocalDate.ofEpochDay(0L);
+
+    private static final Boolean DEFAULT_SCHOOL_CLASS_ACTIVE = false;
+
+    private static final String DEFAULT_SCHOOL_CLASS_NAME = "XXXXXXX";
 
     @Autowired
     private TeachingSubjectRepository teachingSubjectRepository;
@@ -97,6 +106,7 @@ public class TeachingSubjectResourceIntTest {
     private MockMvc restTeachingSubjectMockMvc;
 
     private TeachingSubject teachingSubject;
+    private SchoolClass schoolClass;
 
     @Before
     public void setup() {
@@ -122,10 +132,11 @@ public class TeachingSubjectResourceIntTest {
             .type(DEFAULT_TYPE);
 
         SchoolClass schoolClass = SchoolClassResourceIntTest.createEntity(em);
+        schoolClass.setName(DEFAULT_SCHOOL_CLASS_NAME);
         em.persist(schoolClass);
         em.flush();
 
-        teachingSubject.setSchoolClass(schoolClass);
+        schoolClass.addTeachingSubjects(teachingSubject);
         teachingSubject.setUser(schoolClass.getUser());
         return teachingSubject;
     }
@@ -135,7 +146,7 @@ public class TeachingSubjectResourceIntTest {
         teachingSubject = createEntity(em);
 
         User user = userRepository.findOneByLogin("user").get();
-        SchoolClass schoolClass = schoolClassRepository.findOneByName("AAAAAAAAAA").get();
+        schoolClass = schoolClassRepository.findOneByName(DEFAULT_SCHOOL_CLASS_NAME).get();
 
         schoolClass.user(user);
         teachingSubject.schoolClass(schoolClass);
@@ -169,6 +180,12 @@ public class TeachingSubjectResourceIntTest {
     @Test
     @Transactional
     public void createTeachingSubjectWithExistingId() throws Exception {
+
+        // Initialize the database
+        //schoolClassRepository.save(schoolClassRepository);
+        // As the test used the service layer, reset the Elasticsearch mock repository
+        //reset(mockTeachingSubjectSearchRepository);
+
         int databaseSizeBeforeCreate = teachingSubjectRepository.findAll().size();
 
         // Create the TeachingSubject with an existing ID
