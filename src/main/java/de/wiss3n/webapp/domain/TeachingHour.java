@@ -47,6 +47,7 @@ public class TeachingHour implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("teachingHours")
+    @JsonIgnore
     private TeachingSubject teachingSubject;
 
     @ManyToOne

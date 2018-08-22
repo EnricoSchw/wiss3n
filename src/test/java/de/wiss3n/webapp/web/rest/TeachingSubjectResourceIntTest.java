@@ -146,10 +146,8 @@ public class TeachingSubjectResourceIntTest {
         teachingSubject = createEntity(em);
 
         User user = userRepository.findOneByLogin("user").get();
-        schoolClass = schoolClassRepository.findOneByName(DEFAULT_SCHOOL_CLASS_NAME).get();
 
-        schoolClass.user(user);
-        teachingSubject.schoolClass(schoolClass);
+        teachingSubject.getSchoolClass().user(user);
         teachingSubject.user(user);
     }
 
