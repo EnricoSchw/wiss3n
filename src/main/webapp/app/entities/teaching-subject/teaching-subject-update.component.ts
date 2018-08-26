@@ -6,9 +6,10 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { ITeachingSubject } from 'app/shared/model/teaching-subject.model';
 import { TeachingSubjectService } from './teaching-subject.service';
-import { IUser, UserService } from 'app/core';
+import { IUser, Principal, UserService } from 'app/core';
 import { ISchoolClass } from 'app/shared/model/school-class.model';
 import { SchoolClassService } from 'app/entities/school-class';
+import { CalendarSubjectEventStoreService } from 'app/store/calendar-subject-event/calendar-subject-event-store.service';
 
 @Component({
     selector: 'jhi-teaching-subject-update',
@@ -18,7 +19,9 @@ export class TeachingSubjectUpdateComponent implements OnInit {
     private _teachingSubject: ITeachingSubject;
     isSaving: boolean;
 
-    users: IUser[];
+    activeSchoolClassId$: Observable<number> = Observable.of(-1);
+
+    user: IUser;
 
     schoolclasses: ISchoolClass[];
 
@@ -27,7 +30,9 @@ export class TeachingSubjectUpdateComponent implements OnInit {
         private teachingSubjectService: TeachingSubjectService,
         private userService: UserService,
         private schoolClassService: SchoolClassService,
-        private activatedRoute: ActivatedRoute
+        private calendarSubjectEventStoreService: CalendarSubjectEventStoreService,
+        private activatedRoute: ActivatedRoute,
+        private principal: Principal,
     ) {}
 
     ngOnInit() {
@@ -35,12 +40,10 @@ export class TeachingSubjectUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ teachingSubject }) => {
             this.teachingSubject = teachingSubject;
         });
-        this.userService.query().subscribe(
-            (res: HttpResponse<IUser[]>) => {
-                this.users = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.principal.identity().then(account => {
+            this.user = account;
+        });
+        this.activeSchoolClassId$ = this.calendarSubjectEventStoreService.getActiveSchoolClassId().filter(id => id !== null);
         this.schoolClassService.query().subscribe(
             (res: HttpResponse<ISchoolClass[]>) => {
                 this.schoolclasses = res.body;

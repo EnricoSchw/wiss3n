@@ -52,19 +52,11 @@
                         </small>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="wiss3NApp.teachingSubject.user" for="field_user">User</label>
-                    <select class="form-control" id="field_user" name="user" [(ngModel)]="teachingSubject.user" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="userOption.id === teachingSubject.user?.id ? teachingSubject.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
-                    </select>
-                </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="wiss3NApp.teachingSubject.schoolClass" for="field_schoolClass">School Class</label>
                     <select class="form-control" id="field_schoolClass" name="schoolClass" [(ngModel)]="teachingSubject.schoolClass" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="schoolClassOption.id === teachingSubject.schoolClass?.id ? teachingSubject.schoolClass : schoolClassOption" *ngFor="let schoolClassOption of schoolclasses; trackBy: trackSchoolClassById">{{schoolClassOption.name}}</option>
+                        <option ng-selected="{{activeSchoolClassId$ | async}} === schoolClassOption.id" [ngValue]="schoolClassOption.id === teachingSubject.schoolClass?.id ? teachingSubject.schoolClass : schoolClassOption" *ngFor="let schoolClassOption of schoolclasses; trackBy: trackSchoolClassById">{{schoolClassOption.name}}</option>
                     </select>
                 </div>
             </div>

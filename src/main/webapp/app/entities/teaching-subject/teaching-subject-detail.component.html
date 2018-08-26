@@ -17,10 +17,6 @@
                 <dd>
                     <span jhiTranslate="{{'wiss3NApp.SubjectType.' + teachingSubject.type}}">{{teachingSubject.type}}</span>
                 </dd>
-                <dt><span jhiTranslate="wiss3NApp.teachingSubject.user">User</span></dt>
-                <dd>
-                    {{teachingSubject.user?.login}}
-                </dd>
                 <dt><span jhiTranslate="wiss3NApp.teachingSubject.schoolClass">School Class</span></dt>
                 <dd>
                     <div *ngIf="teachingSubject.schoolClass">
