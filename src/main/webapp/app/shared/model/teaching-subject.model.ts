@@ -28,3 +28,5 @@ export class TeachingSubject implements ITeachingSubject {
         public teachingHours?: ITeachingHour[]
     ) {}
 }
+
+export const freeTeachingSubject = <ITeachingSubject>{id: -1, name: 'Freistunde', prefix: 'Frei'};

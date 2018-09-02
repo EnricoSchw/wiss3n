@@ -9,6 +9,7 @@ import { Injectable } from '@angular/core';
 import { SubjectEvent } from 'app/shared/model/event.model';
 import * as moment from 'moment';
 import { ISchoolClass } from 'app/shared/model/school-class.model';
+import { freeTeachingSubject } from 'app/shared/model/teaching-subject.model';
 
 const subjectColor = <EventColor>{
     primary: '#b7b7b7',
@@ -27,14 +28,14 @@ export class CalendarSubjectEventEntityService {
 
     private mapTeachingHoursToSubjectHourData(teachingHours: ITeachingHour[], start: Date, end: Date): SubjectHourData[] {
         const subjectHourData: SubjectHourData[] = [];
-        const defaultName = 'Freistunde';
+        const defaulTeachingSubject = freeTeachingSubject;
 
         teachingHours.forEach(teachingHour => {
             subjectHourData.push(
                 {
                     id: teachingHour.id,
-                    title: (teachingHour.teachingSubject !== null && teachingHour.teachingSubject !== undefined) ? teachingHour.teachingSubject.name : defaultName,
-                    prefix: (teachingHour.teachingSubject !== null && teachingHour.teachingSubject !== undefined) ? teachingHour.teachingSubject.prefix : defaultName,
+                    title: (teachingHour.teachingSubject !== null && teachingHour.teachingSubject !== undefined) ? teachingHour.teachingSubject.name : defaulTeachingSubject.name,
+                    prefix: (teachingHour.teachingSubject !== null && teachingHour.teachingSubject !== undefined) ? teachingHour.teachingSubject.prefix : defaulTeachingSubject.prefix,
                     hour: getSubjectHourByNumber(teachingHour.hour),
                     day: getWeekdayByNumber(teachingHour.weekday),
                     color: subjectColor,
