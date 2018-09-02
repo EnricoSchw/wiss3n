@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
@@ -46,21 +46,20 @@ export class CalendarSchoolClassListComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-            this.schoolClassService
-                .searchActive({
-                    page: 0,
-                    size: this.itemsPerPage
-                })
-                .filter((res: HttpResponse<ISchoolClass[]>) => res.body.length > 0)
-                .subscribe(
-                    (res: HttpResponse<ISchoolClass[]>) => {
-                        this.schoolClasses = res.body;
-                        this.storeService.loadAll(this.schoolClasses);
-                        this.setSchoolClassActive(this.schoolClasses[0].id);
-                    },(res: HttpErrorResponse) => this.onError(res.message)
-
-                );
-            return;
+        this.schoolClassService
+            .searchActive({
+                page: 0,
+                size: this.itemsPerPage
+            })
+            .filter((res: HttpResponse<ISchoolClass[]>) => res.body.length > 0)
+            .subscribe(
+                (res: HttpResponse<ISchoolClass[]>) => {
+                    this.schoolClasses = res.body;
+                    this.storeService.loadAll(this.schoolClasses);
+                    this.setSchoolClassActive(this.schoolClasses[0].id);
+                }, (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        return;
     }
 
     loadPage(page: number) {

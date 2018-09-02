@@ -7,6 +7,7 @@ import { Wiss3NTestModule } from '../../../test.module';
 import { TeachingSubjectUpdateComponent } from 'app/entities/teaching-subject/teaching-subject-update.component';
 import { TeachingSubjectService } from 'app/entities/teaching-subject/teaching-subject.service';
 import { TeachingSubject } from 'app/shared/model/teaching-subject.model';
+import { Wiss3NStoreModule } from 'app/store/store.module';
 
 describe('Component Tests', () => {
     describe('TeachingSubject Management Update Component', () => {
@@ -16,7 +17,7 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [Wiss3NTestModule],
+                imports: [Wiss3NTestModule, Wiss3NStoreModule],
                 declarations: [TeachingSubjectUpdateComponent]
             })
                 .overrideTemplate(TeachingSubjectUpdateComponent, '')

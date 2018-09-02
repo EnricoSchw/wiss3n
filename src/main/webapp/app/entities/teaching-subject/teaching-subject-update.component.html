@@ -56,7 +56,7 @@
                     <label class="form-control-label" jhiTranslate="wiss3NApp.teachingSubject.schoolClass" for="field_schoolClass">School Class</label>
                     <select class="form-control" id="field_schoolClass" name="schoolClass" [(ngModel)]="teachingSubject.schoolClass" >
                         <option [ngValue]="null"></option>
-                        <option ng-selected="{{activeSchoolClassId$ | async}} === schoolClassOption.id" [ngValue]="schoolClassOption.id === teachingSubject.schoolClass?.id ? teachingSubject.schoolClass : schoolClassOption" *ngFor="let schoolClassOption of schoolclasses; trackBy: trackSchoolClassById">{{schoolClassOption.name}}</option>
+                        <option [selected]="((activeSchoolClassId$ | async) === schoolClassOption.id)? true : null" [ngValue]="schoolClassOption.id === teachingSubject.schoolClass?.id ? teachingSubject.schoolClass : schoolClassOption" *ngFor="let schoolClassOption of schoolclasses; trackBy: trackSchoolClassById">{{schoolClassOption.name}}</option>
                     </select>
                 </div>
             </div>

@@ -5,5 +5,5 @@ export interface CalendarSubjectEvent {
   id: number;
   start: Moment;
   end: Moment;
-  subjectEvents: SubjectEvent[]
+  subjectEvents: SubjectEvent[];
 }

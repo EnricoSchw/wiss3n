@@ -43,7 +43,7 @@ export class TeachingSubjectUpdateComponent implements OnInit {
         this.principal.identity().then(account => {
             this.user = account;
         });
-        this.activeSchoolClassId$ = this.calendarSubjectEventStoreService.getActiveSchoolClassId().filter(id => id !== null);
+        // this.activeSchoolClassId$ = this.calendarSubjectEventStoreService.getActiveSchoolClassId().filter(id => id !== null);
         this.schoolClassService.query().subscribe(
             (res: HttpResponse<ISchoolClass[]>) => {
                 this.schoolclasses = res.body;
