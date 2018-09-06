@@ -1,86 +1,86 @@
 import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-import { StoreTeachingSubject } from './store-teaching-subject.model';
+import { ITeachingSubject } from 'app/shared/model/teaching-subject.model';
 
-export enum StoreTeachingSubjectActionTypes {
-  LoadStoreTeachingSubjects = '[StoreTeachingSubject] Load StoreTeachingSubjects',
-  AddStoreTeachingSubject = '[StoreTeachingSubject] Add StoreTeachingSubject',
-  UpsertStoreTeachingSubject = '[StoreTeachingSubject] Upsert StoreTeachingSubject',
-  AddStoreTeachingSubjects = '[StoreTeachingSubject] Add StoreTeachingSubjects',
-  UpsertStoreTeachingSubjects = '[StoreTeachingSubject] Upsert StoreTeachingSubjects',
-  UpdateStoreTeachingSubject = '[StoreTeachingSubject] Update StoreTeachingSubject',
-  UpdateStoreTeachingSubjects = '[StoreTeachingSubject] Update StoreTeachingSubjects',
-  DeleteStoreTeachingSubject = '[StoreTeachingSubject] Delete StoreTeachingSubject',
-  DeleteStoreTeachingSubjects = '[StoreTeachingSubject] Delete StoreTeachingSubjects',
-  ClearStoreTeachingSubjects = '[StoreTeachingSubject] Clear StoreTeachingSubjects'
+export enum TeachingSubjectActionTypes {
+  LoadTeachingSubjects = '[TeachingSubject] Load TeachingSubjects',
+  AddTeachingSubject = '[TeachingSubject] Add TeachingSubject',
+  UpsertTeachingSubject = '[TeachingSubject] Upsert TeachingSubject',
+  AddTeachingSubjects = '[TeachingSubject] Add TeachingSubjects',
+  UpsertTeachingSubjects = '[TeachingSubject] Upsert TeachingSubjects',
+  UpdateTeachingSubject = '[TeachingSubject] Update TeachingSubject',
+  UpdateTeachingSubjects = '[TeachingSubject] Update TeachingSubjects',
+  DeleteTeachingSubject = '[TeachingSubject] Delete TeachingSubject',
+  DeleteTeachingSubjects = '[TeachingSubject] Delete TeachingSubjects',
+  ClearTeachingSubjects = '[TeachingSubject] Clear TeachingSubjects'
 }
 
-export class LoadStoreTeachingSubjects implements Action {
-  readonly type = StoreTeachingSubjectActionTypes.LoadStoreTeachingSubjects;
+export class LoadTeachingSubjects implements Action {
+  readonly type = TeachingSubjectActionTypes.LoadTeachingSubjects;
 
-  constructor(public payload: { storeTeachingSubjects: StoreTeachingSubject[] }) {}
+  constructor(public payload: { teachingSubjects: ITeachingSubject[] }) {}
 }
 
-export class AddStoreTeachingSubject implements Action {
-  readonly type = StoreTeachingSubjectActionTypes.AddStoreTeachingSubject;
+export class AddTeachingSubject implements Action {
+  readonly type = TeachingSubjectActionTypes.AddTeachingSubject;
 
-  constructor(public payload: { storeTeachingSubject: StoreTeachingSubject }) {}
+  constructor(public payload: { teachingSubject: ITeachingSubject }) {}
 }
 
-export class UpsertStoreTeachingSubject implements Action {
-  readonly type = StoreTeachingSubjectActionTypes.UpsertStoreTeachingSubject;
+export class UpsertTeachingSubject implements Action {
+  readonly type = TeachingSubjectActionTypes.UpsertTeachingSubject;
 
-  constructor(public payload: { storeTeachingSubject: StoreTeachingSubject }) {}
+  constructor(public payload: { teachingSubject: ITeachingSubject }) {}
 }
 
-export class AddStoreTeachingSubjects implements Action {
-  readonly type = StoreTeachingSubjectActionTypes.AddStoreTeachingSubjects;
+export class AddTeachingSubjects implements Action {
+  readonly type = TeachingSubjectActionTypes.AddTeachingSubjects;
 
-  constructor(public payload: { storeTeachingSubjects: StoreTeachingSubject[] }) {}
+  constructor(public payload: { teachingSubjects: ITeachingSubject[] }) {}
 }
 
-export class UpsertStoreTeachingSubjects implements Action {
-  readonly type = StoreTeachingSubjectActionTypes.UpsertStoreTeachingSubjects;
+export class UpsertTeachingSubjects implements Action {
+  readonly type = TeachingSubjectActionTypes.UpsertTeachingSubjects;
 
-  constructor(public payload: { storeTeachingSubjects: StoreTeachingSubject[] }) {}
+  constructor(public payload: { teachingSubjects: ITeachingSubject[] }) {}
 }
 
-export class UpdateStoreTeachingSubject implements Action {
-  readonly type = StoreTeachingSubjectActionTypes.UpdateStoreTeachingSubject;
+export class UpdateTeachingSubject implements Action {
+  readonly type = TeachingSubjectActionTypes.UpdateTeachingSubject;
 
-  constructor(public payload: { storeTeachingSubject: Update<StoreTeachingSubject> }) {}
+  constructor(public payload: { teachingSubject: Update<ITeachingSubject> }) {}
 }
 
-export class UpdateStoreTeachingSubjects implements Action {
-  readonly type = StoreTeachingSubjectActionTypes.UpdateStoreTeachingSubjects;
+export class UpdateTeachingSubjects implements Action {
+  readonly type = TeachingSubjectActionTypes.UpdateTeachingSubjects;
 
-  constructor(public payload: { storeTeachingSubjects: Update<StoreTeachingSubject>[] }) {}
+  constructor(public payload: { teachingSubjects: Update<ITeachingSubject>[] }) {}
 }
 
-export class DeleteStoreTeachingSubject implements Action {
-  readonly type = StoreTeachingSubjectActionTypes.DeleteStoreTeachingSubject;
+export class DeleteTeachingSubject implements Action {
+  readonly type = TeachingSubjectActionTypes.DeleteTeachingSubject;
 
   constructor(public payload: { id: string }) {}
 }
 
-export class DeleteStoreTeachingSubjects implements Action {
-  readonly type = StoreTeachingSubjectActionTypes.DeleteStoreTeachingSubjects;
+export class DeleteTeachingSubjects implements Action {
+  readonly type = TeachingSubjectActionTypes.DeleteTeachingSubjects;
 
   constructor(public payload: { ids: string[] }) {}
 }
 
-export class ClearStoreTeachingSubjects implements Action {
-  readonly type = StoreTeachingSubjectActionTypes.ClearStoreTeachingSubjects;
+export class ClearTeachingSubjects implements Action {
+  readonly type = TeachingSubjectActionTypes.ClearTeachingSubjects;
 }
 
-export type StoreTeachingSubjectActions =
- LoadStoreTeachingSubjects
- | AddStoreTeachingSubject
- | UpsertStoreTeachingSubject
- | AddStoreTeachingSubjects
- | UpsertStoreTeachingSubjects
- | UpdateStoreTeachingSubject
- | UpdateStoreTeachingSubjects
- | DeleteStoreTeachingSubject
- | DeleteStoreTeachingSubjects
- | ClearStoreTeachingSubjects;
+export type TeachingSubjectActions =
+ LoadTeachingSubjects
+ | AddTeachingSubject
+ | UpsertTeachingSubject
+ | AddTeachingSubjects
+ | UpsertTeachingSubjects
+ | UpdateTeachingSubject
+ | UpdateTeachingSubjects
+ | DeleteTeachingSubject
+ | DeleteTeachingSubjects
+ | ClearTeachingSubjects;

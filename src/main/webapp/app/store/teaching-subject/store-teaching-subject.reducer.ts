@@ -1,12 +1,14 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { StoreTeachingSubject } from './store-teaching-subject.model';
-import { StoreTeachingSubjectActions, StoreTeachingSubjectActionTypes } from './store-teaching-subject.actions';
+import { ITeachingSubject } from 'app/shared/model/teaching-subject.model';
+import {
+    TeachingSubjectActions, TeachingSubjectActionTypes
+} from 'app/store/teaching-subject/store-teaching-subject.actions';
 
-export interface State extends EntityState<StoreTeachingSubject> {
+export interface State extends EntityState<ITeachingSubject> {
   // additional entities state properties
 }
 
-export const adapter: EntityAdapter<StoreTeachingSubject> = createEntityAdapter<StoreTeachingSubject>();
+export const adapter: EntityAdapter<ITeachingSubject> = createEntityAdapter<ITeachingSubject>();
 
 export const initialState: State = adapter.getInitialState({
   // additional entity state properties
@@ -14,46 +16,46 @@ export const initialState: State = adapter.getInitialState({
 
 export function reducer(
   state = initialState,
-  action: StoreTeachingSubjectActions
+  action: TeachingSubjectActions
 ): State {
   switch (action.type) {
-    case StoreTeachingSubjectActionTypes.AddStoreTeachingSubject: {
-      return adapter.addOne(action.payload.storeTeachingSubject, state);
+    case TeachingSubjectActionTypes.AddTeachingSubject: {
+      return adapter.addOne(action.payload.teachingSubject, state);
     }
 
-    case StoreTeachingSubjectActionTypes.UpsertStoreTeachingSubject: {
-      return adapter.upsertOne(action.payload.storeTeachingSubject, state);
+    case TeachingSubjectActionTypes.UpsertTeachingSubject: {
+      return adapter.upsertOne(action.payload.teachingSubject, state);
     }
 
-    case StoreTeachingSubjectActionTypes.AddStoreTeachingSubjects: {
-      return adapter.addMany(action.payload.storeTeachingSubjects, state);
+    case TeachingSubjectActionTypes.AddTeachingSubjects: {
+      return adapter.addMany(action.payload.teachingSubjects, state);
     }
 
-    case StoreTeachingSubjectActionTypes.UpsertStoreTeachingSubjects: {
-      return adapter.upsertMany(action.payload.storeTeachingSubjects, state);
+    case TeachingSubjectActionTypes.UpsertTeachingSubjects: {
+      return adapter.upsertMany(action.payload.teachingSubjects, state);
     }
 
-    case StoreTeachingSubjectActionTypes.UpdateStoreTeachingSubject: {
-      return adapter.updateOne(action.payload.storeTeachingSubject, state);
+    case TeachingSubjectActionTypes.UpdateTeachingSubject: {
+      return adapter.updateOne(action.payload.teachingSubject, state);
     }
 
-    case StoreTeachingSubjectActionTypes.UpdateStoreTeachingSubjects: {
-      return adapter.updateMany(action.payload.storeTeachingSubjects, state);
+    case TeachingSubjectActionTypes.UpdateTeachingSubjects: {
+      return adapter.updateMany(action.payload.teachingSubjects, state);
     }
 
-    case StoreTeachingSubjectActionTypes.DeleteStoreTeachingSubject: {
+    case TeachingSubjectActionTypes.DeleteTeachingSubject: {
       return adapter.removeOne(action.payload.id, state);
     }
 
-    case StoreTeachingSubjectActionTypes.DeleteStoreTeachingSubjects: {
+    case TeachingSubjectActionTypes.DeleteTeachingSubjects: {
       return adapter.removeMany(action.payload.ids, state);
     }
 
-    case StoreTeachingSubjectActionTypes.LoadStoreTeachingSubjects: {
-      return adapter.addAll(action.payload.storeTeachingSubjects, state);
+    case TeachingSubjectActionTypes.LoadTeachingSubjects: {
+      return adapter.addAll(action.payload.teachingSubjects, state);
     }
 
-    case StoreTeachingSubjectActionTypes.ClearStoreTeachingSubjects: {
+    case TeachingSubjectActionTypes.ClearTeachingSubjects: {
       return adapter.removeAll(state);
     }
 
