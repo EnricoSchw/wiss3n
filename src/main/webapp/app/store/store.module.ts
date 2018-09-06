@@ -14,7 +14,7 @@ import { CalendarSubjectEventStoreService } from 'app/store/calendar-subject-eve
         CommonModule,
         StoreModule.forRoot(reducers, {metaReducers}),
         APP_ENVIRONMENT !== 'production' ? StoreDevtoolsModule.instrument() : [],
-        EffectsModule.forRoot([AppEffects])
+        EffectsModule.forRoot([AppEffects]),
     ],
     providers: [
         CalendarSubjectEventEntityService,

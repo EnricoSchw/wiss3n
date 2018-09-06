@@ -1,5 +1,6 @@
 import { EventColor } from 'calendar-utils';
 import * as RRule from 'rrule';
+import { TeachingSubject } from 'app/shared/model/teaching-subject.model';
 
 export interface SubjectHourData {
     id: number;
@@ -10,6 +11,7 @@ export interface SubjectHourData {
     day: RRule.Weekday;
     start: Date;
     end: Date;
+    teachingSubject: TeachingSubject
 }
 
 export interface SubjectHour {

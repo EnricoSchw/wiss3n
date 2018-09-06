@@ -83,14 +83,15 @@
         [tooltipPlacement]="tooltipPlacement"
         [tooltipEvent]="weekEvent.event"
         [tooltipTemplate]="tooltipTemplate"
-        [tooltipAppendToBody]="tooltipAppendToBody"
-        (mwlClick)="eventClicked.emit()">
+        [tooltipAppendToBody]="tooltipAppendToBody">
+        <!--(mwlClick)="eventClicked.emit()">-->
         <mwl-calendar-event-actions [event]="weekEvent.event"></mwl-calendar-event-actions>
         <mwl-calendar-event-title
             [event]="weekEvent.event"
             [customTemplate]="eventTitleTemplate"
             view="week">
         </mwl-calendar-event-title>
+        <jhi-select-teaching-subject *ngIf="!weekEvent.event.meta.subjectHour.teachingSubject"></jhi-select-teaching-subject>
         <div *ngFor="let taskEvent of weekEvent.event.meta.events; trackBy:trackByIndex" class="xx">
             <span class="custom-event-month-subject" [ngStyle]="{'color': taskEvent.color.primary}">{{convertTypeToString(taskEvent.meta.task.type)}}</span>
             {{taskEvent.title}}

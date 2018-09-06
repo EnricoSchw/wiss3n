@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { CalendarSchoolClassListComponent } from './calendar-entities/calendar-school-class-list.component';
 import { Wiss3NSharedModule } from 'app/shared';
 import { CalendarTeachingSubjectListComponent } from './calendar-entities/calendar-teaching-subject-list.component';
+import { SelectTeachingSubjectComponent } from './calendar/select-teaching-subject/select-teaching-subject.component';
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import { CalendarTeachingSubjectListComponent } from './calendar-entities/calend
         CalendarBoardComponent,
         SubjectHourViewComponent,
         SubjectHourEventViewComponent,
-        CalendarTeachingSubjectListComponent
+        CalendarTeachingSubjectListComponent,
+        SelectTeachingSubjectComponent
     ],
     providers: [CalendarService],
     exports: [CalendarBoardComponent],

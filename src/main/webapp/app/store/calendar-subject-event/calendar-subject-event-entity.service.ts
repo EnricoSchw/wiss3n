@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 import { SubjectEvent } from 'app/shared/model/event.model';
 import * as moment from 'moment';
 import { ISchoolClass } from 'app/shared/model/school-class.model';
-import { freeTeachingSubject } from 'app/shared/model/teaching-subject.model';
+import { freeTeachingSubject, TeachingSubject } from 'app/shared/model/teaching-subject.model';
 
 const subjectColor = <EventColor>{
     primary: '#b7b7b7',
@@ -31,6 +31,7 @@ export class CalendarSubjectEventEntityService {
         const defaulTeachingSubject = freeTeachingSubject;
 
         teachingHours.forEach(teachingHour => {
+
             subjectHourData.push(
                 {
                     id: teachingHour.id,
@@ -39,6 +40,7 @@ export class CalendarSubjectEventEntityService {
                     hour: getSubjectHourByNumber(teachingHour.hour),
                     day: getWeekdayByNumber(teachingHour.weekday),
                     color: subjectColor,
+                    teachingSubject: teachingHour.teachingSubject,
                     start,
                     end
                 }
