@@ -8,6 +8,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { CalendarSubjectEventEntityService } from 'app/store/calendar-subject-event/calendar-subject-event-entity.service';
 import { CalendarSubjectEventStoreService } from 'app/store/calendar-subject-event/calendar-subject-event-store.service';
+import { StoreTeachingSubjectService } from 'app/store/teaching-subject/store-teaching-subject.service';
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import { CalendarSubjectEventStoreService } from 'app/store/calendar-subject-eve
     ],
     providers: [
         CalendarSubjectEventEntityService,
-        CalendarSubjectEventStoreService
+        CalendarSubjectEventStoreService,
+        StoreTeachingSubjectService
     ],
     declarations: []
 })
