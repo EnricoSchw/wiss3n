@@ -60,13 +60,13 @@ export class UpdateTeachingSubjects implements Action {
 export class DeleteTeachingSubject implements Action {
   readonly type = TeachingSubjectActionTypes.DeleteTeachingSubject;
 
-  constructor(public payload: { id: string }) {}
+  constructor(public payload: { id: number }) {}
 }
 
 export class DeleteTeachingSubjects implements Action {
   readonly type = TeachingSubjectActionTypes.DeleteTeachingSubjects;
 
-  constructor(public payload: { ids: string[] }) {}
+  constructor(public payload: { ids: number[] }) {}
 }
 
 export class ClearTeachingSubjects implements Action {

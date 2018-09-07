@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ITeachingSubject } from 'app/shared/model/teaching-subject.model';
 import { select, Store } from '@ngrx/store';
-import { State, selectAll } from 'app/store/teaching-subject/store-teaching-subject.reducer';
-import { LoadTeachingSubjects, UpsertTeachingSubject } from 'app/store/teaching-subject/store-teaching-subject.actions';
+import {
+    State, selectAll, selectAllTeachingSubjects,
+} from 'app/store/teaching-subject/store-teaching-subject.reducer';
+import {
+    DeleteTeachingSubject,
+    DeleteTeachingSubjects, LoadTeachingSubjects, UpsertTeachingSubject
+} from 'app/store/teaching-subject/store-teaching-subject.actions';
 import { Observable } from 'rxjs/Observable';
+import { Dictionary } from '@ngrx/entity';
 
 @Injectable({
     providedIn: 'root'
@@ -17,11 +23,19 @@ export class StoreTeachingSubjectService {
         this.store.dispatch(new LoadTeachingSubjects({teachingSubjects}));
     }
 
+    public add(teachingSubject: ITeachingSubject) {
+        this.store.dispatch(new UpsertTeachingSubject({teachingSubject}));
+    }
+
+    public delete(id: number) {
+        this.store.dispatch(new DeleteTeachingSubject({id}));
+    }
+
     public upsert(teachingSubject: ITeachingSubject) {
         this.store.dispatch(new UpsertTeachingSubject({teachingSubject}));
     }
 
     public getAll(): Observable<ITeachingSubject[]> {
-        return this.store.pipe(select(selectAll));
+        return this.store.pipe(select(selectAllTeachingSubjects));
     }
 }

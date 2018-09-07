@@ -1,9 +1,17 @@
 <div class="form-group">
     <select class="custom-select" required>
-        <option value="">Wähle eine Fach</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        <!--<option value="">Wähle ein Fach</option>-->
+        <!--<option value="1">One</option>-->
+        <!--<option value="2">Two</option>-->
+        <!--<option value="3">Three</option>-->
+
+        <option *ngFor="let ts of (teachingSubjects$ | async)"
+                [value]="ts.id"
+                [attr.selected]="currentTeachingSubject.id==ts.id ? true : null">
+            {{ts.name}}
+        </option>
+
+
     </select>
 </div>
 

@@ -67,6 +67,18 @@ export function reducer(
     }
 }
 
+// Selectors: CalendarSubjectEvent
+export const selectTeachingSubjectState = createFeatureSelector<State>('teachingSubject');
+
+export const selectBookState = createSelector(
+    selectTeachingSubjectState,
+    state => state.entities
+);
+
+
+
+
+
 export const {
     selectIds,
     selectEntities,
@@ -75,10 +87,12 @@ export const {
 } = adapter.getSelectors();
 
 
-// Selectors: CalendarSubjectEvent
-export const selectTeachingSubjectState = createFeatureSelector<State>('teachingSubject');
+
 
 export const selectAllTeachingSubjects = createSelector(
     selectTeachingSubjectState,
     selectAll
 );
+
+
+
