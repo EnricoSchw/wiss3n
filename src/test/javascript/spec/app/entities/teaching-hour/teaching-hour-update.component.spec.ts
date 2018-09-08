@@ -7,16 +7,19 @@ import { Wiss3NTestModule } from '../../../test.module';
 import { TeachingHourUpdateComponent } from 'app/entities/teaching-hour/teaching-hour-update.component';
 import { TeachingHourService } from 'app/entities/teaching-hour/teaching-hour.service';
 import { TeachingHour } from 'app/shared/model/teaching-hour.model';
+import { TeachingSubjectService } from 'app/entities/teaching-subject/teaching-subject.service';
 
 describe('Component Tests', () => {
     describe('TeachingHour Management Update Component', () => {
         let comp: TeachingHourUpdateComponent;
         let fixture: ComponentFixture<TeachingHourUpdateComponent>;
         let service: TeachingHourService;
+        const mockTeachingSubjectService = {};
 
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [Wiss3NTestModule],
+                providers: [{provide: TeachingSubjectService, useValue: mockTeachingSubjectService}],
                 declarations: [TeachingHourUpdateComponent]
             })
                 .overrideTemplate(TeachingHourUpdateComponent, '')
@@ -33,7 +36,7 @@ describe('Component Tests', () => {
                 fakeAsync(() => {
                     // GIVEN
                     const entity = new TeachingHour(123);
-                    spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
+                    spyOn(service, 'update').and.returnValue(of(new HttpResponse({body: entity})));
                     comp.teachingHour = entity;
                     // WHEN
                     comp.save();
@@ -50,7 +53,7 @@ describe('Component Tests', () => {
                 fakeAsync(() => {
                     // GIVEN
                     const entity = new TeachingHour();
-                    spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
+                    spyOn(service, 'create').and.returnValue(of(new HttpResponse({body: entity})));
                     comp.teachingHour = entity;
                     // WHEN
                     comp.save();

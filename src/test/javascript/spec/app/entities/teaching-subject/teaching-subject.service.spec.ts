@@ -4,19 +4,30 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { TeachingSubjectService } from 'app/entities/teaching-subject/teaching-subject.service';
 import { TeachingSubject } from 'app/shared/model/teaching-subject.model';
 import { SERVER_API_URL } from 'app/app.constants';
+import { StoreTeachingSubjectService } from 'app/store/teaching-subject/store-teaching-subject.service';
 
 describe('Service Tests', () => {
     describe('TeachingSubject Service', () => {
         let injector: TestBed;
         let service: TeachingSubjectService;
         let httpMock: HttpTestingController;
+        let store: StoreTeachingSubjectService;
+        const storeMock = {
+            add: () => null,
+            upsert: () => null,
+            delete: () => null
+        };
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [HttpClientTestingModule]
+                imports: [HttpClientTestingModule],
+                providers: [
+                    {provide: StoreTeachingSubjectService, useValue: storeMock}
+                    ]
             });
             injector = getTestBed();
             service = injector.get(TeachingSubjectService);
+            store = injector.get(StoreTeachingSubjectService);
             httpMock = injector.get(HttpTestingController);
         });
 
@@ -31,8 +42,10 @@ describe('Service Tests', () => {
             });
 
             it('should create a TeachingSubject', () => {
+                spyOn(store, 'add');
                 service.create(new TeachingSubject(null)).subscribe(received => {
                     expect(received.body.id).toEqual(null);
+                    expect(store.add).toHaveBeenCalledWith(received.body);
                 });
 
                 const req = httpMock.expectOne({ method: 'POST' });
@@ -40,8 +53,10 @@ describe('Service Tests', () => {
             });
 
             it('should update a TeachingSubject', () => {
+                spyOn(store, 'upsert');
                 service.update(new TeachingSubject(123)).subscribe(received => {
                     expect(received.body.id).toEqual(123);
+                    expect(store.upsert).toHaveBeenCalledWith(received.body);
                 });
 
                 const req = httpMock.expectOne({ method: 'PUT' });
@@ -67,8 +82,10 @@ describe('Service Tests', () => {
             });
 
             it('should delete a TeachingSubject', () => {
+                spyOn(store, 'delete');
                 service.delete(123).subscribe(received => {
                     expect(received.url).toContain('/' + 123);
+                    expect(store.delete).toHaveBeenCalledWith(123);
                 });
 
                 const req = httpMock.expectOne({ method: 'DELETE' });

@@ -11,7 +11,7 @@ import * as fromStoreTeachingSubject from 'app/store/teaching-subject/store-teac
 
 export interface State {
     calendarSubjectEvent: fromCalendarSubjectEvent.State;
-    teachingSubject: fromStoreTeachingSubject.State
+    teachingSubject: fromStoreTeachingSubject.State;
 }
 
 export const reducers: ActionReducerMap<State> = {

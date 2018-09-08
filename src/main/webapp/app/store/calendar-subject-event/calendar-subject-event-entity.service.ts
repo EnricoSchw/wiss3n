@@ -32,15 +32,19 @@ export class CalendarSubjectEventEntityService {
 
         teachingHours.forEach(teachingHour => {
 
+            const teachingSubject = (teachingHour.teachingSubject !== null && teachingHour.teachingSubject !== undefined)
+                ? teachingHour.teachingSubject
+                : defaulTeachingSubject;
+
             subjectHourData.push(
                 {
                     id: teachingHour.id,
-                    title: (teachingHour.teachingSubject !== null && teachingHour.teachingSubject !== undefined) ? teachingHour.teachingSubject.name : defaulTeachingSubject.name,
-                    prefix: (teachingHour.teachingSubject !== null && teachingHour.teachingSubject !== undefined) ? teachingHour.teachingSubject.prefix : defaulTeachingSubject.prefix,
+                    title: teachingSubject.name,
+                    prefix: teachingSubject.prefix,
                     hour: getSubjectHourByNumber(teachingHour.hour),
                     day: getWeekdayByNumber(teachingHour.weekday),
                     color: subjectColor,
-                    teachingSubject: teachingHour.teachingSubject,
+                    teachingSubject,
                     start,
                     end
                 }

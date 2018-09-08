@@ -6,7 +6,7 @@ import { Observable, of } from 'rxjs';
 import { Wiss3NTestModule } from '../../../test.module';
 import { TeachingSubjectUpdateComponent } from 'app/entities/teaching-subject/teaching-subject-update.component';
 import { TeachingSubjectService } from 'app/entities/teaching-subject/teaching-subject.service';
-import { TeachingSubject } from 'app/shared/model/teaching-subject.model';
+import { ITeachingSubject, TeachingSubject } from 'app/shared/model/teaching-subject.model';
 import { Wiss3NStoreModule } from 'app/store/store.module';
 
 describe('Component Tests', () => {
@@ -14,11 +14,16 @@ describe('Component Tests', () => {
         let comp: TeachingSubjectUpdateComponent;
         let fixture: ComponentFixture<TeachingSubjectUpdateComponent>;
         let service: TeachingSubjectService;
+        const mockTeachingSubjectService = {
+            update: (teachingSubject: ITeachingSubject) => null,
+            create: (teachingSubject: ITeachingSubject) => null
+        };
 
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [Wiss3NTestModule, Wiss3NStoreModule],
-                declarations: [TeachingSubjectUpdateComponent]
+                declarations: [TeachingSubjectUpdateComponent],
+                providers: [{provide: TeachingSubjectService, useValue: mockTeachingSubjectService}]
             })
                 .overrideTemplate(TeachingSubjectUpdateComponent, '')
                 .compileComponents();

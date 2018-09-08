@@ -11,7 +11,7 @@ export interface SubjectHourData {
     day: RRule.Weekday;
     start: Date;
     end: Date;
-    teachingSubject: TeachingSubject
+    teachingSubject: TeachingSubject;
 }
 
 export interface SubjectHour {

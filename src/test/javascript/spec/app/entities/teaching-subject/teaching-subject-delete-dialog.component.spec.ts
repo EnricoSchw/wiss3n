@@ -7,19 +7,22 @@ import { JhiEventManager } from 'ng-jhipster';
 import { Wiss3NTestModule } from '../../../test.module';
 import { TeachingSubjectDeleteDialogComponent } from 'app/entities/teaching-subject/teaching-subject-delete-dialog.component';
 import { TeachingSubjectService } from 'app/entities/teaching-subject/teaching-subject.service';
+import { StoreTeachingSubjectService } from 'app/store/teaching-subject/store-teaching-subject.service';
 
 describe('Component Tests', () => {
     describe('TeachingSubject Management Delete Component', () => {
         let comp: TeachingSubjectDeleteDialogComponent;
         let fixture: ComponentFixture<TeachingSubjectDeleteDialogComponent>;
         let service: TeachingSubjectService;
+        const mockTeachingSubjectService = {delete: (id: number) => null};
         let mockEventManager: any;
         let mockActiveModal: any;
 
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [Wiss3NTestModule],
-                declarations: [TeachingSubjectDeleteDialogComponent]
+                declarations: [TeachingSubjectDeleteDialogComponent],
+                providers: [{provide: TeachingSubjectService, useValue: mockTeachingSubjectService}]
             })
                 .overrideTemplate(TeachingSubjectDeleteDialogComponent, '')
                 .compileComponents();
