@@ -38,7 +38,7 @@ export class CalendarSubjectEventEntityService {
 
             subjectHourData.push(
                 {
-                    id: teachingHour.id,
+                    teachingHour,
                     title: teachingSubject.name,
                     prefix: teachingSubject.prefix,
                     hour: getSubjectHourByNumber(teachingHour.hour),
@@ -58,26 +58,26 @@ export class CalendarSubjectEventEntityService {
         return moment('2018-04-01T' + timeString, 'YYYY-MM-DD[T]HH:mm:ss').toDate();
     }
 
-    private createSubjectEventListFromSubjectHours(subjectHourList: SubjectHourData[]): SubjectEvent[] {
+    private createSubjectEventListFromSubjectHours(subjectHourDataList: SubjectHourData[]): SubjectEvent[] {
         const eventList: SubjectEvent[] = [];
-        subjectHourList.forEach(subject => {
+        subjectHourDataList.forEach(subjectHourData => {
             eventList.push(<SubjectEvent>{
-                title: subject.title,
-                prefix: subject.prefix,
-                color: subject.color,
-                start: this.setSubjectHourTime(subject.hour.start),
-                end: this.setSubjectHourTime(subject.hour.end),
+                title: subjectHourData.title,
+                prefix: subjectHourData.prefix,
+                color: subjectHourData.color,
+                start: this.setSubjectHourTime(subjectHourData.hour.start),
+                end: this.setSubjectHourTime(subjectHourData.hour.end),
                 meta: {
                     type: 'subject',
                     isActive: false,
-                    subjectHour: subject,
+                    subjectHourData,
                     events: []
                 },
                 rrule: {
-                    dtstart: startOfWeek(subject.start),
-                    until: endOfWeek(subject.end),
+                    dtstart: startOfWeek(subjectHourData.start),
+                    until: endOfWeek(subjectHourData.end),
                     freq: RRule.WEEKLY,
-                    byweekday: [subject.day]
+                    byweekday: [subjectHourData.day]
                 }
             });
         });

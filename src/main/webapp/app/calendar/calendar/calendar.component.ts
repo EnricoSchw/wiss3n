@@ -42,7 +42,7 @@ export class CalendarComponent implements OnInit {
 
     public ngOnInit(): void {
 
-        const events = this.service.loadTasks();
+        const events = [];//this.service.loadTasks();
         this.weekEvents$ = this.service
             .loadSubjectEvents()
             .map(subjects => {
@@ -93,7 +93,7 @@ export class CalendarComponent implements OnInit {
             const rule: RRule = new RRule(subjectHour.rrule);
             let eventListOfSubject: CalendarEvent<TaskEventMeta>[] = [];
             nextEvents = nextEvents.reduce((eventList: CalendarEvent<TaskEventMeta>[], current) => {
-                if (current.meta.subjectHour.id === subjectHour.meta.subjectHour.id) {
+                if (current.meta.subjectHourData.teachingSubject.id === subjectHour.meta.subjectHourData.teachingSubject.id) {
                     eventListOfSubject.push(current);
                 } else {
                     eventList.push(current);

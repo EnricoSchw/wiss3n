@@ -16,7 +16,7 @@ export const events = <CalendarEvent<TaskEventMeta>[]>[
                 content: '-'
             },
             isActive: false,
-            subjectHour: subjectHours[1]
+            subjectHourData: subjectHours[1]
         }
     },
     {
@@ -32,7 +32,7 @@ export const events = <CalendarEvent<TaskEventMeta>[]>[
 
             },
             isActive: false,
-            subjectHour: subjectHours[3]
+            subjectHourData: subjectHours[3]
         }
     }
 ];

@@ -1,21 +1,21 @@
-<div class="form-group">
-    <select class="custom-select" required>
-        <!--<option value="">Wähle ein Fach</option>-->
-        <!--<option value="1">One</option>-->
-        <!--<option value="2">Two</option>-->
-        <!--<option value="3">Three</option>-->
+<div [hidden]="submitted" >
+    <form name="selectForm" role="form" novalidate #selectForm="ngForm" (ngSubmit)="onSubmit()">
 
-        <option *ngFor="let ts of (teachingSubjects$ | async)"
-                [value]="ts.id"
-                [attr.selected]="currentTeachingSubject.id==ts.id ? true : null">
-            {{ts.name}}
-        </option>
+        <div class="form-group">
+            <select class="form-control" id="field_teachingSubject" required [(ngModel)]="teachingSubject" name="teachingSubject">
+                <option *ngFor="let ts of (teachingSubjects$ | async)" [ngValue]="ts">{{ts.name}}</option>
+            </select>
+        </div>
 
-
-    </select>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">OK</button>
+        </div>
+    </form>
 </div>
 
-<div class="form-group">
-    <button>OK</button>
+<div [hidden]="!submitted">
+    <div class="cal-event-title">
+        <div class="col-xs-9">{{ teachingSubject.name }}</div>
+        <div class="col-xs-3 pull-left"><button class="btn btn-primary" (click)="submitted=false">Edit</button></div>
+    </div>
 </div>
-_

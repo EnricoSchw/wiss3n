@@ -7,12 +7,12 @@ import { RRule } from 'rrule';
 export interface TaskEventMeta {
     isActive: boolean;
     task: Task;
-    subjectHour: SubjectHourData;
+    subjectHourData: SubjectHourData;
 }
 
 export interface SubjectEventMeta {
     isActive: boolean;
-    subjectHour: SubjectHourData;
+    subjectHourData: SubjectHourData;
     events: CalendarEvent<TaskEventMeta>[];
 }
 

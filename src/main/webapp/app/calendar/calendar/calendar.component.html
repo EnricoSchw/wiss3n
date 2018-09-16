@@ -60,7 +60,7 @@
     </div>
     <small class="custom-event-month" *ngFor="let event of day.events; index as i; first as isFirst">
         <span>
-            <span class="custom-event-month-subject" [ngStyle]="{'color': event.color.primary}">{{event.meta.subjectHour.prefix}}</span>
+            <span class="custom-event-month-subject" [ngStyle]="{'color': event.color.primary}">{{event.meta.subjectHourData.prefix}}</span>
             {{event.title}}
         </span>
     </small>
@@ -86,24 +86,26 @@
         [tooltipAppendToBody]="tooltipAppendToBody">
         <!--(mwlClick)="eventClicked.emit()">-->
         <mwl-calendar-event-actions [event]="weekEvent.event"></mwl-calendar-event-actions>
-        <mwl-calendar-event-title
-            [event]="weekEvent.event"
-            [customTemplate]="eventTitleTemplate"
-            view="week">
-        </mwl-calendar-event-title>
-        <jhi-select-teaching-subject *ngIf="!weekEvent.event.meta.subjectHour.teachingSubject"></jhi-select-teaching-subject>
+        <!--<mwl-calendar-event-title-->
+            <!--[event]="weekEvent.event"-->
+            <!--[customTemplate]="eventTitleTemplate"-->
+            <!--view="week">-->
+        <!--</mwl-calendar-event-title>-->
+        <!--<jhi-select-teaching-subject *ngIf="!weekEvent.event.meta.subjectHour.teachingSubject"></jhi-select-teaching-subject>-->
+        <jhi-select-teaching-subject [subjectHourData]="weekEvent.event.meta.subjectHourData"></jhi-select-teaching-subject>
         <div *ngFor="let taskEvent of weekEvent.event.meta.events; trackBy:trackByIndex" class="xx">
             <span class="custom-event-month-subject" [ngStyle]="{'color': taskEvent.color.primary}">{{convertTypeToString(taskEvent.meta.task.type)}}</span>
             {{taskEvent.title}}
         </div>
-    </div>
+    </div
+>
 </ng-template>
 
 <ng-template
     #customEventTitleTemplate
     let-event="event"
     let-view="view">
-    <span class="cal-event-title-number">{{event.meta.subjectHour.hour.index}}</span>
+    <span class="cal-event-title-number">{{event.meta.subjectHourData.hour.index}}</span>
     <span class="cal-event-title">{{ event.title }}</span>
 </ng-template>
 
