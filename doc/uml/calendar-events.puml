@@ -1,6 +1,6 @@
 @startuml
 
-package "Objects Collections" #DDDDDD {
+package "Backend Model" #DDDDDD {
 class SchoolClass {
     TeachingHour[] teachingHour
     TeachingSubject[] teachingSubject
@@ -17,12 +17,15 @@ class TeachingSubject {
     TeachingHour[] teachingHour
 }
 
+class Task
+
 SchoolClass "1" --> "50" TeachingHour
 SchoolClass "1" --> "0..*" TeachingSubject
 TeachingHour "0..*" --> "1" TeachingSubject
+Task "0..*" --> "1" TeachingHour
 }
 
-package "Calendar Event Collections" #DDDDDD {
+package "Frontend Model" #DDDDDD {
 class SubjectHourData {
     Number: day <Weekday>
     TeachingHour: teachingHour
@@ -37,4 +40,34 @@ SubjectHourData "1" *-- "1" TeachingHour
 
 SubjectHourData "1" --> "0..1"  TeachingSubject
 }
+
+package "Calendar Model" #DDDDDD {
+class CalendarEvent<? extends EventMeta>
+class EventMeta
+class SubjectEventMeta {
+    events: CalendarEvent<TaskEventMeta>[]
+}
+class TaskEventMeta {
+    task: Task
+}
+
+CalendarEvent *- EventMeta
+SubjectEvent *- SubjectEventMeta
+
+
+class SubjectEvent {
+
+}
+
+
+EventMeta <|--  SubjectEventMeta
+EventMeta <|--  TaskEventMeta
+CalendarEvent <|-- SubjectEvent
+
+SubjectEventMeta --> CalendarEvent
+}
+
+TaskEventMeta --> Task
+
+EventMeta --> SubjectHourData
 @enduml

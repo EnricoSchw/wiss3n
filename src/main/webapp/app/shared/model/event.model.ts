@@ -4,15 +4,15 @@ import { SubjectHourData } from './subject-hour.model';
 // import * as RRule from 'rrule';
 import { RRule } from 'rrule';
 
-export interface TaskEventMeta {
+export interface EventMeta {
     isActive: boolean;
+    subjectHourData: SubjectHourData
+}
+export interface TaskEventMeta extends EventMeta{
     task: Task;
-    subjectHourData: SubjectHourData;
 }
 
-export interface SubjectEventMeta {
-    isActive: boolean;
-    subjectHourData: SubjectHourData;
+export interface SubjectEventMeta extends EventMeta {
     events: CalendarEvent<TaskEventMeta>[];
 }
 
