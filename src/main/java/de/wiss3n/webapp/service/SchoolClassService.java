@@ -94,7 +94,11 @@ public class SchoolClassService {
         return SecurityUtils.getCurrentUserLogin()
             .flatMap(userRepository::findOneByLogin)
             .map(User::getLogin)
-            .map((String login) -> schoolClassSearchRepository.findActive(login, pageable))
+            .map((String login) -> schoolClassRepository.findAllByUserIsCurrentUserAndActive(login, pageable))
+            .map((Page<SchoolClass> page) -> page.map((SchoolClass schoolClass) -> {
+                schoolClass.setTeachingHours(teachingHourService.findBySchoolClass(schoolClass));
+                return schoolClass;
+            }))
             .orElse(null);
     }
 

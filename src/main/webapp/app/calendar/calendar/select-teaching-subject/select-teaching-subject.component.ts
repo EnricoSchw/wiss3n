@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { StoreTeachingSubjectService } from 'app/store/teaching-subject/store-teaching-subject.service';
 import { Observable } from 'rxjs/Observable';
-import { ITeachingSubject } from 'app/shared/model/teaching-subject.model';
+import { freeTeachingSubject, ITeachingSubject } from 'app/shared/model/teaching-subject.model';
 import { TeachingHourService } from 'app/entities/teaching-hour/teaching-hour.service';
 import { ITeachingHour, TeachingHour } from 'app/shared/model/teaching-hour.model';
 import { SubjectHourData } from 'app/shared/model/subject-hour.model';
@@ -25,7 +25,7 @@ export class SelectTeachingSubjectComponent implements OnInit {
 
     ngOnInit() {
         this.teachingSubjects$ = this.store.getAll();
-        if (this.subjectHourData.teachingSubject) {
+        if (this.subjectHourData.teachingSubject.id !== freeTeachingSubject.id) {
             this.submitted = true;
             this.teachingSubject = this.subjectHourData.teachingSubject;
         }

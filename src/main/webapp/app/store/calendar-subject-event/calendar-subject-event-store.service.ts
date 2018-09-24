@@ -13,6 +13,7 @@ import {
     LoadCalendarSubjectEvents
 } from 'app/store/calendar-subject-event/calendar-subject-event.actions';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs-compat/add/observable/from';
 
 @Injectable({
     providedIn: 'root'
@@ -26,6 +27,10 @@ export class CalendarSubjectEventStoreService {
 
     public loadAll(schoolClassList: ISchoolClass[]) {
         const calendarSubjectEvents: CalendarSubjectEvent[] = [];
+
+        // Observable
+        //     .from(schoolClassList)
+        //     .flatMap()
 
         schoolClassList.forEach(schoolClass => {
             const subjectEvents: SubjectEvent[] = this.entityService.createSubjectEventsForSchoolClass(schoolClass);

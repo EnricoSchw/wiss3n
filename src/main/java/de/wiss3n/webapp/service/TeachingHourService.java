@@ -2,6 +2,7 @@ package de.wiss3n.webapp.service;
 
 import de.wiss3n.webapp.domain.SchoolClass;
 import de.wiss3n.webapp.domain.TeachingHour;
+import de.wiss3n.webapp.domain.TeachingSubject;
 import de.wiss3n.webapp.domain.User;
 import de.wiss3n.webapp.repository.TeachingHourRepository;
 import de.wiss3n.webapp.repository.search.TeachingHourSearchRepository;
@@ -16,10 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.text.DateFormatSymbols;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -93,14 +91,15 @@ public class TeachingHourService {
     /**
      * Search for the teachingHour corresponding to the query.
      *
-     * @param query the query of the search
+     * @param query    the query of the search
      * @param pageable the pagination information
      * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<TeachingHour> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of TeachingHours for query {}", query);
-        return teachingHourSearchRepository.search(queryStringQuery(query), pageable);    }
+        return teachingHourSearchRepository.search(queryStringQuery(query), pageable);
+    }
 
 
     @Transactional(readOnly = true)
@@ -109,16 +108,16 @@ public class TeachingHourService {
         return SecurityUtils.getCurrentUserLogin()
             .map((String login) -> teachingHourSearchRepository.findAllBySchoolClass(schoolClassId, login, pageable))
             .orElse(null);
-        }
+    }
 
 
     @Transactional()
     public SchoolClass createTeachingHour(SchoolClass schoolClass) {
         List list = new ArrayList<String>();
-        String[] weekdays = { "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"};
+        String[] weekdays = {"Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"};
 
-        for(int weekday= 1; weekday <= 5; weekday++) {
-            for(int hour= 1; hour <= 10; hour++) {
+        for (int weekday = 1; weekday <= 5; weekday++) {
+            for (int hour = 1; hour <= 10; hour++) {
                 TeachingHour teachingHour = new TeachingHour();
                 teachingHour.setName(weekdays[weekday - 1] + ", " + hour + ". Stunde");
                 teachingHour.setHour(hour);
@@ -133,4 +132,8 @@ public class TeachingHourService {
         return schoolClass;
     }
 
+    @Transactional(readOnly = true)
+    public Set<TeachingHour> findBySchoolClass(SchoolClass schoolClass) {
+        return this.teachingHourRepository.findAllBySchoolClass(schoolClass);
+    }
 }
