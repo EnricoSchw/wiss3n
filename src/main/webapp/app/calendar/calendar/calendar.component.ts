@@ -42,7 +42,7 @@ export class CalendarComponent implements OnInit {
 
     public ngOnInit(): void {
 
-        const events = [];//this.service.loadTasks();
+        const events = []; // this.service.loadTasks();
         this.weekEvents$ = this.service
             .loadSubjectEvents()
             .map(subjects => {

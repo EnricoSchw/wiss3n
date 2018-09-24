@@ -8,6 +8,7 @@ import { TeachingHourUpdateComponent } from 'app/entities/teaching-hour/teaching
 import { TeachingHourService } from 'app/entities/teaching-hour/teaching-hour.service';
 import { TeachingHour } from 'app/shared/model/teaching-hour.model';
 import { TeachingSubjectService } from 'app/entities/teaching-subject/teaching-subject.service';
+import { SchoolClassService } from 'app/entities/school-class/school-class.service';
 
 describe('Component Tests', () => {
     describe('TeachingHour Management Update Component', () => {
@@ -15,11 +16,15 @@ describe('Component Tests', () => {
         let fixture: ComponentFixture<TeachingHourUpdateComponent>;
         let service: TeachingHourService;
         const mockTeachingSubjectService = {};
+        const mockSchoolClassService = {};
 
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [Wiss3NTestModule],
-                providers: [{provide: TeachingSubjectService, useValue: mockTeachingSubjectService}],
+                providers: [
+                    {provide: TeachingSubjectService, useValue: mockTeachingSubjectService},
+                    {provide: SchoolClassService, useValue: mockSchoolClassService}
+                ],
                 declarations: [TeachingHourUpdateComponent]
             })
                 .overrideTemplate(TeachingHourUpdateComponent, '')

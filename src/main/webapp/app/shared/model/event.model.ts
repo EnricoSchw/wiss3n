@@ -6,9 +6,10 @@ import { RRule } from 'rrule';
 
 export interface EventMeta {
     isActive: boolean;
-    subjectHourData: SubjectHourData
+    subjectHourData: SubjectHourData;
 }
-export interface TaskEventMeta extends EventMeta{
+
+export interface TaskEventMeta extends EventMeta {
     task: Task;
 }
 

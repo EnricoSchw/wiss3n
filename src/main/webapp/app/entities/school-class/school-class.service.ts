@@ -8,6 +8,7 @@ import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { ISchoolClass } from 'app/shared/model/school-class.model';
 import { ITeachingHour } from 'app/shared/model/teaching-hour.model';
+import { StoreSchoolClassService } from 'app/store/school-class/store-school-class.service';
 
 type EntityResponseType = HttpResponse<ISchoolClass>;
 type EntityArrayResponseType = HttpResponse<ISchoolClass[]>;
@@ -17,21 +18,29 @@ export class SchoolClassService {
     private resourceUrl = SERVER_API_URL + 'api/school-classes';
     private resourceSearchUrl = SERVER_API_URL + 'api/_search/school-classes';
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private store: StoreSchoolClassService) {
     }
 
     create(schoolClass: ISchoolClass): Observable<EntityResponseType> {
         const copy = this.convertDateFromClient(schoolClass);
         return this.http
             .post<ISchoolClass>(this.resourceUrl, copy, {observe: 'response'})
-            .map((res: EntityResponseType) => this.convertDateFromServer(res));
+            .map((res: EntityResponseType) => this.convertDateFromServer(res))
+            .map((res: EntityResponseType) => {
+                this.store.add(res.body);
+                return res;
+            });
     }
 
     update(schoolClass: ISchoolClass): Observable<EntityResponseType> {
         const copy = this.convertDateFromClient(schoolClass);
         return this.http
             .put<ISchoolClass>(this.resourceUrl, copy, {observe: 'response'})
-            .map((res: EntityResponseType) => this.convertDateFromServer(res));
+            .map((res: EntityResponseType) => this.convertDateFromServer(res))
+            .map((res: EntityResponseType) => {
+                this.store.upsert(res.body);
+                return res;
+            });
     }
 
     find(id: number): Observable<EntityResponseType> {
@@ -48,14 +57,22 @@ export class SchoolClassService {
     }
 
     delete(id: number): Observable<HttpResponse<any>> {
-        return this.http.delete<any>(`${this.resourceUrl}/${id}`, {observe: 'response'});
+        return this.http.delete<any>(`${this.resourceUrl}/${id}`, {observe: 'response'})
+            .map((res: EntityResponseType) => {
+                this.store.delete(id);
+                return res;
+            });
     }
 
     searchActive(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http
             .get<ISchoolClass[]>(this.resourceSearchUrl + '/active', {params: options, observe: 'response'})
-            .map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res));
+            .map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res))
+            .map((res: EntityArrayResponseType) => {
+                this.store.loadAll(res.body);
+                return res;
+            });
     }
 
     searchForTeachingHours(id: number, req?: any): Observable<EntityArrayResponseType> {

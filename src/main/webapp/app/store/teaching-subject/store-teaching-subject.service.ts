@@ -2,14 +2,12 @@ import { Injectable } from '@angular/core';
 import { ITeachingSubject } from 'app/shared/model/teaching-subject.model';
 import { select, Store } from '@ngrx/store';
 import {
-    State, selectAll, selectAllTeachingSubjects,
+    State, selectAllTeachingSubjects,
 } from 'app/store/teaching-subject/store-teaching-subject.reducer';
 import {
-    DeleteTeachingSubject,
-    DeleteTeachingSubjects, LoadTeachingSubjects, UpsertTeachingSubject
+    DeleteTeachingSubject, LoadTeachingSubjects, UpsertTeachingSubject
 } from 'app/store/teaching-subject/store-teaching-subject.actions';
 import { Observable } from 'rxjs/Observable';
-import { Dictionary } from '@ngrx/entity';
 
 @Injectable({
     providedIn: 'root'

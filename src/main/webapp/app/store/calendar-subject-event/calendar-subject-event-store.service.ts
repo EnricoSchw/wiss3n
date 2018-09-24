@@ -28,10 +28,6 @@ export class CalendarSubjectEventStoreService {
     public loadAll(schoolClassList: ISchoolClass[]) {
         const calendarSubjectEvents: CalendarSubjectEvent[] = [];
 
-        // Observable
-        //     .from(schoolClassList)
-        //     .flatMap()
-
         schoolClassList.forEach(schoolClass => {
             const subjectEvents: SubjectEvent[] = this.entityService.createSubjectEventsForSchoolClass(schoolClass);
             calendarSubjectEvents.push({
@@ -57,4 +53,5 @@ export class CalendarSubjectEventStoreService {
     public getActiveSchoolClassId(): Observable<number> {
         return this.store.pipe(select(selectActiveCalendarSubjectEventId));
     }
+
 }

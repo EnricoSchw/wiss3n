@@ -5,6 +5,7 @@ import { freeTeachingSubject, ITeachingSubject } from 'app/shared/model/teaching
 import { TeachingHourService } from 'app/entities/teaching-hour/teaching-hour.service';
 import { ITeachingHour, TeachingHour } from 'app/shared/model/teaching-hour.model';
 import { SubjectHourData } from 'app/shared/model/subject-hour.model';
+import { CalendarSubjectEventStoreService } from 'app/store/calendar-subject-event/calendar-subject-event-store.service';
 
 @Component({
     selector: 'jhi-select-teaching-subject',
@@ -20,7 +21,11 @@ export class SelectTeachingSubjectComponent implements OnInit {
     teachingSubjects$: Observable<ITeachingSubject[]> = Observable.of([]);
     submitted = false;
 
-    constructor(private store: StoreTeachingSubjectService, private teachingHourService: TeachingHourService) {
+    constructor(
+        private store: StoreTeachingSubjectService,
+        private teachingHourService: TeachingHourService,
+        private storeService: CalendarSubjectEventStoreService,
+    ) {
     }
 
     ngOnInit() {
@@ -32,6 +37,7 @@ export class SelectTeachingSubjectComponent implements OnInit {
     }
 
     onSubmit() {
+        this.storeService.getActiveSchoolClassId();
         this.subjectHourData.teachingHour.teachingSubject = this.teachingSubject;
         this.teachingHourService.update(this.subjectHourData.teachingHour).subscribe(() => {
             this.submitted = true;

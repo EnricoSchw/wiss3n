@@ -14,12 +14,14 @@ describe('Component Tests', () => {
         let comp: SchoolClassComponent;
         let fixture: ComponentFixture<SchoolClassComponent>;
         let service: SchoolClassService;
+        const mockSchoolClassService = {query: () => null};
 
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [Wiss3NTestModule],
                 declarations: [SchoolClassComponent],
                 providers: [
+                    {provide: SchoolClassService, useValue: mockSchoolClassService},
                     {
                         provide: ActivatedRoute,
                         useValue: {

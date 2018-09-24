@@ -6,17 +6,24 @@ import { Observable, of } from 'rxjs';
 import { Wiss3NTestModule } from '../../../test.module';
 import { SchoolClassUpdateComponent } from 'app/entities/school-class/school-class-update.component';
 import { SchoolClassService } from 'app/entities/school-class/school-class.service';
-import { SchoolClass } from 'app/shared/model/school-class.model';
+import { ISchoolClass, SchoolClass } from 'app/shared/model/school-class.model';
+import { TeachingSubjectService } from 'app/entities/teaching-subject/teaching-subject.service';
+import { ITeachingSubject } from 'app/shared/model/teaching-subject.model';
 
 describe('Component Tests', () => {
     describe('SchoolClass Management Update Component', () => {
         let comp: SchoolClassUpdateComponent;
         let fixture: ComponentFixture<SchoolClassUpdateComponent>;
         let service: SchoolClassService;
+        const mockSchoolClassService =  {
+            update: (schoolClass: ISchoolClass) => null,
+            create: (schoolClass: ISchoolClass) => null
+        };
 
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [Wiss3NTestModule],
+                providers: [{provide: SchoolClassService, useValue: mockSchoolClassService}],
                 declarations: [SchoolClassUpdateComponent]
             })
                 .overrideTemplate(SchoolClassUpdateComponent, '')
