@@ -86,7 +86,7 @@ public class SchoolClassResource {
             throw new BadRequestAlertException("Invalid user", ENTITY_NAME, "not same user");
         }
 
-        SchoolClass result = schoolClassService.save(schoolClass);
+        SchoolClass result = schoolClassService.update(schoolClass);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, schoolClass.getId().toString()))
             .body(result);

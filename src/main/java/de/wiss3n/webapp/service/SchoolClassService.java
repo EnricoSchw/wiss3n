@@ -56,19 +56,43 @@ public class SchoolClassService {
      */
     public SchoolClass save(SchoolClass schoolClass) {
         log.debug("Request to save SchoolClass : {}", schoolClass);
-        return SecurityUtils.getCurrentUserLogin()
-            .flatMap(userRepository::findOneByLogin)
-            .map((User user) -> {
-                schoolClass.setUser(user);
-                return schoolClass;
-            })
-            .map(schoolClassRepository::save)
+        return this.saveInDB(schoolClass)
             .map(teachingHourService::createTeachingHour)
             .map((SchoolClass result) -> {
                 schoolClassSearchRepository.save(result);
                 return result;
             })
             .orElseThrow(IllegalArgumentException::new);
+    }
+
+    /**
+     * update school class
+     * @param schoolClass
+     * @return
+     */
+    public SchoolClass update(SchoolClass schoolClass) {
+        log.debug("Request to update SchoolClass : {}", schoolClass);
+        return this.saveInDB(schoolClass)
+            .map((SchoolClass result) -> {
+                schoolClassSearchRepository.save(result);
+                return result;
+            })
+            .orElseThrow(IllegalArgumentException::new);
+    }
+
+    /**
+     * Save schoolClass in DB
+     * @param schoolClass
+     * @return
+     */
+    private Optional<SchoolClass> saveInDB(SchoolClass schoolClass) {
+        return SecurityUtils.getCurrentUserLogin()
+            .flatMap(userRepository::findOneByLogin)
+            .map((User user) -> {
+                schoolClass.setUser(user);
+                return schoolClass;
+            })
+            .map(schoolClassRepository::save);
     }
 
     /**
