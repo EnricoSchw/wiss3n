@@ -11,13 +11,15 @@ import { CalendarSchoolClassListComponent } from './calendar-entities/calendar-s
 import { Wiss3NSharedModule } from 'app/shared';
 import { CalendarTeachingSubjectListComponent } from './calendar-entities/calendar-teaching-subject-list.component';
 import { SelectTeachingSubjectComponent } from './calendar/select-teaching-subject/select-teaching-subject.component';
+import { Wiss3NStoreModule } from 'app/store/store.module';
 
 @NgModule({
     imports: [
         CommonModule,
         AngularCalendarModule.forRoot(),
         RouterModule,
-        Wiss3NSharedModule
+        Wiss3NSharedModule,
+        Wiss3NStoreModule
     ],
     declarations: [
         CalendarComponent,

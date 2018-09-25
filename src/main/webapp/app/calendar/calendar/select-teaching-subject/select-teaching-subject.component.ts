@@ -6,6 +6,9 @@ import { TeachingHourService } from 'app/entities/teaching-hour/teaching-hour.se
 import { ITeachingHour, TeachingHour } from 'app/shared/model/teaching-hour.model';
 import { SubjectHourData } from 'app/shared/model/subject-hour.model';
 import { CalendarSubjectEventStoreService } from 'app/store/calendar-subject-event/calendar-subject-event-store.service';
+import { StoreSchoolClassService } from 'app/store/school-class/store-school-class.service';
+import { schoolClassPopupRoute } from 'app/entities/school-class';
+import { ISchoolClass } from 'app/shared/model/school-class.model';
 
 @Component({
     selector: 'jhi-select-teaching-subject',
@@ -24,7 +27,8 @@ export class SelectTeachingSubjectComponent implements OnInit {
     constructor(
         private store: StoreTeachingSubjectService,
         private teachingHourService: TeachingHourService,
-        private storeService: CalendarSubjectEventStoreService,
+        private storeCalendarService: CalendarSubjectEventStoreService,
+        private storeSchoolClass: StoreSchoolClassService
     ) {
     }
 
@@ -37,11 +41,21 @@ export class SelectTeachingSubjectComponent implements OnInit {
     }
 
     onSubmit() {
-        this.storeService.getActiveSchoolClassId();
+        this.storeCalendarService.getActiveSchoolClassId()
+            .flatMap(id => this.storeSchoolClass.get(id))
+            .map(schoolClass => this.mapTeachingSubjectToTeachingHour(schoolClass))
+            .flatMap(teachingHour => this.teachingHourService.update(teachingHour))
+            .subscribe(() => {
+                this.submitted = true;
+            });
+    }
+
+    private mapTeachingSubjectToTeachingHour(schoolClass: ISchoolClass): TeachingHour {
+        schoolClass.teachingHours = null;
+        schoolClass.teachingSubjects = null;
+        this.subjectHourData.teachingHour.schoolClass = schoolClass;
         this.subjectHourData.teachingHour.teachingSubject = this.teachingSubject;
-        this.teachingHourService.update(this.subjectHourData.teachingHour).subscribe(() => {
-            this.submitted = true;
-        });
+        return this.subjectHourData.teachingHour;
     }
 
     get teachingSubject() {

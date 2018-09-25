@@ -4,7 +4,6 @@ import {
     TeachingSubjectActions, TeachingSubjectActionTypes
 } from 'app/store/teaching-subject/store-teaching-subject.actions';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { selectCalendarSubjectEventState } from 'app/store/calendar-subject-event/calendar-subject-event.reducer';
 
 export interface State extends EntityState<ITeachingSubject> {
     // additional entities state properties

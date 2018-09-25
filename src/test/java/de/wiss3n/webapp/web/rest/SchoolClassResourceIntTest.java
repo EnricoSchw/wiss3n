@@ -317,6 +317,7 @@ public class SchoolClassResourceIntTest {
             .end(UPDATED_END)
             .active(UPDATED_ACTIVE)
             .name(UPDATED_NAME);
+        updatedSchoolClass.setTeachingHours(null);
 
         restSchoolClassMockMvc.perform(put("/api/school-classes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
