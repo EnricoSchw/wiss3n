@@ -14,7 +14,7 @@ import { JhiAlertService } from 'ng-jhipster';
     styleUrls: ['./../calendar-board/calendar-board.scss']
 })
 export class CalendarTeachingSubjectListComponent implements OnInit {
-    private teachingSubjects$: Observable<ITeachingSubject[]> =  Observable.of([]);
+    teachingSubjects$: Observable<ITeachingSubject[]> =  Observable.of([]);
 
     constructor(private storeService: CalendarSubjectEventStoreService,
                 private teachingSubjectService: TeachingSubjectService,

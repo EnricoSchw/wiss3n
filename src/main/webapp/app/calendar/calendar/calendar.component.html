@@ -93,7 +93,7 @@
         <!--</mwl-calendar-event-title>-->
         <!--<jhi-select-teaching-subject *ngIf="!weekEvent.event.meta.subjectHour.teachingSubject"></jhi-select-teaching-subject>-->
         <jhi-select-teaching-subject [subjectHourData]="weekEvent.event.meta.subjectHourData"></jhi-select-teaching-subject>
-        <div *ngFor="let taskEvent of weekEvent.event.meta.events; trackBy:trackByIndex" class="xx">
+        <div *ngFor="let taskEvent of weekEvent.event.meta.events;" class="xx">
             <span class="custom-event-month-subject" [ngStyle]="{'color': taskEvent.color.primary}">{{convertTypeToString(taskEvent.meta.task.type)}}</span>
             {{taskEvent.title}}
         </div>
@@ -161,7 +161,7 @@
             [viewDate]="viewDate"
             [events]="monthEvents"
             [excludeDays]="excludeDays"
-            [locale]="de"
+            [locale]="'de'"
             [cellTemplate]="customMonthCellTemplate"
             (dayClicked)="viewDate = $event.day.date; view = 'week'">
         </mwl-calendar-month-view>
@@ -169,7 +169,7 @@
             *ngSwitchCase="'week'"
             [excludeDays]="excludeDays"
             [viewDate]="viewDate"
-            [locale]="de"
+            [locale]="'de'"
             [eventTemplate]="customWeekEventTemplate"
             [events]="weekEvents"
             (dayHeaderClicked)="viewDate = $event.day.date; view = 'day'"
@@ -179,7 +179,7 @@
             *ngSwitchCase="'day'"
             [viewDate]="viewDate"
             [events]="weekEvents"
-            [locale]="de"
+            [locale]="'de'"
             [eventTemplate]="customDayEventTemplate"
             [dayStartHour]="0"
             [dayEndHour]="10"
