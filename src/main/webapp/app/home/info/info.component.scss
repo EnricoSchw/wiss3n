@@ -17,182 +17,332 @@ $white: #fff;
     box-sizing: border-box;
 }
 
-.panel {
+// my
+
+h2 {
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+h3 {
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+p {
+    color: $app-yellow;
+    text-align: center;
+}
+
+.buttons-group {
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+#login {
+    background-color: $app-yellow;
+    color: #3E3F3A;
+    margin-right: 0.5rem;
+    border-radius: 1.5rem;
+    width: 100px;
+}
+
+#register {
+    color: $app-light-gray;
+    font-weight: normal;
+}
+
+.bg-image-unsplash {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 1.5rem;
+    color: $app-light-gray;
+}
+
+// begin card
+
+.card {
+    padding: 10px 0px 10px;
+    background-color: rgba(51, 51, 51, 0.65);
+
+    min-height: 400px;
+    max-height: 600px;
+    border-radius: 8px;
+    box-shadow: 0px 8px 20px #0000007a;
+}
+
+.card-body {
+    padding: 0px 15px;
+    color: white;
+    border-bottom: solid 1px;
+}
+
+.panel-body {
+    min-height: 250px;
+    overflow: auto;
+    border-radius: 0px 0px 8px 8px;
+    padding: 0px 15px 10px;
+}
+
+.panel-group {
+    padding-top: 2em;
+}
+
+.panel-default > .panel-heading {
+    background-color: transparent;
+}
+
+.panel-heading {
+    text-align: center;
+    padding: 0px;
+    height: 35px;
+    border: none;
+}
+
+.panel-button {
+    padding: 20px;
+    background: #999999;
+    border-radius: 100%;
+    position: relative;
+    top: -13px;
+    z-index: 9999;
+}
+
+.panel-button .plus-minus:before {
+    content: "\f067";
+    font-family: "FontAwesome";
+}
+
+.panel-button[aria-expanded="true"] .plus-minus:before {
+    content: "\f068";
+    font-family: "FontAwesome";
+}
+
+a.panel-button:hover, a.panel-button:focus {
+    text-decoration: none;
+}
+
+a.panel-button {
+    font-size: 18px;
+    color: #333333;
+    box-shadow: 0px 3px 7px #0000004a;
+}
+
+.card-section {
+    height: 100vh;
+    display: table;
+    width: 100%;
+    background-color: slategray;
+    overflow: hidden;
+}
+
+.card-section > .inner {
+    display: table-cell;
+    vertical-align: middle;
+
+}
+
+@media (max-width: 991px) {
+    .card {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        min-height: 300px;
+    }
+    .panel-body {
+        max-height: 200px;
+        font-size: 15px;
+        padding: 0px 5px;
+    }
+}
+
+// end card
+
+.main {
     width: 100vw;
     min-height: 90vh;
     overflow: hidden;
     font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
-    &__wrapper {
-        min-height: 100vh;
-    }
-
-    @media (min-width: 721px) {
-
-        &__content {
-            h1 {
-                font-size: 5rem
-            }
-
-            h2 {
-                font-size: 4rem
-            }
-
-            h3 {
-                font-size: 3rem
-            }
-            h4 {
-                font-size: 2rem
-            }
-        }
-    }
-
-    &__headline {
-        font-weight: 700;
-        opacity: 0.8;
-        font-size: 48px;
-        margin: 0 0 25px 0;
-    }
-
-    p {
-        margin: 0 0 25px 0;
-        //color: lighten(#000602, 10);
-        font-size: 20px;
-
-        &:last-child {
-            margin-bottom: 0;
-        }
-    }
-
-    &__block {
-        height: 3px;
-        background: rgba(black, 0.2);
-        margin: 0 0 25px 0;
-    }
-
-    @media (max-width: 720px) {
-
-        &__headline {
-            font-size: 36px;
-        }
-
-        &__wrapper {
-
-        }
-
-        p {
-            font-size: 16px;
-        }
-    }
+    //&__wrapper {
+    //    min-height: 100vh;
+    //}
+    //
+    //@media (min-width: 721px) {
+    //
+    //    &__content {
+    //        h1 {
+    //            font-size: 5rem
+    //        }
+    //
+    //        h2 {
+    //            font-size: 4rem
+    //        }
+    //
+    //        h3 {
+    //            font-size: 3rem
+    //        }
+    //        h4 {
+    //            font-size: 2rem
+    //        }
+    //    }
+    //}
+    //
+    //&__headline {
+    //    font-weight: 700;
+    //    opacity: 0.8;
+    //    font-size: 48px;
+    //    margin: 0 0 25px 0;
+    //}
+    //
+    //p {
+    //    margin: 0 0 25px 0;
+    //    //color: lighten(#000602, 10);
+    //    font-size: 20px;
+    //
+    //    &:last-child {
+    //        margin-bottom: 0;
+    //    }
+    //}
+    //
+    //&__block {
+    //    height: 3px;
+    //    background: rgba(black, 0.2);
+    //    margin: 0 0 25px 0;
+    //}
+    //
+    //@media (max-width: 720px) {
+    //
+    //    &__headline {
+    //        font-size: 36px;
+    //    }
+    //
+    //    &__wrapper {
+    //
+    //    }
+    //
+    //    p {
+    //        font-size: 16px;
+    //    }
+    //}
 }
 
-.c-blue {
-    color: $blue;
-}
+//.c-blue {
+//    color: $blue;
+//}
+//
+//.c-red {
+//    color: $red;
+//}
+//
+//.c-green {
+//    color: $green;
+//}
+//
+//.c-yellow {
+//    color: $yellow;
+//}
 
-.c-red {
-    color: $red;
-}
-
-.c-green {
-    color: $green;
-}
-
-.c-yellow {
-    color: $yellow;
-}
-
-.b-blue {
+.cover {
     background: url("../../../content/images/info/alexis-brown-82988-unsplash-min.jpg") no-repeat center top;
     background-size: cover;
-    //background-size: 100vw 100vh
-    .panel {
-        &__wrapper {
 
+    padding-top: 120px;
 
-            &__left {
-                margin: 0;
-                padding: 0;
-                min-height: 100vh;
-                //background: $transparentWhite;
-                //border-right: 1px solid $app-gray;
-                color: $app-blue;
-                &__content {
-                    margin-top: 40%;
-                    margin-left: $app-margin-left;
-
-                    h4 {
-                        margin-bottom: 1.5em;
-                    }
-                    p {
-                        font-size: 1.3rem;
-                        line-height: 1.5rem;
-                    }
-                }
-            }
-
-            &__right {
-                min-height: 100vh;
-                color: $app-light-gray;
-                margin: 0;
-                padding: 0;
-                &__content {
-                    position: absolute;
-                    text-align: right;
-                    top: 30%;
-                    right: 0;
-                    padding-right: 1.5rem;
-                    padding-left: 1.5rem;
-
-                    h2 {
-                        margin-bottom: 0.5em;
-                    }
-
-                    h3 {
-                        margin-bottom: 1.5em;
-                    }
-
-                    p {
-                        color: $app-yellow;
-                    }
-                    .buttons-group {
-                        margin-bottom: 2em;
-                    }
-
-                    #login {
-                        background-color: $app-yellow;
-                        color: #3E3F3A;
-                        margin-right: 0.5rem;
-                        border-radius: 1.5rem;
-                        width: 100px;
-                    }
-                    #register {
-                        color: $app-light-gray;
-                        font-weight: normal;
-                    }
-                }
-
-                .bg-image-unsplash {
-                    position: absolute;
-                    bottom: 0.5rem;
-                    right: 1.5rem;
-                }
-            }
-        }
-    }
 }
 
-.b-red {
-    background: $red;
-}
-
-.b-green {
-    background: $green;
-}
-
-.b-yellow {
-    background: $yellow;
-}
+//    //background-size: 100vw 100vh
+//    .panel {
+//        &__wrapper {
+//
+//
+//            &__left {
+//                margin: 0;
+//                padding: 0;
+//                min-height: 100vh;
+//                //background: $transparentWhite;
+//                //border-right: 1px solid $app-gray;
+//                color: $app-blue;
+//                &__content {
+//                    margin-top: 40%;
+//                    margin-left: $app-margin-left;
+//
+//                    h4 {
+//                        margin-bottom: 1.5em;
+//                    }
+//                    p {
+//                        font-size: 1.3rem;
+//                        line-height: 1.5rem;
+//                    }
+//                }
+//            }
+//
+//            &__right {
+//                min-height: 100vh;
+//                color: $app-light-gray;
+//                margin: 0;
+//                padding: 0;
+//                &__content {
+//                    position: absolute;
+//                    text-align: right;
+//                    top: 30%;
+//                    right: 0;
+//                    padding-right: 1.5rem;
+//                    padding-left: 1.5rem;
+//
+//                    h2 {
+//                        margin-bottom: 0.5em;
+//                    }
+//
+//                    h3 {
+//                        margin-bottom: 1.5em;
+//                    }
+//
+//                    p {
+//                        color: $app-yellow;
+//                    }
+//                    .buttons-group {
+//                        margin-bottom: 2em;
+//                    }
+//
+//                    #login {
+//                        background-color: $app-yellow;
+//                        color: #3E3F3A;
+//                        margin-right: 0.5rem;
+//                        border-radius: 1.5rem;
+//                        width: 100px;
+//                    }
+//                    #register {
+//                        color: $app-light-gray;
+//                        font-weight: normal;
+//                    }
+//                }
+//
+//                .bg-image-unsplash {
+//                    position: absolute;
+//                    bottom: 0.5rem;
+//                    right: 1.5rem;
+//                }
+//            }
+//        }
+//    }
+//}
+//
+//.b-red {
+//    background: $red;
+//}
+//
+//.b-green {
+//    background: $green;
+//}
+//
+//.b-yellow {
+//    background: $yellow;
+//}
 
 .logo {
     position: fixed;
