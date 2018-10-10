@@ -58,6 +58,9 @@ a.dropdown-item:hover {
     background-color: $app-gray;
 }
 
+.navbar-collapse {
+    padding-right: 7px;
+}
 
 @media(min-width: 767px) {
     .navbar {
