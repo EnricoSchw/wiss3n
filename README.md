@@ -18,8 +18,8 @@ Select and Display Classes                                                  | âœ
 Select and Display Teaching Subjects                                        | âœ“
 Create Tasks                                                                | :construction:
 **Data Security**                                                           |                                                                  | 
-Local file system support                                                   | 
-Share Data peer to peet between Devices                                     |                             
+Save in Local file System Support                                           | 
+Share Data Peer to Peet between Devices                                     |                             
 **Collaboration**                                                           | 
 User Groups                                                                 | 
 Find and Connect to Friend                                                  | 
