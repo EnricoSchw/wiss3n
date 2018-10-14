@@ -1,8 +1,8 @@
 # WiSS3N
 
-WiSS3N is a app for web-based content scharing. 
+WiSS3N is a app for web-based Realtime Private Collaborative School Home Work Content Editing and Sharing. 
 
-Check the [project website](http://substance.io) and the [example editor](https://github.com/substance/example-editor).
+Check the [project website](http://wiss3n.de).
 
 ## Roadmap
 
