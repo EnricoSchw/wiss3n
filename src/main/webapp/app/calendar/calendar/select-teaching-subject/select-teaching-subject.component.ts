@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { StoreTeachingSubjectService } from 'app/store/teaching-subject/store-teaching-subject.service';
 import { Observable } from 'rxjs/Observable';
 import { freeTeachingSubject, ITeachingSubject } from 'app/shared/model/teaching-subject.model';
@@ -7,7 +7,6 @@ import { ITeachingHour, TeachingHour } from 'app/shared/model/teaching-hour.mode
 import { SubjectHourData } from 'app/shared/model/subject-hour.model';
 import { CalendarSubjectEventStoreService } from 'app/store/calendar-subject-event/calendar-subject-event-store.service';
 import { StoreSchoolClassService } from 'app/store/school-class/store-school-class.service';
-import { schoolClassPopupRoute } from 'app/entities/school-class';
 import { ISchoolClass } from 'app/shared/model/school-class.model';
 
 @Component({
@@ -40,11 +39,19 @@ export class SelectTeachingSubjectComponent implements OnInit {
         }
     }
 
+    byId(item1: ITeachingSubject, item2: ITeachingSubject) {
+        if (item2 == null || item1 == null) {
+            return false;
+        }
+        return item1.id === item2.id;
+    }
+
     onSubmit() {
         this.storeCalendarService.getActiveSchoolClassId()
             .flatMap(id => this.storeSchoolClass.get(id))
             .map(schoolClass => this.mapTeachingSubjectToTeachingHour(schoolClass))
             .flatMap(teachingHour => this.teachingHourService.update(teachingHour))
+            .take(1)
             .subscribe(() => {
                 this.submitted = true;
             });
