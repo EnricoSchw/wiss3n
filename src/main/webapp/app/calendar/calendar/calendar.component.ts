@@ -13,6 +13,7 @@ import { CustomDateFormatterService } from '../providers/custom-date-formatter.s
 import { Task, TaskType } from 'app/shared/model/task.model';
 import { SubjectEvent, TaskEventMeta } from 'app/shared/model/event.model';
 import { Observable } from 'rxjs/Observable';
+import { CalendarEventService } from 'app/calendar/providers/calendar-event.service';
 
 @Component({
     selector: 'jhi-calendar',
@@ -37,7 +38,11 @@ export class CalendarComponent implements OnInit {
 
     private activeEvent: SubjectEvent;
 
-    constructor(private service: CalendarService) {
+    constructor(
+        private service: CalendarService,
+        private calendarEventService: CalendarEventService
+
+    ) {
     }
 
     public ngOnInit(): void {
@@ -47,7 +52,7 @@ export class CalendarComponent implements OnInit {
             .loadSubjectEvents()
             .map(subjects => {
                 this.activeEvent = null;
-                return this.mapSubjectsToWeekEvents(subjects, events);
+                return this.calendarEventService.createCalendarEvents(subjects, events);
             });
 
         this.monthEvents = events;
@@ -79,59 +84,6 @@ export class CalendarComponent implements OnInit {
         }
     }
 
-    /**
-     * Map each task event to his subject hour.
-     * @param {SubjectEvent[]} subjectHours
-     * @param {CalendarEvent<TaskEventMeta>[]} orgEvents
-     * @returns {SubjectEvent[]}
-     */
-    private mapSubjectsToWeekEvents(subjectHours: SubjectEvent[], orgEvents: CalendarEvent<TaskEventMeta>[]): SubjectEvent[] {
-        const calendarEvents: SubjectEvent[] = [];
-        let nextEvents = orgEvents;
-
-        subjectHours.forEach(subjectHour => {
-            const rule: RRule = new RRule(subjectHour.rrule);
-            let eventListOfSubject: CalendarEvent<TaskEventMeta>[] = [];
-            nextEvents = nextEvents.reduce((eventList: CalendarEvent<TaskEventMeta>[], current) => {
-                if (current.meta.subjectHourData.teachingSubject.id === subjectHour.meta.subjectHourData.teachingSubject.id) {
-                    eventListOfSubject.push(current);
-                } else {
-                    eventList.push(current);
-                }
-                return eventList;
-            }, []);
-
-            rule.all().forEach(date => {
-                const start = new Date(date);
-                start.setHours(subjectHour.start.getHours());
-                start.setMinutes(subjectHour.start.getMinutes());
-                const end = new Date(date);
-                end.setHours(subjectHour.end.getHours());
-                end.setMinutes(subjectHour.end.getMinutes());
-
-                const thisEvents = [];
-
-                eventListOfSubject = eventListOfSubject.reduce((eventList: CalendarEvent<TaskEventMeta>[], current) => {
-                    if (isSameDay(start, current.start)) {
-                        thisEvents.push(current);
-                    } else {
-                        eventList.push(current);
-                    }
-                    return eventList;
-                }, []);
-                const subjectEvent = <SubjectEvent>{
-                    ...subjectHour,
-                    start,
-                    end,
-                    meta: {...subjectHour.meta, events: thisEvents},
-                    vxallDay: true
-                };
-                calendarEvents.push(subjectEvent);
-            });
-        });
-
-        return calendarEvents;
-    }
 
     /**
      * Convert Task Type to string

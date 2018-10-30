@@ -1,0 +1,29 @@
+@startuml
+
+package "Backend" #DDDDDD {
+class SchoolClassService
+class TeachingHourService
+class TeachingSubjectService
+class TaskService
+class ContentService
+
+}
+
+package "Store" #DDDDDD {
+class StoreTeachingSubjectService
+class StoreSchoolClassService
+class CalendarSubjectEventStoreService
+class CalendarSubjectEventEntityService
+
+CalendarSubjectEventStoreService --> CalendarSubjectEventEntityService
+}
+
+package "Calendar" #DDDDDD {
+class CalendarService
+class CalendarEventService
+}
+
+SchoolClassService --> StoreSchoolClassService
+CalendarService --> CalendarSubjectEventStoreServiceas
+TeachingSubjectService --> StoreTeachingSubjectService
+@enduml

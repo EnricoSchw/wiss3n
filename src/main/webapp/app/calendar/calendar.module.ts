@@ -12,6 +12,7 @@ import { Wiss3NSharedModule } from 'app/shared';
 import { CalendarTeachingSubjectListComponent } from './calendar-entities/calendar-teaching-subject-list.component';
 import { SelectTeachingSubjectComponent } from './calendar/select-teaching-subject/select-teaching-subject.component';
 import { Wiss3NStoreModule } from 'app/store/store.module';
+import { CalendarEventService } from 'app/calendar/providers/calendar-event.service';
 
 @NgModule({
     imports: [
@@ -30,7 +31,7 @@ import { Wiss3NStoreModule } from 'app/store/store.module';
         CalendarTeachingSubjectListComponent,
         SelectTeachingSubjectComponent
     ],
-    providers: [CalendarService],
+    providers: [CalendarService, CalendarEventService],
     exports: [CalendarBoardComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

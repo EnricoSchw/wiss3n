@@ -8,6 +8,7 @@ import { SubjectHourData } from 'app/shared/model/subject-hour.model';
 import { CalendarSubjectEventStoreService } from 'app/store/calendar-subject-event/calendar-subject-event-store.service';
 import { StoreSchoolClassService } from 'app/store/school-class/store-school-class.service';
 import { ISchoolClass } from 'app/shared/model/school-class.model';
+import { CalendarService } from 'app/calendar/providers/calendar.service';
 
 @Component({
     selector: 'jhi-select-teaching-subject',
@@ -25,9 +26,7 @@ export class SelectTeachingSubjectComponent implements OnInit {
 
     constructor(
         private store: StoreTeachingSubjectService,
-        private teachingHourService: TeachingHourService,
-        private storeCalendarService: CalendarSubjectEventStoreService,
-        private storeSchoolClass: StoreSchoolClassService
+        private calendarService: CalendarService
     ) {
     }
 
@@ -47,22 +46,11 @@ export class SelectTeachingSubjectComponent implements OnInit {
     }
 
     onSubmit() {
-        this.storeCalendarService.getActiveSchoolClassId()
-            .flatMap(id => this.storeSchoolClass.get(id))
-            .map(schoolClass => this.mapTeachingSubjectToTeachingHour(schoolClass))
-            .flatMap(teachingHour => this.teachingHourService.update(teachingHour))
-            .take(1)
-            .subscribe(() => {
+        this.calendarService.setTeachingSubjectInTeachingHour(this.subjectHourData, this.teachingSubject)
+            .subscribe((subjectHourData) => {
                 this.submitted = true;
+                this.subjectHourData = subjectHourData;
             });
-    }
-
-    private mapTeachingSubjectToTeachingHour(schoolClass: ISchoolClass): TeachingHour {
-        schoolClass.teachingHours = null;
-        schoolClass.teachingSubjects = null;
-        this.subjectHourData.teachingHour.schoolClass = schoolClass;
-        this.subjectHourData.teachingHour.teachingSubject = this.teachingSubject;
-        return this.subjectHourData.teachingHour;
     }
 
     get teachingSubject() {
