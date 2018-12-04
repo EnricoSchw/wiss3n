@@ -24,6 +24,6 @@ class CalendarEventService
 }
 
 SchoolClassService --> StoreSchoolClassService
-CalendarService --> CalendarSubjectEventStoreServiceas
+CalendarService --> CalendarSubjectEventStoreService
 TeachingSubjectService --> StoreTeachingSubjectService
 @enduml

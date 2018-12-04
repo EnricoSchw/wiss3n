@@ -43,7 +43,9 @@ SubjectHourData "1" --> "0..1"  TeachingSubject
 
 package "Calendar Model" #DDDDDD {
 class CalendarEvent<? extends EventMeta>
-class EventMeta
+class EventMeta {
+    subjectHourData: SubjectHourData
+}
 class SubjectEventMeta {
     events: CalendarEvent<TaskEventMeta>[]
 }

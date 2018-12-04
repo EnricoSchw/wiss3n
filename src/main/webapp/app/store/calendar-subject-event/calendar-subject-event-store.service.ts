@@ -3,14 +3,14 @@ import { select, Store } from '@ngrx/store';
 import {
     selectActiveCalendarSubjectEvent, selectActiveCalendarSubjectEventId, State
 } from 'app/store/calendar-subject-event/calendar-subject-event.reducer';
-import { ISchoolClass } from 'app/shared/model/school-class.model';
+import { ISchoolClass, SchoolClass } from 'app/shared/model/school-class.model';
 import { CalendarSubjectEventEntityService } from 'app/store/calendar-subject-event/calendar-subject-event-entity.service';
 import { forEach } from '@angular/router/src/utils/collection';
 import { SubjectEvent } from 'app/shared/model/event.model';
 import { CalendarSubjectEvent } from 'app/store/calendar-subject-event/calendar-subject-event.model';
 import {
     ActivateCalendarSubjectEvent,
-    LoadCalendarSubjectEvents
+    LoadCalendarSubjectEvents, UpsertCalendarSubjectEvent
 } from 'app/store/calendar-subject-event/calendar-subject-event.actions';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs-compat/add/observable/from';
@@ -38,6 +38,22 @@ export class CalendarSubjectEventStoreService {
             });
         });
         this.store.dispatch(new LoadCalendarSubjectEvents({calendarSubjectEvents}));
+    }
+
+    public  updateSubjectEventOfSchoolClass (schoolClass: SchoolClass, subjectEvents: SubjectEvent) {
+
+
+    }
+
+    public  updateBySchoolClass (schoolClass: SchoolClass, subjectEvents: SubjectEvent[]) {
+        const calendarSubjectEvent: CalendarSubjectEvent = <CalendarSubjectEvent>{
+            id: schoolClass.id,
+            start: schoolClass.start,
+            end: schoolClass.end,
+            subjectEvents
+        };
+
+        this.store.dispatch( new UpsertCalendarSubjectEvent({calendarSubjectEvent}));
     }
 
     public getActiveSubjectEvents(): Observable<SubjectEvent[]> {

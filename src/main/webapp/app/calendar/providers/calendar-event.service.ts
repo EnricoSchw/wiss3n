@@ -7,7 +7,11 @@ import {
     addDays, isSameDay, subDays
 } from 'date-fns';
 import { RRule } from 'rrule';
+import { SubjectHourData } from 'app/shared/model/subject-hour.model';
 
+/**
+ * Helper Service to create Calendar Events from Frontend Models
+ */
 @Injectable()
 export class CalendarEventService {
 
@@ -64,6 +68,18 @@ export class CalendarEventService {
         });
 
         return calendarEvents;
+    }
+
+
+    public updateCalendarEvents(events: SubjectEvent[] ,subjectHourData: SubjectHourData ): SubjectEvent[]{
+        events.forEach((subjectEvent:SubjectEvent ) => {
+            if (subjectEvent.meta.subjectHourData.teachingSubject.id === subjectHourData.teachingSubject.id) {
+                subjectEvent.meta.subjectHourData = subjectHourData;
+            }
+        });
+
+        return events;
+
     }
 
     /**
