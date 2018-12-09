@@ -5,6 +5,7 @@ import { ITeachingHour } from 'app/shared/model/teaching-hour.model';
 
 export interface SubjectHourData {
     teachingHour: ITeachingHour;
+    teachingSubject: ITeachingSubject;
     title: string;
     prefix: string;
     color: EventColor;
@@ -12,7 +13,6 @@ export interface SubjectHourData {
     day: RRule.Weekday;
     start: Date;
     end: Date;
-    teachingSubject: ITeachingSubject;
 }
 
 export interface SubjectHour {

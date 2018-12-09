@@ -1,0 +1,41 @@
+@startuml
+
+package "Entity" #DDDDDD {
+class SchoolClass
+class TeachingHour
+class TeachingSubject
+class Task
+class Content
+
+}
+
+package "Calendar" #DDDDDD {
+class CalendarEvent<MetaType> {
+    id?: string | number;
+    start: Date;
+    end?: Date;
+    title: string;
+    color?: EventColor;
+    actions?: EventAction[];
+    allDay?: boolean;
+    cssClass?: string;
+    resizable?: {
+        beforeStart?: boolean;
+        afterEnd?: boolean;
+    };
+    draggable?: boolean;
+    meta?: MetaType;
+}
+
+class MetaType
+class LessonHour {
+    teachingHour
+    teachingSubject
+}
+class LessonHourCalendarEvent<MetaType=LessonHour>
+
+CalendarEvent <|-- LessonHourCalendarEvent
+
+MetaType <|-- LessonHour
+}
+@enduml
