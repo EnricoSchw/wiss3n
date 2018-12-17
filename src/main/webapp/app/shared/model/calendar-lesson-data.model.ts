@@ -1,87 +1,101 @@
-import { EventColor } from 'calendar-utils';
 import * as RRule from 'rrule';
-import { ITeachingSubject, TeachingSubject } from 'app/shared/model/teaching-subject.model';
-import { ITeachingHour } from 'app/shared/model/teaching-hour.model';
 
-export interface SubjectHourData {
-    teachingHour: ITeachingHour;
-    teachingSubject: ITeachingSubject;
-    title: string;
-    prefix: string;
-    color: EventColor;
-    hour: SubjectHour;
-    day: RRule.Weekday;
-    start: Date;
-    end: Date;
+
+/**
+ * This Object is a Map for the lessons of a week for each school class
+ *
+ * Means each school class has a list of lessons
+ *  + lessonHour
+ *  + teaching hour
+ *  + teaching subject
+ */
+export interface CalendarLessonData {
+    schoolClassId: number;
+    lessons: CalendarLesson[]
+
+    // This should part of Calendar Events
+    //title: string;
+    //prefix: string;
+    // hour: LessonHour;
+    // color: EventColor;
+    // day: RRule.Weekday;
+    // start: Date;
+    // end: Date;
 }
 
-export interface SubjectHour {
+export interface CalendarLesson {
+    lessonHour: LessonHour;
+    teachingHourId: number;
+    teachingSubjectId: number | null;
+}
+
+export interface LessonHour {
     index: number;
     start: string;
     end: string;
 }
 
-export const firstHour = <SubjectHour>{
+export const firstHour = <LessonHour>{
     index: 1,
     start: '01:00:00',
     end: '02:00:00'
 };
 
-export const secondHour = <SubjectHour> {
+export const secondHour = <LessonHour> {
     index: 2,
     start: '02:00:00',
     end: '03:00:00'
 };
 
-export const thirdHour = <SubjectHour> {
+export const thirdHour = <LessonHour> {
     index: 3,
     start: '03:00:00',
     end: '04:00:00'
 };
 
-export const fourthHour = <SubjectHour> {
+export const fourthHour = <LessonHour> {
     index: 4,
     start: '04:00:00',
     end: '05:00:00'
 };
 
-export const fifthHour = <SubjectHour> {
+export const fifthHour = <LessonHour> {
     index: 5,
     start: '05:00:00',
     end: '06:00:00'
 };
 
-export const sixthHour = <SubjectHour> {
+export const sixthHour = <LessonHour> {
     index: 6,
     start: '06:00:00',
     end: '07:00:00'
 };
 
-export const seventhHour = <SubjectHour> {
+export const seventhHour = <LessonHour> {
     index: 7,
     start: '07:00:00',
     end: '08:00:00'
 };
 
-export const eighthHour = <SubjectHour> {
+export const eighthHour = <LessonHour> {
     index: 8,
     start: '08:00:00',
     end: '09:00:00'
 };
 
-export const ninthHour = <SubjectHour> {
+export const ninthHour = <LessonHour> {
     index: 9,
     start: '09:00:00',
     end: '10:00:00'
 };
 
-export const tenthHour = <SubjectHour> {
+export const tenthHour = <LessonHour> {
     index: 10,
     start: '10:00:00',
     end: '11:00:00'
 };
 
-export const getSubjectHourByNumber = (day: number): SubjectHour => {
+export const getLessonHourByNumber = (day: number): LessonHour => {
     switch (day) {
         case 1:
             return firstHour;

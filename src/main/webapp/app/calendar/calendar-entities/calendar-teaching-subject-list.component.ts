@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CalendarSubjectEventStoreService } from 'app/store/calendar-subject-event/calendar-subject-event-store.service';
+import { StoreCalendarLessonDataService } from 'app/store/calendar-lesson-data/calendar-subject-event-store.service';
 import { Observable } from 'rxjs/Observable';
 import { TeachingSubjectService } from 'app/entities/teaching-subject/teaching-subject.service';
 import { ITeachingSubject } from 'app/shared/model/teaching-subject.model';
@@ -16,7 +16,7 @@ import { JhiAlertService } from 'ng-jhipster';
 export class CalendarTeachingSubjectListComponent implements OnInit {
     teachingSubjects$: Observable<ITeachingSubject[]> =  Observable.of([]);
 
-    constructor(private storeService: CalendarSubjectEventStoreService,
+    constructor(private storeService: StoreCalendarLessonDataService,
                 private teachingSubjectService: TeachingSubjectService,
                 private jhiAlertService: JhiAlertService) {
     }

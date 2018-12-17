@@ -1,12 +1,12 @@
 import { CalendarEvent } from 'calendar-utils';
 import { Task } from './task.model';
-import { SubjectHourData } from './subject-hour.model';
+//import { SubjectHourData } from './subject-hour.model';
 // import * as RRule from 'rrule';
 import { RRule } from 'rrule';
 
 export interface EventMeta {
     isActive: boolean;
-    subjectHourData: SubjectHourData;
+    //subjectHourData: SubjectHourData;
 }
 
 export interface TaskEventMeta extends EventMeta {

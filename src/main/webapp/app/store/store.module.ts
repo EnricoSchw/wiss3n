@@ -6,8 +6,7 @@ import { APP_ENVIRONMENT } from '../app.constants';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
-import { CalendarSubjectEventEntityService } from 'app/store/calendar-subject-event/calendar-subject-event-entity.service';
-import { CalendarSubjectEventStoreService } from 'app/store/calendar-subject-event/calendar-subject-event-store.service';
+import { StoreCalendarLessonDataService } from 'app/store/calendar-lesson-data/store-calendar-lesson-data.service';
 import { StoreTeachingSubjectService } from 'app/store/teaching-subject/store-teaching-subject.service';
 import { StoreSchoolClassService } from 'app/store/school-class/store-school-class.service';
 
@@ -19,8 +18,7 @@ import { StoreSchoolClassService } from 'app/store/school-class/store-school-cla
         EffectsModule.forRoot([AppEffects]),
     ],
     providers: [
-        CalendarSubjectEventEntityService,
-        CalendarSubjectEventStoreService,
+        StoreCalendarLessonDataService,
         StoreTeachingSubjectService,
         StoreSchoolClassService
     ],

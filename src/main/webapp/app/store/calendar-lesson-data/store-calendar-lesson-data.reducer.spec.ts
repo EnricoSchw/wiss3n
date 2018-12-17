@@ -1,6 +1,7 @@
-import { reducer, initialState } from './calendar-subject-event.reducer';
+import { initialState, reducer } from 'app/store/calendar-lesson-data/store-calendar-lesson-data.reducer';
 
-describe('CalendarSubjectEvent Reducer', () => {
+
+describe('CalendarLessonData Reducer', () => {
   describe('unknown action', () => {
     it('should return the initial state', () => {
       const action = {} as any;

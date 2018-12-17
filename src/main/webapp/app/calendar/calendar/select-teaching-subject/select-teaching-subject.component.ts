@@ -5,7 +5,7 @@ import { freeTeachingSubject, ITeachingSubject } from 'app/shared/model/teaching
 import { TeachingHourService } from 'app/entities/teaching-hour/teaching-hour.service';
 import { ITeachingHour, TeachingHour } from 'app/shared/model/teaching-hour.model';
 import { SubjectHourData } from 'app/shared/model/subject-hour.model';
-import { CalendarSubjectEventStoreService } from 'app/store/calendar-subject-event/calendar-subject-event-store.service';
+import { StoreCalendarLessonDataService } from 'app/store/calendar-lesson-data/calendar-subject-event-store.service';
 import { StoreSchoolClassService } from 'app/store/school-class/store-school-class.service';
 import { ISchoolClass } from 'app/shared/model/school-class.model';
 import { CalendarService } from 'app/calendar/providers/calendar.service';

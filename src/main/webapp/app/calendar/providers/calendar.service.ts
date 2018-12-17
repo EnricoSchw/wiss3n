@@ -4,24 +4,25 @@ import { CalendarEvent } from 'angular-calendar';
 import { subjectFixtures } from '../fixtures/subjects';
 import { events } from '../fixtures/event';
 import { Observable, Subscribable } from 'rxjs/Observable';
-import { CalendarSubjectEventStoreService } from 'app/store/calendar-subject-event/calendar-subject-event-store.service';
+// import { StoreCalendarLessonDataService } from 'app/store/calendar-lesson-data/calendar-subject-event-store.service';
 import { TeachingHourService } from 'app/entities/teaching-hour/teaching-hour.service';
 import { StoreSchoolClassService } from 'app/store/school-class/store-school-class.service';
-import { SubjectHourData } from 'app/shared/model/subject-hour.model';
+// import { SubjectHourData } from 'app/shared/model/subject-hour.model';
 import { ITeachingSubject } from 'app/shared/model/teaching-subject.model';
 import { ISchoolClass } from 'app/shared/model/school-class.model';
+import { StoreCalendarLessonDataService } from 'app/store/calendar-lesson-data/store-calendar-lesson-data.service';
 
 @Injectable()
 export class CalendarService {
     constructor(
-        private calendarSubjectEventStoreService: CalendarSubjectEventStoreService,
+        private calendarStore: StoreCalendarLessonDataService,
         private teachingHourService: TeachingHourService,
         private storeSchoolClassService: StoreSchoolClassService
     ) {
     }
 
     loadSubjectEvents(): Observable<SubjectEvent[]> {
-        return this.calendarSubjectEventStoreService.getActiveSubjectEvents();
+        return this.calendarStore.getActiveEvents();
     }
 
 

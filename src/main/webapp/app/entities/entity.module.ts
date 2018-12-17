@@ -5,6 +5,7 @@ import { Wiss3NSchoolClassModule } from './school-class/school-class.module';
 import { Wiss3NTeachingSubjectModule } from './teaching-subject/teaching-subject.module';
 import { Wiss3NTeachingHourModule } from './teaching-hour/teaching-hour.module';
 import { Wiss3NContentModule } from './content/content.module';
+import { Wiss3NCalendarLessonDataModule } from 'app/entities/calendar-lesson-data/calendar-lesson-data.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -14,7 +15,8 @@ import { Wiss3NContentModule } from './content/content.module';
         Wiss3NSchoolClassModule,
         Wiss3NTeachingSubjectModule,
         Wiss3NTeachingHourModule,
-        Wiss3NContentModule
+        Wiss3NContentModule,
+        Wiss3NCalendarLessonDataModule
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],
