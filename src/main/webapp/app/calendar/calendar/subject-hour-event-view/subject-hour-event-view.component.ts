@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TaskEventMeta } from 'app/shared/model/event.model';
 import { CalendarEvent } from 'calendar-utils';
 import { Task, TaskType } from 'app/shared/model/task.model';
 
@@ -10,7 +9,7 @@ import { Task, TaskType } from 'app/shared/model/task.model';
 })
 export class SubjectHourEventViewComponent implements OnInit {
 
-    @Input() event: CalendarEvent<TaskEventMeta>;
+    @Input() event: CalendarEvent<any>;
 
     constructor() {
     }

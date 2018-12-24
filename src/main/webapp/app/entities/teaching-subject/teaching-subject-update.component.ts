@@ -9,7 +9,7 @@ import { TeachingSubjectService } from './teaching-subject.service';
 import { IUser, Principal, UserService } from 'app/core';
 import { ISchoolClass } from 'app/shared/model/school-class.model';
 import { SchoolClassService } from 'app/entities/school-class';
-import { StoreCalendarLessonDataService } from 'app/store/calendar-lesson-data/calendar-subject-event-store.service';
+import { StoreCalendarLessonDataService } from 'app/store/calendar-lesson-data/store-calendar-lesson-data.service';
 
 @Component({
     selector: 'jhi-teaching-subject-update',

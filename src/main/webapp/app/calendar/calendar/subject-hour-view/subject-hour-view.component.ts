@@ -4,7 +4,7 @@ import { DayViewEvent } from 'calendar-utils';
 @Component({
     selector: 'jhi-subject-hour-view',
     templateUrl: './subject-hour-view.component.html',
-    styleUrls: ['./subject-hour-view.component.scss', '../subject-hour.scss', '../media-queries.scss']
+    styleUrls: ['./subject-hour-view.component.scss', '../../scss/subject-hour.scss', '../../scss/media-queries.scss']
 })
 export class SubjectHourViewComponent implements OnInit {
 
