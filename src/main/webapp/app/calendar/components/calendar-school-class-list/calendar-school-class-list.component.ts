@@ -14,7 +14,7 @@ import { StoreCalendarLessonDataService } from 'app/store/calendar-lesson-data/s
 @Component({
     selector: 'jhi-calendar-school-class-list',
     templateUrl: './calendar-school-class-list.component.html',
-    styleUrls: ['./../calendar-board/calendar-board.scss']
+    styleUrls: ['./../../scss/calendar-board.scss']
 })
 export class CalendarSchoolClassListComponent implements OnInit, OnDestroy {
     currentAccount: any;

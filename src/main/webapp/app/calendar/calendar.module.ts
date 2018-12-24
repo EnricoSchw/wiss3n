@@ -7,9 +7,9 @@ import { CalendarService } from './providers/calendar.service';
 import { SubjectHourViewComponent } from './calendar/subject-hour-view/subject-hour-view.component';
 import { SubjectHourEventViewComponent } from './calendar/subject-hour-event-view/subject-hour-event-view.component';
 import { RouterModule } from '@angular/router';
-import { CalendarSchoolClassListComponent } from './calendar-entities/calendar-school-class-list.component';
+import { CalendarSchoolClassListComponent } from './components/calendar-school-class-list/calendar-school-class-list.component';
 import { Wiss3NSharedModule } from 'app/shared';
-import { CalendarTeachingSubjectListComponent } from './calendar-entities/calendar-teaching-subject-list.component';
+import { CalendarTeachingSubjectListComponent } from './components/calendar-teaching-subject-list/calendar-teaching-subject-list.component';
 import { Wiss3NStoreModule } from 'app/store/store.module';
 import { CalendarMenuComponent } from './components/calendar-menu/calendar-menu.component';
 
