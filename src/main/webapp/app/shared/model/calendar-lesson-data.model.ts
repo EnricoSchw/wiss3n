@@ -10,7 +10,8 @@ import * as RRule from 'rrule';
  *  + teaching subject
  */
 export interface CalendarLessonData {
-    schoolClassId: number;
+    /** schoolClassId */
+    id: number;
     lessons: CalendarLesson[]
 
     // This should part of Calendar Events

@@ -10,6 +10,7 @@ import { Principal } from 'app/core';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { SchoolClassService } from 'app/entities/school-class/school-class.service';
 import { StoreCalendarLessonDataService } from 'app/store/calendar-lesson-data/store-calendar-lesson-data.service';
+import { CalendarLessonDataService } from 'app/entities/calendar-lesson-data/calendar-lesson-data.service';
 
 @Component({
     selector: 'jhi-calendar-school-class-list',
@@ -34,7 +35,7 @@ export class CalendarSchoolClassListComponent implements OnInit, OnDestroy {
 
     constructor(
         private schoolClassService: SchoolClassService,
-        private storeService: StoreCalendarLessonDataService,
+        private calendarLessonDataService: CalendarLessonDataService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
         private principal: Principal,
@@ -55,7 +56,7 @@ export class CalendarSchoolClassListComponent implements OnInit, OnDestroy {
             .subscribe(
                 (res: HttpResponse<ISchoolClass[]>) => {
                     this.schoolClasses = res.body;
-                    // this.storeService.loadAll(this.schoolClasses);
+                    this.calendarLessonDataService.loadAll(this.schoolClasses);
                     this.setSchoolClassActive(this.schoolClasses[0].id);
                 }, (res: HttpErrorResponse) => this.onError(res.message)
             );
@@ -104,6 +105,6 @@ export class CalendarSchoolClassListComponent implements OnInit, OnDestroy {
 
     setSchoolClassActive(id: number) {
         this.activeClassId = id;
-        this.storeService.activateBySchoolClassId(id);
+        this.calendarLessonDataService.activateBySchoolClassId(id);
     }
 }

@@ -22,9 +22,14 @@ export class CalendarLessonDataService {
         this.store.loadAll(calendarLessonDataSet);
     }
 
+
+    public activateBySchoolClassId(id: number) {
+        this.store.activateBySchoolClassId(id);
+    }
+
     private createLessonData(schoolClass: ISchoolClass): CalendarLessonData {
         const data: CalendarLessonData = {
-            schoolClassId: schoolClass.id,
+            id: schoolClass.id,
             lessons: []
         };
         const defaultTeachingSubjectId = freeTeachingSubject.id;
@@ -128,4 +133,5 @@ export class CalendarLessonDataService {
     //
     //     return eventList;
     // }
+
 }

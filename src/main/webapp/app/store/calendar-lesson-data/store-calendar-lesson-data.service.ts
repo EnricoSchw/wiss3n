@@ -22,6 +22,11 @@ export class StoreCalendarLessonDataService {
         private store: Store<State>) {
     }
 
+
+    public loadBySchoolClassList() {
+
+    }
+
     public loadAll(calendarLessonDataSet: CalendarLessonData[]) {
         // const calendarSubjectEvents: CalendarSubjectEvent[] = [];
         //

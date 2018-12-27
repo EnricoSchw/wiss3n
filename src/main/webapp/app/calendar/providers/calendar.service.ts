@@ -36,7 +36,7 @@ export class CalendarService {
 
     private getSchoolClassData(lessonData: CalendarLessonData): Observable<SchoolClassData> {
         return this.schoolClassService
-            .get(lessonData.schoolClassId)
+            .get(lessonData.id)
             .pipe(
                 take(1),
                 map(schoolClass => (

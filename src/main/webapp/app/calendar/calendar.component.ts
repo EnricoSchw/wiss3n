@@ -1,19 +1,47 @@
 import {
-    ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges,
+    AfterViewInit,
+    ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges, TemplateRef,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { CalendarEvent, ViewPeriod } from 'calendar-utils';
 import {
-    addDays, isSameDay, subDays
+    startOfDay,
+    endOfDay,
+    subDays,
+    addDays,
+    endOfMonth,
+    isSameDay,
+    isSameMonth,
+    addHours
 } from 'date-fns';
 import { RRule } from 'rrule';
-import { CalendarDateFormatter } from 'angular-calendar';
+import { CalendarDateFormatter, CalendarEventAction } from 'angular-calendar';
 import { Task, TaskType } from 'app/shared/model/task.model';
 
 import { Observable } from 'rxjs/Observable';
 import { CalendarLesson } from 'app/shared/model/calendar-lesson-data.model';
 import { CalendarService } from 'app/calendar/providers/calendar.service';
 import { CustomDateFormatter } from 'app/calendar/util/custom-date-formatter';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CalendarMenuComponent } from 'app/calendar/components/calendar-menu/calendar-menu.component';
+
+
+const colors: any = {
+    red: {
+        primary: '#ad2121',
+        secondary: '#FAE3E3'
+    },
+    blue: {
+        primary: '#1e90ff',
+        secondary: '#D1E8FF'
+    },
+    yellow: {
+        primary: '#e3bc08',
+        secondary: '#FDF1BA'
+    }
+};
+
 
 @Component({
     selector: 'jhi-calendar',
@@ -28,24 +56,69 @@ import { CustomDateFormatter } from 'app/calendar/util/custom-date-formatter';
         }
     ]
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, AfterViewInit{
+
+    @ViewChild('modalContent') modalContent: TemplateRef<any>;
+
+    @ViewChild('calendarMenu') menue: CalendarMenuComponent;
+
+    modalData: {
+        action: string;
+        event: CalendarEvent;
+    };
+
+
     view = 'month';
     viewDate: Date = new Date('2018-07-16');
     // exclude weekends
+
     monthEvents: CalendarEvent<any>[];
     weekEvents$: Observable<CalendarEvent<CalendarLesson>[]>;
 
     private activeEvent: CalendarEvent<CalendarLesson>;
 
+    events: CalendarEvent[];
+
+
+
+    actions: CalendarEventAction[] = [
+        {
+            label: '<i class="fa fa-fw fa-pencil"></i>',
+            onClick: ({ event }: { event: CalendarEvent }): void => {
+                this.handleEvent('Edited', event);
+            }
+        },
+        {
+            label: '<i class="fa fa-fw fa-times"></i>',
+            onClick: ({ event }: { event: CalendarEvent }): void => {
+                this.events = this.events.filter(iEvent => iEvent !== event);
+                this.handleEvent('Deleted', event);
+            }
+        }
+    ];
+
+
     constructor(
-        private service: CalendarService
+        private service: CalendarService,
+        private modal: NgbModal
 
     ) {
     }
 
+
+
+
+    public ngAfterViewInit() {
+        // Redefine `seconds()` to get from the `CountdownTimerComponent.seconds` ...
+        // but wait a tick first to avoid one-time devMode
+        // unidirectional-data-flow-violation error
+        // setTimeout(() => this.view = () => this.timerComponent.seconds, 0);
+    }
+
+
     public ngOnInit(): void {
 
-        const events = []; // this.service.loadTasks();
+        //const events = []; // this.service.loadTasks();
         this.weekEvents$ = this.service
             .loadLessonEvents()
             .map(subjects => {
@@ -54,7 +127,43 @@ export class CalendarComponent implements OnInit {
                 //return this.calendarEventService.createCalendarEvents(subjects, events);
             });
 
-        this.monthEvents = events;
+        this.events = [
+            {
+                start: subDays(startOfDay(new Date()), 1),
+                end: addDays(new Date(), 1),
+                title: 'A 3 day event',
+                color: colors.red,
+                actions: this.actions
+            },
+            {
+                start: startOfDay(new Date()),
+                title: 'An event with no end date',
+                color: colors.yellow,
+                actions: this.actions
+            },
+            {
+                start: subDays(endOfMonth(new Date()), 3),
+                end: addDays(endOfMonth(new Date()), 3),
+                title: 'A long event that spans 2 months',
+                color: colors.blue
+            },
+            {
+                start: addHours(startOfDay(new Date()), 2),
+                end: new Date(),
+                title: 'A draggable and resizable event',
+                color: colors.yellow,
+                actions: this.actions,
+                resizable: {
+                    beforeStart: true,
+                    afterEnd: true
+                },
+                draggable: true
+            }
+        ];
+
+
+
+        this.monthEvents = this.events;
     }
 
     public beforeDayViewRender({period}: { period: ViewPeriod }): void {
@@ -97,6 +206,11 @@ export class CalendarComponent implements OnInit {
         }
         //event.meta.isActive = true;
         this.activeEvent = event;
+    }
+
+    handleEvent(action: string, event: CalendarEvent): void {
+        this.modalData = { event, action };
+        this.modal.open(this.modalContent, { size: 'lg' });
     }
 
 }

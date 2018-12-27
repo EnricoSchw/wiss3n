@@ -146,7 +146,7 @@ public class TeachingHourResource {
     }
 
     /**
-     * SEARCH  /_search/schoolClasses/{schoolClassId}/teaching-hours: search for the teachingHour corresponding
+     * SEARCH  /_search/schoolClasses/{id}/teaching-hours: search for the teachingHour corresponding
      * to the user and school class.
      *
      * @param schoolClassId the query of the teachingHour search
