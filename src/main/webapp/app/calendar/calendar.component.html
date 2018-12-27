@@ -25,12 +25,12 @@
 <calendar-menu  #calendarMenu></calendar-menu>
 
 
-<div [ngSwitch]="menue.view">
+<div [ngSwitch]="menu.view">
     <mwl-calendar-month-view
         *ngSwitchCase="'month'"
-        [viewDate]="menue.viewDate"
+        [viewDate]="menu.viewDate"
         [events]="events"
-        [excludeDays]="menue.excludeDays"
+        [excludeDays]="menu.excludeDays"
         [refresh]="refresh"
         [activeDayIsOpen]="activeDayIsOpen"
         (dayClicked)="dayClicked($event.day)"
@@ -39,8 +39,8 @@
     </mwl-calendar-month-view>
     <mwl-calendar-week-view
         *ngSwitchCase="'week'"
-        [viewDate]="menue.viewDate"
-        [excludeDays]="menue.excludeDays"
+        [viewDate]="menu.viewDate"
+        [excludeDays]="menu.excludeDays"
         [events]="events"
         [refresh]="refresh"
         (eventClicked)="handleEvent('Clicked', $event.event)"
@@ -48,7 +48,7 @@
     </mwl-calendar-week-view>
     <mwl-calendar-day-view
         *ngSwitchCase="'day'"
-        [viewDate]="menue.viewDate"
+        [viewDate]="menu.viewDate"
         [excludeDays]="excludeDays"
         [events]="events"
         [refresh]="refresh"

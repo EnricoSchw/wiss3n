@@ -60,7 +60,7 @@ export class CalendarComponent implements OnInit, AfterViewInit{
 
     @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
-    @ViewChild('calendarMenu') menue: CalendarMenuComponent;
+    @ViewChild('calendarMenu') menu: CalendarMenuComponent;
 
     modalData: {
         action: string;
