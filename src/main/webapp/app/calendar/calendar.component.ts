@@ -116,50 +116,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     }
 
     public ngOnInit(): void {
-
-        // const events = []; // this.service.loadTasks();
-        this.weekEvents$ = this.service
-            .loadLessonEvents()
-            .map(subjects => {
-                this.activeEvent = null;
-                return [];
-                // return this.calendarEventService.createCalendarEvents(subjects, events);
-            });
-
-        this.events = [
-            {
-                start: subDays(startOfDay(new Date()), 1),
-                end: addDays(new Date(), 1),
-                title: 'A 3 day event',
-                color: colors.red,
-                actions: this.actions
-            },
-            {
-                start: startOfDay(new Date()),
-                title: 'An event with no end date',
-                color: colors.yellow,
-                actions: this.actions
-            },
-            {
-                start: subDays(endOfMonth(new Date()), 3),
-                end: addDays(endOfMonth(new Date()), 3),
-                title: 'A long event that spans 2 months',
-                color: colors.blue
-            },
-            {
-                start: addHours(startOfDay(new Date()), 2),
-                end: new Date(),
-                title: 'A draggable and resizable event',
-                color: colors.yellow,
-                actions: this.actions,
-                resizable: {
-                    beforeStart: true,
-                    afterEnd: true
-                },
-                draggable: true
-            }
-        ];
-
+        this.weekEvents$ = this.service.loadLessonEvents();
         this.monthEvents = this.events;
     }
 

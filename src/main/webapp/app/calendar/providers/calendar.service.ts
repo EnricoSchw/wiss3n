@@ -7,8 +7,33 @@ import { StoreCalendarLessonDataService } from 'app/store/calendar-lesson-data/s
 import { CalendarLesson, CalendarLessonData } from 'app/shared/model/calendar-lesson-data.model';
 import { endOfWeek, startOfWeek } from 'date-fns';
 import { RRule } from 'rrule';
-import { map, take } from 'rxjs/operators';
+import { flatMap, map, take } from 'rxjs/operators';
 import moment = require('moment');
+import {
+    startOfDay,
+    endOfDay,
+    subDays,
+    addDays,
+    endOfMonth,
+    isSameDay,
+    isSameMonth,
+    addHours
+} from 'date-fns';
+
+const colors: any = {
+    red: {
+        primary: '#ad2121',
+        secondary: '#FAE3E3'
+    },
+    blue: {
+        primary: '#1e90ff',
+        secondary: '#D1E8FF'
+    },
+    yellow: {
+        primary: '#e3bc08',
+        secondary: '#FDF1BA'
+    }
+};
 
 interface SchoolClassData {
     start: Date;
@@ -28,8 +53,10 @@ export class CalendarService {
     loadLessonEvents(): Observable<CalendarEvent<CalendarLesson>[]> {
         return this.calendarStore
             .getActiveCalendarLessonData()
-            .flatMap(data => this.getSchoolClassData(data))
-            .map(data => this.createCalendarLessonEvents(data));
+            .pipe(
+                flatMap(data => this.getSchoolClassData(data)),
+                map(data => this.createCalendarLessonEvents(data))
+            );
     }
 
     private getSchoolClassData(lessonData: CalendarLessonData): Observable<SchoolClassData> {
@@ -49,7 +76,39 @@ export class CalendarService {
     }
 
     private createCalendarLessonEvents(data: SchoolClassData): CalendarEvent<CalendarLesson>[] {
-        const events: CalendarEvent<CalendarLesson>[] = [];
+        const events: CalendarEvent<CalendarLesson>[] = [
+            {
+                start: subDays(startOfDay(new Date()), 1),
+                end: addDays(new Date(), 1),
+                title: 'A 3 day event',
+                color: colors.red,
+                actions: []
+            },
+            {
+                start: startOfDay(new Date()),
+                title: 'An event with no end date',
+                color: colors.yellow,
+                actions: []
+            },
+            {
+                start: subDays(endOfMonth(new Date()), 3),
+                end: addDays(endOfMonth(new Date()), 3),
+                title: 'A long event that spans 2 months',
+                color: colors.blue
+            },
+            {
+                start: addHours(startOfDay(new Date()), 2),
+                end: new Date(),
+                title: 'A draggable and resizable event',
+                color: colors.yellow,
+                actions: [],
+                resizable: {
+                    beforeStart: true,
+                    afterEnd: true
+                },
+                draggable: true
+            }
+        ];
 
         // data.lessons.forEach(lesson => {
         //     const rule: RRule = this.createRule(data.start, data.end);
@@ -93,9 +152,7 @@ export class CalendarService {
         //         calendarEvents.push(subjectEvent);
         //     });
         // });
-
         return events;
-
     }
 
     private createRule(startDate: Date, endDate: Date): RRule {

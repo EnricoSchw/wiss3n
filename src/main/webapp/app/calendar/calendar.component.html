@@ -20,30 +20,42 @@
     </div>
 </ng-template>
 
-<jhi-calendar-menu  #calendarMenu></jhi-calendar-menu>
+<jhi-calendar-menu #calendarMenu></jhi-calendar-menu>
 
-<div [ngSwitch]="menu.view">
-    <jhi-calendar-view-month
-        *ngSwitchCase="'month'"
-        [viewDate]="menu.viewDate"
-        [events]="events"
-        [excludeDays]="menu.excludeDays"
-        (dayClicked)="onDayInMonthClicked($event)">
-    </jhi-calendar-view-month>
-    <jhi-calendar-view-week
-        *ngSwitchCase="'week'"
-        [viewDate]="menu.viewDate"
-        [events]="events"
-        [excludeDays]="menu.excludeDays"
-        (dayClicked)="onDayInWeekClicked($event)">
-    </jhi-calendar-view-week>
-    <jhi-calendar-view-day
-        *ngSwitchCase="'day'"
-        [viewDate]="menu.viewDate"
-        [events]="events">
-    </jhi-calendar-view-day>
 
-    <!--<mwl-calendar-month-view-->
+<ng-template #loading>
+    <div class="text-center" style="width: 100%">
+        <div class="fa fa-spin fa-circle-notch fa-5x" style="position: relative; left: 45%; display: block;height: 100px;width: 100px; ">
+            <fa-icon [icon]="'circle-notch'"><div class="fa fa-spin fa-circle-notch fa-5x"></div></fa-icon>
+        </div>
+        <br>
+        Loading events...
+    </div>
+</ng-template>
+
+<div *ngIf="weekEvents$ | async; else loading; let events">
+    <div [ngSwitch]="menu.view">
+        <jhi-calendar-view-month
+            *ngSwitchCase="'month'"
+            [viewDate]="menu.viewDate"
+            [events]="events"
+            [excludeDays]="menu.excludeDays"
+            (dayClicked)="onDayInMonthClicked($event)">
+        </jhi-calendar-view-month>
+        <jhi-calendar-view-week
+            *ngSwitchCase="'week'"
+            [viewDate]="menu.viewDate"
+            [events]="events"
+            [excludeDays]="menu.excludeDays"
+            (dayClicked)="onDayInWeekClicked($event)">
+        </jhi-calendar-view-week>
+        <jhi-calendar-view-day
+            *ngSwitchCase="'day'"
+            [viewDate]="menu.viewDate"
+            [events]="events">
+        </jhi-calendar-view-day>
+
+        <!--<mwl-calendar-month-view-->
         <!--*ngSwitchCase="'month'"-->
         <!--[viewDate]="menu.viewDate"-->
         <!--[events]="events"-->
@@ -53,8 +65,8 @@
         <!--(dayClicked)="dayClicked($event.day)"-->
         <!--(eventClicked)="handleEvent('Clicked', $event.event)"-->
         <!--(eventTimesChanged)="eventTimesChanged($event)">-->
-    <!--</mwl-calendar-month-view>-->
-    <!--<mwl-calendar-week-view-->
+        <!--</mwl-calendar-month-view>-->
+        <!--<mwl-calendar-week-view-->
         <!--*ngSwitchCase="'week'"-->
         <!--[viewDate]="menu.viewDate"-->
         <!--[excludeDays]="menu.excludeDays"-->
@@ -62,8 +74,8 @@
         <!--[refresh]="refresh"-->
         <!--(eventClicked)="handleEvent('Clicked', $event.event)"-->
         <!--(eventTimesChanged)="eventTimesChanged($event)">-->
-    <!--</mwl-calendar-week-view>-->
-    <!--<mwl-calendar-day-view-->
+        <!--</mwl-calendar-week-view>-->
+        <!--<mwl-calendar-day-view-->
         <!--*ngSwitchCase="'day'"-->
         <!--[viewDate]="menu.viewDate"-->
         <!--[excludeDays]="excludeDays"-->
@@ -71,129 +83,128 @@
         <!--[refresh]="refresh"-->
         <!--(eventClicked)="handleEvent('Clicked', $event.event)"-->
         <!--(eventTimesChanged)="eventTimesChanged($event)">-->
-    <!--</mwl-calendar-day-view>-->
+        <!--</mwl-calendar-day-view>-->
+    </div>
 </div>
 
 
-
-
 <!--<ng-template-->
-    <!--#customWeekEventTemplate-->
-    <!--let-weekEvent="weekEvent"-->
-    <!--let-tooltipPlacement="tooltipPlacement"-->
-    <!--let-eventClicked="eventClicked"-->
-    <!--let-tooltipTemplate="tooltipTemplate"-->
-    <!--let-tooltipAppendToBody="tooltipAppendToBody">-->
-    <!--<div-->
-        <!--class="cal-event"-->
-        <!--[style.backgroundColor]="weekEvent.event.color?.secondary"-->
-        <!--[style.borderColor]="weekEvent.event.color?.primary"-->
-        <!--[mwlCalendarTooltip]="weekEvent.event.title | calendarEventTitle:'weekTooltip':weekEvent.event"-->
-        <!--[tooltipPlacement]="tooltipPlacement"-->
-        <!--[tooltipEvent]="weekEvent.event"-->
-        <!--[tooltipTemplate]="tooltipTemplate"-->
-        <!--[tooltipAppendToBody]="tooltipAppendToBody">-->
-        <!--&lt;!&ndash;(mwlClick)="eventClicked.emit()">&ndash;&gt;-->
-        <!--<mwl-calendar-event-actions [event]="weekEvent.event"></mwl-calendar-event-actions>-->
-        <!--&lt;!&ndash;<mwl-calendar-event-title&ndash;&gt;-->
-        <!--&lt;!&ndash;[event]="weekEvent.event"&ndash;&gt;-->
-        <!--&lt;!&ndash;[customTemplate]="eventTitleTemplate"&ndash;&gt;-->
-        <!--&lt;!&ndash;view="week">&ndash;&gt;-->
-        <!--&lt;!&ndash;</mwl-calendar-event-title>&ndash;&gt;-->
-        <!--&lt;!&ndash;<jhi-select-teaching-subject *ngIf="!weekEvent.event.meta.subjectHour.teachingSubject"></jhi-select-teaching-subject>&ndash;&gt;-->
-        <!--<jhi-select-teaching-subject-->
-            <!--[subjectHourData]="weekEvent.event.meta.subjectHourData"></jhi-select-teaching-subject>-->
-        <!--<div *ngFor="let taskEvent of weekEvent.event.meta.events;" class="xx">-->
-            <!--<span class="custom-event-month-subject" [ngStyle]="{'color': taskEvent.color.primary}">{{convertTypeToString(taskEvent.meta.task.type)}}</span>-->
-            <!--{{taskEvent.title}}-->
-        <!--</div>-->
-    <!--</div-->
-    <!--&gt;-->
+<!--#customWeekEventTemplate-->
+<!--let-weekEvent="weekEvent"-->
+<!--let-tooltipPlacement="tooltipPlacement"-->
+<!--let-eventClicked="eventClicked"-->
+<!--let-tooltipTemplate="tooltipTemplate"-->
+<!--let-tooltipAppendToBody="tooltipAppendToBody">-->
+<!--<div-->
+<!--class="cal-event"-->
+<!--[style.backgroundColor]="weekEvent.event.color?.secondary"-->
+<!--[style.borderColor]="weekEvent.event.color?.primary"-->
+<!--[mwlCalendarTooltip]="weekEvent.event.title | calendarEventTitle:'weekTooltip':weekEvent.event"-->
+<!--[tooltipPlacement]="tooltipPlacement"-->
+<!--[tooltipEvent]="weekEvent.event"-->
+<!--[tooltipTemplate]="tooltipTemplate"-->
+<!--[tooltipAppendToBody]="tooltipAppendToBody">-->
+<!--&lt;!&ndash;(mwlClick)="eventClicked.emit()">&ndash;&gt;-->
+<!--<mwl-calendar-event-actions [event]="weekEvent.event"></mwl-calendar-event-actions>-->
+<!--&lt;!&ndash;<mwl-calendar-event-title&ndash;&gt;-->
+<!--&lt;!&ndash;[event]="weekEvent.event"&ndash;&gt;-->
+<!--&lt;!&ndash;[customTemplate]="eventTitleTemplate"&ndash;&gt;-->
+<!--&lt;!&ndash;view="week">&ndash;&gt;-->
+<!--&lt;!&ndash;</mwl-calendar-event-title>&ndash;&gt;-->
+<!--&lt;!&ndash;<jhi-select-teaching-subject *ngIf="!weekEvent.event.meta.subjectHour.teachingSubject"></jhi-select-teaching-subject>&ndash;&gt;-->
+<!--<jhi-select-teaching-subject-->
+<!--[subjectHourData]="weekEvent.event.meta.subjectHourData"></jhi-select-teaching-subject>-->
+<!--<div *ngFor="let taskEvent of weekEvent.event.meta.events;" class="xx">-->
+<!--<span class="custom-event-month-subject" [ngStyle]="{'color': taskEvent.color.primary}">{{convertTypeToString(taskEvent.meta.task.type)}}</span>-->
+<!--{{taskEvent.title}}-->
+<!--</div>-->
+<!--</div-->
+<!--&gt;-->
 <!--</ng-template>-->
 
 <!--<ng-template-->
-    <!--#customEventTitleTemplate-->
-    <!--let-event="event"-->
-    <!--let-view="view">-->
-    <!--<span class="cal-event-title-number">{{event.meta.subjectHourData.hour.index}}</span>-->
-    <!--<span class="cal-event-title">{{ event.title }}</span>-->
+<!--#customEventTitleTemplate-->
+<!--let-event="event"-->
+<!--let-view="view">-->
+<!--<span class="cal-event-title-number">{{event.meta.subjectHourData.hour.index}}</span>-->
+<!--<span class="cal-event-title">{{ event.title }}</span>-->
 <!--</ng-template>-->
 
 <!--<ng-template-->
-    <!--#customDayEventTemplate-->
-    <!--let-dayEvent="dayEvent"-->
-    <!--let-tooltipPlacement="tooltipPlacement"-->
-    <!--let-eventClicked="eventClicked"-->
-    <!--let-tooltipTemplate="tooltipTemplate"-->
-    <!--let-tooltipAppendToBody="tooltipAppendToBody">-->
-    <!--<jhi-subject-hour-view-->
-        <!--[dayEvent]="dayEvent">-->
-    <!--</jhi-subject-hour-view>-->
-    <!--<div class="line top"></div>-->
-    <!--<div class="line bottom"></div>-->
-    <!--<div class="line right" [hidden]="!dayEvent.event.meta.isActive"></div>-->
-    <!--<div-->
-        <!--class="cal-event"-->
-        <!--[ngClass]="{ 'active': dayEvent.event.meta.isActive }"-->
-        <!--[style.backgroundColor]="dayEvent.event.color?.secondary"-->
-        <!--[style.borderColor]="dayEvent.event.color?.primary"-->
-        <!--[mwlCalendarTooltip]="dayEvent.event.title | calendarEventTitle:'dayTooltip':dayEvent.event"-->
-        <!--[tooltipPlacement]="tooltipPlacement"-->
-        <!--[tooltipEvent]="dayEvent.event"-->
-        <!--[tooltipTemplate]="tooltipTemplate"-->
-        <!--[tooltipAppendToBody]="tooltipAppendToBody"-->
-        <!--(mwlClick)="eventClicked.emit()">-->
-        <!--<mwl-calendar-event-actions [event]="dayEvent.event"></mwl-calendar-event-actions>-->
-        <!--&ngsp;-->
-        <!--<mwl-calendar-event-title-->
-            <!--[event]="dayEvent.event"-->
-            <!--[customTemplate]="customEventTitleTemplate"-->
-            <!--view="day"-->
-            <!--(mwlClick)="eventClicked.emit()">-->
-        <!--</mwl-calendar-event-title>-->
-    <!--</div>-->
+<!--#customDayEventTemplate-->
+<!--let-dayEvent="dayEvent"-->
+<!--let-tooltipPlacement="tooltipPlacement"-->
+<!--let-eventClicked="eventClicked"-->
+<!--let-tooltipTemplate="tooltipTemplate"-->
+<!--let-tooltipAppendToBody="tooltipAppendToBody">-->
+<!--<jhi-subject-hour-view-->
+<!--[dayEvent]="dayEvent">-->
+<!--</jhi-subject-hour-view>-->
+<!--<div class="line top"></div>-->
+<!--<div class="line bottom"></div>-->
+<!--<div class="line right" [hidden]="!dayEvent.event.meta.isActive"></div>-->
+<!--<div-->
+<!--class="cal-event"-->
+<!--[ngClass]="{ 'active': dayEvent.event.meta.isActive }"-->
+<!--[style.backgroundColor]="dayEvent.event.color?.secondary"-->
+<!--[style.borderColor]="dayEvent.event.color?.primary"-->
+<!--[mwlCalendarTooltip]="dayEvent.event.title | calendarEventTitle:'dayTooltip':dayEvent.event"-->
+<!--[tooltipPlacement]="tooltipPlacement"-->
+<!--[tooltipEvent]="dayEvent.event"-->
+<!--[tooltipTemplate]="tooltipTemplate"-->
+<!--[tooltipAppendToBody]="tooltipAppendToBody"-->
+<!--(mwlClick)="eventClicked.emit()">-->
+<!--<mwl-calendar-event-actions [event]="dayEvent.event"></mwl-calendar-event-actions>-->
+<!--&ngsp;-->
+<!--<mwl-calendar-event-title-->
+<!--[event]="dayEvent.event"-->
+<!--[customTemplate]="customEventTitleTemplate"-->
+<!--view="day"-->
+<!--(mwlClick)="eventClicked.emit()">-->
+<!--</mwl-calendar-event-title>-->
+<!--</div>-->
 <!--</ng-template>-->
 
 
 <!--<ng-template #loading>-->
-    <!--<div class="text-center">-->
-        <!--<i class="fa fa-spin fa-spinner fa-5x"></i>-->
-        <!--<br>-->
-        <!--Events...-->
-    <!--</div>-->
+<!--<div class="text-center">-->
+<!--<i class="fa fa-spin fa-spinner fa-5x"></i>-->
+<!--<br>-->
+<!--Events...-->
+<!--</div>-->
 <!--</ng-template>-->
 
 
 <!--<div [ngSwitch]="view" style="overflow:hidden;" *ngIf="weekEvents$ | async; else loading; let weekEvents">-->
-    <!--<mwl-calendar-month-view-->
-        <!--*ngSwitchCase="'month'"-->
-        <!--[viewDate]="viewDate"-->
-        <!--[events]="monthEvents"-->
-        <!--[excludeDays]="excludeDays"-->
-        <!--[locale]="'de'"-->
-        <!--[cellTemplate]="customMonthCellTemplate"-->
-        <!--(dayClicked)="viewDate = $event.day.date; view = 'week'">-->
-    <!--</mwl-calendar-month-view>-->
-    <!--<mwl-calendar-week-view-->
-        <!--*ngSwitchCase="'week'"-->
-        <!--[excludeDays]="excludeDays"-->
-        <!--[viewDate]="viewDate"-->
-        <!--[locale]="'de'"-->
-        <!--[eventTemplate]="customWeekEventTemplate"-->
-        <!--[events]="weekEvents"-->
-        <!--(dayHeaderClicked)="viewDate = $event.day.date; view = 'day'"-->
-        <!--(eventClicked)="clickSubjectEventInWeek($event)">-->
-    <!--</mwl-calendar-week-view>-->
-    <!--<mwl-calendar-day-view-->
-        <!--*ngSwitchCase="'day'"-->
-        <!--[viewDate]="viewDate"-->
-        <!--[events]="weekEvents"-->
-        <!--[locale]="'de'"-->
-        <!--[eventTemplate]="customDayEventTemplate"-->
-        <!--[dayStartHour]="0"-->
-        <!--[dayEndHour]="10"-->
-        <!--(beforeViewRender)="beforeDayViewRender($event)"-->
-        <!--(eventClicked)="clickSubjectEventInDay($event)">-->
-    <!--</mwl-calendar-day-view>-->
+<!--<mwl-calendar-month-view-->
+<!--*ngSwitchCase="'month'"-->
+<!--[viewDate]="viewDate"-->
+<!--[events]="monthEvents"-->
+<!--[excludeDays]="excludeDays"-->
+<!--[locale]="'de'"-->
+<!--[cellTemplate]="customMonthCellTemplate"-->
+<!--(dayClicked)="viewDate = $event.day.date; view = 'week'">-->
+<!--</mwl-calendar-month-view>-->
+<!--<mwl-calendar-week-view-->
+<!--*ngSwitchCase="'week'"-->
+<!--[excludeDays]="excludeDays"-->
+<!--[viewDate]="viewDate"-->
+<!--[locale]="'de'"-->
+<!--[eventTemplate]="customWeekEventTemplate"-->
+<!--[events]="weekEvents"-->
+<!--(dayHeaderClicked)="viewDate = $event.day.date; view = 'day'"-->
+<!--(eventClicked)="clickSubjectEventInWeek($event)">-->
+<!--</mwl-calendar-week-view>-->
+<!--<mwl-calendar-day-view-->
+<!--*ngSwitchCase="'day'"-->
+<!--[viewDate]="viewDate"-->
+<!--[events]="weekEvents"-->
+<!--[locale]="'de'"-->
+<!--[eventTemplate]="customDayEventTemplate"-->
+<!--[dayStartHour]="0"-->
+<!--[dayEndHour]="10"-->
+<!--(beforeViewRender)="beforeDayViewRender($event)"-->
+<!--(eventClicked)="clickSubjectEventInDay($event)">-->
+<!--</mwl-calendar-day-view>-->
 <!--</div>-->
 
