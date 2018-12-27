@@ -12,6 +12,7 @@ import { Wiss3NSharedModule } from 'app/shared';
 import { CalendarTeachingSubjectListComponent } from './components/calendar-teaching-subject-list/calendar-teaching-subject-list.component';
 import { Wiss3NStoreModule } from 'app/store/store.module';
 import { CalendarMenuComponent } from './components/calendar-menu/calendar-menu.component';
+import { CalendarViewMonthComponent } from './components/calendar-view-month/calendar-view-month.component';
 
 @NgModule({
     imports: [
@@ -27,6 +28,7 @@ import { CalendarMenuComponent } from './components/calendar-menu/calendar-menu.
         CalendarBoardComponent,
         SubjectHourViewComponent,
         CalendarMenuComponent,
+        CalendarViewMonthComponent,
         // SubjectHourEventViewComponent,
         // CalendarTeachingSubjectListComponent,
         // SelectTeachingSubjectComponent
