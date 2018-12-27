@@ -1,3 +1,9 @@
-<p>
-  calendar-view-week works!
-</p>
+<mwl-calendar-week-view
+    [excludeDays]="excludeDays"
+    [viewDate]="viewDate"
+    [locale]="'de'"
+    [events]="events"
+    (dayHeaderClicked)="onDayClicked($event)"
+    (eventClicked)="onEventClicked($event)">
+    <!--[eventTemplate]="customWeekEventTemplate" -->
+</mwl-calendar-week-view>

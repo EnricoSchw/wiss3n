@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'jhi-calendar-view-week',
@@ -7,9 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalendarViewWeekComponent implements OnInit {
 
-  constructor() { }
+    @Input() events;
+    @Input() viewDate;
+    @Input() excludeDays;
+    @Output() dayClicked = new EventEmitter<Date>();
 
-  ngOnInit() {
-  }
+    constructor() {
+    }
+
+    ngOnInit() {
+    }
+
+    onDayClicked(event) {
+        const viewDate = event.day.date;
+        this.dayClicked.emit(viewDate);
+    }
+
+    onEventClicked(event) {
+        alert(event);
+    }
 
 }

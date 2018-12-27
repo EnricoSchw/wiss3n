@@ -103,6 +103,11 @@ export class CalendarComponent implements OnInit, AfterViewInit {
         this.menu.view = 'week';
     }
 
+    onDayInWeekClicked(date) {
+        this.menu.viewDate = date;
+        this.menu.view = 'day';
+    }
+
     public ngAfterViewInit() {
         // Redefine `seconds()` to get from the `CountdownTimerComponent.seconds` ...
         // but wait a tick first to avoid one-time devMode
