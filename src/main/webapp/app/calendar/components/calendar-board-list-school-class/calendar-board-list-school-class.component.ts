@@ -3,21 +3,18 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
-
 import { ISchoolClass } from 'app/shared/model/school-class.model';
 import { Principal } from 'app/core';
-
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { SchoolClassService } from 'app/entities/school-class/school-class.service';
-import { StoreCalendarLessonDataService } from 'app/store/calendar-lesson-data/store-calendar-lesson-data.service';
 import { CalendarLessonDataService } from 'app/entities/calendar-lesson-data/calendar-lesson-data.service';
 
 @Component({
-    selector: 'jhi-calendar-school-class-list',
-    templateUrl: './calendar-school-class-list.component.html',
+    selector: 'jhi-calendar-board-list-school-class',
+    templateUrl: './calendar-board-list-school-class.component.html',
     styleUrls: ['./../../scss/calendar-board.scss']
 })
-export class CalendarSchoolClassListComponent implements OnInit, OnDestroy {
+export class CalendarBoardListSchoolClassComponent implements OnInit, OnDestroy {
     currentAccount: any;
     schoolClasses: ISchoolClass[] = [];
     error: any;
