@@ -37,6 +37,12 @@
         [excludeDays]="menu.excludeDays"
         (dayClicked)="onDayInWeekClicked($event)">
     </jhi-calendar-view-week>
+    <jhi-calendar-view-day
+        *ngSwitchCase="'day'"
+        [viewDate]="menu.viewDate"
+        [events]="events">
+    </jhi-calendar-view-day>
+
     <!--<mwl-calendar-month-view-->
         <!--*ngSwitchCase="'month'"-->
         <!--[viewDate]="menu.viewDate"-->
@@ -57,15 +63,15 @@
         <!--(eventClicked)="handleEvent('Clicked', $event.event)"-->
         <!--(eventTimesChanged)="eventTimesChanged($event)">-->
     <!--</mwl-calendar-week-view>-->
-    <mwl-calendar-day-view
-        *ngSwitchCase="'day'"
-        [viewDate]="menu.viewDate"
-        [excludeDays]="excludeDays"
-        [events]="events"
-        [refresh]="refresh"
-        (eventClicked)="handleEvent('Clicked', $event.event)"
-        (eventTimesChanged)="eventTimesChanged($event)">
-    </mwl-calendar-day-view>
+    <!--<mwl-calendar-day-view-->
+        <!--*ngSwitchCase="'day'"-->
+        <!--[viewDate]="menu.viewDate"-->
+        <!--[excludeDays]="excludeDays"-->
+        <!--[events]="events"-->
+        <!--[refresh]="refresh"-->
+        <!--(eventClicked)="handleEvent('Clicked', $event.event)"-->
+        <!--(eventTimesChanged)="eventTimesChanged($event)">-->
+    <!--</mwl-calendar-day-view>-->
 </div>
 
 

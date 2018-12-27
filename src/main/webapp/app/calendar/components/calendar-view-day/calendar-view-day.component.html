@@ -1,0 +1,10 @@
+<mwl-calendar-day-view
+    [viewDate]="viewDate"
+    [events]="events"
+    [locale]="'de'"
+    [dayStartHour]="0"
+    [dayEndHour]="10"
+    (eventClicked)="onLessondClicked($event)">
+    <!--(beforeViewRender)="beforeDayViewRender($event)"-->
+    <!--[eventTemplate]="customDayEventTemplate"-->
+</mwl-calendar-day-view>
