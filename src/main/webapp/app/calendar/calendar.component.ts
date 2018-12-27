@@ -26,7 +26,6 @@ import { CustomDateFormatter } from 'app/calendar/util/custom-date-formatter';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarMenuComponent } from 'app/calendar/components/calendar-menu/calendar-menu.component';
 
-
 const colors: any = {
     red: {
         primary: '#ad2121',
@@ -42,7 +41,6 @@ const colors: any = {
     }
 };
 
-
 @Component({
     selector: 'jhi-calendar',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -56,7 +54,7 @@ const colors: any = {
         }
     ]
 })
-export class CalendarComponent implements OnInit, AfterViewInit{
+export class CalendarComponent implements OnInit, AfterViewInit {
 
     @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
@@ -66,7 +64,6 @@ export class CalendarComponent implements OnInit, AfterViewInit{
         action: string;
         event: CalendarEvent;
     };
-
 
     view = 'month';
     viewDate: Date = new Date('2018-07-16');
@@ -79,34 +76,27 @@ export class CalendarComponent implements OnInit, AfterViewInit{
 
     events: CalendarEvent[];
 
-
-
     actions: CalendarEventAction[] = [
         {
             label: '<i class="fa fa-fw fa-pencil"></i>',
-            onClick: ({ event }: { event: CalendarEvent }): void => {
+            onClick: ({event}: { event: CalendarEvent }): void => {
                 this.handleEvent('Edited', event);
             }
         },
         {
             label: '<i class="fa fa-fw fa-times"></i>',
-            onClick: ({ event }: { event: CalendarEvent }): void => {
+            onClick: ({event}: { event: CalendarEvent }): void => {
                 this.events = this.events.filter(iEvent => iEvent !== event);
                 this.handleEvent('Deleted', event);
             }
         }
     ];
 
-
     constructor(
         private service: CalendarService,
         private modal: NgbModal
-
     ) {
     }
-
-
-
 
     public ngAfterViewInit() {
         // Redefine `seconds()` to get from the `CountdownTimerComponent.seconds` ...
@@ -115,16 +105,15 @@ export class CalendarComponent implements OnInit, AfterViewInit{
         // setTimeout(() => this.view = () => this.timerComponent.seconds, 0);
     }
 
-
     public ngOnInit(): void {
 
-        //const events = []; // this.service.loadTasks();
+        // const events = []; // this.service.loadTasks();
         this.weekEvents$ = this.service
             .loadLessonEvents()
             .map(subjects => {
                 this.activeEvent = null;
-                return []
-                //return this.calendarEventService.createCalendarEvents(subjects, events);
+                return [];
+                // return this.calendarEventService.createCalendarEvents(subjects, events);
             });
 
         this.events = [
@@ -161,8 +150,6 @@ export class CalendarComponent implements OnInit, AfterViewInit{
             }
         ];
 
-
-
         this.monthEvents = this.events;
     }
 
@@ -177,9 +164,6 @@ export class CalendarComponent implements OnInit, AfterViewInit{
         //     }
         // }
     }
-
-
-
 
     /**
      * Convert Task Type to string
@@ -202,15 +186,15 @@ export class CalendarComponent implements OnInit, AfterViewInit{
 
     private setActiveEvent(event: CalendarEvent) {
         if (this.activeEvent) {
-            //this.activeEvent.meta.isActive = false;
+            // this.activeEvent.meta.isActive = false;
         }
-        //event.meta.isActive = true;
+        // event.meta.isActive = true;
         this.activeEvent = event;
     }
 
     handleEvent(action: string, event: CalendarEvent): void {
-        this.modalData = { event, action };
-        this.modal.open(this.modalContent, { size: 'lg' });
+        this.modalData = {event, action};
+        this.modal.open(this.modalContent, {size: 'lg'});
     }
 
 }

@@ -7,11 +7,10 @@ import {
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs-compat/add/observable/from';
-import { CalendarLesson, CalendarLessonData } from 'app/shared/model/calendar-lesson-data.model';
+import { CalendarLessonData } from 'app/shared/model/calendar-lesson-data.model';
 import {
     ActivateCalendarLessonData, LoadCalendarLessonDataSet
 } from 'app/store/calendar-lesson-data/store-calendar-lesson-data.actions';
-
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +20,6 @@ export class StoreCalendarLessonDataService {
     constructor(
         private store: Store<State>) {
     }
-
 
     public loadBySchoolClassList() {
 

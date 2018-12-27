@@ -9,7 +9,6 @@ import { freeTeachingSubject } from 'app/shared/model/teaching-subject.model';
 @Injectable({providedIn: 'root'})
 export class CalendarLessonDataService {
 
-
     constructor(private store: StoreCalendarLessonDataService) {
     }
 
@@ -21,7 +20,6 @@ export class CalendarLessonDataService {
         });
         this.store.loadAll(calendarLessonDataSet);
     }
-
 
     public activateBySchoolClassId(id: number) {
         this.store.activateBySchoolClassId(id);
@@ -43,8 +41,8 @@ export class CalendarLessonDataService {
             data.lessons.push({
                 lessonHour: getLessonHourByNumber(teachingHour.hour),
                 teachingHourId: teachingHour.id,
-                teachingSubjectId: teachingSubjectId
-            })
+                teachingSubjectId
+            });
             //
             //         subjectHourData.push(
             //             {

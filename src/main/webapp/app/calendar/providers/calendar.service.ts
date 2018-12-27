@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
 import { CalendarEvent } from 'angular-calendar';
-
-import { Observable, Subscribable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import { TeachingHourService } from 'app/entities/teaching-hour/teaching-hour.service';
 import { StoreSchoolClassService } from 'app/store/school-class/store-school-class.service';
 import { StoreCalendarLessonDataService } from 'app/store/calendar-lesson-data/store-calendar-lesson-data.service';
 import { CalendarLesson, CalendarLessonData } from 'app/shared/model/calendar-lesson-data.model';
 import { endOfWeek, startOfWeek } from 'date-fns';
 import { RRule } from 'rrule';
-import { Moment } from 'moment';
 import { map, take } from 'rxjs/operators';
 import moment = require('moment');
 
 interface SchoolClassData {
-    start: Date
-    end: Date
-    lessons: CalendarLesson[]
+    start: Date;
+    end: Date;
+    lessons: CalendarLesson[];
 }
 
 @Injectable()
@@ -30,7 +28,7 @@ export class CalendarService {
     loadLessonEvents(): Observable<CalendarEvent<CalendarLesson>[]> {
         return this.calendarStore
             .getActiveCalendarLessonData()
-            .flatMap((data) => this.getSchoolClassData(data))
+            .flatMap(data => this.getSchoolClassData(data))
             .map(data => this.createCalendarLessonEvents(data));
     }
 
@@ -96,11 +94,9 @@ export class CalendarService {
         //     });
         // });
 
-
         return events;
 
     }
-
 
     private createRule(startDate: Date, endDate: Date): RRule {
         return new RRule({
@@ -110,7 +106,6 @@ export class CalendarService {
             byweekday: []
         });
     }
-
 
     // public loadTasks(): CalendarEvent<TaskEventMeta>[] {
     //     return events;

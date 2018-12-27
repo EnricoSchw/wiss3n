@@ -4,7 +4,7 @@ import {
 } from 'date-fns';
 
 @Component({
-    selector: 'calendar-menu',
+    selector: 'jhi-calendar-menu',
     templateUrl: './calendar-menu.component.html',
     styleUrls: ['./calendar-menu.component.css']
 })

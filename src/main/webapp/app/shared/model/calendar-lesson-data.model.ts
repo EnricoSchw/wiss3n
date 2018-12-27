@@ -1,6 +1,5 @@
 import * as RRule from 'rrule';
 
-
 /**
  * This Object is a Map for the lessons of a week for each school class
  *
@@ -12,11 +11,11 @@ import * as RRule from 'rrule';
 export interface CalendarLessonData {
     /** schoolClassId */
     id: number;
-    lessons: CalendarLesson[]
+    lessons: CalendarLesson[];
 
     // This should part of Calendar Events
-    //title: string;
-    //prefix: string;
+    // title: string;
+    // prefix: string;
     // hour: LessonHour;
     // color: EventColor;
     // day: RRule.Weekday;
