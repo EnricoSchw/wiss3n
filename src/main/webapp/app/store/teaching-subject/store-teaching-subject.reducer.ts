@@ -4,6 +4,7 @@ import {
     TeachingSubjectActions, TeachingSubjectActionTypes
 } from 'app/store/teaching-subject/store-teaching-subject.actions';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { selectSchoolClassEntities } from 'app/store/school-class/store-school-class.reducer';
 
 export interface State extends EntityState<ITeachingSubject> {
     // additional entities state properties
@@ -79,4 +80,20 @@ export const {
 export const selectAllTeachingSubjects = createSelector(
     selectTeachingSubjectState,
     selectAll
+);
+
+export const selectTeachingSubjectEntities = createSelector(
+    selectTeachingSubjectState,
+    selectEntities
+);
+
+export const selectAllTeachingSubjectsById = (ids: number[]) => createSelector(
+    selectTeachingSubjectEntities,
+    teachingSubjects => {
+        const list: ITeachingSubject[] = [];
+        ids.forEach(id => {
+            list.push(teachingSubjects[id]);
+        });
+        return list;
+    }
 );

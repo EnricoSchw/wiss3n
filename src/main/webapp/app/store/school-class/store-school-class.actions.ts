@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-import { ISchoolClass } from 'app/shared/model/school-class.model';
+import { StoreSchoolClass } from 'app/store/school-class/store-school-class.model';
 
 export enum SchoolClassActionTypes {
   LoadSchoolClasses = '[SchoolClass] Load SchoolClasses',
@@ -18,43 +18,43 @@ export enum SchoolClassActionTypes {
 export class LoadSchoolClasses implements Action {
   readonly type = SchoolClassActionTypes.LoadSchoolClasses;
 
-  constructor(public payload: { schoolClasses: ISchoolClass[] }) {}
+  constructor(public payload: { schoolClasses: StoreSchoolClass[] }) {}
 }
 
 export class AddSchoolClass implements Action {
   readonly type = SchoolClassActionTypes.AddSchoolClass;
 
-  constructor(public payload: { schoolClass: ISchoolClass }) {}
+  constructor(public payload: { schoolClass: StoreSchoolClass }) {}
 }
 
 export class UpsertSchoolClass implements Action {
   readonly type = SchoolClassActionTypes.UpsertSchoolClass;
 
-  constructor(public payload: { schoolClass: ISchoolClass }) {}
+  constructor(public payload: { schoolClass: StoreSchoolClass }) {}
 }
 
 export class AddSchoolClasses implements Action {
   readonly type = SchoolClassActionTypes.AddSchoolClasses;
 
-  constructor(public payload: { schoolClasses: ISchoolClass[] }) {}
+  constructor(public payload: { schoolClasses: StoreSchoolClass[] }) {}
 }
 
 export class UpsertSchoolClasses implements Action {
   readonly type = SchoolClassActionTypes.UpsertSchoolClasses;
 
-  constructor(public payload: { schoolClasses: ISchoolClass[] }) {}
+  constructor(public payload: { schoolClasses: StoreSchoolClass[] }) {}
 }
 
 export class UpdateSchoolClass implements Action {
   readonly type = SchoolClassActionTypes.UpdateSchoolClass;
 
-  constructor(public payload: { schoolClass: Update<ISchoolClass> }) {}
+  constructor(public payload: { schoolClass: Update<StoreSchoolClass> }) {}
 }
 
 export class UpdateSchoolClasses implements Action {
   readonly type = SchoolClassActionTypes.UpdateSchoolClasses;
 
-  constructor(public payload: { schoolClasses: Update<ISchoolClass>[] }) {}
+  constructor(public payload: { schoolClasses: Update<StoreSchoolClass>[] }) {}
 }
 
 export class DeleteSchoolClass implements Action {

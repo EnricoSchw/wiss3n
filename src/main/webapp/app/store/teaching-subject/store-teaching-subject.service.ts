@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { ITeachingSubject } from 'app/shared/model/teaching-subject.model';
 import { select, Store } from '@ngrx/store';
 import {
-    State, selectAllTeachingSubjects,
+    State, selectAllTeachingSubjects, selectAllTeachingSubjectsById
 } from 'app/store/teaching-subject/store-teaching-subject.reducer';
 import {
-    DeleteTeachingSubject, LoadTeachingSubjects, UpsertTeachingSubject
+    AddTeachingSubjects,
+    DeleteTeachingSubject, DeleteTeachingSubjects, LoadTeachingSubjects, UpsertTeachingSubject, UpsertTeachingSubjects
 } from 'app/store/teaching-subject/store-teaching-subject.actions';
 import { Observable } from 'rxjs/Observable';
 
@@ -33,7 +34,19 @@ export class StoreTeachingSubjectService {
         this.store.dispatch(new UpsertTeachingSubject({teachingSubject}));
     }
 
+    public getList(ids: number[]): Observable<ITeachingSubject[]> {
+        return this.store.pipe(select(selectAllTeachingSubjectsById(ids)));
+    }
+
     public getAll(): Observable<ITeachingSubject[]> {
         return this.store.pipe(select(selectAllTeachingSubjects));
+    }
+
+    public upsertAll(teachingSubjects: ITeachingSubject[] | undefined) {
+        this.store.dispatch(new UpsertTeachingSubjects({teachingSubjects}));
+    }
+
+    public deleteAll(ids: number[]) {
+        this.store.dispatch(new DeleteTeachingSubjects({ids}));
     }
 }

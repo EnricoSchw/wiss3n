@@ -5,11 +5,12 @@ import { TeachingHourService } from 'app/entities/teaching-hour/teaching-hour.se
 import { StoreSchoolClassService } from 'app/store/school-class/store-school-class.service';
 import { StoreCalendarLessonDataService } from 'app/store/calendar-lesson-data/store-calendar-lesson-data.service';
 import { CalendarLesson, CalendarLessonData } from 'app/shared/model/calendar-lesson-data.model';
-import { endOfWeek, startOfWeek } from 'date-fns';
 import { RRule } from 'rrule';
 import { flatMap, map, take } from 'rxjs/operators';
 import moment = require('moment');
 import {
+    startOfWeek,
+    endOfWeek,
     startOfDay,
     endOfDay,
     subDays,
@@ -19,6 +20,7 @@ import {
     isSameMonth,
     addHours
 } from 'date-fns';
+import { StoreTeachingHourService } from 'app/store/teaching-hour/store-teaching-hour.service';
 
 const colors: any = {
     red: {
@@ -45,7 +47,7 @@ interface SchoolClassData {
 export class CalendarService {
     constructor(
         private calendarStore: StoreCalendarLessonDataService,
-        private teachingHourService: TeachingHourService,
+        private teachingHourService: StoreTeachingHourService,
         private schoolClassService: StoreSchoolClassService
     ) {
     }
@@ -110,7 +112,12 @@ export class CalendarService {
             }
         ];
 
-        // data.lessons.forEach(lesson => {
+        data.lessons.forEach(lesson => {
+            // this.teachingHourService.;
+            // const weeklyRule: RRule = this.createRecursWeeklyRule(data.start, data.end, lesson.teachingHourId.);
+
+        });
+
         //     const rule: RRule = this.createRule(data.start, data.end);
         //
         //
@@ -155,7 +162,7 @@ export class CalendarService {
         return events;
     }
 
-    private createRule(startDate: Date, endDate: Date): RRule {
+    private createRecursWeeklyRule(startDate: Date, endDate: Date): RRule {
         return new RRule({
             dtstart: startOfWeek(startDate),
             until: endOfWeek(endDate),

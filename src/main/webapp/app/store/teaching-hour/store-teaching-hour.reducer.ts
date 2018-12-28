@@ -2,6 +2,8 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { StoreTeachingHourActions, TeachingHourActionTypes } from './store-teaching-hour.actions';
 import { ITeachingHour } from 'app/shared/model/teaching-hour.model';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { selectTeachingSubjectState } from 'app/store/teaching-subject/store-teaching-subject.reducer';
+import { ITeachingSubject } from 'app/shared/model/teaching-subject.model';
 
 export interface State extends EntityState<ITeachingHour> {
   // additional entities state properties
@@ -74,9 +76,23 @@ export const {
 // Selectors: CalendarSubjectEvent
 export const selectTeachingHourState = createFeatureSelector<State>('teachingHour');
 
-
-
 export const selectAllTeachingHours = createSelector(
     selectTeachingHourState,
     selectAll
+);
+
+export const selectTeachingHourEntities = createSelector(
+    selectTeachingHourState,
+    selectEntities
+);
+
+export const selectAllTeachingHoursById = (ids: number[]) => createSelector(
+    selectTeachingHourEntities,
+    teachingHours => {
+        const list: ITeachingHour[] = [];
+        ids.forEach(id => {
+            list.push(teachingHours[id]);
+        });
+        return list;
+    }
 );

@@ -1,13 +1,13 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { SchoolClassActions, SchoolClassActionTypes } from './store-school-class.actions';
-import { ISchoolClass } from 'app/shared/model/school-class.model';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { StoreSchoolClass } from 'app/store/school-class/store-school-class.model';
 
-export interface State extends EntityState<ISchoolClass> {
+export interface State extends EntityState<StoreSchoolClass> {
     // additional entities state properties
 }
 
-export const adapter: EntityAdapter<ISchoolClass> = createEntityAdapter<ISchoolClass>();
+export const adapter: EntityAdapter<StoreSchoolClass> = createEntityAdapter<StoreSchoolClass>();
 
 export const initialState: State = adapter.getInitialState({
     // additional entity state properties
