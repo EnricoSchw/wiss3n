@@ -2,14 +2,17 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { SchoolClassActions, SchoolClassActionTypes } from './store-school-class.actions';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { StoreSchoolClass } from 'app/store/school-class/store-school-class.model';
+import { CalendarLessonDataActionTypes } from 'app/store/calendar-lesson-data/store-calendar-lesson-data.actions';
 
 export interface State extends EntityState<StoreSchoolClass> {
     // additional entities state properties
+    selectedSchoolClassId: number | null;
 }
 
 export const adapter: EntityAdapter<StoreSchoolClass> = createEntityAdapter<StoreSchoolClass>();
 
 export const initialState: State = adapter.getInitialState({
+    selectedSchoolClassId: null
     // additional entity state properties
 });
 
@@ -58,11 +61,17 @@ export function reducer(
             return adapter.removeAll(state);
         }
 
+        case SchoolClassActionTypes.ActivateSchoolClass: {
+            return { ...state, selectedSchoolClassId: action.payload.id };
+        }
+
         default: {
             return state;
         }
     }
 }
+
+export const getSelectedSchoolClassId = (state: State) => state.selectedSchoolClassId;
 
 export const selectSchoolClassState = createFeatureSelector<State>('schoolClass');
 
@@ -86,4 +95,15 @@ export const selectSchoolClassEntities = createSelector(
 export const selectSchoolClass = (id: number) => createSelector(
     selectSchoolClassEntities,
     schoolClasses => schoolClasses[id]
+);
+
+export const selectActiveSchoolClassId = createSelector(
+    selectSchoolClassState,
+    getSelectedSchoolClassId
+);
+
+export const selectActiveSchoolClass = createSelector(
+    selectSchoolClassEntities,
+    selectActiveSchoolClassId,
+    (schoolClassEntities, schoolClassId) => schoolClassEntities[schoolClassId]
 );

@@ -2,7 +2,9 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { StoreTeachingHourActions, TeachingHourActionTypes } from './store-teaching-hour.actions';
 import { ITeachingHour } from 'app/shared/model/teaching-hour.model';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { selectTeachingSubjectState } from 'app/store/teaching-subject/store-teaching-subject.reducer';
+import {
+    selectTeachingSubjectEntities, selectTeachingSubjectState
+} from 'app/store/teaching-subject/store-teaching-subject.reducer';
 import { ITeachingSubject } from 'app/shared/model/teaching-subject.model';
 
 export interface State extends EntityState<ITeachingHour> {
@@ -95,4 +97,9 @@ export const selectAllTeachingHoursById = (ids: number[]) => createSelector(
         });
         return list;
     }
+);
+
+export const selectTeachingHour = (id: number) => createSelector(
+    selectTeachingHourEntities,
+    teachingHour => teachingHour[id]
 );

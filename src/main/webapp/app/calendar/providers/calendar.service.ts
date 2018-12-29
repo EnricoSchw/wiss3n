@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { CalendarEvent } from 'angular-calendar';
 import { Observable } from 'rxjs/Observable';
-import { TeachingHourService } from 'app/entities/teaching-hour/teaching-hour.service';
 import { StoreSchoolClassService } from 'app/store/school-class/store-school-class.service';
 import { StoreCalendarLessonDataService } from 'app/store/calendar-lesson-data/store-calendar-lesson-data.service';
-import { CalendarLesson, CalendarLessonData } from 'app/shared/model/calendar-lesson-data.model';
+import { CalendarLesson, getWeekdayByNumber } from 'app/shared/model/calendar-lesson-data.model';
 import { RRule } from 'rrule';
-import { flatMap, map, take } from 'rxjs/operators';
-import moment = require('moment');
+import { map } from 'rxjs/operators';
 import {
     startOfWeek,
     endOfWeek,
@@ -21,6 +19,9 @@ import {
     addHours
 } from 'date-fns';
 import { StoreTeachingHourService } from 'app/store/teaching-hour/store-teaching-hour.service';
+import { SchoolClass } from 'app/shared/model/school-class.model';
+import { CalendarLessonDataService } from 'app/entities/calendar-lesson-data';
+import { DateFormatter } from 'app/shared/util/date-formatter';
 
 const colors: any = {
     red: {
@@ -37,167 +38,57 @@ const colors: any = {
     }
 };
 
-interface SchoolClassData {
-    start: Date;
-    end: Date;
-    lessons: CalendarLesson[];
-}
-
 @Injectable()
 export class CalendarService {
     constructor(
         private calendarStore: StoreCalendarLessonDataService,
         private teachingHourService: StoreTeachingHourService,
-        private schoolClassService: StoreSchoolClassService
+        private schoolClassService: StoreSchoolClassService,
+        private calendarLessonService: CalendarLessonDataService
     ) {
     }
 
     loadLessonEvents(): Observable<CalendarEvent<CalendarLesson>[]> {
-        return this.calendarStore
-            .getActiveCalendarLessonData()
-            .pipe(
-                flatMap(data => this.getSchoolClassData(data)),
-                map(data => this.createCalendarLessonEvents(data))
-            );
-    }
-
-    private getSchoolClassData(lessonData: CalendarLessonData): Observable<SchoolClassData> {
         return this.schoolClassService
-            .get(lessonData.id)
+            .getActiveSchoolClass()
             .pipe(
-                take(1),
-                map(schoolClass => (
-                    {
-                        // start: moment(schoolClass.start.format('YYYY-MM-DD[T]HH:mm:ss')).toDate(),
-                        start: moment(schoolClass.start).toDate(),
-                        end: moment(schoolClass.end).toDate(),
-                        lessons: lessonData.lessons
-                    }
-                ))
+                map(schoolClass => this.createCalendarLessonEvents(schoolClass))
             );
     }
 
-    private createCalendarLessonEvents(data: SchoolClassData): CalendarEvent<CalendarLesson>[] {
-        const events: CalendarEvent<CalendarLesson>[] = [
-            {
-                start: subDays(startOfDay(new Date()), 1),
-                end: addDays(new Date(), 1),
-                title: 'A 3 day event',
-                color: colors.red,
-                actions: []
-            },
-            {
-                start: startOfDay(new Date()),
-                title: 'An event with no end date',
-                color: colors.yellow,
-                actions: []
-            },
-            {
-                start: subDays(endOfMonth(new Date()), 3),
-                end: addDays(endOfMonth(new Date()), 3),
-                title: 'A long event that spans 2 months',
-                color: colors.blue
-            },
-            {
-                start: addHours(startOfDay(new Date()), 2),
-                end: new Date(),
-                title: 'A draggable and resizable event',
-                color: colors.yellow,
-                actions: [],
-                resizable: {
-                    beforeStart: true,
-                    afterEnd: true
-                },
-                draggable: true
-            }
-        ];
+    private createCalendarLessonEvents(schoolClass: SchoolClass): CalendarEvent<CalendarLesson>[] {
+        const events: CalendarEvent<CalendarLesson>[] = [];
 
-        data.lessons.forEach(lesson => {
-            // this.teachingHourService.;
-            // const weeklyRule: RRule = this.createRecursWeeklyRule(data.start, data.end, lesson.teachingHourId.);
+        schoolClass.teachingHours.forEach(teachingHour => {
+            const lesson = this.calendarLessonService.createCalendarLesson(teachingHour);
+            const weeklyDates: RRule = this.createRecursWeeklyRule(schoolClass.start.toDate(), schoolClass.end.toDate(), getWeekdayByNumber(teachingHour.weekday));
 
+            weeklyDates.all().forEach(date => {
+                events.push({
+                    start: this.createEventDate(date, lesson.lessonHour.start),
+                    end: this.createEventDate(date, lesson.lessonHour.end),
+                    title: 'A draggable and resizable event',
+                    color: (schoolClass.id === 2) ? colors.yellow : colors.blue,
+                    meta: lesson
+                });
+            });
         });
-
-        //     const rule: RRule = this.createRule(data.start, data.end);
-        //
-        //
-        //     // let eventListOfSubject: CalendarEvent<TaskEventMeta>[] = [];
-        //     // nextEvents = nextEvents.reduce((eventList: CalendarEvent<TaskEventMeta>[], current) => {
-        //     //     if (current.meta.subjectHourData.teachingSubject.id === subjectHour.meta.subjectHourData.teachingSubject.id) {
-        //     //         eventListOfSubject.push(current);
-        //     //     } else {
-        //     //         eventList.push(current);
-        //     //     }
-        //     //     return eventList;
-        //     // }, []);
-        //
-        //     rule.all().forEach(date => {
-        //         const start = new Date(date);
-        //         start.setHours(subjectHour.start.getHours());
-        //         start.setMinutes(subjectHour.start.getMinutes());
-        //         const end = new Date(date);
-        //         end.setHours(subjectHour.end.getHours());
-        //         end.setMinutes(subjectHour.end.getMinutes());
-        //
-        //         const thisEvents = [];
-        //
-        //         eventListOfSubject = eventListOfSubject.reduce((eventList: CalendarEvent<TaskEventMeta>[], current) => {
-        //             if (isSameDay(start, current.start)) {
-        //                 thisEvents.push(current);
-        //             } else {
-        //                 eventList.push(current);
-        //             }
-        //             return eventList;
-        //         }, []);
-        //         const subjectEvent = <SubjectEvent>{
-        //             ...subjectHour,
-        //             start,
-        //             end,
-        //             meta: {...subjectHour.meta, events: thisEvents},
-        //             vxallDay: true
-        //         };
-        //         calendarEvents.push(subjectEvent);
-        //     });
-        // });
         return events;
     }
 
-    private createRecursWeeklyRule(startDate: Date, endDate: Date): RRule {
+    private createRecursWeeklyRule(startDate: Date, endDate: Date, weekDay: RRule.Weekday): RRule {
         return new RRule({
             dtstart: startOfWeek(startDate),
             until: endOfWeek(endDate),
             freq: RRule.WEEKLY,
-            byweekday: []
+            byweekday: [weekDay]
         });
     }
 
-    // public loadTasks(): CalendarEvent<TaskEventMeta>[] {
-    //     return events;
-    // }
-    //
-    // public loadSubjects(): Observable<SubjectEvent[]> {
-    //     return Observable.of(subjectFixtures());
-    // }
-    //
-    // setTeachingSubjectInTeachingHour(subjectHourData: SubjectHourData, teachingSubject: ITeachingSubject) : Observable<SubjectHourData> {
-    //     const newSubjectHourData: SubjectHourData = {...subjectHourData};
-    //     newSubjectHourData.teachingHour.teachingSubject = teachingSubject;
-    //
-    //     return this.calendarSubjectEventStoreService.getActiveSchoolClassId()
-    //         .flatMap(id => this.storeSchoolClassService.get(id))
-    //         // get school class
-    //         // 1. --> update school class in store with new teaching hour and subject hour
-    //         // 2. --> update calendar event store by school class
-    //         // -----> select school class from store
-    //         // -----> update newSubjectHourData to this schoolClass
-    //         // 3. --> update teaching hour in backend with new teaching subject (finish)
-    //         // 4. --> update calendar with new teaching hour and subject
-    //         // -----> 1. way iterate events and update
-    //         // -----> 2. way recreate events from calendar event store
-    //         .map(schoolClass => newSubjectHourData.teachingHour.schoolClass =({...schoolClass, teachingHours: null, teachingSubjects: null}))
-    //         .flatMap(() => this.teachingHourService.update(newSubjectHourData.teachingHour))
-    //         .map(() => newSubjectHourData)
-    //         .take(1)
-    // }
-
+    private createEventDate(date: Date, timeString: string): Date {
+        const eventDate = new Date(date);
+        eventDate.setHours(DateFormatter.createHoursFromTimeString(timeString));
+        eventDate.setMinutes(DateFormatter.createMinutesFromTimeString(timeString));
+        return eventDate;
+    }
 }

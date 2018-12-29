@@ -2,20 +2,22 @@ import { Injectable } from '@angular/core';
 import { ITeachingSubject } from 'app/shared/model/teaching-subject.model';
 import { select, Store } from '@ngrx/store';
 import {
-    State, selectAllTeachingSubjects, selectAllTeachingSubjectsById
+    State, selectAllTeachingSubjects, selectAllTeachingSubjectsById, selectTeachingSubject
 } from 'app/store/teaching-subject/store-teaching-subject.reducer';
 import {
-    AddTeachingSubjects,
     DeleteTeachingSubject, DeleteTeachingSubjects, LoadTeachingSubjects, UpsertTeachingSubject, UpsertTeachingSubjects
 } from 'app/store/teaching-subject/store-teaching-subject.actions';
 import { Observable } from 'rxjs/Observable';
+import { StoreSchoolClassService } from 'app/store/school-class/store-school-class.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class StoreTeachingSubjectService {
 
-    constructor(private store: Store<State>) {
+    constructor(
+        private store: Store<State>,
+    ) {
     }
 
     public loadAll(teachingSubjects: ITeachingSubject[]) {

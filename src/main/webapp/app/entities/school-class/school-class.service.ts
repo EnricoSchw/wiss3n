@@ -113,4 +113,8 @@ export class SchoolClassService {
         });
         return res;
     }
+
+    public activateBySchoolClassId(id: number) {
+        this.store.activateBySchoolClassId(id);
+    }
 }

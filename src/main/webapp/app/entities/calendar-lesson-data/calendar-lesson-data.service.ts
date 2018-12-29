@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CalendarEvent } from 'calendar-utils';
-import { CalendarLessonData, getLessonHourByNumber } from 'app/shared/model/calendar-lesson-data.model';
+import { CalendarLesson, CalendarLessonData, getLessonHourByNumber } from 'app/shared/model/calendar-lesson-data.model';
 import { ISchoolClass } from 'app/shared/model/school-class.model';
 import { ITeachingHour } from 'app/shared/model/teaching-hour.model';
 import { StoreCalendarLessonDataService } from 'app/store/calendar-lesson-data/store-calendar-lesson-data.service';
@@ -23,6 +23,18 @@ export class CalendarLessonDataService {
 
     public activateBySchoolClassId(id: number) {
         this.store.activateBySchoolClassId(id);
+    }
+
+    public createCalendarLesson(teachingHour: ITeachingHour): CalendarLesson {
+        const defaultTeachingSubjectId = freeTeachingSubject.id;
+        const teachingSubjectId = (teachingHour.teachingSubject !== null && teachingHour.teachingSubject !== undefined)
+            ? teachingHour.teachingSubject.id
+            : defaultTeachingSubjectId;
+        return {
+            lessonHour: getLessonHourByNumber(teachingHour.hour),
+            teachingHourId: teachingHour.id,
+            teachingSubjectId
+        };
     }
 
     private createLessonData(schoolClass: ISchoolClass): CalendarLessonData {

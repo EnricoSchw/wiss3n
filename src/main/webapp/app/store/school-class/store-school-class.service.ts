@@ -3,15 +3,23 @@ import { Observable } from 'rxjs/Observable';
 import { select, Store } from '@ngrx/store';
 import { ISchoolClass, SchoolClass } from 'app/shared/model/school-class.model';
 import {
+    ActivateSchoolClass,
     DeleteSchoolClass, LoadSchoolClasses, UpsertSchoolClass
 } from 'app/store/school-class/store-school-class.actions';
-import { selectAllSchoolClasses, selectSchoolClass, State } from 'app/store/school-class/store-school-class.reducer';
+import {
+    selectActiveSchoolClass, selectActiveSchoolClassId, selectAllSchoolClasses, selectSchoolClass, State
+} from 'app/store/school-class/store-school-class.reducer';
 import { StoreSchoolClass } from 'app/store/school-class/store-school-class.model';
 import { StoreTeachingHourService } from 'app/store/teaching-hour/store-teaching-hour.service';
 import { ITeachingHour, TeachingHour } from 'app/shared/model/teaching-hour.model';
 import { StoreTeachingSubjectService } from 'app/store/teaching-subject/store-teaching-subject.service';
 import { ITeachingSubject, TeachingSubject } from 'app/shared/model/teaching-subject.model';
-import { flatMap, map } from 'rxjs/operators';
+import { filter, flatMap, map } from 'rxjs/operators';
+import { ActivateCalendarLessonData } from 'app/store/calendar-lesson-data/store-calendar-lesson-data.actions';
+import {
+    selectActiveCalendarLessonData, selectActiveCalendarLessonDataId
+} from 'app/store/calendar-lesson-data/store-calendar-lesson-data.reducer';
+import { CalendarLessonData } from 'app/shared/model/calendar-lesson-data.model';
 
 @Injectable({
     providedIn: 'root'
@@ -165,5 +173,22 @@ export class StoreSchoolClassService {
         } else {
             return Observable.of([]);
         }
+    }
+
+    public getActiveSchoolClass(): Observable<ISchoolClass> {
+        return this.store
+            .pipe(
+                select(selectActiveSchoolClass),
+                filter(s => s !== null && s !== undefined),
+                flatMap(schoolClass => this.createSchoolClass(schoolClass))
+            );
+    }
+
+    public activateBySchoolClassId(id: number) {
+        this.store.dispatch(new ActivateSchoolClass({id}));
+    }
+
+    public getActiveSchoolClassId(): Observable<number> {
+        return this.store.pipe(select(selectActiveSchoolClassId));
     }
 }

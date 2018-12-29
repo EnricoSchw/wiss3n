@@ -6,7 +6,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { JhiAlertService } from 'ng-jhipster';
-import { StoreCalendarLessonDataService } from 'app/store/calendar-lesson-data/store-calendar-lesson-data.service';
+import { StoreSchoolClassService } from 'app/store/school-class/store-school-class.service';
 
 @Component({
     selector: 'jhi-calendar-board-list-teaching-subject',
@@ -16,7 +16,7 @@ import { StoreCalendarLessonDataService } from 'app/store/calendar-lesson-data/s
 export class CalendarBoardListTeachingSubjectComponent implements OnInit {
     teachingSubjects$: Observable<ITeachingSubject[]> =  Observable.of([]);
 
-    constructor(private storeService: StoreCalendarLessonDataService,
+    constructor(private storeService: StoreSchoolClassService,
                 private teachingSubjectService: TeachingSubjectService,
                 private jhiAlertService: JhiAlertService) {
     }

@@ -11,9 +11,4 @@ export class CustomDateFormatter extends CalendarDateFormatter {
         return new DatePipe(locale).transform(date, 'H', locale);
     }
 
-    public calendartHourTime = (date: Moment, timeString: string): Date => {
-        date.format('2018-04-01T');
-        return moment('2018-04-01T' + timeString, 'YYYY-MM-DD[T]HH:mm:ss').toDate();
-    };
-
 }
