@@ -176,35 +176,35 @@
 
 
 <!--<div [ngSwitch]="view" style="overflow:hidden;" *ngIf="weekEvents$ | async; else loading; let weekEvents">-->
-<!--<mwl-calendar-month-view-->
-<!--*ngSwitchCase="'month'"-->
-<!--[viewDate]="viewDate"-->
-<!--[events]="monthEvents"-->
-<!--[excludeDays]="excludeDays"-->
-<!--[locale]="'de'"-->
-<!--[cellTemplate]="customMonthCellTemplate"-->
-<!--(dayClicked)="viewDate = $event.day.date; view = 'week'">-->
-<!--</mwl-calendar-month-view>-->
-<!--<mwl-calendar-week-view-->
-<!--*ngSwitchCase="'week'"-->
-<!--[excludeDays]="excludeDays"-->
-<!--[viewDate]="viewDate"-->
-<!--[locale]="'de'"-->
-<!--[eventTemplate]="customWeekEventTemplate"-->
-<!--[events]="weekEvents"-->
-<!--(dayHeaderClicked)="viewDate = $event.day.date; view = 'day'"-->
-<!--(eventClicked)="clickSubjectEventInWeek($event)">-->
-<!--</mwl-calendar-week-view>-->
-<!--<mwl-calendar-day-view-->
-<!--*ngSwitchCase="'day'"-->
-<!--[viewDate]="viewDate"-->
-<!--[events]="weekEvents"-->
-<!--[locale]="'de'"-->
-<!--[eventTemplate]="customDayEventTemplate"-->
-<!--[dayStartHour]="0"-->
-<!--[dayEndHour]="10"-->
-<!--(beforeViewRender)="beforeDayViewRender($event)"-->
-<!--(eventClicked)="clickSubjectEventInDay($event)">-->
-<!--</mwl-calendar-day-view>-->
+    <!--<mwl-calendar-month-view-->
+        <!--*ngSwitchCase="'month'"-->
+        <!--[viewDate]="viewDate"-->
+        <!--[events]="monthEvents"-->
+        <!--[excludeDays]="excludeDays"-->
+        <!--[locale]="'de'"-->
+        <!--[cellTemplate]="customMonthCellTemplate"-->
+        <!--(dayClicked)="viewDate = $event.day.date; view = 'week'">-->
+    <!--</mwl-calendar-month-view>-->
+    <!--<mwl-calendar-week-view-->
+        <!--*ngSwitchCase="'week'"-->
+        <!--[excludeDays]="excludeDays"-->
+        <!--[viewDate]="viewDate"-->
+        <!--[locale]="'de'"-->
+        <!--[eventTemplate]="customWeekEventTemplate"-->
+        <!--[events]="weekEvents"-->
+        <!--(dayHeaderClicked)="viewDate = $event.day.date; view = 'day'"-->
+        <!--(eventClicked)="clickSubjectEventInWeek($event)">-->
+    <!--</mwl-calendar-week-view>-->
+    <!--<mwl-calendar-day-view-->
+        <!--*ngSwitchCase="'day'"-->
+        <!--[viewDate]="viewDate"-->
+        <!--[events]="weekEvents"-->
+        <!--[locale]="'de'"-->
+        <!--[eventTemplate]="customDayEventTemplate"-->
+        <!--[dayStartHour]="0"-->
+        <!--[dayEndHour]="10"-->
+        <!--(beforeViewRender)="beforeDayViewRender($event)"-->
+        <!--(eventClicked)="clickSubjectEventInDay($event)">-->
+    <!--</mwl-calendar-day-view>-->
 <!--</div>-->
 

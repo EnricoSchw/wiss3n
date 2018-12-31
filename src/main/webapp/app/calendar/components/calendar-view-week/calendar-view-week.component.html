@@ -1,3 +1,52 @@
+<ng-template
+    #customEventTitleTemplate
+    let-event="event"
+    let-view="view">
+    <span class="cal-event-title-number">{{event.meta.subjectHourData.hour.index}}</span>
+    <span class="cal-event-title">{{ event.title }}</span>
+</ng-template>
+
+
+<ng-template
+    #customWeekEventTemplate
+    let-weekEvent="weekEvent"
+    let-tooltipPlacement="tooltipPlacement"
+    let-eventClicked="eventClicked"
+    let-tooltipTemplate="tooltipTemplate"
+    let-tooltipAppendToBody="tooltipAppendToBody">
+    <div
+        class="cal-event"
+        [style.backgroundColor]="weekEvent.event.color?.secondary"
+        [style.borderColor]="weekEvent.event.color?.primary"
+        [mwlCalendarTooltip]="weekEvent.event.title | calendarEventTitle:'weekTooltip':weekEvent.event"
+        [tooltipPlacement]="tooltipPlacement"
+        [tooltipEvent]="weekEvent.event"
+        [tooltipTemplate]="tooltipTemplate"
+        [tooltipAppendToBody]="tooltipAppendToBody">
+        <!--(mwlClick)="eventClicked.emit()">-->
+        <mwl-calendar-event-actions [event]="weekEvent.event"></mwl-calendar-event-actions>
+        <!--<mwl-calendar-event-title-->
+        <!--[event]="weekEvent.event"-->
+        <!--[customTemplate]="eventTitleTemplate"-->
+        <!--view="week">-->
+        <!--</mwl-calendar-event-title>-->
+        <!--<jhi-select-teaching-subject *ngIf="!weekEvent.event.meta.subjectHour.teachingSubject"></jhi-select-teaching-subject>-->
+
+
+
+        <!--<jhi-select-teaching-subject-->
+            <!--[subjectHourData]="weekEvent.event.meta.subjectHourData">-->
+            <!---->
+        <!--</jhi-select-teaching-subject>-->
+        <!--<div *ngFor="let taskEvent of weekEvent.event.meta.events;" class="xx">-->
+            <!--<span class="custom-event-month-subject" [ngStyle]="{'color': taskEvent.color.primary}">{{convertTypeToString(taskEvent.meta.task.type)}}</span>-->
+            <!--{{taskEvent.title}}-->
+        <!--</div>-->
+    </div>
+<!--&gt;-->
+</ng-template>
+
+
 <mwl-calendar-week-view
     [excludeDays]="excludeDays"
     [viewDate]="viewDate"
@@ -5,5 +54,5 @@
     [events]="events"
     (dayHeaderClicked)="onDayClicked($event)"
     (eventClicked)="onEventClicked($event)">
-    <!--[eventTemplate]="customWeekEventTemplate" -->
+    [eventTemplate]="customWeekEventTemplate"
 </mwl-calendar-week-view>

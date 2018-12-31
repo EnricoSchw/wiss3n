@@ -1,3 +1,52 @@
+<ng-template
+    #customEventTitleTemplate
+    let-event="event"
+    let-view="view">
+    <!--<span class="cal-event-title-number">{{event.meta.subjectHourData.hour.index}}</span>-->
+    <span class="cal-event-title-number">1</span>
+    <span class="cal-event-title">{{ event.title }}</span>
+</ng-template>
+
+
+<ng-template
+    #customDayEventTemplate
+    let-dayEvent="dayEvent"
+    let-tooltipPlacement="tooltipPlacement"
+    let-eventClicked="eventClicked"
+    let-tooltipTemplate="tooltipTemplate"
+    let-tooltipAppendToBody="tooltipAppendToBody">
+    <jhi-subject-hour-view
+        [dayEvent]="dayEvent">
+    </jhi-subject-hour-view>
+    <div class="line top"></div>
+    <div class="line bottom"></div>
+    <!--<div class="line right" [hidden]="!dayEvent.event.meta.isActive"></div>-->
+    <div class="line right"></div>
+    <div
+        class="cal-event"
+        [ngClass]="{ 'active': dayEvent.event.meta.isActive }"
+        [style.backgroundColor]="dayEvent.event.color?.secondary"
+        [style.borderColor]="dayEvent.event.color?.primary"
+        [mwlCalendarTooltip]="dayEvent.event.title | calendarEventTitle:'dayTooltip':dayEvent.event"
+        [tooltipPlacement]="tooltipPlacement"
+        [tooltipEvent]="dayEvent.event"
+        [tooltipTemplate]="tooltipTemplate"
+        [tooltipAppendToBody]="tooltipAppendToBody"
+        (mwlClick)="eventClicked.emit()">
+        <mwl-calendar-event-actions [event]="dayEvent.event"></mwl-calendar-event-actions>
+        &ngsp;
+        <mwl-calendar-event-title
+            [event]="dayEvent.event"
+            [customTemplate]="customEventTitleTemplate"
+            view="day"
+            (mwlClick)="eventClicked.emit()">
+        </mwl-calendar-event-title>
+    </div>
+</ng-template>
+
+
+
+
 <mwl-calendar-day-view
     [viewDate]="viewDate"
     [events]="events"
@@ -6,5 +55,5 @@
     [dayEndHour]="10"
     (eventClicked)="onLessondClicked($event)">
     <!--(beforeViewRender)="beforeDayViewRender($event)"-->
-    <!--[eventTemplate]="customDayEventTemplate"-->
+    [eventTemplate]="customDayEventTemplate"
 </mwl-calendar-day-view>
