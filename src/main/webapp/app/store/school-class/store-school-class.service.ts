@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { select, Store } from '@ngrx/store';
-import { ISchoolClass, SchoolClass } from 'app/shared/model/school-class.model';
+import { ISchoolClass, SchoolClass, StoreSchoolClass } from 'app/shared/model/school-class.model';
 import {
     ActivateSchoolClass,
     DeleteSchoolClass, LoadSchoolClasses, UpsertSchoolClass
@@ -9,17 +9,11 @@ import {
 import {
     selectActiveSchoolClass, selectActiveSchoolClassId, selectAllSchoolClasses, selectSchoolClass, State
 } from 'app/store/school-class/store-school-class.reducer';
-import { StoreSchoolClass } from 'app/store/school-class/store-school-class.model';
 import { StoreTeachingHourService } from 'app/store/teaching-hour/store-teaching-hour.service';
-import { ITeachingHour, TeachingHour } from 'app/shared/model/teaching-hour.model';
+import { TeachingHour } from 'app/shared/model/teaching-hour.model';
 import { StoreTeachingSubjectService } from 'app/store/teaching-subject/store-teaching-subject.service';
-import { ITeachingSubject, TeachingSubject } from 'app/shared/model/teaching-subject.model';
+import { TeachingSubject } from 'app/shared/model/teaching-subject.model';
 import { filter, flatMap, map } from 'rxjs/operators';
-import { ActivateCalendarLessonData } from 'app/store/calendar-lesson-data/store-calendar-lesson-data.actions';
-import {
-    selectActiveCalendarLessonData, selectActiveCalendarLessonDataId
-} from 'app/store/calendar-lesson-data/store-calendar-lesson-data.reducer';
-import { CalendarLessonData } from 'app/shared/model/calendar-lesson-data.model';
 
 @Injectable({
     providedIn: 'root'
@@ -33,18 +27,16 @@ export class StoreSchoolClassService {
     ) {
     }
 
-    public loadAll(schoolClassesOrg: ISchoolClass[]) {
-        const schoolClasses = this.createStoreSchoolClassList(schoolClassesOrg);
-        schoolClassesOrg.forEach(schoolClass => {
+    public loadAll(schoolClasses: ISchoolClass[]) {
+        schoolClasses.forEach(schoolClass => {
             this.upsertSubEntities(schoolClass);
         });
-        this.store.dispatch(new LoadSchoolClasses({schoolClasses}));
+        this.store.dispatch(new LoadSchoolClasses({schoolClasses: this.mapToStoreEntityList(schoolClasses)}));
     }
 
-    public add(schoolClassOrg: ISchoolClass) {
-        const schoolClass = this.createStoreSchoolClass(schoolClassOrg);
-        this.upsertSubEntities(schoolClassOrg);
-        this.store.dispatch(new UpsertSchoolClass({schoolClass}));
+    public add(schoolClass: ISchoolClass) {
+        this.upsertSubEntities(schoolClass);
+        this.store.dispatch(new UpsertSchoolClass({schoolClass: StoreSchoolClass.fromSchoolClass(schoolClass)}));
     }
 
     public delete(id: number) {
@@ -55,10 +47,9 @@ export class StoreSchoolClassService {
         this.store.dispatch(new DeleteSchoolClass({id}));
     }
 
-    public upsert(schoolClassOrg: ISchoolClass) {
-        const schoolClass = this.createStoreSchoolClass(schoolClassOrg);
+    public upsert(schoolClass: ISchoolClass) {
         this.upsertSubEntities(schoolClass);
-        this.store.dispatch(new UpsertSchoolClass({schoolClass}));
+        this.store.dispatch(new UpsertSchoolClass({schoolClass: StoreSchoolClass.fromSchoolClass(schoolClass)}));
     }
 
     public getAll(): Observable<ISchoolClass[]> {
@@ -91,50 +82,6 @@ export class StoreSchoolClassService {
                 map(teachingSubjects => schoolClass.teachingSubjects = teachingSubjects),
                 map(() => schoolClass)
             );
-    }
-
-    private createStoreSchoolClass(schoolClass: ISchoolClass): StoreSchoolClass {
-        const teachingHourIds = this.createTeachingHours(schoolClass.teachingHours);
-        const teachingSubjectIds = this.createTeachingSubjects(schoolClass.teachingSubjects);
-        return new StoreSchoolClass(
-            schoolClass.id,
-            schoolClass.start,
-            schoolClass.end,
-            schoolClass.active,
-            schoolClass.name,
-            teachingHourIds,
-            teachingSubjectIds,
-            schoolClass.user
-        );
-    }
-
-    private createStoreSchoolClassList(schoolClasses: ISchoolClass[]): StoreSchoolClass[] {
-        const storeSchoolClasseList: StoreSchoolClass[] = [];
-        schoolClasses.forEach(schoolClass => {
-            const storeSchoolClass = this.createStoreSchoolClass(schoolClass);
-            storeSchoolClasseList.push(storeSchoolClass);
-        });
-        return storeSchoolClasseList;
-    }
-
-    private createTeachingHours(teachingHours: ITeachingHour[]): number[] {
-        const teachingHoursIds: number[] = [];
-        if (teachingHours !== undefined && teachingHours !== null) {
-            teachingHours.forEach(teachingHour => {
-                teachingHoursIds.push(teachingHour.id);
-            });
-        }
-        return teachingHoursIds;
-    }
-
-    private createTeachingSubjects(teachingSubjects: ITeachingSubject[]): number[] {
-        const teachingSubjectIds: number[] = [];
-        if (teachingSubjects !== undefined && teachingSubjects !== null) {
-            teachingSubjects.forEach(teachingSubject => {
-                teachingSubjectIds.push(teachingSubject.id);
-            });
-        }
-        return teachingSubjectIds;
     }
 
     private upsertSubEntities(schoolClass: ISchoolClass) {
@@ -190,5 +137,11 @@ export class StoreSchoolClassService {
 
     public getActiveSchoolClassId(): Observable<number> {
         return this.store.pipe(select(selectActiveSchoolClassId));
+    }
+
+    private mapToStoreEntityList(schoolClasses: ISchoolClass[]): StoreSchoolClass[] {
+        const list: StoreSchoolClass[] = [];
+        schoolClasses.forEach(schoolClass => list.push(StoreSchoolClass.fromSchoolClass(schoolClass)));
+        return list;
     }
 }

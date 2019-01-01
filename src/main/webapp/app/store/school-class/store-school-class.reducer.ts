@@ -1,8 +1,7 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { SchoolClassActions, SchoolClassActionTypes } from './store-school-class.actions';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { StoreSchoolClass } from 'app/store/school-class/store-school-class.model';
-import { CalendarLessonDataActionTypes } from 'app/store/calendar-lesson-data/store-calendar-lesson-data.actions';
+import { StoreSchoolClass } from 'app/shared/model/school-class.model';
 
 export interface State extends EntityState<StoreSchoolClass> {
     // additional entities state properties

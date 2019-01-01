@@ -1,3 +1,28 @@
-<p>
-  calendar-view-week-cell works!
-</p>
+<ng-template #customEventTitleTemplate let-event="event" let-view="view">
+    <jhi-calendar-view-week-cell-title [lesson]="event.meta"></jhi-calendar-view-week-cell-title>
+</ng-template>
+
+<div
+    class="cal-event"
+    [style.backgroundColor]="event.color?.secondary"
+    [style.borderColor]="event.color?.primary">
+    <!--(mwlClick)="eventClicked.emit()">-->
+    <mwl-calendar-event-actions [event]="event"></mwl-calendar-event-actions>
+    <mwl-calendar-event-title
+        [event]="event"
+        [customTemplate]="customEventTitleTemplate"
+        view="week">
+    </mwl-calendar-event-title>
+    <!--<jhi-select-teaching-subject *ngIf="!weekEvent.event.meta.subjectHour.teachingSubject"></jhi-select-teaching-subject>-->
+
+
+
+    <!--<jhi-select-teaching-subject-->
+    <!--[subjectHourData]="weekEvent.event.meta.subjectHourData">-->
+    <!---->
+    <!--</jhi-select-teaching-subject>-->
+    <!--<div *ngFor="let taskEvent of weekEvent.event.meta.events;" class="xx">-->
+    <!--<span class="custom-event-month-subject" [ngStyle]="{'color': taskEvent.color.primary}">{{convertTypeToString(taskEvent.meta.task.type)}}</span>-->
+    <!--{{taskEvent.title}}-->
+    <!--</div>-->
+</div>

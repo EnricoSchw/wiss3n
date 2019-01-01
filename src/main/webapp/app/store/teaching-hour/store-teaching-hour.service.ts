@@ -7,7 +7,7 @@ import {
     DeleteTeachingHour, DeleteTeachingHours, LoadTeachingHours, UpsertTeachingHour, UpsertTeachingHours
 } from 'app/store/teaching-hour/store-teaching-hour.actions';
 import { Observable } from 'rxjs/Observable';
-import { ITeachingHour } from 'app/shared/model/teaching-hour.model';
+import { ITeachingHour, StoreTeachingHour } from 'app/shared/model/teaching-hour.model';
 
 @Injectable({
     providedIn: 'root'
@@ -18,11 +18,11 @@ export class StoreTeachingHourService {
     }
 
     public loadAll(teachingHours: ITeachingHour[]) {
-        this.store.dispatch(new LoadTeachingHours({teachingHours}));
+        this.store.dispatch(new LoadTeachingHours({teachingHours: this.mapToStoreEntityList(teachingHours)}));
     }
 
     public add(teachingHour: ITeachingHour) {
-        this.store.dispatch(new UpsertTeachingHour({teachingHour}));
+        this.store.dispatch(new UpsertTeachingHour({teachingHour: StoreTeachingHour.fromTeachingHour(teachingHour)}));
     }
 
     public delete(id: number) {
@@ -30,7 +30,7 @@ export class StoreTeachingHourService {
     }
 
     public upsert(teachingHour: ITeachingHour) {
-        this.store.dispatch(new UpsertTeachingHour({teachingHour}));
+        this.store.dispatch(new UpsertTeachingHour({teachingHour: StoreTeachingHour.fromTeachingHour(teachingHour)}));
     }
 
     public getAll(): Observable<ITeachingHour[]> {
@@ -38,7 +38,7 @@ export class StoreTeachingHourService {
     }
 
     public upsertAll(teachingHours: ITeachingHour[] | undefined) {
-        this.store.dispatch(new UpsertTeachingHours({teachingHours}));
+        this.store.dispatch(new UpsertTeachingHours({teachingHours: this.mapToStoreEntityList(teachingHours)}));
     }
 
     public deleteAll(ids: number[]) {
@@ -49,7 +49,13 @@ export class StoreTeachingHourService {
         return this.store.pipe(select(selectAllTeachingHoursById(ids)));
     }
 
-    public get(id: number) {
+    public get(id: number): Observable<StoreTeachingHour> {
         return this.store.pipe(select(selectTeachingHour(id)));
+    }
+
+    private mapToStoreEntityList(teachingHoursOrig: ITeachingHour[]): StoreTeachingHour[] {
+        const list: StoreTeachingHour[] = [];
+        teachingHoursOrig.forEach(teachingHour => list.push(StoreTeachingHour.fromTeachingHour(teachingHour)));
+        return list;
     }
 }

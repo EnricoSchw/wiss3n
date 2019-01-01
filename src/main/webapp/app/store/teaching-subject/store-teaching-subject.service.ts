@@ -51,4 +51,8 @@ export class StoreTeachingSubjectService {
     public deleteAll(ids: number[]) {
         this.store.dispatch(new DeleteTeachingSubjects({ids}));
     }
+
+    public get(id: number) {
+        return this.store.pipe(select(selectTeachingSubject(id)));
+    }
 }

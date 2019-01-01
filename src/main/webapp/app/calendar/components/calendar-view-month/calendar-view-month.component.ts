@@ -8,7 +8,7 @@ import { CalendarViewMonthCellComponent } from 'app/calendar/components/calendar
 })
 export class CalendarViewMonthComponent implements OnInit {
 
-    @ViewChild('customMonthCellTemplate') customMonthCellTemplate: CalendarViewMonthCellComponent;
+    // @ViewChild('customMonthCellTemplate') customMonthCellTemplate: CalendarViewMonthCellComponent;
 
     @Input() events;
     @Input() viewDate;

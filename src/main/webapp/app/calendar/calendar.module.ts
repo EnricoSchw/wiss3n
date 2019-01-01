@@ -16,6 +16,7 @@ import { CalendarBoardListTeachingSubjectComponent } from 'app/calendar/componen
 import { CalendarViewDayComponent } from './components/calendar-view-day/calendar-view-day.component';
 import { CalendarViewMonthCellComponent } from './components/calendar-view-month-cell/calendar-view-month-cell.component';
 import { CalendarViewWeekCellComponent } from './components/calendar-view-week-cell/calendar-view-week-cell.component';
+import { CalendarViewWeekCellTitleComponent } from './components/calendar-view-week-cell-title/calendar-view-week-cell-title.component';
 
 @NgModule({
     imports: [
@@ -37,6 +38,7 @@ import { CalendarViewWeekCellComponent } from './components/calendar-view-week-c
         CalendarViewDayComponent,
         CalendarViewMonthCellComponent,
         CalendarViewWeekCellComponent,
+        CalendarViewWeekCellTitleComponent,
         // SubjectHourEventViewComponent,
         // CalendarTeachingSubjectListComponent,
         // SelectTeachingSubjectComponent

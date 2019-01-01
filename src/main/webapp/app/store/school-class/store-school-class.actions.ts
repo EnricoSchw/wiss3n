@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-import { StoreSchoolClass } from 'app/store/school-class/store-school-class.model';
+import { StoreSchoolClass } from 'app/shared/model/school-class.model';
 
 export enum SchoolClassActionTypes {
     LoadSchoolClasses = '[SchoolClass] Load SchoolClasses',
