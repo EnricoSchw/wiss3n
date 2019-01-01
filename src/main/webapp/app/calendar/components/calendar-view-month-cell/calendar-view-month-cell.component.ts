@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MonthViewDay, CalendarEvent } from 'calendar-utils';
+import { MonthViewDay } from 'calendar-utils';
 
 @Component({
     selector: 'jhi-calendar-view-month-cell',
@@ -7,7 +7,6 @@ import { MonthViewDay, CalendarEvent } from 'calendar-utils';
     styleUrls: ['./calendar-view-month-cell.component.scss']
 })
 export class CalendarViewMonthCellComponent implements OnInit {
-
 
     @Input() day: MonthViewDay;
 

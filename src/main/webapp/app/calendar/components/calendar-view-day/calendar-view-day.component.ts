@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { CalendarEvent, ViewPeriod } from 'calendar-utils';
 
-
 @Component({
   selector: 'jhi-calendar-view-day',
   templateUrl: './calendar-view-day.component.html',
@@ -21,7 +20,6 @@ export class CalendarViewDayComponent implements OnInit {
     onLessondClicked(event) {
         alert('LessonClicked');
     }
-
 
     public beforeDayViewRender({period}: { period: ViewPeriod }): void {
         // const events: SubjectEvent[] = <SubjectEvent[]> period.events;
