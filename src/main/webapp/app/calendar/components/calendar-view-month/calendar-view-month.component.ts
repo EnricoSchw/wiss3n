@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { CalendarViewMonthCellComponent } from 'app/calendar/components/calendar-view-month-cell/calendar-view-month-cell.component';
 
 @Component({
     selector: 'jhi-calendar-view-month',
@@ -6,6 +7,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
     styleUrls: ['./calendar-view-month.component.scss']
 })
 export class CalendarViewMonthComponent implements OnInit {
+
+    @ViewChild('customMonthCellTemplate') customMonthCellTemplate: CalendarViewMonthCellComponent;
 
     @Input() events;
     @Input() viewDate;
