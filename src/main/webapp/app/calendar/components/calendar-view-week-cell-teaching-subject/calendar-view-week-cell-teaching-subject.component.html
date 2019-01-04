@@ -1,0 +1,36 @@
+<div [hidden]="submitted">
+    <form name="selectForm" role="form" novalidate #selectForm="ngForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+            <select class="form-control" id="field_teachingSubject" required [(ngModel)]="teachingSubject"
+                    name="teachingSubject"
+                    [compareWith]="byId">
+                <option *ngFor="let ts of (teachingSubjects$ | async)"
+                        [ngValue]="ts"
+                        [selected]="teachingSubject.name === ts.name" >{{ts.name}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-success  btn-sm rounded-circle">
+                <fa-icon [icon]="'check'"></fa-icon>
+            </button>
+        </div>
+    </form>
+</div>
+
+<div [hidden]="!submitted">
+    <div class="cal-event-title">
+
+        <div class="">{{ teachingSubject.name }}
+            <button
+                class="btn btn-outline-dark float-right btn-sm rounded-circle"
+                (click)="submitted=false">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+            </button>
+
+        </div>
+
+        <!--<div class="col-xs-3 pull-right"><button class="btn btn-primary" (click)="submitted=false">Edit</button></div>-->
+    </div>
+</div>
