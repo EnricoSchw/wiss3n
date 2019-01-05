@@ -4,7 +4,9 @@ import { Observable } from 'rxjs/Observable';
 import { StoreTeachingSubjectService } from 'app/store/teaching-subject/store-teaching-subject.service';
 import { StoreTeachingHourService } from 'app/store/teaching-hour/store-teaching-hour.service';
 import { TeachingHourService } from 'app/entities/teaching-hour';
-import { ITeachingHour } from 'app/shared/model/teaching-hour.model';
+import { ITeachingHour, StoreTeachingHour } from 'app/shared/model/teaching-hour.model';
+import { ISchoolClass } from 'app/shared/model/school-class.model';
+import { StoreSchoolClassService } from 'app/store/school-class/store-school-class.service';
 
 @Component({
     selector: 'jhi-calendar-view-week-cell-teaching-subject',
@@ -19,20 +21,21 @@ export class CalendarViewWeekCellTeachingSubjectComponent implements OnInit {
     submitted = false;
 
     constructor(
-        private teachingSubjectService: StoreTeachingSubjectService,
+        private storeTeachingSubjectService: StoreTeachingSubjectService,
         private storeTeachingHourService: StoreTeachingHourService,
+        private storeSchoolClassService: StoreSchoolClassService,
         private teachingHourService: TeachingHourService
     ) {
     }
 
     ngOnInit() {
-        this.teachingSubjects$ = this.teachingSubjectService.getAll();
+        this.teachingSubjects$ = this.storeTeachingSubjectService.getAll();
         this.storeTeachingHourService
             .get(this.teachingHourId)
             .take(1)
             .map(th => th.teachingSubjectId)
             .filter(id => id !== freeTeachingSubject.id)
-            .flatMap(id => this.teachingSubjectService.get(id))
+            .flatMap(id => this.storeTeachingSubjectService.get(id))
             .take(1)
             .subscribe(teachingSubject => {
                 this.submitted = true;
@@ -50,12 +53,32 @@ export class CalendarViewWeekCellTeachingSubjectComponent implements OnInit {
     onSubmit() {
         this.storeTeachingHourService
             .get(this.teachingHourId)
+            .take(1)
             .map(teachingHour => <ITeachingHour>{...teachingHour, teachingSubject: this._teachingSubject} )
+            .flatMap(teachingHour => this.createTeachingHour(teachingHour) )
             .flatMap(teachingHour => this.teachingHourService.update(teachingHour))
             .take(1)
             .subscribe(() => {
                 this.submitted = true;
             });
+    }
+
+    private createTeachingHour(teachingHour: StoreTeachingHour): Observable<ITeachingHour> {
+        return this.storeSchoolClassService
+            .get(teachingHour.schoolClassId)
+            .take(1)
+            .map(schoolClass => <ISchoolClass>({...schoolClass, teachingHours: [], teachingSubjects: []}))
+            .map(schoolClass => {
+                const newTeachingHour = {
+                    ...teachingHour,
+                    teachingSubject: this._teachingSubject,
+                    schoolClasses: schoolClass,
+                    tasks: []
+                };
+                delete newTeachingHour.schoolClassId;
+                delete newTeachingHour.teachingSubjectId;
+                return <ITeachingHour>newTeachingHour;
+            } )
     }
 
     get teachingSubject() {
