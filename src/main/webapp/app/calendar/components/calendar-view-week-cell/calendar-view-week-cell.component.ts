@@ -12,12 +12,14 @@ export class CalendarViewWeekCellComponent implements OnInit {
     @Input() event: CalendarEvent<CalendarLesson>;
 
     lessonHour: LessonHour;
+    teachingHourId: number;
 
     constructor() {
     }
 
     ngOnInit() {
         this.lessonHour = this.event.meta.lessonHour;
+        this.teachingHourId = this.event.meta.teachingHourId;
     }
 
 }

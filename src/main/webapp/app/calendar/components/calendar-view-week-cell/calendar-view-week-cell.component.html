@@ -8,14 +8,16 @@
     [style.borderColor]="event.color?.primary">
     <!--(mwlClick)="eventClicked.emit()">-->
     <mwl-calendar-event-actions [event]="event"></mwl-calendar-event-actions>
-    <mwl-calendar-event-title
-        [event]="event"
-        [customTemplate]="customEventTitleTemplate"
-        view="week">
-    </mwl-calendar-event-title>
+    <!--<mwl-calendar-event-title-->
+        <!--[event]="event"-->
+        <!--[customTemplate]="customEventTitleTemplate"-->
+        <!--view="week">-->
+    <!--</mwl-calendar-event-title>-->
+    <jhi-calendar-view-week-cell-teaching-subject
+        [teachingHourId]="teachingHourId">
+    </jhi-calendar-view-week-cell-teaching-subject>
+
     <!--<jhi-select-teaching-subject *ngIf="!weekEvent.event.meta.subjectHour.teachingSubject"></jhi-select-teaching-subject>-->
-
-
 
     <!--<jhi-select-teaching-subject-->
     <!--[subjectHourData]="weekEvent.event.meta.subjectHourData">-->

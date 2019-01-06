@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { ITeachingHour } from 'app/shared/model/teaching-hour.model';
+import { StoreTeachingHourService } from 'app/store/teaching-hour/store-teaching-hour.service';
 
 type EntityResponseType = HttpResponse<ITeachingHour>;
 type EntityArrayResponseType = HttpResponse<ITeachingHour[]>;
@@ -14,14 +15,18 @@ export class TeachingHourService {
     private resourceUrl = SERVER_API_URL + 'api/teaching-hours';
     private resourceSearchUrl = SERVER_API_URL + 'api/_search/teaching-hours';
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private store: StoreTeachingHourService) {}
 
     create(teachingHour: ITeachingHour): Observable<EntityResponseType> {
         return this.http.post<ITeachingHour>(this.resourceUrl, teachingHour, { observe: 'response' });
     }
 
     update(teachingHour: ITeachingHour): Observable<EntityResponseType> {
-        return this.http.put<ITeachingHour>(this.resourceUrl, teachingHour, { observe: 'response' });
+        return this.http.put<ITeachingHour>(this.resourceUrl, teachingHour, { observe: 'response' })
+            .map((res: HttpResponse<ITeachingHour>) => {
+            this.store.upsert(res.body);
+            return res;
+        });
     }
 
     find(id: number): Observable<EntityResponseType> {
