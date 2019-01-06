@@ -10,7 +10,7 @@ export class CalendarViewWeekComponent implements OnInit {
     @Input() events;
     @Input() viewDate;
     @Input() excludeDays;
-    @Output() dayClicked = new EventEmitter<Date>();
+    @Output() cellClicked = new EventEmitter<Date>();
 
     constructor() {
     }
@@ -18,9 +18,8 @@ export class CalendarViewWeekComponent implements OnInit {
     ngOnInit() {
     }
 
-    onDayClicked(event) {
-        const viewDate = event.day.date;
-        this.dayClicked.emit(viewDate);
+    onCellClicked(event) {
+        this.cellClicked.emit(this.viewDate);
     }
 
     onEventClicked(event) {

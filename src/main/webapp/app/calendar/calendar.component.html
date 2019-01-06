@@ -47,7 +47,7 @@
             [viewDate]="menu.viewDate"
             [events]="events"
             [excludeDays]="menu.excludeDays"
-            (dayClicked)="onDayInWeekClicked($event)">
+            (cellClicked)="onCellInWeekClicked($event)">
         </jhi-calendar-view-week>
         <jhi-calendar-view-day
             *ngSwitchCase="'day'"

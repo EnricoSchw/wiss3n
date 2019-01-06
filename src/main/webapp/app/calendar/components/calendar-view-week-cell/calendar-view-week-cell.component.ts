@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CalendarLesson, LessonHour } from 'app/shared/model/calendar-lesson-data.model';
 import { CalendarEvent } from 'angular-calendar';
 
@@ -10,6 +10,7 @@ import { CalendarEvent } from 'angular-calendar';
 export class CalendarViewWeekCellComponent implements OnInit {
 
     @Input() event: CalendarEvent<CalendarLesson>;
+    @Output() cellClicked = new EventEmitter<Date>();
 
     lessonHour: LessonHour;
     teachingHourId: number;
@@ -22,4 +23,7 @@ export class CalendarViewWeekCellComponent implements OnInit {
         this.teachingHourId = this.event.meta.teachingHourId;
     }
 
+    onCellClicked(event) {
+        this.cellClicked.emit(null);
+    }
 }

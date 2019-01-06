@@ -4,7 +4,10 @@
     let-eventClicked="eventClicked"
     let-tooltipTemplate="tooltipTemplate"
     let-tooltipAppendToBody="tooltipAppendToBody">
-    <jhi-calendar-view-week-cell [event]="weekEvent.event"></jhi-calendar-view-week-cell>
+    <jhi-calendar-view-week-cell
+        [event]="weekEvent.event"
+        (cellClicked)="onCellClicked($event)"
+    ></jhi-calendar-view-week-cell>
 </ng-template>
 
 
@@ -13,7 +16,5 @@
     [viewDate]="viewDate"
     [locale]="'de'"
     [events]="events"
-    (dayHeaderClicked)="onDayClicked($event)"
-    (eventClicked)="onEventClicked($event)"
     [eventTemplate]="customWeekEventTemplate">
 </mwl-calendar-week-view>

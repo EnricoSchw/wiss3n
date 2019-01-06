@@ -5,14 +5,9 @@
 <div
     class="cal-event"
     [style.backgroundColor]="event.color?.secondary"
-    [style.borderColor]="event.color?.primary">
-    <!--(mwlClick)="eventClicked.emit()">-->
+    [style.borderColor]="event.color?.primary"
+    (mwlClick)="onCellClicked($event)">
     <mwl-calendar-event-actions [event]="event"></mwl-calendar-event-actions>
-    <!--<mwl-calendar-event-title-->
-        <!--[event]="event"-->
-        <!--[customTemplate]="customEventTitleTemplate"-->
-        <!--view="week">-->
-    <!--</mwl-calendar-event-title>-->
     <jhi-calendar-view-week-cell-teaching-subject
         [teachingHourId]="teachingHourId">
     </jhi-calendar-view-week-cell-teaching-subject>

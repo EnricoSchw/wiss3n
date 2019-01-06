@@ -103,7 +103,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
         this.menu.view = 'week';
     }
 
-    onDayInWeekClicked(date) {
+    onCellInWeekClicked(date) {
         this.menu.viewDate = date;
         this.menu.view = 'day';
     }
