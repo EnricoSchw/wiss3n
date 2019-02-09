@@ -1,9 +1,40 @@
-<jhi-page-ribbon></jhi-page-ribbon>
-<div>
-    <router-outlet name="navbar"></router-outlet>
-</div>
-<div class="container-fluid">
-    <router-outlet></router-outlet>
+<!--<jhi-page-ribbon></jhi-page-ribbon>-->
+
+<ng-container [ngSwitch]="isAuthenticated()">
+
+        <jhi-single-page *ngSwitchCase="false">
+        </jhi-single-page>
+
     <router-outlet name="popup"></router-outlet>
-    <jhi-footer></jhi-footer>
-</div>
+
+
+    <div *ngSwitchCase="true">
+        <router-outlet name="navbar"></router-outlet>
+    </div>
+    <div class="container-fluid" *ngSwitchCase="true">
+        <router-outlet></router-outlet>
+        <router-outlet name="popup"></router-outlet>
+        <jhi-footer></jhi-footer>
+    </div>
+</ng-container>
+
+<!--&lt;!&ndash; Main Side &ndash;&gt;-->
+<!--<div class="overlay_menu" *ngIf="isAuthenticated"></div>-->
+
+<!--&lt;!&ndash; Overlay For Sidebars &ndash;&gt;-->
+<!--<div class="overlay" *ngIf="isAuthenticated" ></div>-->
+<!--<router-outlet *ngIf="isAuthenticated"  name="navbar"></router-outlet>-->
+
+<!--<router-outlet></router-outlet>-->
+
+<!--<router-outlet name="popup"></router-outlet>-->
+
+
+<!--<div>-->
+<!--<router-outlet name="navbar"></router-outlet>-->
+<!--</div>-->
+<!--<div class="container-fluid">-->
+<!--<router-outlet></router-outlet>-->
+<!--<router-outlet name="popup"></router-outlet>-->
+<!--<jhi-footer></jhi-footer>-->
+<!--</div>-->

@@ -1,0 +1,195 @@
+/*****************************************************
+*** Main Nav ***
+*****************************************************/
+#main-nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  padding:30px 0;
+  font-size: 16px;
+  z-index: 10;
+  background-color: transparent;
+  webkit-transition: all 0.37s cubic-bezier(0, 0, 0.58, 1);
+  transition: all 0.37s cubic-bezier(0, 0, 0.58, 1);
+  
+  .logo {
+      @extend .inlineblock;
+      @extend .p-t-5;      
+      img{
+        width:120px;
+      }
+  }
+  
+  &.active {
+      background-color: $white;
+      padding:15px 0;
+      box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
+      -ms-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
+      -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
+      z-index: 999;
+  }
+  
+  #navigation {
+      color: $grey-900;
+      text-decoration: none;
+      position: absolute;
+      top: 50%;
+      margin-top:-13px;
+      z-index: 2;
+      font-size:20px;
+      
+      &:hover {
+          color: $cyan-500 !important;
+        }
+    }
+    
+    ul {
+    @extend .padding-0;
+    @extend .m-b-0;
+      
+      &.left {
+          text-align: left;         
+          
+          li {
+            @extend .inlineblock;
+              padding: 13px 0;
+              
+              &:first-child {
+                @extend .m-r-30;
+              }
+          }
+
+      }
+      
+      &.right {
+          text-align: right;
+          
+          li { 
+              padding: 9px 0;
+          }
+      }
+      
+      li {
+        @extend .inlineblock;
+        @extend .m-r-40;
+          
+          &.active{
+            a{
+                color:$grey-800;
+                text-decoration:underline;
+            }
+          }
+          &:last-child {
+            @extend .m-r-0;
+            @extend .padding-0;            
+          }
+          
+          a {
+              color: $grey-800;
+              text-decoration: none;
+              &.btn{
+                  color: inherit;
+              }              
+              
+              &:hover {
+                  color: $cyan-500;
+                }
+            }
+        }
+    }
+  
+}
+#main-nav{
+    
+    #slide_out_menu {
+      position: fixed;
+      @extend .displayblock;
+      width: 280px;
+      max-width: 650px;
+      height: 100%;
+      left: -280px;
+      top: 0;
+      padding: 40px;
+      z-index: 50;
+      background: $grey-800;
+      transition: left 0.7s cubic-bezier(0.545, 0, 0.05, 1);
+      
+      .menu-close {
+          position: absolute;
+          color: $white;
+          right: 20px;
+          top: 52px;
+      }
+      
+      ul {
+        @extend .m-t-40;
+          
+          li {
+            @extend .displayblock;
+              margin: 10px 0;
+              
+              &:last-child {
+                @extend .m-t-20;
+              }
+
+              a {
+                  color: $white;
+                  font-weight:$font-weight-light;
+                  
+                  &:hover {
+                      color: $cyan-500;
+                  }
+              }
+              a.btn{
+                color:$grey-900;
+              }
+          }
+      }
+      
+      .slide_out_menu_footer {
+          position: absolute;
+          @extend .displayblock;
+          width: 100%;
+          left: 0;
+          bottom: 0;
+          padding: 20px 40px 25px;
+          
+          .more-info{
+            
+            p {              
+              line-height: 24px;
+              color: rgba(255, 255, 255, 0.8);
+              @extend .margin-0;
+            }
+          }
+          
+          .socials {
+              margin: 18px 0 0;
+              
+              li {
+                  display: inline-block;
+                  margin: 0 20px 0 0;
+                  
+                  &:last-child {
+                    @extend .m-r-0;
+                  }
+
+                  a {
+                      color: rgba(255, 255, 255, 0.8);
+                      transition: all .2s ease-in-out;
+                      
+                      &:hover {
+                          color: $white;
+                     }
+                  }
+              }
+          }
+      }
+   }
+}
+
+#main-nav #slide_out_menu.open {
+  left: 0;
+}

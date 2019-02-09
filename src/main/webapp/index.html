@@ -11,9 +11,17 @@
     <meta name="theme-color" content="#000000">
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="manifest" href="manifest.webapp" />
-    <!-- jhipster-needle-add-resources-to-root - JHipster will add new resources here -->
+    <link rel="stylesheet" href="content/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="content/css/normalize.css">
+    <link rel="stylesheet" href="content/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css"/>
+    <link rel="stylesheet" href="content/plugins/morrisjs/morris.min.css" />
+    <link rel="stylesheet" href="content/css/animate.min.css" type="text/css">
+    <!-- Jquery Core Js -->
+
+    <link rel="stylesheet" href="content/css/sp-main.css">
+    <!--<link rel="stylesheet" href="content/css/color_skins.css">-->
 </head>
-<body  data-spy="scroll" data-target=".navbar-fixed-top">
+<body class="theme-blue">
     <!--[if lt IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -21,6 +29,11 @@
     <noscript>
         <h1>You must enable javascript to view this page.</h1>
     </noscript>
+
+    <script src="content/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+    <script src="content/bundles/vendorscripts.bundle.js"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+
     <!-- uncomment this for adding service worker
         <script>
             if ('serviceWorker' in navigator) {

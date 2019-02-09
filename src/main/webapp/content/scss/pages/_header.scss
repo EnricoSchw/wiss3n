@@ -1,0 +1,58 @@
+/*****************************************************
+*** Header ***
+*****************************************************/
+#header {
+  padding: 150px 0 0px;
+  //background:$cyan-500;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;  
+  text-align:center;
+  height: 100vh;
+  
+  &:after{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index:1;
+    background: url("../images/banner_background.jpg") center center no-repeat;
+    content: '';
+    background-size:cover;
+    opacity: 0.8;
+  }
+  
+  h1{    
+    position:relative;
+    z-index:2;
+    @extend .m-b-10;
+    font-size: 28px;
+    
+    span{     
+        font-weight: $font-weight-bold;
+    }
+  }
+  
+  p {      
+      position:relative;
+      z-index:2;
+  }
+  
+  .header_iphone {
+      position:relative;
+      z-index:2;
+      @extend .m-t-10;
+    }
+    
+   .btn {
+      position:relative;
+      z-index:2;
+      
+      i {
+          @extend .m-r-15;
+        }
+    }
+}

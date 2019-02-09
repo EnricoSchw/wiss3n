@@ -20,6 +20,7 @@ import { Wiss3NEntityModule } from './entities/entity.module';
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 import { Wiss3NCalendarModule } from 'app/calendar/calendar.module';
 import { Wiss3NStoreModule } from 'app/store/store.module';
+import { SinglePageComponent } from './layouts/single-page/single-page.component';
 
 @NgModule({
     imports: [
@@ -35,7 +36,7 @@ import { Wiss3NStoreModule } from 'app/store/store.module';
         Wiss3NEntityModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, SinglePageComponent],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
