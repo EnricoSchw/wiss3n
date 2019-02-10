@@ -1,0 +1,53 @@
+<div class="authentication sidebar-collapse" id="login">
+    <div class="page-header">
+        <div class="container">
+            <div class="col-md-12 content-center">
+                <div class="card-plain">
+                    <form class="form" role="form" (ngSubmit)="login()">
+                        <div class="header">
+                            <div class="logo-container expandUp">
+                                <img src="../../../content/images/logo.svg" alt="">
+                            </div>
+                            <h5>Log in</h5>
+                        </div>
+
+                        <div class="alert alert-danger" *ngIf="authenticationError" jhiTranslate="login.messages.error.authentication">
+                            <strong>Failed to sign in!</strong> Please check your credentials and try again.
+                        </div>
+
+                        <div class="content">
+
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="username" id="username" placeholder="{{'global.form.username.placeholder' | translate}}"
+                                       [(ngModel)]="username">
+                                <span class="input-group-addon">
+                                    <i class="zmdi zmdi-account-circle"></i>
+                                </span>
+                            </div>
+
+
+                            <div class="input-group">
+                                <input type="password" class="form-control" name="password" id="password" placeholder="{{'login.form.password.placeholder' | translate}}"
+                                       [(ngModel)]="password">
+                                <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
+                            </div>
+
+                        </div>
+
+                        <div class="checkbox">
+                            <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" [(ngModel)]="rememberMe" checked>
+                            <label for="rememberMe">
+                                <span jhiTranslate="login.form.rememberme">Remember me</span>
+                            </label>
+                        </div>
+
+                        <div class="footer">
+                            <button type="submit" class="btn btn-primary btn-round btn-lg btn-block" >Login</button>
+                            <h5><a href="javascript:void(0);" class="link" (click)="requestResetPassword()" jhiTranslate="login.password.forgot">Did you forget your password?</a></h5>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

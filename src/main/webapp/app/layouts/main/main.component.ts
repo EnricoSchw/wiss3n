@@ -9,11 +9,14 @@ import { JhiLanguageHelper, Principal } from 'app/core';
 })
 export class JhiMainComponent implements OnInit {
 
+    isAuthenticated = false;
+
     constructor(
         private jhiLanguageHelper: JhiLanguageHelper,
         private router: Router,
         private principal: Principal
     ) {
+        this.isAuthenticated = this.principal.isAuthenticated();
     }
 
     private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {
@@ -30,10 +33,6 @@ export class JhiMainComponent implements OnInit {
                 this.jhiLanguageHelper.updateTitle(this.getPageTitle(this.router.routerState.snapshot.root));
             }
         });
-    }
-
-    public isAuthenticated() {
-        return this.principal.isAuthenticated();
     }
 
 }

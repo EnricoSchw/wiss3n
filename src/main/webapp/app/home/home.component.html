@@ -1,4 +1,4 @@
-<div [ngSwitch]="isAuthenticated()">
+<ng-container [ngSwitch]="isAuthenticated()">
 
     <!--<div class="alert alert-success" *ngSwitchCase="true">-->
     <!--<span *ngIf="account" jhiTranslate="home.logged.message"-->
@@ -8,4 +8,4 @@
     <jhi-calendar-board *ngSwitchCase="true"></jhi-calendar-board>
 
     <jhi-info *ngSwitchCase="false"></jhi-info>
-</div>
+</ng-container>

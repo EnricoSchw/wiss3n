@@ -1,53 +1,115 @@
 <!-- Top Bar -->
-<nav class="navbar">
-    <ul class="nav navbar-nav navbar-left" [ngSwitch]="isAuthenticated()">
-        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-            <div class="navbar-header">
-                <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" routerLink="/"><img src="../../../content/images/logo.png" width="30" alt="Wiss3n"><span class="m-l-10">Wiss3n</span></a>
+<ng-container [ngSwitch]="isAuthenticated()">
+
+    <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center" *ngSwitchCase="false">
+        <!--<a href="/" class="navbar-brand d-flex w-50 mr-auto">Navbar 3</a>-->
+        <a class="navbar-brand m-l-20" routerLink="/">
+            <img src="../../../content/images/logo.svg" width="50" alt="Wiss3n">
+            <span class="m-l-10">Wiss3n</span>
+        </a>
+
+        <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+
+            <div class="nav navbar-nav ml-auto w-100 justify-content-end">
+                <a class="btn-primary btn-simple btn-round  m-r-10" routerLink="login" routerLinkActive="active">
+                    <span>Login</span>
+                </a>
+                <a class="btn-primary btn-simple btn-round m-r-20" routerLink="register" routerLinkActive="active">
+                    <span>Register</span>
+                </a>
             </div>
-        </li>
-        <li>
-            <a href="javascript:void(0);" class="menu-sm" data-close="true">
-                <i class="zmdi zmdi-arrow-left"></i>
-                <i class="zmdi zmdi-arrow-right"></i>
-            </a>
-        </li>
-
-        <li class="dropdown app_menu">
-            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="zmdi zmdi-apps"></i></a>
-            <ul class="dropdown-menu pullDown">
-                <li><a routerLink="/"><i class="zmdi zmdi-calendar-note m-r-10"></i><span>Calendar</span></a></li>
-            </ul>
-        </li>
-
-        <li class="float-right" *ngSwitchCase="true">
-            <a routerLink="/authentication/sign-in" class="mega-menu"><i class="zmdi zmdi-power"></i></a>
-        </li>
-
-        <li *ngSwitchCase="false" class="float-right" >
-            <a class="dropdown-item" (click)="login()" id="login">
-                <fa-icon [icon]="'sign-in-alt'" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.account.login">Sign in</span>
-            </a>
-        </li>
-
-        <li *ngSwitchCase="false" class="float-right" >
-            <a class="dropdown-item" routerLink="register" routerLinkActive="active" (click)="collapseNavbar()">
-                <fa-icon [icon]="'user-plus'" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.account.register">Register</span>
-            </a>
-        </li>
-
-    </ul>
-</nav>
+        </div>
+    </nav>
 
 
+    <nav class="navbar" *ngSwitchCase="true">
+        <ul class="nav navbar-nav navbar-left">
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <div class="navbar-header">
+                    <a href="javascript:void(0);" class="bars"></a>
+                    <a class="navbar-brand" routerLink="/"><img src="../../../content/images/logo.svg"
+                                                                width="50"
+                                                                alt="Wiss3n"><span class="m-l-10">Wiss3n</span></a>
+                </div>
+            </li>
+            <li>
+                <a href="javascript:void(0);" class="menu-sm" data-close="true">
+                    <i class="zmdi zmdi-arrow-left"></i>
+                    <i class="zmdi zmdi-arrow-right"></i>
+                </a>
+            </li>
+
+            <li class="dropdown app_menu">
+                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"><i
+                    class="zmdi zmdi-apps"></i></a>
+                <ul class="dropdown-menu pullDown">
+                    <li><a routerLink="/"><i
+                        class="zmdi zmdi-calendar-note m-r-10"></i><span>Calendar</span></a></li>
+                </ul>
+            </li>
+
+            <li class="float-right" *ngSwitchCase="true">
+                <a routerLink="/authentication/sign-in" class="mega-menu"><i class="zmdi zmdi-power"></i></a>
+            </li>
+
+            <li *ngSwitchCase="false" class="my-2 my-lg-0">
+                <a class="btn-primary btn-simple btn-round hidden-sm-down" (click)="login()" id="login">
+                    <span jhiTranslate="global.menu.account.login">Sign in</span>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
 
 
+    <!-- Not Authenticated -->
 
+    <header id="main-nav" *ngSwitchCase="true">
+        <div class="container">
+            <a id="navigation" class="d-md-none" href="javascript:void(0);" (click)="openSideMenu()"><i
+                class="zmdi zmdi-apps"></i></a>
+            <div id="slide_out_menu" [ngClass]="isSideMenuOpen ? 'open' : 'close' "><a href="javascript:void(0);"
+                                                                                       class="menu-close"
+                                                                                       (click)="closeSideMenu()">
+                <i class="zmdi zmdi-close"></i></a>
+                <div class="logo"><a href="javascript:void(0);"><img src="../../../content/images/logo.svg" alt=""></a>
+                </div>
+                <ul>
+                    <li><a href="javascript:void(0);" class="btn btn-primary btn-round" (click)="login()">Login</a></li>
+                    <li><a class="btn btn-primary btn-round" routerLink="register" routerLinkActive="active"
+                           (click)="collapseNavbar()">Rgister</a></li>
+                </ul>
+                <div class="slide_out_menu_footer">
+                    <div class="more-info">
+                        <p>Developed by <a href="javascript:void(0);">Wiss3n</a></p>
+                    </div>
+                    <ul class="socials">
+                        <li><a href="javascript:void(0);"><i class="zmdi zmdi-github"></i></a></li>
+                    </ul>
+                </div>
+            </div>
 
-
+            <div class="row">
+                <div class="col-md-3 col-sm-12 col-xs-12 text-center">
+                    <a href="javascript:void(0);" class="logo">
+                        <img src="../../../content/images/logo.svg" style="width: 50px; padding-top: 0;" alt="sQuare">
+                        Wiss3n
+                    </a>
+                </div>
+                <div class="col-md-9 col-sm-12 col-xs-12">
+                    <ul class="left nav-active">
+                        <li class="float-right">
+                            <a class="btn btn-primary btn-simple" (click)="login()"
+                               href="javascript:void(0);">Login</a>
+                            <a class="btn btn-primary btn-simple" routerLink="register"
+                               (click)="collapseNavbar()">Register</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+</ng-container>
 
 
 

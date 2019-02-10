@@ -13,6 +13,7 @@ import {
     SettingsComponent,
     accountState
 } from './';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
     imports: [Wiss3NSharedModule, RouterModule.forChild(accountState)],
@@ -23,7 +24,8 @@ import {
         PasswordStrengthBarComponent,
         PasswordResetInitComponent,
         PasswordResetFinishComponent,
-        SettingsComponent
+        SettingsComponent,
+        LoginComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

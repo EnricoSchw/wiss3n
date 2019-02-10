@@ -7,6 +7,9 @@ import { VERSION } from 'app/app.constants';
 import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from 'app/core';
 import { ProfileService } from '../profiles/profile.service';
 
+
+declare const $: any;
+
 @Component({
     selector: 'jhi-navbar',
     templateUrl: './navbar.component.html'
@@ -18,6 +21,9 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
+
+
+    isSideMenuOpen = false;
 
     constructor(
         private loginService: LoginService,
@@ -53,6 +59,14 @@ export class NavbarComponent implements OnInit {
                 }
             });
         }
+    }
+
+    openSideMenu() {
+        this.isSideMenuOpen = true;
+    }
+
+    closeSideMenu() {
+        this.isSideMenuOpen = false;
     }
 
     changeLanguage(languageKey: string) {
