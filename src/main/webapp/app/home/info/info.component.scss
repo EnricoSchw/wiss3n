@@ -25,3 +25,11 @@
     color: $app-light-gray;
 }
 
+.member-card {
+    .member-img {
+        img {
+            border: none !important;
+            box-shadow: none !important;
+        }
+    }
+}

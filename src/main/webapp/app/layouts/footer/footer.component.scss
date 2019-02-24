@@ -1,73 +1,7 @@
-@import "../../../content/scss/variables";
+@import "../../../content/scss/components/colors";
 
-.footer {
-    width: 100%;
-    padding-top: 120px;
-    padding-bottom: 120px;
-    background-color: $app-blue;
-    color: $app-light-gray;
-}
-
-.footer .social {
-    list-style: outside none none;
-    padding: 0;
-}
-
-.footer .social li {
-    display: inline-block;
-    list-style: outside none none;
-    //margin: 0 8px;
-}
-
-.footer .social li a {
-    border: 1px solid $app-light-gray;
-    display: block;
-    font-size: 14px;
-    height: 30px;
-    line-height: 28px;
-    text-align: center;
-    width: 30px;
-    transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-}
-
-a {
-    color: $app-light-gray;
-}
-
-a:hover {
-    color: $app-yellow;
-}
-
-.footer .social li a .fa-rotate-45-back {
-    display: block;
-    transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    -o-transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-}
-
-.footer .social li a:hover {
-    //background: $app-light-gray none repeat scroll 0 0;
-    background-color: $app-gray;
-    color: $app-yellow;
-}
-
-.fadeInUp {
-    -webkit-animation-name: fadeInUp;
-    animation-name: fadeInUp;
-}
-
-.copyright {
-    line-height: 1.9;
-}
-
-.copy-link {
-    letter-spacing: 4px;
-    font-size: 12px;
+#footer {
+    background: $grey-800;
+    color: #FFFFFF;
 }
 

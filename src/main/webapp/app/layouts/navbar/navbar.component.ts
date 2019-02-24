@@ -39,6 +39,13 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        $('.menu-sm').on('click', function() {
+            console.log('Hallo');
+            $('body').toggleClass('menu_sm');
+        });
+
+
         this.languageHelper.getAll().then(languages => {
             this.languages = languages;
         });
@@ -93,6 +100,10 @@ export class NavbarComponent implements OnInit {
 
     toggleNavbar() {
         this.isNavbarCollapsed = !this.isNavbarCollapsed;
+    }
+
+    toggleSidebar() {
+        $('body').toggleClass('menu_sm');
     }
 
     getImageUrl() {

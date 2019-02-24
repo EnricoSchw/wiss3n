@@ -27,13 +27,16 @@
             <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <div class="navbar-header">
                     <a href="javascript:void(0);" class="bars"></a>
-                    <a class="navbar-brand" routerLink="/"><img src="../../../content/images/logo.svg"
-                                                                width="50"
-                                                                alt="Wiss3n"><span class="m-l-10">Wiss3n</span></a>
+                    <a class="navbar-brand" routerLink="/">
+                        <img src="../../../content/images/logo.svg"
+                             width="50"
+                             alt="Wiss3n">
+                        <span class="m-l-10">Wiss3n</span>
+                    </a>
                 </div>
             </li>
             <li>
-                <a href="javascript:void(0);" class="menu-sm" data-close="true">
+                <a href="javascript:void(0);" class="menu-sm" data-close="true" (click)="toggleSidebar()">
                     <i class="zmdi zmdi-arrow-left"></i>
                     <i class="zmdi zmdi-arrow-right"></i>
                 </a>
@@ -49,14 +52,9 @@
             </li>
 
             <li class="float-right" *ngSwitchCase="true">
-                <a routerLink="/authentication/sign-in" class="mega-menu"><i class="zmdi zmdi-power"></i></a>
+                <a href="javascript:void(0);" class="mega-menu" (click)="logout()" id="logout" ><i class="zmdi zmdi-power"></i></a>
             </li>
 
-            <li *ngSwitchCase="false" class="my-2 my-lg-0">
-                <a class="btn-primary btn-simple btn-round hidden-sm-down" (click)="login()" id="login">
-                    <span jhiTranslate="global.menu.account.login">Sign in</span>
-                </a>
-            </li>
 
         </ul>
     </nav>
@@ -64,52 +62,52 @@
 
     <!-- Not Authenticated -->
 
-    <header id="main-nav" *ngSwitchCase="true">
-        <div class="container">
-            <a id="navigation" class="d-md-none" href="javascript:void(0);" (click)="openSideMenu()"><i
-                class="zmdi zmdi-apps"></i></a>
-            <div id="slide_out_menu" [ngClass]="isSideMenuOpen ? 'open' : 'close' "><a href="javascript:void(0);"
-                                                                                       class="menu-close"
-                                                                                       (click)="closeSideMenu()">
-                <i class="zmdi zmdi-close"></i></a>
-                <div class="logo"><a href="javascript:void(0);"><img src="../../../content/images/logo.svg" alt=""></a>
-                </div>
-                <ul>
-                    <li><a href="javascript:void(0);" class="btn btn-primary btn-round" (click)="login()">Login</a></li>
-                    <li><a class="btn btn-primary btn-round" routerLink="register" routerLinkActive="active"
-                           (click)="collapseNavbar()">Rgister</a></li>
-                </ul>
-                <div class="slide_out_menu_footer">
-                    <div class="more-info">
-                        <p>Developed by <a href="javascript:void(0);">Wiss3n</a></p>
-                    </div>
-                    <ul class="socials">
-                        <li><a href="javascript:void(0);"><i class="zmdi zmdi-github"></i></a></li>
-                    </ul>
-                </div>
-            </div>
+    <!--<header id="main-nav" *ngSwitchCase="true">-->
+        <!--<div class="container">-->
+            <!--<a id="navigation" class="d-md-none" href="javascript:void(0);" (click)="openSideMenu()"><i-->
+                <!--class="zmdi zmdi-apps"></i></a>-->
+            <!--<div id="slide_out_menu" [ngClass]="isSideMenuOpen ? 'open' : 'close' "><a href="javascript:void(0);"-->
+                                                                                       <!--class="menu-close"-->
+                                                                                       <!--(click)="closeSideMenu()">-->
+                <!--<i class="zmdi zmdi-close"></i></a>-->
+                <!--<div class="logo"><a href="javascript:void(0);"><img src="../../../content/images/logo.svg" alt=""></a>-->
+                <!--</div>-->
+                <!--<ul>-->
+                    <!--<li><a href="javascript:void(0);" class="btn btn-primary btn-round" (click)="login()">Login</a></li>-->
+                    <!--<li><a class="btn btn-primary btn-round" routerLink="register" routerLinkActive="active"-->
+                           <!--(click)="collapseNavbar()">Rgister</a></li>-->
+                <!--</ul>-->
+                <!--<div class="slide_out_menu_footer">-->
+                    <!--<div class="more-info">-->
+                        <!--<p>Developed by <a href="javascript:void(0);">Wiss3n</a></p>-->
+                    <!--</div>-->
+                    <!--<ul class="socials">-->
+                        <!--<li><a href="javascript:void(0);"><i class="zmdi zmdi-github"></i></a></li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</div>-->
 
-            <div class="row">
-                <div class="col-md-3 col-sm-12 col-xs-12 text-center">
-                    <a href="javascript:void(0);" class="logo">
-                        <img src="../../../content/images/logo.svg" style="width: 50px; padding-top: 0;" alt="sQuare">
-                        Wiss3n
-                    </a>
-                </div>
-                <div class="col-md-9 col-sm-12 col-xs-12">
-                    <ul class="left nav-active">
-                        <li class="float-right">
-                            <a class="btn btn-primary btn-simple" (click)="login()"
-                               href="javascript:void(0);">Login</a>
-                            <a class="btn btn-primary btn-simple" routerLink="register"
-                               (click)="collapseNavbar()">Register</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </header>
-</ng-container>
+            <!--<div class="row">-->
+                <!--<div class="col-md-3 col-sm-12 col-xs-12 text-center">-->
+                    <!--<a href="javascript:void(0);" class="logo">-->
+                        <!--<img src="../../../content/images/logo.svg" style="width: 50px; padding-top: 0;" alt="sQuare">-->
+                        <!--Wiss3n-->
+                    <!--</a>-->
+                <!--</div>-->
+                <!--<div class="col-md-9 col-sm-12 col-xs-12">-->
+                    <!--<ul class="left nav-active">-->
+                        <!--<li class="float-right">-->
+                            <!--<a class="btn btn-primary btn-simple" (click)="login()"-->
+                               <!--href="javascript:void(0);">Login</a>-->
+                            <!--<a class="btn btn-primary btn-simple" routerLink="register"-->
+                               <!--(click)="collapseNavbar()">Register</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</header>-->
+<!--</ng-container>-->
 
 
 

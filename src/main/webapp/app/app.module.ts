@@ -17,10 +17,14 @@ import { Wiss3NHomeModule } from './home/home.module';
 import { Wiss3NAccountModule } from './account/account.module';
 import { Wiss3NEntityModule } from './entities/entity.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
-import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
+import {
+    JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent,
+    SidebarComponent
+} from './layouts';
 import { Wiss3NCalendarModule } from 'app/calendar/calendar.module';
 import { Wiss3NStoreModule } from 'app/store/store.module';
-import { SinglePageComponent } from './layouts/single-page/single-page.component';
+import { Wiss3NDashboardModule } from 'app/dashboard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     imports: [
@@ -31,12 +35,13 @@ import { SinglePageComponent } from './layouts/single-page/single-page.component
         Wiss3NSharedModule,
         Wiss3NCoreModule,
         Wiss3NCalendarModule,
+        Wiss3NDashboardModule,
         Wiss3NHomeModule,
         Wiss3NAccountModule,
         Wiss3NEntityModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, SinglePageComponent],
+    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, SidebarComponent],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,

@@ -1,9 +1,8 @@
 <!--<jhi-page-ribbon></jhi-page-ribbon>-->
-
+<div class="overlay"></div>
 <router-outlet name="navbar"></router-outlet>
+<router-outlet name="popup"></router-outlet>
+<router-outlet name="sidebar"></router-outlet>
+<router-outlet></router-outlet>
 
-<section [ngClass]="{'content': isAuthenticated, 'on-page-content': !isAuthenticated}">
-    <router-outlet name="popup"></router-outlet>
-    <router-outlet></router-outlet>
-</section>
-<!--<jhi-footer></jhi-footer>-->
+<jhi-footer></jhi-footer>

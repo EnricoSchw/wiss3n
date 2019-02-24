@@ -69,6 +69,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
                 if (redirect) {
                     this.stateStorageService.storeUrl(null);
                     this.router.navigate([redirect]);
+                } else {
+                    this.router.navigate(['/']);
                 }
             })
             .catch(() => {

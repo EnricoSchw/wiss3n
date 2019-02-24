@@ -1,0 +1,90 @@
+<ng-container [ngSwitch]="isAuthenticated()">
+
+    <aside id="leftsidebar" class="sidebar"  *ngSwitchCase="true">
+        <div class="menu">
+            <ul class="list">
+                <li>
+                    <div class="user-info m-b-20">
+                        <div class="image"><a href="profile.html"><i class="zmdi zmdi-account"></i></a></div>
+                        <div class="detail">
+                            <h4>Michael</h4>
+                            <p class="m-b-0">Manager</p>
+                            <a href="events.html" title="Events"><i class="zmdi zmdi-calendar"></i></a>
+                            <a href="mail-inbox.html" title="Inbox"><i class="zmdi zmdi-email"></i></a>
+                            <a href="contact.html" title="Contact List"><i class="zmdi zmdi-account-box-phone"></i></a>
+                            <div class="row">
+                                <div class="col-4 p-r-0">
+                                    <h6 class="m-b-5">852</h6>
+                                    <small>Sales</small>
+                                </div>
+                                <div class="col-4 p-l-0 p-r-0">
+                                    <h6 class="m-b-5">513</h6>
+                                    <small>Order</small>
+                                </div>
+                                <div class="col-4 p-l-0">
+                                    <h6 class="m-b-5">$34M</h6>
+                                    <small>Revenue</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="header">MAIN</li>
+                <li class="active open"> <a href="index.html"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
+                <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-calendar-note"></i><span>Calendar</span></a>
+                    <ul class="ml-menu">
+                        <li><a href="dashboard-rtl.html">RTL Layouts</a></li>
+                        <li><a href="index2.html">Horizontal Menu</a></li>
+                        <li><a href="sidebar-sm.html">Small leftmenu</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </aside>
+</ng-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--<aside id="leftsidebar" class="sidebar" *ngSwitchCase="true">-->
+        <!--<div class="menu">-->
+            <!--<div class="slimScrollDiv"-->
+                 <!--style="position: relative; overflow: hidden; width: auto; height: calc(100vh - 65px);">-->
+                <!--<ul class="list" style="overflow: hidden; width: auto; height: calc(100vh - 65px);">-->
+
+                    <!--<li class="header">MAIN</li>-->
+                    <!--<li>-->
+                        <!--<a href="/" class=" waves-effect waves-block"><i-->
+                            <!--class="zmdi zmdi-home"></i><span>Dashboard</span></a>-->
+                    <!--</li>-->
+                    <!--<li >-->
+                        <!--<a class="menu-toggle waves-effect waves-block" (click)="isNavbarCalendarCollapsed = (!this.isNavbarCalendarCollapsed)" [ngClass]="{'toggled': !isNavbarCalendarCollapsed}">-->
+                            <!--<i class="zmdi zmdi-calendar-note"></i><span>Calendar</span>-->
+                        <!--</a>-->
+                        <!--<ul  [ngbCollapse]="isNavbarCalendarCollapsed" class="navbar-collapse">-->
+                            <!--<li><a href="/" class=" waves-effect waves-block">Dashboard</a></li>-->
+                            <!--<li><a href="index2.html" class=" waves-effect waves-block">Calendar</a></li>-->
+
+                            <!--<li><a href="sidebar-sm.html" class=" waves-effect waves-block">Small leftmenu</a></li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
+                <!--</ul>-->
+                <!--<div class="slimScrollBar"-->
+                     <!--style="background: rgba(0, 0, 0, 0.2); width: 2px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 3px; z-index: 99; left: 1px; height: 30px;"></div>-->
+                <!--<div class="slimScrollRail"-->
+                     <!--style="width: 2px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 0px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; left: 1px;"></div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</aside>-->
+</ng-container>
