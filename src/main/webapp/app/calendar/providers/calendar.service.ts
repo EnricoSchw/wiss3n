@@ -33,8 +33,8 @@ const colors: any = {
         secondary: '#D1E8FF'
     },
     yellow: {
-        primary: '#e3bc08',
-        secondary: '#FDF1BA'
+        primary: 'transparent',
+        secondary: 'transparent'
     }
 };
 

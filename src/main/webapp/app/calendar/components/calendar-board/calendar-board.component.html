@@ -1,27 +1,80 @@
-<section class="content">
+<section class="content page-calendar">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Calendar
+                    <small>Hausaufgaben</small>
+                </h2>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item active">Calendar</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
 
-    <jhi-alert></jhi-alert>
-    <div class="row board">
-        <div class="left-board col-md-2">
-            <jhi-calendar-board-list-school-class></jhi-calendar-board-list-school-class>
-            <jhi-calendar-board-list-teaching-subject></jhi-calendar-board-list-teaching-subject>
+        <div class="card">
+            <div class="header">
+                <h2><strong>Klasse:</strong> {{activeSchoolClassName$ | async }}
+                    <small>Klicke rechts zum Öffnen und Schließen..</small>
+                </h2>
+                <ul class="header-dropdown">
+                    <li>
+                        <a href="javascript:void(0);" *ngIf="isClassMenuOpen==true" data-toggle="collapse"
+                           href="#classMenu" role="button" data-close="false" (click)="toggleClassMenu()">
+                            <i class="material-icons col-amber">expand_less</i>
+                        </a>
+                        <a href="javascript:void(0);" *ngIf="isClassMenuOpen==false" role="button"
+                           data-toggle="collapse" href="#classMenu" data-close="false" (click)="toggleClassMenu()">
+                            <i class="material-icons col-amber">expand_more</i>
+                        </a>
+                    </li>
+                </ul>
 
 
-            <div>
-                <h4>
-                <span class="title">Aufgabe
-                <button id="jh-create-task"
-                        class="btn btn-outline-dark btn-sm float-right rounded-circle jh-create-entity create-school-class"
-                        [routerLink]="['/school-class/new']">
-                    <fa-icon [icon]="'plus'"></fa-icon>
-                </button>
-                    </span>
-                </h4>
             </div>
 
+            <div class="body">
+
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-xl-12 collapse" id="classMenu" aria-expanded="false">
+
+
+                        <div id="open-eventss">
+                            <jhi-calendar-board-list-school-class></jhi-calendar-board-list-school-class>
+
+                            <hr>
+
+                            <jhi-calendar-board-list-teaching-subject></jhi-calendar-board-list-teaching-subject>
+
+
+                            <hr>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="right-bord col-md">
-            <jhi-calendar></jhi-calendar>
+
+
+        <div class="card">
+            <div class="header">
+                <h2><strong>Hausaufgaben-Kalendar</strong>
+                    <small>Mögliche Klassen..</small>
+                </h2>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-xl-12">
+                    <div class="body">
+
+                        <jhi-calendar></jhi-calendar>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+

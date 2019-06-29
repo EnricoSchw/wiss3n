@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ITeachingSubject } from 'app/shared/model/teaching-subject.model';
+import { freeTeachingSubject, ITeachingSubject } from 'app/shared/model/teaching-subject.model';
 import { select, Store } from '@ngrx/store';
 import {
     State, selectAllTeachingSubjects, selectAllTeachingSubjectsById, selectTeachingSubject
@@ -21,6 +21,7 @@ export class StoreTeachingSubjectService {
     }
 
     public loadAll(teachingSubjects: ITeachingSubject[]) {
+        teachingSubjects = [freeTeachingSubject].concat(teachingSubjects);
         this.store.dispatch(new LoadTeachingSubjects({teachingSubjects}));
     }
 

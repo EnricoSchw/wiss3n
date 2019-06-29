@@ -1,25 +1,42 @@
-<ng-template #customEventTitleTemplate let-event="event" let-view="view">
-    <jhi-calendar-view-week-cell-title [lesson]="event.meta"></jhi-calendar-view-week-cell-title>
-</ng-template>
 
-<div
-    class="cal-event"
-    [style.backgroundColor]="event.color?.secondary"
-    [style.borderColor]="event.color?.primary"
-    (mwlClick)="onCellClicked($event)">
-    <mwl-calendar-event-actions [event]="event"></mwl-calendar-event-actions>
-    <jhi-calendar-view-week-cell-teaching-subject
-        [teachingHourId]="teachingHourId">
-    </jhi-calendar-view-week-cell-teaching-subject>
+<div class="card social_widget2" >
 
-    <!--<jhi-select-teaching-subject *ngIf="!weekEvent.event.meta.subjectHour.teachingSubject"></jhi-select-teaching-subject>-->
+    <div class="body data text-center">
+        <ul class="list-unstyled m-b-0">
+            <li class="m-b-30" *ngIf="!(free$ | async)">
+                <!--<i class="material-icons col-amber">school</i>-->
+                <fa-icon class="material-icons col-amber" [icon]="'graduation-cap'"></fa-icon>
+                <h4 class="m-t-0 m-b-0">5</h4>
+                <jhi-calendar-view-week-cell-title [lesson]="event.meta"></jhi-calendar-view-week-cell-title>
+            </li>
+            <li class="m-b-30" *ngIf="(free$ | async)">
+                <i class="material-icons">beach_access</i>
+                <h4 class="m-t-0 m-b-0">#</h4>
+                <jhi-calendar-view-week-cell-title [lesson]="event.meta"></jhi-calendar-view-week-cell-title>
+            </li>
+        </ul>
+    </div>
 
-    <!--<jhi-select-teaching-subject-->
-    <!--[subjectHourData]="weekEvent.event.meta.subjectHourData">-->
-    <!---->
-    <!--</jhi-select-teaching-subject>-->
-    <!--<div *ngFor="let taskEvent of weekEvent.event.meta.events;" class="xx">-->
-    <!--<span class="custom-event-month-subject" [ngStyle]="{'color': taskEvent.color.primary}">{{convertTypeToString(taskEvent.meta.task.type)}}</span>-->
-    <!--{{taskEvent.title}}-->
-    <!--</div>-->
+
+    <div class="name dribbble">
+        <ul class="list-unstyled m-b-30">
+            <li class="m-b-25">
+                <!--<div class="progress-container">-->
+                    <!--<span class="progress-badge">-->
+                        <!--<jhi-calendar-view-week-cell-title [lesson]="event.meta"></jhi-calendar-view-week-cell-title>-->
+                    <!--</span>-->
+                    <!--<div class="progress">-->
+                        <!--<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0"-->
+                             <!--aria-valuemax="100" style="width: 100%;">-->
+                            <!--<span class="progress-value">1000%</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</li>-->
+            <!--<li>-->
+                <jhi-calendar-view-week-cell-teaching-subject
+                    [teachingHourId]="event.meta.teachingHourId"></jhi-calendar-view-week-cell-teaching-subject>
+            </li>
+        </ul>
+    </div>
 </div>

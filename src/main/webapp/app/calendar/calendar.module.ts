@@ -4,7 +4,6 @@ import { CalendarComponent } from './calendar.component';
 import { CalendarModule  as AngularCalendarModule } from 'angular-calendar';
 import { CalendarBoardComponent } from './components/calendar-board/calendar-board.component';
 import { CalendarService } from './providers/calendar.service';
-import { SubjectHourViewComponent } from './calendar/subject-hour-view/subject-hour-view.component';
 import { RouterModule } from '@angular/router';
 import { Wiss3NSharedModule } from 'app/shared';
 import { Wiss3NStoreModule } from 'app/store/store.module';
@@ -18,6 +17,7 @@ import { CalendarViewMonthCellComponent } from './components/calendar-view-month
 import { CalendarViewWeekCellComponent } from './components/calendar-view-week-cell/calendar-view-week-cell.component';
 import { CalendarViewWeekCellTitleComponent } from './components/calendar-view-week-cell-title/calendar-view-week-cell-title.component';
 import { CalendarViewWeekCellTeachingSubjectComponent } from './components/calendar-view-week-cell-teaching-subject/calendar-view-week-cell-teaching-subject.component';
+import { CalendarViewDataService } from 'app/calendar/providers/calendar-view-data.service';
 
 @NgModule({
     imports: [
@@ -32,7 +32,6 @@ import { CalendarViewWeekCellTeachingSubjectComponent } from './components/calen
         CalendarBoardComponent,
         CalendarBoardListSchoolClassComponent,
         CalendarBoardListTeachingSubjectComponent,
-        SubjectHourViewComponent,
         CalendarMenuComponent,
         CalendarViewMonthComponent,
         CalendarViewWeekComponent,
@@ -45,8 +44,8 @@ import { CalendarViewWeekCellTeachingSubjectComponent } from './components/calen
         // CalendarTeachingSubjectListComponent,
         // SelectTeachingSubjectComponent
     ],
-    providers: [CalendarService],
-    exports: [CalendarBoardComponent],
+    providers: [CalendarService, CalendarViewDataService],
+    exports: [CalendarBoardComponent, CalendarComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Wiss3NCalendarModule {

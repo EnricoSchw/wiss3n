@@ -4,7 +4,8 @@ import { CalendarEvent, ViewPeriod } from 'calendar-utils';
 @Component({
   selector: 'jhi-calendar-view-day',
   templateUrl: './calendar-view-day.component.html',
-  styleUrls: ['./calendar-view-day.component.scss', './../../calendar.component.scss', './../../scss/media-queries.scss']
+  // styleUrls: ['./calendar-view-day.component.scss', './../../calendar.component.scss', './../../scss/media-queries.scss']
+  styleUrls: ['./calendar-view-day.component.scss']
 })
 export class CalendarViewDayComponent implements OnInit {
 

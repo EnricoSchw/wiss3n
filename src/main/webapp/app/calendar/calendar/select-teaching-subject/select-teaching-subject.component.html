@@ -5,7 +5,7 @@
             <select class="form-control" id="field_teachingSubject" required [(ngModel)]="teachingSubject"
                     name="teachingSubject"
                     [compareWith]="byId">
-                <option *ngFor="let ts of (teachingSubjects$ | async)"
+                <option *ngFor="let ts of (teachingSubjectList$ | async)"
                         [ngValue]="ts"
                         [selected]="teachingSubject.name === ts.name" >{{ts.name}}</option>
             </select>

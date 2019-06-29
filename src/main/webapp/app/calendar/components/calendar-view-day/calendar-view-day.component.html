@@ -1,59 +1,120 @@
-<ng-template
-    #customEventTitleTemplate
-    let-event="event"
-    let-view="view">
-    <!--<span class="cal-event-title-number">{{event.meta.subjectHourData.hour.index}}</span>-->
-    <span class="cal-event-title-number">1</span>
-    <span class="cal-event-title">{{ event.title }}</span>
-</ng-template>
+<!--<ng-template-->
+<!--#xxcustomEventTitleTemplate-->
+<!--let-event="event"-->
+<!--let-view="view">-->
+<!--&lt;!&ndash;<span class="cal-event-title-number">{{event.meta.subjectHourData.hour.index}}</span>&ndash;&gt;-->
+<!--<span class="cal-event-title-number">1</span>-->
+<!--<span class="cal-event-title">nxnxhxhxhxhxh{{ event.title }}</span>-->
+<!--</ng-template>-->
 
 
-<ng-template
-    #customDayEventTemplate
-    let-dayEvent="dayEvent"
-    let-tooltipPlacement="tooltipPlacement"
-    let-eventClicked="eventClicked"
-    let-tooltipTemplate="tooltipTemplate"
-    let-tooltipAppendToBody="tooltipAppendToBody">
-    <jhi-subject-hour-view
-        [dayEvent]="dayEvent">
-    </jhi-subject-hour-view>
-    <div class="line top"></div>
-    <div class="line bottom"></div>
-    <!--<div class="line right" [hidden]="!dayEvent.event.meta.isActive"></div>-->
-    <div class="line right"></div>
-    <div
-        class="cal-event"
-        [ngClass]="{ 'active': dayEvent.event.meta.isActive }"
-        [style.backgroundColor]="dayEvent.event.color?.secondary"
-        [style.borderColor]="dayEvent.event.color?.primary"
-        [mwlCalendarTooltip]="dayEvent.event.title | calendarEventTitle:'dayTooltip':dayEvent.event"
-        [tooltipPlacement]="tooltipPlacement"
-        [tooltipEvent]="dayEvent.event"
-        [tooltipTemplate]="tooltipTemplate"
-        [tooltipAppendToBody]="tooltipAppendToBody"
-        (mwlClick)="eventClicked.emit()">
-        <mwl-calendar-event-actions [event]="dayEvent.event"></mwl-calendar-event-actions>
-        &ngsp;
-        <mwl-calendar-event-title
-            [event]="dayEvent.event"
-            [customTemplate]="customEventTitleTemplate"
-            view="day"
-            (mwlClick)="eventClicked.emit()">
-        </mwl-calendar-event-title>
-    </div>
-</ng-template>
+<!--<ng-template-->
+<!--#xxcustomDayEventTemplate-->
+<!--let-dayEvent="dayEvent"-->
+<!--let-tooltipPlacement="tooltipPlacement"-->
+<!--let-eventClicked="eventClicked"-->
+<!--let-tooltipTemplate="tooltipTemplate"-->
+<!--let-tooltipAppendToBody="tooltipAppendToBody">-->
+<!--<jhi-subject-hour-view-->
+<!--[dayEvent]="dayEvent">-->
+<!--</jhi-subject-hour-view>-->
+<!--<div class="line top"></div>-->
+<!--<div class="line bottom"></div>-->
+<!--&lt;!&ndash;<div class="line right" [hidden]="!dayEvent.event.meta.isActive"></div>&ndash;&gt;-->
+<!--<div class="line right"></div>-->
+<!--<div-->
+<!--class="cal-event"-->
+<!--[ngClass]="{ 'active': dayEvent.event.meta.isActive }"-->
+<!--[style.backgroundColor]="dayEvent.event.color?.secondary"-->
+<!--[style.borderColor]="dayEvent.event.color?.primary"-->
+<!--[mwlCalendarTooltip]="dayEvent.event.title | calendarEventTitle:'dayTooltip':dayEvent.event"-->
+<!--[tooltipPlacement]="tooltipPlacement"-->
+<!--[tooltipEvent]="dayEvent.event"-->
+<!--[tooltipTemplate]="tooltipTemplate"-->
+<!--[tooltipAppendToBody]="tooltipAppendToBody"-->
+<!--(mwlClick)="eventClicked.emit()">-->
+<!--<mwl-calendar-event-actions [event]="dayEvent.event"></mwl-calendar-event-actions>-->
+<!--&ngsp;-->
+<!--<mwl-calendar-event-title-->
+<!--[event]="dayEvent.event"-->
+<!--[customTemplate]="customEventTitleTemplate"-->
+<!--view="day"-->
+<!--(mwlClick)="eventClicked.emit()">-->
+<!--</mwl-calendar-event-title>-->
+<!--</div>-->
+<!--</ng-template>-->
 
 
+<!--<mwl-calendar-day-view-->
+<!--[viewDate]="viewDate"-->
+<!--[events]="events"-->
+<!--[locale]="'de'"-->
+<!--[dayStartHour]="0"-->
+<!--[dayEndHour]="11"-->
+<!--(eventClicked)="onLessondClicked($event)">-->
+<!--&lt;!&ndash;(beforeViewRender)="beforeDayViewRender($event)"&ndash;&gt;-->
+<!--</mwl-calendar-day-view>-->
 
 
-<mwl-calendar-day-view
-    [viewDate]="viewDate"
-    [events]="events"
-    [locale]="'de'"
-    [dayStartHour]="0"
-    [dayEndHour]="10"
-    (eventClicked)="onLessondClicked($event)">
-    <!--(beforeViewRender)="beforeDayViewRender($event)"-->
-    [eventTemplate]="customDayEventTemplate"
-</mwl-calendar-day-view>
+<div id="day-content" class="body cal-day-view">
+    <h1>Classes Timetable</h1>
+
+    <ul class="timeline">
+        <li class="event" data-date="7:00am - 07:45am">
+            <h3>Circuit Training</h3>
+            <p>Short interval training circuits to condition muscles and burn fat fast. Circuits may vary from centre to
+                centre.</p>
+        </li>
+        <li class="event" data-date="9:30am - 10:30am">
+            <h3>Total tone</h3>
+            <p>Focuses on strength and endurance for the whole body and improves muscle tone. Instructor led.</p>
+        </li>
+        <li class="event" data-date="10:30am - 11:30am">
+            <h3>Zumba</h3>
+            <p>A vigorous dance class to Latin music. Helps tone, shape and condition your body, burning up to 800
+                calories in one hour depending on how much you put in.</p>
+        </li>
+        <li class="event" data-date="12:30pm - 1:30pm">
+            <h3>Active Me</h3>
+            <p>Active Me is an inclusive sports programme aimed at disabled people in Liverpool who experience barriers
+                to doing physical activities and sport.</p>
+        </li>
+        <li class="event" data-date="5:30pm - 6:30pm">
+            <h3>Zumba</h3>
+            <p>A vigorous dance class to Latin music. Helps tone, shape and condition your body, burning up to 800
+                calories in one hour depending on how much you put in.</p>
+        </li>
+        <li class="event" data-date="6:00pm - 6:45pm">
+            <h3>Spinning</h3>
+            <p>A vigorous class using stationary bikes with weighted flywheel. Focuses on strength, endurance, intervals
+                and recovery. Burns calories and shapes muscles. Instructor led.</p>
+        </li>
+        <li class="event" data-date="6:30pm - 7:30pm">
+            <h3>Pilates</h3>
+            <p>Lengthens and tones muscles using breathing and slow controlled movements.</p>
+        </li>
+        <li class="event" data-date="7:00pm - 7:45pm">
+            <h3>Spinning</h3>
+            <p>A vigorous class using stationary bikes with weighted flywheel. Focuses on strength, endurance, intervals
+                and recovery. Burns calories and shapes muscles. Instructor led.</p>
+        </li>
+        <li class="event" data-date="7:00pm - 8:00pm">
+            <h3>Aqua Fit</h3>
+            <p>Splash your way to fitness with gentle exercise in a heated pool. A class that is kind to joints and good
+                fun too. Instructor led.</p>
+        </li>
+        <li class="event" data-date="7:30pm - 8:30pm">
+            <h3>Total tone</h3>
+            <p>Focuses on strength and endurance for the whole body and improves muscle tone. Instructor led.</p>
+        </li>
+        <li class="event" data-date="8:00pm - 9:00pm">
+            <h3>Aqua Running</h3>
+            <p>Aqua Running is a water class which uses all the major muscle groups. It results in total body
+                conditioning and burns calories faster than any known activity.</p>
+        </li>
+        <li class="event" data-date="8:30pm - 9:00pm">
+            <h3>Metafit</h3>
+            <p>Metafit is a new exciting twist on circuit-style training.</p>
+        </li>
+    </ul>
+</div>

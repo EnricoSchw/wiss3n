@@ -1,4 +1,5 @@
 @import "../../content/scss/variables";
+@import "../../content/scss/components/colors";
 
 
 // Common --------------------------------------------------------
@@ -52,7 +53,7 @@ body {
 }
 
 // Hover ---------------------------------------------------------
-$hover: #e7e8ee;
+$hover: $blue-grey-700;
 $hover-bg-off: $app-light-blue;
 $hover-bg-row: $hover;
 $hover-bg-cell: $hover;
@@ -108,6 +109,36 @@ small {
 
 // Week ------------------------------------------------------------------
 
+
+// Week header ...........................................................
+.cal-week-view .cal-day-headers {
+    display: flex;
+    margin-bottom: 3px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 1px solid #555;
+    margin-left: 2px;
+    margin-right: 2px;
+    color: #888;
+}
+
+.cal-week-view .cal-day-headers .cal-header:hover{
+    background-color: transparent;
+}
+
+.cal-week-view .cal-day-headers .cal-header:not(:last-child) {
+    border-right: 1px solid #555;
+}
+
+// Week Row ..............................................................
+
+
+.cal-week-view .cal-event-container:not(:last-child) {
+    border-right: 1px solid #555;
+}
+
+
 .cal-week-view .cal-events-row {
     height: 124px;
 }
@@ -126,88 +157,89 @@ small {
 
 // Day --------------------------------------------------------------------
 
-.cal-day-view .cal-hour-rows {
-    border: none;
-}
+//.cal-day-view .cal-hour-rows {
+//    border: none;
+//}
+//
+//.cal-day-view .cal-hour {
+//    background-color: transparent !important;
+//}
+//
+//.cal-day-view .cal-hour .cal-hour-segment.cal-hour-start {
+//    border-top: 1px solid $app-light-gray-border !important;
+//    border-bottom: none !important
+//}
+//
+//.cal-hour-segment.cal-after-hour-start {
+//    border-bottom: none !important;
+//}
+//
+//.cal-day-view .cal-hour .cal-hour-segment:hover {
+//    background-color: transparent;
+//}
+//
+//.cal-day-view .cal-ends-within-day .cal-event {
+//    //background-color: transparent !important;
+//}
+//
+//.cal-day-view .cal-event {
+//    width: 100%;
+//    border: solid 0;
+//    border-radius: 0 !important;
+//    // border-bottom: solid 1px;
+//    padding: 15px;
+//    font-size: 12px;
+//    background-color: $app-light-blue !important;
+//}
+//
+//.cal-day-view .cal-event.active {
+//    background-color: $app-light-gray !important;
+//    a {
+//        font-weight: normal;
+//    }
+//}
+//
+//.cal-day-view .cal-event:hover{
+//    cursor: pointer;
+//}
+//
+//.cal-day-view .cal-event-container {
+//    margin-left: 0 !important;
+//    width: 100% !important;
+//}
+//
+//
+//.cal-day-view .cal-time {
+//    font-weight: normal;
+//    font-size: 12px;
+//    padding-top: 5px;
+//    padding-left: 15px;
+//    /*line-height: 16px;*/
+//    width: 70px;
+//    text-align: left;
+//}
+//
+//
+//.cal-day-view {
+//    .line {
+//        position: absolute;
+//        width: 150px;
+//        height: 1px;
+//        background-color: $app-light-gray-border;
+//    }
+//    .line.top {
+//        top: -1px;
+//    }
+//
+//    .line.bottom {
+//        bottom: 0px;
+//    }
+//
+//    .line.right {
+//        height: 58px;
+//        width: 3px;
+//        z-index: 101;
+//        background-color: $cyan;
+//    }
+//}
 
-.cal-day-view .cal-hour {
-    background-color: transparent !important;
-}
-
-.cal-day-view .cal-hour .cal-hour-segment.cal-hour-start {
-    border-top: 1px solid $app-light-gray-border !important;
-    border-bottom: none !important
-}
-
-.cal-hour-segment.cal-after-hour-start {
-    border-bottom: none !important;
-}
-
-.cal-day-view .cal-hour .cal-hour-segment:hover {
-    background-color: transparent;
-}
-
-.cal-day-view .cal-ends-within-day .cal-event {
-    //background-color: transparent !important;
-}
-
-.cal-day-view .cal-event {
-    width: 100%;
-    border: solid 0;
-    border-radius: 0 !important;
-    // border-bottom: solid 1px;
-    padding: 15px;
-    font-size: 12px;
-    background-color: $app-light-blue !important;
-}
-
-.cal-day-view .cal-event.active {
-    background-color: $app-light-gray !important;
-    a {
-        font-weight: normal;
-    }
-}
-
-.cal-day-view .cal-event:hover{
-    cursor: pointer;
-}
-
-.cal-day-view .cal-event-container {
-    margin-left: 0 !important;
-    width: 100% !important;
-}
-
-
-.cal-day-view .cal-time {
-    font-weight: normal;
-    font-size: 12px;
-    padding-top: 5px;
-    padding-left: 15px;
-    /*line-height: 16px;*/
-    width: 70px;
-    text-align: left;
-}
-
-
-.cal-day-view {
-    .line {
-        position: absolute;
-        width: 150px;
-        height: 1px;
-        background-color: $app-light-gray-border;
-    }
-    .line.top {
-        top: -1px;
-    }
-
-    .line.bottom {
-        bottom: 0px;
-    }
-
-    .line.right {
-        height: 58px;
-        width: 3px;
-        z-index: 101;
-        background-color: $cyan;
-    }
-}

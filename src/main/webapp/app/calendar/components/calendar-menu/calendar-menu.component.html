@@ -1,28 +1,26 @@
-<div class="row text-center calendar-head">
+<div class="row text-center">
     <div class="col-md-4">
         <div class="btn-group">
-            <div
-                class="btn btn-primary"
+            <button
+                class="btn btn-primary btn-round"
                 mwlCalendarPreviousView
                 [view]="view"
                 [(viewDate)]="viewDate"
                 (viewDateChange)="navigateCalendar('back')">
                 Previous
-            </div>
-            <div
-                class="btn btn-outline-secondary"
-                mwlCalendarToday
-                [(viewDate)]="viewDate">
-                Today
-            </div>
-            <div
-                class="btn btn-primary"
+            </button>
+
+            <button class="btn btn-primary btn-round waves-effect" id="change-view-today" mwlCalendarToday
+                    [(viewDate)]="viewDate">today
+            </button>
+            <button
+                class="btn btn-primary btn-round"
                 mwlCalendarNextView
                 [view]="view"
                 [(viewDate)]="viewDate"
                 (viewDateChange)="navigateCalendar('forward')">
                 Next
-            </div>
+            </button>
         </div>
     </div>
     <div class="col-md-4">
@@ -30,24 +28,15 @@
     </div>
     <div class="col-md-4">
         <div class="btn-group">
-            <div
-                class="btn btn-primary"
-                (click)="view = 'month'"
-                [class.active]="view === 'month'">
-                Month
-            </div>
-            <div
-                class="btn btn-primary"
-                (click)="view = 'week'"
-                [class.active]="view === 'week'">
-                Week
-            </div>
-            <div
-                class="btn btn-primary"
-                (click)="view = 'day'"
-                [class.active]="view === 'day'">
-                Day
-            </div>
+            <button class="btn btn-default btn-simple btn-round waves-effect" id="change-view-day"
+                    (click)="view = 'day'" [class.active]="view === 'day'">Day
+            </button>
+            <button class="btn btn-default btn-simple btn-round waves-effect" id="change-view-week"
+                    (click)="view = 'week'" [class.active]="view === 'week'">Week
+            </button>
+            <button class="btn btn-default btn-simple btn-round waves-effect" id="change-view-month"
+                    (click)="view = 'month'" [class.active]="view === 'month'">Month
+            </button>
         </div>
     </div>
 </div>

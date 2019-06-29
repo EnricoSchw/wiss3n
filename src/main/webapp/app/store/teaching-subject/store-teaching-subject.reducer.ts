@@ -1,5 +1,5 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { ITeachingSubject } from 'app/shared/model/teaching-subject.model';
+import { EntityState, EntityAdapter, createEntityAdapter, Dictionary } from '@ngrx/entity';
+import { ITeachingSubject, TeachingSubject } from 'app/shared/model/teaching-subject.model';
 import {
     TeachingSubjectActions, TeachingSubjectActionTypes
 } from 'app/store/teaching-subject/store-teaching-subject.actions';
@@ -100,5 +100,6 @@ export const selectAllTeachingSubjectsById = (ids: number[]) => createSelector(
 
 export const selectTeachingSubject = (id: number) => createSelector(
     selectTeachingSubjectEntities,
-    teachingSubject => teachingSubject[id]
+    teachingSubjects => teachingSubjects.hasOwnProperty(id)? teachingSubjects[id]: null
+
 );

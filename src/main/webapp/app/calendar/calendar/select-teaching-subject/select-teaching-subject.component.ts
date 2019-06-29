@@ -20,7 +20,7 @@
 //
 //     private _teachingSubject: ITeachingSubject = {name: null, id: null};
 //
-//     teachingSubjects$: Observable<ITeachingSubject[]> = Observable.of([]);
+//     teachingSubjectList$: Observable<ITeachingSubject[]> = Observable.of([]);
 //     submitted = false;
 //
 //     constructor(
@@ -30,7 +30,7 @@
 //     }
 //
 //     ngOnInit() {
-//         this.teachingSubjects$ = this.store.getAll();
+//         this.teachingSubjectList$ = this.store.getAll();
 //         if (this.subjectHourData.teachingSubject.id !== freeTeachingSubject.id) {
 //             this.submitted = true;
 //             this.teachingSubject = this.subjectHourData.teachingSubject;

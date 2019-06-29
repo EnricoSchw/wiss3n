@@ -7,6 +7,8 @@ import { TeachingHourService } from 'app/entities/teaching-hour';
 import { ITeachingHour, StoreTeachingHour } from 'app/shared/model/teaching-hour.model';
 import { ISchoolClass } from 'app/shared/model/school-class.model';
 import { StoreSchoolClassService } from 'app/store/school-class/store-school-class.service';
+import { CalendarViewDataService } from 'app/calendar/providers/calendar-view-data.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
     selector: 'jhi-calendar-view-week-cell-teaching-subject',
@@ -17,13 +19,14 @@ import { StoreSchoolClassService } from 'app/store/school-class/store-school-cla
 export class CalendarViewWeekCellTeachingSubjectComponent implements OnInit {
 
     @Input('teachingHourId') teachingHourId: number;
-    _teachingSubject: ITeachingSubject = {name: null, id: null};
-    teachingSubjects$: Observable<ITeachingSubject[]> = Observable.of([]);
+    teachingSubject: ITeachingSubject;
+    teachingSubjectList$: Observable<ITeachingSubject[]> = Observable.of([]);
     submitted = false;
 
     constructor(
         private storeTeachingSubjectService: StoreTeachingSubjectService,
         private storeTeachingHourService: StoreTeachingHourService,
+        private dataService: CalendarViewDataService,
         private storeSchoolClassService: StoreSchoolClassService,
         private teachingHourService: TeachingHourService,
         private cdr: ChangeDetectorRef
@@ -31,17 +34,13 @@ export class CalendarViewWeekCellTeachingSubjectComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.teachingSubjects$ = this.storeTeachingSubjectService.getAll();
-        this.storeTeachingHourService
-            .get(this.teachingHourId)
-            .map(th => th.teachingSubjectId)
-            .filter(id => id !== freeTeachingSubject.id)
-            .flatMap(id => this.storeTeachingSubjectService.get(id))
-            .take(1)
-            .subscribe(teachingSubject => {
-                this.submitted = true;
-                this.teachingSubject = teachingSubject;
-            });
+        this.teachingSubjectList$ = this.storeTeachingSubjectService.getAll();
+        this.dataService.getTeachingSubjectByTeachingHour(this.teachingHourId).subscribe(
+            s=> {
+                this.submitted = s.id !== freeTeachingSubject.id;
+                this.teachingSubject = s
+            }
+        )
     }
 
     byId(item1: ITeachingSubject, item2: ITeachingSubject) {
@@ -55,7 +54,7 @@ export class CalendarViewWeekCellTeachingSubjectComponent implements OnInit {
         this.storeTeachingHourService
             .get(this.teachingHourId)
             .take(1)
-            .map(teachingHour => <ITeachingHour>{...teachingHour, teachingSubject: this._teachingSubject} )
+            .map(teachingHour => <ITeachingHour>{...teachingHour, teachingSubject: this.teachingSubject} )
             .flatMap(teachingHour => this.createTeachingHour(teachingHour) )
             .flatMap(teachingHour => this.teachingHourService.update(teachingHour))
             .take(1)
@@ -73,7 +72,7 @@ export class CalendarViewWeekCellTeachingSubjectComponent implements OnInit {
             .map(schoolClass => {
                 const newTeachingHour = {
                     ...teachingHour,
-                    teachingSubject: this._teachingSubject,
+                    teachingSubject: this.teachingSubject.id == freeTeachingSubject.id? null: this.teachingSubject,
                     schoolClass,
                     tasks: []
                 };
@@ -83,11 +82,11 @@ export class CalendarViewWeekCellTeachingSubjectComponent implements OnInit {
             });
     }
 
-    get teachingSubject() {
-        return this._teachingSubject;
-    }
+    // get teachingSubject() {
+    //     return this._teachingSubject;
+    // }
 
-    set teachingSubject(teachingSubject: ITeachingSubject) {
-        this._teachingSubject = teachingSubject;
-    }
+    // set teachingSubject(teachingSubject: ITeachingSubject) {
+    //     this._teachingSubject = teachingSubject;
+    // }
 }

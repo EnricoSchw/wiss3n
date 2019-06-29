@@ -1,0 +1,33 @@
+.social_widget2 .data {
+    padding: 5px;
+    top: 0px;
+    margin: 0;
+    width: calc(100% - 0px);
+    box-shadow: none;
+    border-radius: 0;
+    height: 116px;
+
+}
+
+.social_widget2 .data:not(:last-child) {
+    // border-right: 1px solid #EA4C89;
+    // border-left: 1px solid #EA4C89;
+}
+
+.social_widget2 .name {
+    padding: 5px;
+    margin: 0;
+    height: 120px;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+
+.social_widget2 {
+    height: 120px !important;
+    margin-bottom: 0;
+    min-height: 0;
+    padding: 0px 0px 1px;
+    box-shadow: none;
+    border-radius: 0;
+}

@@ -1,28 +1,34 @@
-<div>
-    <h4 id="page-heading">
-        <span class="title"> Klassen
-        <button id="jh-create-entity"
-                class="btn btn-outline-dark float-right btn-sm rounded-circle  jh-create-entity create-school-class"
+<ng-container *ngIf="schoolClasses.length > 0; else create_school_class">
+    <select class="btn btn-round bootstrap-select form-control show-tick" [(ngModel)]="activeClassId"
+            (change)="setSchoolClassActive(activeClassId)">
+        <option [ngValue]="null">&#45;&#45; Please create School class &#45;&#45;</option>
+        <option [ngValue]="schoolClass.id === activeClassId ? activeClassId : schoolClass.id"
+                *ngFor="let schoolClass of schoolClasses">
+            {{schoolClass.name}}
+        </option>
+    </select>
+</ng-container>
+
+<ng-template #create_school_class>
+    <div style="text-align: center">
+        <span>Lege zuerts eine Klasse an!</span>
+    </div>
+</ng-template>
+
+<div style="text-align: right">
+    <div>
+        <button id="jh-create-entitys"
+                class="btn btn-default btn-simple btn-round waves-effect  jh-create-entity create-school-class"
                 [routerLink]="['/school-class/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
         </button>
-        <button id="jh-view-entity"
-                class="btn btn-outline-dark float-right btn-sm rounded-circle  jh-create-entity create-school-class"
+        <button id="jh-view-entitys"
+                class="btn btn-default btn-simple btn-round waves-effect  jh-create-entity create-school-class"
                 [routerLink]="['/school-class']">
             <fa-icon [icon]="'pencil-alt'"></fa-icon>
         </button>
-        </span>
-    </h4>
-    <br/>
-    <div class="table-responsive" *ngIf="schoolClasses.length > 0; else create_school_class">
-        <ul *ngFor="let schoolClass of schoolClasses ;trackBy: trackId">
-            <li (click)="setSchoolClassActive(schoolClass.id)">
-                <a href="#" [ngClass]="{'active': schoolClass.id== activeClassId}">{{schoolClass.name}}</a>
-            </li>
-        </ul>
-    </div>
 
-    <ng-template #create_school_class>
-        <span>Lege eine Klasse an!</span>
-    </ng-template>
+    </div>
 </div>
+
+

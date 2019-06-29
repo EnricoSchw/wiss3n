@@ -1,28 +1,40 @@
-<div *ngIf="teachingSubjects$ | async as subjects">
-    <h4>
+<ng-container *ngIf="teachingSubjects$ | async as subjects">
+    <h4 style="text-align: center">
         <span class="title">Unterrichtsfächer
-            <button id="jh-view-teaching-subject"
-                    class="btn btn-outline-dark btn-sm float-right rounded-circle  jh-create-entity create-school-class"
-                    [routerLink]="['/teaching-subject/new']">
-                    <fa-icon [icon]="'plus'"></fa-icon>
-            </button>
-            <button id="jh-view-entity"
-                    class="btn btn-outline-dark btn-sm float-right rounded-circle  jh-create-entity create-school-class"
-                    [routerLink]="['/teaching-subject']">
-                    <fa-icon [icon]="'pencil-alt'"></fa-icon>
-            </button>
+
         </span>
     </h4>
-    <br/>
+    <hr>
     <div class="table-responsive" *ngIf="subjects.length > 0; else create_teaching_subjects">
-        <ul *ngFor="let teachingSubject of subjects;">
-            <li >{{teachingSubject.name}}</li>
-        </ul>
+        <ng-container *ngFor="let teachingSubject of subjects;">
+            <div class="event-name b-greensea row">{{teachingSubject.name}}</div>
+        </ng-container>
+    </div>
+
+    <hr>
+
+    <div style="text-align: right">
+        <div>
+            <button id="jh-view-teaching-subject"
+                    class="btn btn-default btn-simple btn-round waves-effect  jh-create-entity create-school-class"
+                    [routerLink]="['/teaching-subject/new']">
+                <fa-icon [icon]="'plus'"></fa-icon>
+            </button>
+            <button id="jh-view-entity"
+                    class="btn btn-default btn-simple btn-round waves-effect  jh-create-entity create-school-class"
+                    [routerLink]="['/teaching-subject']">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+            </button>
+
+        </div>
     </div>
 
     <ng-template #create_teaching_subjects>
-        <span>Lege Unterrichtsfächer an!</span>
+        <div style="text-align: center">
+            <span>Lege Unterrichtsfächer an!</span>
+        </div>
     </ng-template>
-</div>
+</ng-container>
 
 <ng-template #no_school_class>...</ng-template>
+

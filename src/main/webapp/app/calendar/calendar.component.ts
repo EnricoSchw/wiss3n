@@ -15,7 +15,6 @@ import {
     isSameMonth,
     addHours
 } from 'date-fns';
-import { RRule } from 'rrule';
 import { CalendarDateFormatter, CalendarEventAction } from 'angular-calendar';
 import { Task, TaskType } from 'app/shared/model/task.model';
 
@@ -46,7 +45,7 @@ const colors: any = {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     templateUrl: './calendar.component.html',
-    styleUrls: ['./calendar.component.scss', './scss/media-queries.scss'],
+    styleUrls: ['./calendar.component.scss'],
     providers: [
         {
             provide: CalendarDateFormatter,
@@ -65,7 +64,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
         event: CalendarEvent;
     };
 
-    view = 'month';
+    view = 'week';
     viewDate: Date = new Date('2018-07-16');
     // exclude weekends
 
@@ -116,6 +115,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     }
 
     public ngOnInit(): void {
+        this.menu.view = 'week';
         this.weekEvents$ = this.service.loadLessonEvents();
         this.monthEvents = this.events;
     }
