@@ -1,73 +1,145 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-teaching-subject-heading" jhiTranslate="wiss3NApp.teachingSubject.home.createOrEditLabel">Create or edit a Teaching Subject</h2>
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!teachingSubject.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="teachingSubject.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="wiss3NApp.teachingSubject.name" for="field_name">Name</label>
-                    <input type="text" class="form-control" name="name" id="field_name"
-                        [(ngModel)]="teachingSubject.name" required minlength="2"/>
-                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.name?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 2 }">
-                        This field is required to be at least 2 characters.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="wiss3NApp.teachingSubject.prefix" for="field_prefix">Prefix</label>
-                    <input type="text" class="form-control" name="prefix" id="field_prefix"
-                        [(ngModel)]="teachingSubject.prefix" required minlength="2"/>
-                    <div [hidden]="!(editForm.controls.prefix?.dirty && editForm.controls.prefix?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.prefix?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.prefix?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 2 }">
-                        This field is required to be at least 2 characters.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="wiss3NApp.teachingSubject.type" for="field_type">Type</label>
-                    <select class="form-control" name="type" [(ngModel)]="teachingSubject.type" id="field_type"  required>
-                        <option value="HAUPFACH">{{'wiss3NApp.SubjectType.HAUPFACH' | translate}}</option>
-                        <option value="NEBENFACH">{{'wiss3NApp.SubjectType.NEBENFACH' | translate}}</option>
-                    </select>
-                    <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.type?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="wiss3NApp.teachingSubject.schoolClass" for="field_schoolClass">School Class</label>
-                    <select class="form-control" id="field_schoolClass" name="schoolClass" [(ngModel)]="teachingSubject.schoolClass" >
-                        <option [ngValue]="null"></option>
-                        <option [selected]="((activeSchoolClassId$ | async) === schoolClassOption.id)? true : null" [ngValue]="schoolClassOption.id === teachingSubject.schoolClass?.id ? teachingSubject.schoolClass : schoolClassOption" *ngFor="let schoolClassOption of schoolclasses; trackBy: trackSchoolClassById">{{schoolClassOption.name}}</option>
-                    </select>
-                </div>
+<section class="content">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Unterrichtsfach<small>Unterrichtsfach Bearbeiten</small>
+                </h2>
             </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="/"><i class="zmdi zmdi-home"></i> Home</a></li>
+                    <li class="breadcrumb-item"><a href="/#/teaching-subject">Unterrichtsfach</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Bearbeiten</a></li>
+                </ul>
             </div>
-        </form>
+        </div>
     </div>
-</div>
+    <div class="container-fluid">
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2 id="jhi-teaching-subject-heading" jhiTranslate="wiss3NApp.teachingSubject.home.createOrEditLabel">Create or edit a School Class</h2>
+                    </div>
+                    <div class="body">
+
+                        <jhi-alert-error></jhi-alert-error>
+
+
+                        <form name="editForm" class="common-form" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+
+                            <div class="row clearfix" [hidden]="!teachingSubject.id">
+                                <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                    <label for="id" jhiTranslate="global.field.id">Id</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="id" name="id"
+                                               [(ngModel)]="teachingSubject.id" readonly />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row clearfix">
+                                <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                    <label class="form-control-label" jhiTranslate="wiss3NApp.teachingSubject.name" for="field_name">Name</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="name" id="field_name"
+                                               [(ngModel)]="teachingSubject.name" required minlength="2"/>
+                                    </div>
+                                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                                        <small class="form-text text-danger"
+                                               [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                        <small class="form-text text-danger"
+                                               [hidden]="!editForm.controls.name?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 2 }">
+                                            This field is required to be at least 2 characters.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row clearfix">
+                                <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                    <label class="form-control-label" jhiTranslate="wiss3NApp.teachingSubject.prefix" for="field_prefix">Prefix</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="prefix" id="field_prefix"
+                                               [(ngModel)]="teachingSubject.prefix" required minlength="2"/>
+                                    </div>
+                                    <div [hidden]="!(editForm.controls.prefix?.dirty && editForm.controls.prefix?.invalid)">
+                                        <small class="form-text text-danger"
+                                               [hidden]="!editForm.controls.prefix?.errors?.required" jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                        <small class="form-text text-danger"
+                                               [hidden]="!editForm.controls.prefix?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 2 }">
+                                            This field is required to be at least 2 characters.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row clearfix">
+                                <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                    <label class="form-control-label" jhiTranslate="wiss3NApp.teachingSubject.type" for="field_type">Type</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8">
+                                    <div class="form-group">
+                                        <select class="form-control" name="type" [(ngModel)]="teachingSubject.type" id="field_type"  required>
+                                            <option value="HAUPFACH">{{'wiss3NApp.SubjectType.HAUPFACH' | translate}}</option>
+                                            <option value="NEBENFACH">{{'wiss3NApp.SubjectType.NEBENFACH' | translate}}</option>
+                                        </select>
+                                    </div>
+                                    <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
+                                        <small class="form-text text-danger"
+                                               [hidden]="!editForm.controls.type?.errors?.required" jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row clearfix">
+                                <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                    <label class="form-control-label" jhiTranslate="wiss3NApp.teachingSubject.schoolClass" for="field_schoolClass">School Class</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8">
+                                    <div class="form-group">
+                                        <select class="form-control" id="field_schoolClass" name="schoolClass" [(ngModel)]="teachingSubject.schoolClass" >
+                                            <option [ngValue]="null"></option>
+                                            <option [selected]="((activeSchoolClassId$ | async) === schoolClassOption.id)? true : null" [ngValue]="schoolClassOption.id === teachingSubject.schoolClass?.id ? teachingSubject.schoolClass : schoolClassOption" *ngFor="let schoolClassOption of schoolclasses; trackBy: trackSchoolClassById">{{schoolClassOption.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row clearfix">
+                                <div class="col-sm-8 offset-sm-2">
+                                    <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                                    </button>
+                                    <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -4,6 +4,7 @@
         "teachingSubject" : {
             "home": {
                 "title": "Teaching Subjects",
+                "headline": "<strong>Teaching Subjects</strong> Overview<small></small> ",
                 "createLabel": "Create a new Teaching Subject",
                 "createOrEditLabel": "Create or edit a Teaching Subject",
                 "search": "Search for Teaching Subject"

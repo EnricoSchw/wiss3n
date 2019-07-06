@@ -3,26 +3,27 @@
     "wiss3NApp": {
         "teachingSubject" : {
             "home": {
-                "title": "Teaching Subjects",
-                "createLabel": "Teaching Subject erstellen",
-                "createOrEditLabel": "Teaching Subject erstellen oder bearbeiten",
-                "search": "Suche nach Teaching Subject"
+                "title": "Unterrichtsfach",
+                "headline": "<strong>Unterrichtsfächer</strong> Übersicht<small></small> ",
+                "createLabel": "Unterrichtsfach erstellen",
+                "createOrEditLabel": "Unterrichtsfach erstellen oder bearbeiten",
+                "search": "Suche nach Unterrichtsfach"
             },
-            "created": "Teaching Subject erstellt mit ID {{ param }}",
-            "updated": "Teaching Subject aktualisiert mit ID {{ param }}",
-            "deleted": "Teaching Subject gelöscht mit ID {{ param }}",
+            "created": "Unterrichtsfach erstellt mit ID {{ param }}",
+            "updated": "Unterrichtsfach aktualisiert mit ID {{ param }}",
+            "deleted": "Unterrichtsfach gelöscht mit ID {{ param }}",
             "delete": {
-                "question": "Soll Teaching Subject {{ id }} wirklich dauerhaft gelöscht werden?"
+                "question": "Soll das Unterrichtsfach {{ id }} wirklich dauerhaft gelöscht werden?"
             },
             "detail": {
-                "title": "Teaching Subject"
+                "title": "Unterrichtsfach"
             },
             "name": "Name",
             "prefix": "Prefix",
             "type": "Type",
             "user": "User",
-            "schoolClass": "School Class",
-            "teachingHours": "Teaching Hours"
+            "schoolClass": "Stundenplan",
+            "teachingHours": "Unterrichtsstunden"
         }
     }
 }

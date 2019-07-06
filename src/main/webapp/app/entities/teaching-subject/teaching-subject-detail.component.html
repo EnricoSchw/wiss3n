@@ -1,41 +1,72 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="teachingSubject">
-            <h2><span jhiTranslate="wiss3NApp.teachingSubject.detail.title">Teaching Subject</span> {{teachingSubject.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="wiss3NApp.teachingSubject.name">Name</span></dt>
-                <dd>
-                    <span>{{teachingSubject.name}}</span>
-                </dd>
-                <dt><span jhiTranslate="wiss3NApp.teachingSubject.prefix">Prefix</span></dt>
-                <dd>
-                    <span>{{teachingSubject.prefix}}</span>
-                </dd>
-                <dt><span jhiTranslate="wiss3NApp.teachingSubject.type">Type</span></dt>
-                <dd>
-                    <span jhiTranslate="{{'wiss3NApp.SubjectType.' + teachingSubject.type}}">{{teachingSubject.type}}</span>
-                </dd>
-                <dt><span jhiTranslate="wiss3NApp.teachingSubject.schoolClass">School Class</span></dt>
-                <dd>
-                    <div *ngIf="teachingSubject.schoolClass">
-                        <a [routerLink]="['/school-class', teachingSubject.schoolClass?.id, 'view']">{{teachingSubject.schoolClass?.name}}</a>
-                    </div>
-                </dd>
-            </dl>
-
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/teaching-subject', teachingSubject.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
+<section class="content" id = "shoolclass" xmlns="http://www.w3.org/1999/html">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Unterrichtsfach<small>Unterrichtsfachdetail</small>
+                </h2>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="/"><i class="zmdi zmdi-home"></i> Home</a></li>
+                    <li class="breadcrumb-item"><a href="/#/teaching-subject">Unterrichtsfach</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Detail</a></li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong jhiTranslate="wiss3NApp.teachingSubject.detail.title">Teaching Subject</strong> {{teachingSubject.name}}</h2>
+                    </div>
+
+
+
+                    <div class="body table-responsive" *ngIf="teachingSubject">
+
+                        <hr>
+
+                        <jhi-alert-error></jhi-alert-error>
+
+
+                        <dl class="row-md jh-entity-details">
+                            <dt><span jhiTranslate="wiss3NApp.teachingSubject.name">Name</span></dt>
+                            <dd>
+                                <span>{{teachingSubject.name}}</span>
+                            </dd>
+                            <dt><span jhiTranslate="wiss3NApp.teachingSubject.prefix">Prefix</span></dt>
+                            <dd>
+                                <span>{{teachingSubject.prefix}}</span>
+                            </dd>
+                            <dt><span jhiTranslate="wiss3NApp.teachingSubject.type">Type</span></dt>
+                            <dd>
+                                <span jhiTranslate="{{'wiss3NApp.SubjectType.' + teachingSubject.type}}">{{teachingSubject.type}}</span>
+                            </dd>
+                            <dt><span jhiTranslate="wiss3NApp.teachingSubject.schoolClass">School Class</span></dt>
+                            <dd>
+                                <div *ngIf="teachingSubject.schoolClass">
+                                    <a [routerLink]="['/school-class', teachingSubject.schoolClass?.id, 'view']">{{teachingSubject.schoolClass?.name}}</a>
+                                </div>
+                            </dd>
+                        </dl>
+
+                        <button type="submit"
+                                (click)="previousState()"
+                                class="btn btn-info">
+                            <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                        </button>
+
+                        <button type="button"
+                                [routerLink]="['/teaching-subject', teachingSubject.id, 'edit']"
+                                class="btn btn-primary">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
