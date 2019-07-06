@@ -106,6 +106,10 @@ export class NavbarComponent implements OnInit {
         $('body').toggleClass('menu_sm');
     }
 
+    toggleSMSidebar() {
+        $('body').toggleClass('overlay-open');
+        $('body').removeClass('menu_sm');
+    }
     getImageUrl() {
         return this.isAuthenticated() ? this.principal.getImageUrl() : null;
     }

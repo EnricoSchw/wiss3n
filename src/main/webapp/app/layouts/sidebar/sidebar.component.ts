@@ -1,6 +1,10 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Principal } from 'app/core';
+import { Principal, User } from 'app/core';
 import { Router } from '@angular/router';
+import { JhiEventManager } from 'ng-jhipster';
+import { StoreUserService } from 'app/store/user/store-user.service';
+import { Observable } from 'rxjs/Observable';
+import { defaultIfEmpty } from 'rxjs/operators';
 
 
 @Component({
@@ -11,14 +15,19 @@ import { Router } from '@angular/router';
 export class SidebarComponent implements OnInit {
 
     public isNavbarCalendarCollapsed = true;
+    private user$: Observable<User>;
 
     constructor(
+        private userService: StoreUserService,
         private principal: Principal,
         private router: Router
     ) {
     }
 
     ngOnInit() {
+        this.user$ = this.userService.getCurrentUser().pipe(
+            defaultIfEmpty({  firstName: 'unknown', lastName: 'unknown'} as User)
+        );
         // $(document).ready(function() {
         //     $('.menu-toggle').on('click', function(e) {
         //         const $this = $(this);

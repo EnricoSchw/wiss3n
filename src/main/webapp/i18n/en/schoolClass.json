@@ -4,6 +4,7 @@
         "schoolClass" : {
             "home": {
                 "title": "School Classes",
+                "headline": "<strong>School Classe</strong> Overview",
                 "createLabel": "Create a new School Class",
                 "createOrEditLabel": "Create or edit a School Class",
                 "search": "Search for School Class"

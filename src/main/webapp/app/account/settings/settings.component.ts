@@ -5,7 +5,8 @@ import { Principal, AccountService, JhiLanguageHelper } from 'app/core';
 
 @Component({
     selector: 'jhi-settings',
-    templateUrl: './settings.component.html'
+    templateUrl: './settings.component.html',
+    styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
     error: string;

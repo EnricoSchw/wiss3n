@@ -1,81 +1,133 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-school-class-heading" jhiTranslate="wiss3NApp.schoolClass.home.createOrEditLabel">Create or edit a School Class</h2>
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!schoolClass.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="schoolClass.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="wiss3NApp.schoolClass.start" for="field_start">Start</label>
-                    <div class="input-group">
-                        <input id="field_start" type="text" class="form-control" name="start" ngbDatepicker  #startDp="ngbDatepicker" [(ngModel)]="schoolClass.start"
-                        required/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="startDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                    <div [hidden]="!(editForm.controls.start?.dirty && editForm.controls.start?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.start?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="wiss3NApp.schoolClass.end" for="field_end">End</label>
-                    <div class="input-group">
-                        <input id="field_end" type="text" class="form-control" name="end" ngbDatepicker  #endDp="ngbDatepicker" [(ngModel)]="schoolClass.end"
-                        required/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="endDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                    <div [hidden]="!(editForm.controls.end?.dirty && editForm.controls.end?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.end?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="wiss3NApp.schoolClass.active" for="field_active">Active</label>
-                    <input type="checkbox" class="form-control" name="active" id="field_active"
-                        [(ngModel)]="schoolClass.active" />
-                    <div [hidden]="!(editForm.controls.active?.dirty && editForm.controls.active?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.active?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="wiss3NApp.schoolClass.name" for="field_name">Name</label>
-                    <input type="text" class="form-control" name="name" id="field_name"
-                        [(ngModel)]="schoolClass.name" required minlength="2"/>
-                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.name?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 2 }">
-                        This field is required to be at least 2 characters.
-                        </small>
-                    </div>
-                </div>
+<section class="content">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Stundenplan<small>Stundenplan Bearbeiten</small>
+                </h2>
             </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="/"><i class="zmdi zmdi-home"></i> Home</a></li>
+                    <li class="breadcrumb-item"><a href="/#/school-class">Stundenplan</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Bearbeiten</a></li>
+                </ul>
             </div>
-        </form>
+        </div>
     </div>
-</div>
+    <div class="container-fluid">
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2 id="jhi-school-class-heading" jhiTranslate="wiss3NApp.schoolClass.home.createOrEditLabel">Create or edit a School Class</h2>
+                    </div>
+                    <div class="body">
+
+                        <jhi-alert-error></jhi-alert-error>
+
+
+                        <form name="editForm" class="common-form" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+
+                            <div class="row clearfix" [hidden]="!schoolClass.id">
+                                <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="id" name="id"
+                                               [(ngModel)]="schoolClass.id" readonly />
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row clearfix">
+                                <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                    <label class="form-control-label" jhiTranslate="wiss3NApp.schoolClass.start" for="field_start">Start</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8">
+
+
+                                    <div class="input-group">
+                                        <input id="field_start" type="text" class="form-control" name="start" ngbDatepicker  #startDp="ngbDatepicker" [(ngModel)]="schoolClass.start" required/>
+                                        <span class="input-group-addon" style="border-bottom-left-radius: 0;border-top-left-radius: 0; padding: 10px 18px 10px 0;">
+                                            <i class="zmdi zmdi-time" (click)="startDp.toggle()"></i>
+                                        </span>
+                                    </div>
+                                    <div [hidden]="!(editForm.controls.start?.dirty && editForm.controls.start?.invalid)">
+                                        <small class="form-text text-danger"
+                                           [hidden]="!editForm.controls.start?.errors?.required" jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row clearfix">
+                                <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                    <label class="form-control-label" jhiTranslate="wiss3NApp.schoolClass.end" for="field_end">End</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8">
+
+
+                                    <div class="input-group">
+                                        <input id="field_end" type="text" class="form-control" name="end" ngbDatepicker  #endDp="ngbDatepicker" [(ngModel)]="schoolClass.end"
+                                               required/>
+                                        <span class="input-group-addon" style="border-bottom-left-radius: 0;border-top-left-radius: 0; padding: 10px 18px 10px 0;">
+                                            <i class="zmdi zmdi-time" (click)="endDp.toggle()"></i>
+                                        </span>
+                                    </div>
+                                    <div [hidden]="!(editForm.controls.end?.dirty && editForm.controls.end?.invalid)">
+                                        <small class="form-text text-danger"
+                                               [hidden]="!editForm.controls.end?.errors?.required" jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row clearfix">
+                                <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                    <label class="form-control-label" jhiTranslate="wiss3NApp.schoolClass.name" for="field_name">Name</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="name" id="field_name"
+                                               [(ngModel)]="schoolClass.name" required minlength="2"/>
+                                    </div>
+                                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                                        <small class="form-text text-danger"
+                                               [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                        <small class="form-text text-danger"
+                                               [hidden]="!editForm.controls.name?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 2 }">
+                                            This field is required to be at least 2 characters.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <div class="col-sm-8 offset-sm-2">
+                                    <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                                    </button>
+                                    <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -9,6 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreCalendarLessonDataService } from 'app/store/calendar-lesson-data/store-calendar-lesson-data.service';
 import { StoreTeachingSubjectService } from 'app/store/teaching-subject/store-teaching-subject.service';
 import { StoreSchoolClassService } from 'app/store/school-class/store-school-class.service';
+import { StoreUserService } from 'app/store/user/store-user.service';
 
 @NgModule({
     imports: [
@@ -20,7 +21,8 @@ import { StoreSchoolClassService } from 'app/store/school-class/store-school-cla
     providers: [
         StoreCalendarLessonDataService,
         StoreTeachingSubjectService,
-        StoreSchoolClassService
+        StoreSchoolClassService,
+        StoreUserService
     ],
     declarations: []
 })

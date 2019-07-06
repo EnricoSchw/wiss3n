@@ -3,19 +3,20 @@
     "wiss3NApp": {
         "schoolClass" : {
             "home": {
-                "title": "School Classes",
-                "createLabel": "School Class erstellen",
-                "createOrEditLabel": "School Class erstellen oder bearbeiten",
-                "search": "Suche nach School Class"
+                "title": "Stundenplan",
+                "headline": "<strong>Stundenplan</strong> Übersicht<small>Jede Stundenplan </small> ",
+                "createLabel": "Stundenplan erstellen",
+                "createOrEditLabel": "Stundenplan erstellen oder bearbeiten",
+                "search": "Suche nach Stundenplan"
             },
-            "created": "School Class erstellt mit ID {{ param }}",
-            "updated": "School Class aktualisiert mit ID {{ param }}",
-            "deleted": "School Class gelöscht mit ID {{ param }}",
+            "created": "Stundenplan erstellt mit ID {{ param }}",
+            "updated": "Stundenplan aktualisiert mit ID {{ param }}",
+            "deleted": "Stundenplan gelöscht mit ID {{ param }}",
             "delete": {
-                "question": "Soll School Class {{ id }} wirklich dauerhaft gelöscht werden?"
+                "question": "Soll der Stundenplan {{ id }} wirklich dauerhaft gelöscht werden?"
             },
             "detail": {
-                "title": "School Class"
+                "title": "Stundenplan"
             },
             "start": "Start",
             "end": "End",
