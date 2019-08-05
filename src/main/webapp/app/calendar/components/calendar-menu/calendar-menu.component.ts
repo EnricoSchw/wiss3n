@@ -11,7 +11,7 @@ import {
 export class CalendarMenuComponent implements OnInit {
 
     public view = 'month';
-    public viewDate: Date = new Date('2018-07-16');
+    public viewDate: Date = new Date();
     excludeDays: number[] = [0, 6];
 
     constructor() {

@@ -1,0 +1,17 @@
+<ng-container *ngIf="(schoolClasses$ | async) as schoolClasses; else create_school_class">
+    <select class="btn btn-round bootstrap-select form-control show-tick" [(ngModel)]="activeClassId"
+            (change)="setSchoolClassActive(activeClassId)">
+        <option [ngValue]="null">-- Please create School class --</option>
+        <option [ngValue]="schoolClass.id === activeClassId ? activeClassId : schoolClass.id"
+                *ngFor="let schoolClass of schoolClasses">
+            {{schoolClass.name}}
+        </option>
+    </select>
+</ng-container>
+
+<ng-template #create_school_class>
+    <div style="text-align: center">
+        <span>Lege zuerts einen Stundenplan an!</span>
+    </div>
+</ng-template>
+

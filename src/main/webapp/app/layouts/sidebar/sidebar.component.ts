@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+    import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Principal, User } from 'app/core';
 import { Router } from '@angular/router';
 import { JhiEventManager } from 'ng-jhipster';
@@ -6,9 +6,8 @@ import { StoreUserService } from 'app/store/user/store-user.service';
 import { Observable } from 'rxjs/Observable';
 import { defaultIfEmpty } from 'rxjs/operators';
 
-
 @Component({
-    selector: 'sidebar',
+    selector: 'jhi-sidebar',
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.scss']
 })
@@ -53,7 +52,6 @@ export class SidebarComponent implements OnInit {
     isAuthenticated() {
         return this.principal.isAuthenticated();
     }
-
 
     public toggle(e) {
 

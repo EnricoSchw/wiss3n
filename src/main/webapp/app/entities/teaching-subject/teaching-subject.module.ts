@@ -12,11 +12,12 @@ import {
     teachingSubjectRoute,
     teachingSubjectPopupRoute
 } from './';
+import { Wiss3NGlobalComponentModule } from 'app/global-component/global-component.module';
 
 const ENTITY_STATES = [...teachingSubjectRoute, ...teachingSubjectPopupRoute];
 
 @NgModule({
-    imports: [Wiss3NSharedModule, Wiss3NAdminModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [Wiss3NSharedModule, Wiss3NAdminModule, Wiss3NGlobalComponentModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         TeachingSubjectComponent,
         TeachingSubjectDetailComponent,

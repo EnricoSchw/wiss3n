@@ -22,6 +22,7 @@ import { Wiss3NCalendarLessonDataModule } from 'app/entities/calendar-lesson-dat
     declarations: [],
     entryComponents: [],
     providers: [],
+    exports: [],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Wiss3NEntityModule {}

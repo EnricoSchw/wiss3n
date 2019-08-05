@@ -1,76 +1,33 @@
-<section class="content page-calendar">
+<section class="content">
     <div class="block-header">
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
-                <h2>Calendar
-                    <small>Hausaufgaben</small>
+                <h2>Hausaufgabenkalender
+                    <small>Stundenplan</small>
                 </h2>
             </div>
             <div class="col-lg-5 col-md-6 col-sm-12">
                 <ul class="breadcrumb float-md-right">
-                    <li class="breadcrumb-item active">Calendar</li>
+                    <li class="breadcrumb-item"><a href="/"><i class="zmdi zmdi-home"></i> Home</a></li>
                 </ul>
             </div>
         </div>
     </div>
+
     <div class="container-fluid">
-
         <div class="card">
             <div class="header">
-                <h2><strong>Klasse:</strong> {{activeSchoolClassName$ | async }}
-                    <small>Klicke rechts zum Öffnen und Schließen..</small>
-                </h2>
-                <ul class="header-dropdown">
-                    <li>
-                        <a href="javascript:void(0);" *ngIf="isClassMenuOpen==true" data-toggle="collapse"
-                           href="#classMenu" role="button" data-close="false" (click)="toggleClassMenu()">
-                            <i class="material-icons col-amber">expand_less</i>
-                        </a>
-                        <a href="javascript:void(0);" *ngIf="isClassMenuOpen==false" role="button"
-                           data-toggle="collapse" href="#classMenu" data-close="false" (click)="toggleClassMenu()">
-                            <i class="material-icons col-amber">expand_more</i>
-                        </a>
-                    </li>
-                </ul>
+                <h2><strong>Aktueller Stundenplan:</strong> {{activeSchoolClassName$ | async }}</h2>
 
+                <p style="padding-top: 10px">
+                    <jhi-school-class-active></jhi-school-class-active>
+                </p>
 
-            </div>
-
-            <div class="body">
-
-                <div class="row">
-                    <div class="col-md-12 col-lg-12 col-xl-12 collapse" id="classMenu" aria-expanded="false">
-
-
-                        <div id="open-eventss">
-                            <jhi-calendar-board-list-school-class></jhi-calendar-board-list-school-class>
-
-                            <hr>
-
-                            <jhi-calendar-board-list-teaching-subject></jhi-calendar-board-list-teaching-subject>
-
-
-                            <hr>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="card">
-            <div class="header">
-                <h2><strong>Hausaufgaben-Kalendar</strong>
-                    <small>Mögliche Klassen..</small>
-                </h2>
             </div>
             <div class="row">
                 <div class="col-md-12 col-lg-12 col-xl-12">
                     <div class="body" id="calendar-body">
-
                         <jhi-calendar></jhi-calendar>
-
                     </div>
                 </div>
             </div>

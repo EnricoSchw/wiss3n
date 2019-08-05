@@ -1,7 +1,6 @@
 import { Task, TaskType, taskTypeSetting } from 'app/shared/model/task.model';
-import { subjectHours } from './subjects';
-import { TaskEventMeta } from 'app/shared/model/event.model';
 import { CalendarEvent } from 'angular-calendar';
+import { TaskEventMeta } from 'app/shared/model/xxx-event.model';
 
 export const events = <CalendarEvent<TaskEventMeta>[]>[
     {
@@ -15,8 +14,7 @@ export const events = <CalendarEvent<TaskEventMeta>[]>[
                 titel: 'Lehrbuch: Seite 22 Nummer 3,a,b,c',
                 content: '-'
             },
-            isActive: false,
-            subjectHourData: subjectHours[1]
+            isActive: false
         }
     },
     {
@@ -32,7 +30,7 @@ export const events = <CalendarEvent<TaskEventMeta>[]>[
 
             },
             isActive: false,
-            subjectHourData: subjectHours[3]
+            subjectHourData: null
         }
     }
 ];

@@ -44,19 +44,19 @@ export class CalendarBoardListSchoolClassComponent implements OnInit, OnDestroy 
     }
 
     loadAll() {
-        this.schoolClassService
-            .searchActive({
-                page: 0,
-                size: this.itemsPerPage
-            })
-            .filter((res: HttpResponse<ISchoolClass[]>) => res.body.length > 0)
-            .subscribe(
-                (res: HttpResponse<ISchoolClass[]>) => {
-                    this.schoolClasses = res.body;
-                    this.setSchoolClassActive(this.schoolClasses[0].id);
-                }, (res: HttpErrorResponse) => this.onError(res.message)
-            );
-        return;
+        // this.schoolClassService
+        //     .searchActive({
+        //         page: 0,
+        //         size: this.itemsPerPage
+        //     })
+        //     .filter((res: HttpResponse<ISchoolClass[]>) => res.body.length > 0)
+        //     .subscribe(
+        //         (res: HttpResponse<ISchoolClass[]>) => {
+        //             this.schoolClasses = res.body;
+        //             this.setSchoolClassActive(this.schoolClasses[0].id);
+        //         }, (res: HttpErrorResponse) => this.onError(res.message)
+        //     );
+        // return;
     }
 
     loadPage(page: number) {

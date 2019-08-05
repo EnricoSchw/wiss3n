@@ -9,12 +9,17 @@ import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { TeachingSubjectService } from './teaching-subject.service';
+import { Observable } from 'rxjs/Observable';
+import { catchError, retry } from 'rxjs/operators';
+import { StoreSchoolClassService } from 'app/store/school-class/store-school-class.service';
 
 @Component({
     selector: 'jhi-teaching-subject',
     templateUrl: './teaching-subject.component.html'
 })
 export class TeachingSubjectComponent implements OnInit, OnDestroy {
+    teachingSubjects$: Observable<ITeachingSubject[]> =  Observable.of([]);
+
     currentAccount: any;
     teachingSubjects: ITeachingSubject[];
     error: any;
@@ -38,7 +43,8 @@ export class TeachingSubjectComponent implements OnInit, OnDestroy {
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private storeService: StoreSchoolClassService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -54,30 +60,48 @@ export class TeachingSubjectComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        if (this.currentSearch) {
-            this.teachingSubjectService
-                .search({
-                    page: this.page - 1,
-                    query: this.currentSearch,
-                    size: this.itemsPerPage,
-                    sort: this.sort()
-                })
-                .subscribe(
-                    (res: HttpResponse<ITeachingSubject[]>) => this.paginateTeachingSubjects(res.body, res.headers),
-                    (res: HttpErrorResponse) => this.onError(res.message)
-                );
-            return;
-        }
-        this.teachingSubjectService
-            .query({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<ITeachingSubject[]>) => this.paginateTeachingSubjects(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
+        this.storeService
+            .getActiveSchoolClassId()
+            .filter(id => id !== null)
+            .flatMap(id => this.teachingSubjectService.findBySchoolClassId(id))
+            .map(response => response.body)
+            .pipe(
+                retry(3), // retry a failed request up to 3 times
+                catchError(() => null) // then handle the error
+            ).subscribe(
+                (res: ITeachingSubject[]) => {
+                    this.teachingSubjects = res;
+                },
+                        (res: HttpErrorResponse) => this.onError(res.message)
+
             );
+
+
+
+        // if (this.currentSearch) {
+        //     this.teachingSubjectService
+        //         .search({
+        //             page: this.page - 1,
+        //             query: this.currentSearch,
+        //             size: this.itemsPerPage,
+        //             sort: this.sort()
+        //         })
+        //         .subscribe(
+        //             (res: HttpResponse<ITeachingSubject[]>) => this.paginateTeachingSubjects(res.body, res.headers),
+        //             (res: HttpErrorResponse) => this.onError(res.message)
+        //         );
+        //     return;
+        // }
+        // this.teachingSubjectService
+        //     .query({
+        //         page: this.page - 1,
+        //         size: this.itemsPerPage,
+        //         sort: this.sort()
+        //     })
+        //     .subscribe(
+        //         (res: HttpResponse<ITeachingSubject[]>) => this.paginateTeachingSubjects(res.body, res.headers),
+        //         (res: HttpErrorResponse) => this.onError(res.message)
+        //     );
     }
 
     loadPage(page: number) {

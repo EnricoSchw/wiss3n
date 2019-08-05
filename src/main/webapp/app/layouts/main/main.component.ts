@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
 
 import { JhiLanguageHelper, Principal } from 'app/core';
+import { SchoolClassInitService } from 'app/entities/school-class/school-class-init.service';
 
 @Component({
     selector: 'jhi-main',
@@ -14,9 +15,11 @@ export class JhiMainComponent implements OnInit {
     constructor(
         private jhiLanguageHelper: JhiLanguageHelper,
         private router: Router,
-        private principal: Principal
+        private principal: Principal,
+        private schoolClassInit: SchoolClassInitService
     ) {
         this.isAuthenticated = this.principal.isAuthenticated();
+        this.schoolClassInit.init();
     }
 
     private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {

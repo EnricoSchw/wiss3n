@@ -7,7 +7,6 @@ import { VERSION } from 'app/app.constants';
 import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from 'app/core';
 import { ProfileService } from '../profiles/profile.service';
 
-
 declare const $: any;
 
 @Component({
@@ -21,8 +20,6 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
-
-
     isSideMenuOpen = false;
 
     constructor(
@@ -44,7 +41,6 @@ export class NavbarComponent implements OnInit {
             console.log('Hallo');
             $('body').toggleClass('menu_sm');
         });
-
 
         this.languageHelper.getAll().then(languages => {
             this.languages = languages;

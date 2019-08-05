@@ -12,11 +12,12 @@ import {
     schoolClassRoute,
     schoolClassPopupRoute
 } from './';
+import { Wiss3NGlobalComponentModule } from 'app/global-component/global-component.module';
 
 const ENTITY_STATES = [...schoolClassRoute, ...schoolClassPopupRoute];
 
 @NgModule({
-    imports: [Wiss3NSharedModule, Wiss3NAdminModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [Wiss3NSharedModule, Wiss3NAdminModule, Wiss3NGlobalComponentModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         SchoolClassComponent,
         SchoolClassDetailComponent,
@@ -25,6 +26,7 @@ const ENTITY_STATES = [...schoolClassRoute, ...schoolClassPopupRoute];
         SchoolClassDeletePopupComponent
     ],
     entryComponents: [SchoolClassComponent, SchoolClassUpdateComponent, SchoolClassDeleteDialogComponent, SchoolClassDeletePopupComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    exports: []
 })
 export class Wiss3NSchoolClassModule {}

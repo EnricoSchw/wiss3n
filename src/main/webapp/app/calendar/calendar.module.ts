@@ -18,6 +18,7 @@ import { CalendarViewWeekCellComponent } from './components/calendar-view-week-c
 import { CalendarViewWeekCellTitleComponent } from './components/calendar-view-week-cell-title/calendar-view-week-cell-title.component';
 import { CalendarViewWeekCellTeachingSubjectComponent } from './components/calendar-view-week-cell-teaching-subject/calendar-view-week-cell-teaching-subject.component';
 import { CalendarViewDataService } from 'app/calendar/providers/calendar-view-data.service';
+import { Wiss3NGlobalComponentModule } from 'app/global-component/global-component.module';
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import { CalendarViewDataService } from 'app/calendar/providers/calendar-view-da
         AngularCalendarModule.forRoot(),
         RouterModule,
         Wiss3NSharedModule,
-        Wiss3NStoreModule
+        Wiss3NStoreModule,
+        Wiss3NGlobalComponentModule
     ],
     declarations: [
         CalendarComponent,

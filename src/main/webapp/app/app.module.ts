@@ -24,7 +24,7 @@ import {
 import { Wiss3NCalendarModule } from 'app/calendar/calendar.module';
 import { Wiss3NStoreModule } from 'app/store/store.module';
 import { Wiss3NDashboardModule } from 'app/dashboard';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Wiss3NGlobalComponentModule } from 'app/global-component/global-component.module';
 
 @NgModule({
     imports: [
@@ -39,6 +39,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         Wiss3NHomeModule,
         Wiss3NAccountModule,
         Wiss3NEntityModule,
+        Wiss3NGlobalComponentModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, SidebarComponent],
