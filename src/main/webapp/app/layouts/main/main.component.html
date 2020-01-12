@@ -1,9 +1,14 @@
 <jhi-page-ribbon></jhi-page-ribbon>
-<div>
-    <router-outlet name="navbar"></router-outlet>
-</div>
-<div class="container-fluid">
-    <router-outlet></router-outlet>
-    <router-outlet name="popup"></router-outlet>
-    <jhi-footer></jhi-footer>
-</div>
+
+<div class="overlay"></div>
+<router-outlet name="popup"></router-outlet>
+
+<ng-container [ngSwitch]="getRole()">
+    <jhi-main-info *ngSwitchCase="'ANONYMOUS'"></jhi-main-info>
+    <jhi-main-user *ngSwitchCase="'USER'"></jhi-main-user>
+    <jhi-main-admin *ngSwitchCase="'ADMIN'"></jhi-main-admin>
+</ng-container>
+
+<router-outlet></router-outlet>
+
+<jhi-footer></jhi-footer>

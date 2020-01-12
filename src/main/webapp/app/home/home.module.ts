@@ -1,14 +1,14 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { Wiss3NSharedModule } from 'app/shared';
-import { HOME_ROUTE, HomeComponent } from './';
-import { InfoComponent } from 'app/home/info/info.component';
-import { Wiss3NCalendarModule } from 'app/calendar/calendar.module';
+import { WebWiss3NSharedModule } from 'app/shared/shared.module';
+import { HOME_ROUTE } from './home.route';
+import { HomeComponent } from './home.component';
+import { InfoComponent } from './info/info.component';
 
 @NgModule({
-    imports: [Wiss3NSharedModule, Wiss3NCalendarModule, RouterModule.forChild([HOME_ROUTE])],
-    declarations: [HomeComponent, InfoComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  imports: [WebWiss3NSharedModule, RouterModule.forChild([HOME_ROUTE])],
+  declarations: [HomeComponent, InfoComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class Wiss3NHomeModule {}
+export class WebWiss3NHomeModule {}

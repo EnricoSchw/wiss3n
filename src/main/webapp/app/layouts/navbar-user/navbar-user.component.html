@@ -1,0 +1,37 @@
+<nav class="navbar">
+    <ul class="nav navbar-nav navbar-left">
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="bars" (click)="toggleSMSidebar()"></a>
+                <a class="navbar-brand" routerLink="/">
+                    <img src="../../../content/images/logo.svg"
+                         width="50"
+                         alt="Wiss3n">
+                    <span class="m-l-10">Wiss3n</span>
+                </a>
+            </div>
+        </li>
+        <li>
+            <a href="javascript:void(0);" class="menu-sm" data-close="true" (click)="toggleSidebar()">
+                <i class="zmdi zmdi-arrow-left"></i>
+                <i class="zmdi zmdi-arrow-right"></i>
+            </a>
+        </li>
+
+        <li class="dropdown app_menu">
+            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"><i
+                class="zmdi zmdi-apps"></i></a>
+            <ul class="dropdown-menu pullDown">
+                <li><a routerLink="/"><i
+                    class="zmdi zmdi-calendar-note m-r-10"></i><span>Calendar</span></a></li>
+            </ul>
+        </li>
+
+        <li class="float-right">
+            <a href="javascript:void(0);" class="mega-menu" (click)="logout()" id="logout"><i
+                class="zmdi zmdi-power"></i></a>
+        </li>
+
+    </ul>
+</nav>
+

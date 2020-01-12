@@ -1,0 +1,308 @@
+
+
+/*****************************************************
+Responsive Styles
+*****************************************************/
+@media only screen and (min-device-width :992px) and (max-device-width : 1024px) {
+/* Styles */
+
+    #header{
+        padding: 130px 0;
+    }
+    #main-nav{
+         ul{
+             li{
+                margin-right:25px;
+             }
+         }
+    }
+    
+    .c-logo-part{
+         ul{
+             li{
+                margin: 0 5px;
+             }
+         }
+    }
+}
+
+@media only screen and (max-width: 992px) {
+  /*** Main Nav ***/
+  
+  #main-nav .col-md-5:first-child,
+  #main-nav .col-md-5:last-child {
+    display: none;
+  }
+  #main-nav{
+    .logo {
+        padding-top: 0px;
+      }
+     #slide_out_menu {
+        position: fixed;
+        display: block;
+        width: 300px;
+        height: 100%;
+        left: -300px;
+        
+        .menu-close {
+            top: 41px;
+          }
+      }
+  }
+
+  /*** Features ***/
+  #features,
+  .features-btm,
+  #portfolio,
+  #services,
+  .fun-facts-wrapper,
+  #team,
+  #plan,
+  #contact{ padding:50px 0;}
+  
+  #features {  
+    
+    .feature-item {
+        margin-bottom: 80px;
+      }
+      
+    .feature-item:last-child {
+        margin-bottom: 0;
+      }
+      
+      .feature {
+        padding: 0px 0px;
+        
+        .f-icon {
+            margin-bottom: 48px;
+            
+            i {
+                font-size: 42px;
+                color: #267df4;
+              }
+          }
+      }
+  }
+  
+  .features-btm{
+     img{
+        width:90%;
+     }
+     
+     .features-list-dark{
+         li{
+            width:100%;
+         }
+     }
+  }
+  /*** Customers ***/
+  #customers .carousel-control.left,
+  #customers .carousel-control.right {
+    display: none;
+  }
+  /*** Plan ***/ 
+  #plan #price_tables .individual.active, #plan #price_tables .company.active {
+    margin-top:50px;
+  }
+  #plan .toggle-container .switch-toggles .individual, #plan .toggle-container .switch-toggles .company {
+    margin-top: 0;
+  }
+  /*** Footer ***/
+ 
+}
+
+@media only screen and (max-width: 768px) {
+    #header{
+    .header_iphone {
+        width:100%;
+      }
+    }
+    #main-nav{
+         ul{
+             li{
+                 margin-right: 10px;
+                 
+                    a{
+                        font-size:15px;
+                    }
+                    
+                    &:first-child{
+                        margin-right: 11px!important;
+                    }
+             }
+             
+         }
+
+    }
+
+    #ready-to-buy{
+        padding:40px 0px;
+        
+        text-align:center;
+        h3{
+             font-size:23px;
+             margin-bottom:15px;
+        }
+    }
+    
+    #subscribe{
+        padding:40px 0px;
+        text-align:center;
+        
+        .promise{
+            margin-bottom:20px;
+        }
+    }
+    #services{
+        padding:40px 0px;
+        
+        .services-item{
+            text-align:center;
+            
+            .services-icon{
+                width:auto;
+                text-align:center;
+             }
+         }
+    }
+    
+    #plan{
+         h2{
+            font-size:35px;
+            margin-bottom: 25px;
+            line-height:35px;
+            text-align:center;
+         }
+         
+         p{
+            text-align:center;
+         }
+         
+         .toggle-container {
+            margin-bottom: 30px;
+            
+            .switch-toggles{
+                margin:0 auto;
+            }
+        }
+    }
+  
+}
+@media only screen and (max-width: 767px) {
+    #main-nav{
+        .left{
+            display:none;
+        }
+    }
+    #header{
+         h1{
+            font-size: 28px;
+            line-height: 37px;
+         }
+         
+         p{
+            font-size: 16px;
+            line-height: 22px;
+         }
+         
+    }
+    .fun-facts-wrapper{
+        padding:40px 0px;
+        .fun-facts-box{
+            width:49%;
+        }
+    }
+    
+    .c-logo-part{
+        padding:40px 0px;
+        
+         ul{
+            li{
+                display:block;
+                text-align:center;
+                padding:10px 0;
+                margin:0;
+             }
+         }
+     }
+    .section-subtitle{
+        font-size:16px;
+    }
+    
+    #features{
+         .features-item{
+            margin: 0 0 40px 0;
+            
+            &:last-child{
+                margin-bottom:0;
+            }
+            
+            .icon-wrapper{
+                margin:0;
+            }
+         }
+    }
+    .features-btm{
+        
+        
+        .medium-title{
+            text-align: center;
+            line-height: 25px;
+            font-size: 20px;
+            margin:20px 0;
+        }
+        
+         p{
+            text-align:center;
+            line-height: 23px;
+         }
+    }
+    #team{
+         .team{
+             .team-player{
+                margin-bottom:20px;
+                
+                .title{
+                    margin:10px 0;
+                 }                
+                .btn{
+                    margin:0;
+                }
+              }
+         }
+    }
+    
+}
+
+@media only screen and (max-width: 575px) {
+ 
+  /*** Header ***/
+  #header{
+    padding: 160px 0 460px;
+    
+    .header_iphone {
+        width:100%;
+      }
+  }
+  /*** Ready to Buy  ***/
+  #ready-to-buy .form-group .btn,
+  #subscribe .form-group .btn {
+    position: relative;
+    margin-top: 14px;
+  }
+   
+  #customers .carousel-indicators li {
+    width: 90px;
+    height: 90px;
+  }
+  /*** Plan ***/ 
+  #plan .price-table {
+    width: 340px;
+    max-width: 100%;
+    padding: 0px 15px;
+    margin: 0 auto;
+    float: none;
+  }
+  /*** Footer ***/
+ 
+}

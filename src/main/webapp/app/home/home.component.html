@@ -1,11 +1,36 @@
-<div [ngSwitch]="isAuthenticated()">
+<ng-container [ngSwitch]="isAuthenticated()">
 
-    <!--<div class="alert alert-success" *ngSwitchCase="true">-->
-    <!--<span *ngIf="account" jhiTranslate="home.logged.message"-->
-    <!--translateValues="{username: '{{account.login}}'}"> You are logged in as user "{{account.login}}". </span>-->
-    <!--</div>-->
+        <section class="content" *ngSwitchCase="true">
+            <div class="block-header">
+                <div class="row">
+                    <div class="col-lg-7 col-md-6 col-sm-12">
+                        <h2>Wiss3n
+                            <small>Home</small>
+                        </h2>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-sm-12">
+                        <ul class="breadcrumb float-md-right">
+                            <li class="breadcrumb-item"><a href="/"><i class="zmdi zmdi-home"></i> Home</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-    <jhi-calendar-board *ngSwitchCase="true"></jhi-calendar-board>
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Aktuelle Dokument:</strong> Home</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-xl-12">
+                            <div class="body" id="calendar-body">
+                                Inhalt
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     <jhi-info *ngSwitchCase="false"></jhi-info>
-</div>
+</ng-container>

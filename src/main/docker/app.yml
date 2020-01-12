@@ -1,20 +1,22 @@
 version: '2'
 services:
-    wiss3n-app:
-        image: wiss3n
-        environment:
-            # - _JAVA_OPTIONS=-Xmx512m -Xms256m
-            - SPRING_PROFILES_ACTIVE=prod,swagger
-            - SPRING_DATASOURCE_URL=jdbc:mysql://wiss3n-mysql:3306/wiss3n?useUnicode=true&characterEncoding=utf8&useSSL=false
-            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
-            - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=wiss3n-elasticsearch:9300
-        ports:
-            - 8080:8080
-    wiss3n-mysql:
-        extends:
-            file: mysql.yml
-            service: wiss3n-mysql
-    wiss3n-elasticsearch:
-        extends:
-            file: elasticsearch.yml
-            service: wiss3n-elasticsearch
+  webwiss3n-app:
+    image: webwiss3n
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,swagger
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - SPRING_DATASOURCE_URL=jdbc:mysql://webwiss3n-mysql:3306/webwiss3n?useUnicode=true&characterEncoding=utf8&useSSL=false
+      - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+      - SPRING_DATA_JEST_URI=http://webwiss3n-elasticsearch:9200
+      - SPRING_ELASTICSEARCH_REST_URIS=http://webwiss3n-elasticsearch:9200
+    ports:
+      - 8080:8080
+  webwiss3n-mysql:
+    extends:
+      file: mysql.yml
+      service: webwiss3n-mysql
+  webwiss3n-elasticsearch:
+    extends:
+      file: elasticsearch.yml
+      service: webwiss3n-elasticsearch

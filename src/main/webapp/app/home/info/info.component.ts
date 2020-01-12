@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginModalService } from 'app/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { LoginModalService } from 'app/core/login/login-modal.service';
 
 @Component({
     selector: 'jhi-info',

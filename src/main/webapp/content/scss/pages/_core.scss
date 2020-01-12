@@ -1,0 +1,106 @@
+p.subtitle {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+
+a:focus {
+  outline: none;
+}
+
+.f-w-300 {
+  font-weight: 300;
+}
+
+.f-w-400 {
+  font-weight: 400;
+}
+
+ul {
+  padding-left: 0px;
+}
+
+ul > li {
+  list-style: none;  
+}
+
+.mt-20{
+    margin-top:20px;
+}
+
+.mb-30{
+    margin-bottom:30px;
+}
+.mb-40{
+    margin-bottom:40px;
+}
+.section-title{
+    font-weight:$font-weight-light;
+    font-size:35px;
+    margin:0 0 20px 0;
+    color:$grey-800;
+}
+.medium-title{
+    font-weight:500;
+    font-size:24px;
+    margin:0 0 20px 0;
+    color:$grey-800;
+    text-transform:uppercase;
+}
+.section-subtitle{
+    font-size: 16px;
+    color:$grey-700;
+}
+
+.section-grey{
+    background:$grey-200;
+}
+
+/*****************************************************
+*** Inputs ***
+*****************************************************/
+#subscribe input[type="text"],
+#subscribe input[type="email"],
+#ready-to-buy input[type="text"],
+#ready-to-buy input[type="email"] {
+  width: 502px;
+  height: 47px;
+  max-width: 100%;
+  border: 1px solid rgba(38, 39, 45, 0.2);
+  padding: 16px 26px;
+  font-size: 16px;
+  background-color: transparent;
+  padding-right: 148px;
+  border-radius: 30px;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  outline: none !important;
+  color: #30373e;
+  box-shadow:none !important;
+  
+}
+
+/*****************************************************
+*** Forms ***
+*****************************************************/
+#ready-to-buy .form-group,
+#subscribe .form-group {
+  position: relative;
+  width: 502px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+#ready-to-buy .form-group .btn,
+#subscribe .form-group .btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
