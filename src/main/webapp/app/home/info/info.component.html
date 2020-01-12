@@ -1,73 +1,74 @@
-<section class="main cover row">
+<!--<section id="header">-->
+<!--<div class="container">-->
 
-    <div class="col-md-8 order-last order-md-first">
-    </div>
+<!--<div class="row">-->
+<!--<div class="col-md-8 col-md-offset-2 text-center">-->
+<!--<h1 class="wow fadeInUp animated" data-wow-delay=".3s" data-effect="mfp-zoom-in">s<span>Q</span>uare <span>Bootstrap 4</span> and <br><span>Angular 5</span> Dashboard Template</h1>-->
+<!--<p class="wow fadeInUp animated" data-wow-delay=".3s" data-effect="mfp-zoom-in">sQuare Bootstrap4 Admin Dashboard, Light & Dark Menu Versions, 6 Unique Color Scheme, 4 Dashboard Variations, 80+ Integrated Plugins, 140+ Pages, 3000+ Material Design Font Icons, 500+ UI Components & much more...</p>-->
+<!--<a href="https://themeforest.net/item/square-the-ultimate-bootstrap-4-angular-5-admin-dashboard-ui-kit/21322297" target="_blank" class="btn btn-default btn-round wow fadeInUp animated" data-wow-delay=".6s" data-effect="mfp-zoom-in">Live Demo</a>-->
+<!--</div>-->
 
+<!--&lt;!&ndash; iPhone &ndash;&gt;-->
+<!--<img class="header_iphone wow fadeInUp animated" src="../../../content/images/header_img.png" alt="" data-wow-delay=".3s" data-effect="mfp-zoom-in">-->
+<!--&lt;!&ndash; //iPhone &ndash;&gt;-->
+<!--</div>-->
+<!--</div>-->
+<!--</section>-->
 
-    <div class="col-md-4 order-first order-md-last">
-        <div class="card">
-            <div class="card-body">
+<section class="on-page-content">
+    <div class="container-fluid bg-cover">
+        <div class="row  clearfix">
 
-                <div class="center-block">
-                    <h2>WiSS3N</h2>
-                </div>
-                <h3>Helft euch gegenseitig.</h3>
-                <p>Schreibe zusammen und zur gleichen Zeit mit deinen Mitschülern an euren Hausaufgaben oder Vorträgen. Teile deine Termine mit ihnen und verabrede dich zu Hausaufgaben. Behalte über alles die Übersicht.</p>
-
-
-                <!--<div class="buttons-group">-->
-                <!--<button type="button" class="btn btn-primary btn-rounded btn-lg" (click)="login()" id="login">-->
-                <!--Login-->
-                <!--</button>-->
-                <!--<a routerLink="register" routerLinkActive="active" id="register">Register</a>-->
-                <!--</div>-->
+            <div class="col-md-8 order-last order-md-first">
             </div>
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
-                <div class="panel panel-default">
-                    <div class="buttons-group">
-                        <button type="button" class="btn btn-primary btn-rounded btn-lg" (click)="login()" id="login">
-                            Login
-                        </button>
-                        <a routerLink="register" routerLinkActive="active" id="register">Register</a>
+
+
+            <div class="col-md-4 order-first order-md-last">
+
+
+                <div class="card member-card">
+                    <div class="header l-amber">
+                        <h4 class="m-t-10">WISS3N</h4>
+                    </div>
+                    <div class="member-img">
+                        <a href="javascript:void(0);" class="">
+                            <img src="../../../content/images/logo.svg" class="rounded-circle" alt="logo">
+                        </a>
+                    </div>
+                    <div class="body">
+                        <div class="col-12">
+                            <h5>WISS3N ist eine kooperative Lernplattform</h5>
+                            <p class="text-muted">Arbeitet gemeinsam an euren Hausaufgaben oder an euren Vorträgen.
+                                Teile deine Termine und verabrede dich zu Hausaufgaben. Und behalte über alles die
+                                Übersicht.</p>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-6">
+                                <a class="btn-primary btn-simple btn-round" routerLink="account/login">
+                                    <span>Login</span>
+                                </a>
+                            </div>
+                            <div class="col-6">
+
+                                <a class="btn-primary btn-simple btn-round" routerLink="account/register"
+                                   routerLinkActive="active" id="register">
+                                    <span>Register</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
+
+                <!-- card -->
+                <div class="bg-image-unsplash">Photo by Alexis Brown on Unsplash</div>
             </div>
-            <!-- card-body -->
+
         </div>
-        <!-- card -->
-        <div class="bg-image-unsplash">Photo by Alexis Brown on Unsplash</div>
     </div>
-
-
-    <!--<div class="panel__wrapper__left col-md order-last order-md-first">-->
-    <!--<div class="panel__content panel__wrapper__left__content">-->
-    <!--&lt;!&ndash;<h3>WiSS3N</h3>&ndash;&gt;-->
-    <!--&lt;!&ndash;<h4>ist eine cooperative Lernplattform.</h4>&ndash;&gt;-->
-    <!--&lt;!&ndash;<p>Werf deine Aufsätze und Presentationen nicht weg, teile sie.</p>&ndash;&gt;-->
-    <!--&lt;!&ndash;<p>Hole dir Hilfe von anderen.</p>&ndash;&gt;-->
-    <!--&lt;!&ndash;<p>Jeder hat seine eigene Sicht auf die Dinge.</p>&ndash;&gt;-->
-    <!--</div>-->
-
-    <!--</div>-->
-    <!--<div class="panel__wrapper__right col-md order-first order-md-last">-->
-    <!--<div class="panel__content  panel__wrapper__right__content">-->
-    <!--<div class="buttons-group">-->
-    <!--<button type="button" class="btn btn-primary btn-rounded btn-lg" (click)="login()" id="login">Login</button>-->
-    <!--<a routerLink="register" routerLinkActive="active"  id="register">Register</a>-->
-    <!--</div>-->
-    <!--<h2>WiSS3N</h2>-->
-    <!--<h3>ist eine cooperative Lernplattform</h3>-->
-    <!--<p>Arbeitet gemeinsam an euren Hausaufgaben und veröffentlicht eure Aufsätze und Texte  </p>-->
-    <!--</div>-->
-    <!--<div class="bg-image-unsplash">Photo by Alexis Brown on Unsplash</div>-->
-    <!--</div>-->
-
 </section>
 
 
-<!--<a href="http://ettrics.com/code/vertical-layout-navigation/" class="logo" target="_blank">-->
-<!--<img class="logo" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45226/ettrics-logo.svg" alt=""/>-->
-<!--</a>-->
 
 

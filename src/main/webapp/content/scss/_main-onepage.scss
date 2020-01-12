@@ -1,0 +1,29 @@
+// import google fonts
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet');
+
+// bootstrap
+@import 'bootstrap';  // bootstrap plugin
+
+// My variables, mixins and colors
+@import 'inc/mixins';
+@import 'inc/variables';
+
+// Material kit
+@import 'ui-kit';  // Material kit
+
+// Vendor
+@import "components/colors.scss";
+@import "components/general.scss";
+@import "components/helpers.scss";
+
+
+
+//Pages
+@import "pages/core"; // global page
+@import "pages/header"; //
+@import "pages/navbar"; //
+@import "pages/index"; //
+@import "pages/responsive"; // page Media Query
+@import "pages/magnific-popup"; //
+
+

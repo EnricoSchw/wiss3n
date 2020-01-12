@@ -4,16 +4,58 @@
     <base href="./" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>wiss3n</title>
+    <title>WISS3N</title>
     <meta name="description" content="">
     <meta name="google" value="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="manifest" href="manifest.webapp" />
-    <!-- jhipster-needle-add-resources-to-root - JHipster will add new resources here -->
+    <link rel="stylesheet" href="content/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="content/css/normalize.css">
+    <link rel="stylesheet" href="content/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css"/>
+    <link rel="stylesheet" href="content/plugins/morrisjs/morris.min.css" />
+    <link rel="stylesheet" href="content/css/animate.min.css" type="text/css">
+
+
+    <!-- Jquery Core Js -->
+
+    <!--<link rel="stylesheet" href="content/css/sp-main.css">-->
+    <link rel="stylesheet" href="content/css/main.css">
+    <link rel="stylesheet" href="content/css/color_skins.css">
+    <style type="text/css">
+        .modal.fade .modal-dialog {
+            -webkit-transition: -webkit-transform 0.3s ease-out;
+            transition: -webkit-transform 0.3s ease-out;
+            -o-transition: -o-transform 0.3s ease-out;
+            transition: transform 0.3s ease-out;
+            transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out, -o-transform 0.3s ease-out;
+            -webkit-transform: translate(0, -25%);
+            -o-transform: translate(0, -25%);
+            transform: translate(0, -25%);
+        }
+
+        .modal.show .modal-dialog {
+            -webkit-transform: translate(0, 0);
+            -o-transform: translate(0, 0);
+            transform: translate(0, 0);
+        }
+
+        section.on-page-content{
+            margin: 65px 0px 0px 0px !important;
+        }
+    </style>
 </head>
-<body  data-spy="scroll" data-target=".navbar-fixed-top">
+<body class="theme-blue menu_sm">
+
+
+<div class="page-loader-wrapper">
+    <div class="loader">
+        <div class="m-t-30"><img class="zmdi-hc-spin" src="content/images/logo.svg" width="48" height="48" alt="Wiss3n"></div>
+        <p>Please wait...</p>
+    </div>
+</div>
+
     <!--[if lt IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -21,6 +63,11 @@
     <noscript>
         <h1>You must enable javascript to view this page.</h1>
     </noscript>
+
+    <script src="content/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+    <script src="content/bundles/vendorscripts.bundle.js"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+
     <!-- uncomment this for adding service worker
         <script>
             if ('serviceWorker' in navigator) {
@@ -39,5 +86,9 @@
         r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
         ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>-->
+
+
+    <!--<script src="assets/bundles/mainscripts.bundle.js"></script>-->
+    <script src="content/js/admin.js"></script>
 </body>
 </html>

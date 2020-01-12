@@ -1,12 +1,11 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "de.wiss3n.webapp",
-      "nativeLanguage": "de"
+      "packageName": "de.wiss3n.webapp"
     },
-    "jhipsterVersion": "5.0.1",
+    "jhipsterVersion": "6.3.1",
     "applicationType": "monolith",
-    "baseName": "wiss3n",
+    "baseName": "webWiss3n",
     "packageName": "de.wiss3n.webapp",
     "packageFolder": "de/wiss3n/webapp",
     "serverPort": "8080",
@@ -21,20 +20,20 @@
     "messageBroker": false,
     "serviceDiscoveryType": false,
     "buildTool": "gradle",
-    "enableSwaggerCodegen": false,
-    "jwtSecretKey": "fb9a1b95e2f69bcb8dcc600fd939949f454c45c5",
-    "clientFramework": "angularX",
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "NjMxZjUyMTAzM2JhZWQyOTFlYWM0MzkzNjU3MDVlZDIyZjhjZGM4M2NhNDE5ZGZjODNlNzY5ZjFkODcxNTgyYmFkYzUwZTZmNGNiOGU3Y2VlMzQyMGQ3MGJhOWRlYjhkZWFhNmM0ZjBkYThlNDBjYzIzNjc1NTczZTEwMTYyMzE=",
+    "embeddableLaunchScript": false,
     "useSass": true,
     "clientPackageManager": "npm",
-    "testFrameworks": [
-      "protractor"
-    ],
+    "clientFramework": "angularX",
+    "clientTheme": "sandstone",
+    "clientThemeVariant": "primary",
+    "testFrameworks": [],
     "jhiPrefix": "jhi",
-    "enableTranslation": true,
-    "nativeLanguage": "de",
-    "languages": [
-      "de",
-      "en"
-    ]
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
   }
 }

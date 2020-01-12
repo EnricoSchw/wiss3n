@@ -1,0 +1,73 @@
+<ng-container *ngIf="isUser()" >
+
+    <aside id="leftsidebar" class="sidebar"  >
+        <div class="menu">
+            <ul class="list">
+                <li>
+                    <div class="user-info m-b-20">
+                        <div class="image">
+                            <a routerLink="settings" routerLinkActive="active" >
+                                <i class="zmdi zmdi-account"></i>
+                            </a>
+                        </div>
+                        <div class="detail">
+                            <!--<h4>{{(user$ | async).firstName}} {{(user$ | async).lastName}}</h4>-->
+                            <p class="m-b-0">Schüler</p>
+                            <a href="events.html" title="Events"><i class="zmdi zmdi-calendar-note"></fa-icon></i></a>
+                            <a href="mail-inbox.html" title="Inbox"><fa-icon [icon]="'tasks'"></fa-icon></i></a>
+                            <div class="row">
+                                <div class="col-4 p-r-0">
+                                    <h6 class="m-b-5">0</h6>
+                                    <small>Hausaufgaben</small>
+                                </div>
+                                <div class="col-4 p-l-0 p-r-0">
+                                    <h6 class="m-b-5">0</h6>
+                                    <small>Arbeiten</small>
+                                </div>
+                                <div class="col-4 p-l-0">
+                                    <h6 class="m-b-5">0</h6>
+                                    <small>Vorträge</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="header">MAIN</li>
+                <li>
+                    <a class="dropdown-item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="collapseNavbar()">
+                        <i class="zmdi zmdi-calendar-note"></i>
+                        <span>Kalendar</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="dropdown-item" routerLink="school-class" routerLinkActive="active" (click)="collapseNavbar()">
+                        <i class="zmdi zmdi-view-web"></i>
+                        <span>Stundenplan</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="dropdown-item" routerLink="teaching-subject" routerLinkActive="active" (click)="collapseNavbar()">
+                        <i class="zmdi zmdi-graduation-cap"></i>
+                        <span>Fächer</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="dropdown-item" routerLink="settings" routerLinkActive="active" (click)="collapseNavbar()">
+                        <i class="zmdi zmdi-account"></i>
+                        <span >Profil</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="dropdown-item" routerLink="password" routerLinkActive="active" (click)="collapseNavbar()">
+                        <i class="zmdi zmdi-shield-security"></i>
+                        <span>Password</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+</ng-container>
